@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "nuxt test/fixture",
+    "dev-fix": "nuxt test/fixture",
+    "dev": "nuxt test/integration/article",
     "lint": "eslint lib test",
     "test": "npm run lint && jest",
     "release": "standard-version && git push --follow-tags && npm publish"
@@ -29,7 +30,19 @@
     "testEnvironment": "node",
     "collectCoverage": true
   },
-  "dependencies": {},
+  "dependencies": {
+    "@nuxtjs/apollo": "^3.0.5",
+    "@nuxtjs/vuetify": "^0.4.1",
+    "apollo-link-http": "^1.5.3",
+    "apollo-link-ws": "^1.0.7",
+    "apollo-utilities": "^1.0.11",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
+    "install": "^0.11.0",
+    "npm": "^5.8.0",
+    "subscriptions-transport-ws": "^0.9.7",
+    "vue-ls": "^3.0.0"
+  },
   "devDependencies": {
     "nuxt": "latest",
     "codecov": "latest",
