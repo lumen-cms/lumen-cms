@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <h3>fancy layout</h3>
-    {{$options.test}}
+
+    <cms-test></cms-test>
     <nuxt/>
   </v-app>
 </template>
