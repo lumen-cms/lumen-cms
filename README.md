@@ -27,7 +27,7 @@ The module features
     'nuxt-graphql-cms',
 
     // With options
-    ['nuxt-graphql-cms', { /* module options */ }],
+    ['nuxt-graphql-cms', { modules }],
  ]
 }
 ```
