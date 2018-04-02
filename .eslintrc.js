@@ -1,14 +1,16 @@
 module.exports = {
   root: true,
   parserOptions: {
-    sourceType: 'module'
+    parser: 'babel-eslint',
+    sourceType: 'module',
+    ecmaVersion: 8
   },
   env: {
     browser: true,
     node: true,
     jest: true
   },
-  extends: 'standard',
+  extends: ['plugin:vue/recommended', 'plugin:jest/recommended', 'standard' ],
   plugins: [
     'jest',
     'vue'
@@ -21,8 +23,20 @@ module.exports = {
     // Allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // Do not allow console.logs etc...
-    'no-console': 2
+    'no-console': 2,
+    "rules": {
+      "indent": ["error", 2]
+    }
   },
+  overrides: [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off",
+        "vue/script-indent": ["error", 2, { "baseIndent": 1 }]
+      }
+    }
+  ],
   globals: {
     'jest/globals': true,
     jasmine: true

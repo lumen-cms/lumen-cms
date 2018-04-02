@@ -16,7 +16,7 @@
     //   CmsTest: () => import('@@/lib/templates/components/CmsTest').then(m => m.default || m)
     // },
     mounted () {
-      console.log(this.$cms)
+      console.log(this.$cms) // eslint-disable-line
     }
   }
 </script>
