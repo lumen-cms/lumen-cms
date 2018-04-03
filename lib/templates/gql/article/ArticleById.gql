@@ -1,0 +1,11 @@
+#import '../content/contentFragment.gql'
+#import './articleFragment.gql'
+
+query Article($id:ID!) {
+  Article(id: $id) {
+    ...article
+    contents(orderBy:sorting_ASC){
+      ...content
+    }
+  }
+}

@@ -1,0 +1,6 @@
+query allArticleCategories($filter:ArticleCategoryFilter){
+  allArticleCategories(filter:$filter, orderBy:title_ASC){
+    id
+    title
+  }
+}

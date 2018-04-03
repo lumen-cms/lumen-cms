@@ -1,0 +1,23 @@
+#import './mediaFragment.gql'
+
+mutation updateMedia(
+$id: ID!
+$filesIds: [ID!]
+$previewImageId: ID
+$header: String
+$headerLayout: HEADER_LAYOUT
+$classNames:[String!]
+$imageColumnSize:IMAGE_COLUMNS
+){
+  updateMedia(
+    id:$id
+    filesIds:$filesIds
+    previewImageId:$previewImageId
+    header: $header
+    headerLayout: $headerLayout
+    classNames:$classNames
+    imageColumnSize:$imageColumnSize
+  ){
+    ...media
+  }
+}

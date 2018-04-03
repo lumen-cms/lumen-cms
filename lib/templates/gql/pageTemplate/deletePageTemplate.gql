@@ -1,0 +1,7 @@
+#import './pageTemplateFragment.gql'
+
+mutation deletePageTemplate($id:ID!){
+  deletePageTemplate(id:$id){
+    ...pageTemplate
+  }
+}

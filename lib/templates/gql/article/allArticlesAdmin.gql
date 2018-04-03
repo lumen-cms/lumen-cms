@@ -1,0 +1,16 @@
+query allArticles ($filter: ArticleFilter, $first:Int, $skip:Int,$orderBy:ArticleOrderBy){
+  allArticles (filter: $filter,first:$first,skip:$skip, orderBy:$orderBy) {
+    id
+    deleted
+    slug
+    title
+    published
+    publishedDate
+    authors {name, id}
+    updatedAt
+    categories {id}
+  }
+  _allArticlesMeta(filter:$filter){
+    count
+  }
+}

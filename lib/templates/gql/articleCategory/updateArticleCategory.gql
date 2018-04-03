@@ -1,0 +1,17 @@
+#import './articleCategoryFragment.gql'
+
+mutation updateArticleCategory(
+$id:ID!
+$title:String!
+$languageKey:LANGUAGE_KEY!
+$slug:String!
+){
+  updateArticleCategory(
+    id:$id
+    title:$title
+    slug:$slug
+    languageKey:$languageKey
+  ){
+    ...articleCategory
+  }
+}

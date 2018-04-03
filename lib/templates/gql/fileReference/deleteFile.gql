@@ -1,0 +1,5 @@
+mutation deleteFileReference ($id:ID!){
+  deleteFile(id:$id){
+    id
+  }
+}

@@ -1,0 +1,19 @@
+#import '../file/fileFragment.gql'
+
+fragment fileReference on FileReference{
+  id
+  title
+  alternative
+  caption
+  linkSlug
+  linkOpenExternal
+  linkId
+  linkType
+  sorting
+  resize
+  crop
+  backgroundStyles
+  file{
+    ...file
+  }
+}

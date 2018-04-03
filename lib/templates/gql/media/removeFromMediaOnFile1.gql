@@ -1,0 +1,5 @@
+mutation ($filesFileId:ID!,$mediaFilesMediaId:ID!){
+  removeFromMediaOnFile1(filesFileId:$filesFileId,mediaFilesMediaId:$mediaFilesMediaId){
+    filesFile{id} mediaFilesMedia{id}
+  }
+}

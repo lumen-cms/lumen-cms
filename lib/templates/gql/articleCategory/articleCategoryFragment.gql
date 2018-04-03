@@ -1,0 +1,11 @@
+fragment articleCategory on ArticleCategory{
+  id
+  additionalLanguages{
+    id title
+  }
+  defaultLanguage{
+    id title
+  }
+  title
+  languageKey
+}

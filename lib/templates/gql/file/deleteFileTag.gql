@@ -1,0 +1,5 @@
+mutation deleteFileTag($id:ID!){
+  deleteFileTag(id:$id){
+    id
+  }
+}

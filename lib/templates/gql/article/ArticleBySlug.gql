@@ -1,0 +1,25 @@
+#import '../content/contentFragment.gql'
+#import './articleFragment.gql'
+#import '../file/fileFragment.gql'
+
+query Article($slug:String!) {
+  Article(slug: $slug) {
+    ...article
+    contents(orderBy:sorting_ASC){
+      ...content
+    }
+    media(filter:{previewImage:{id_not:null}}){
+      id
+      previewImage{
+        ...file
+      }
+    }
+  }
+  UrlAlias(path:$slug){
+    path
+    article{
+      id
+      slug
+    }
+  }
+}

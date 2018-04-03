@@ -1,0 +1,17 @@
+mutation createUrlAlias(
+$path:String!,
+$isActive:Boolean,
+$articleId:ID
+){
+  createUrlAlias(
+    path:$path,
+    isActive:$isActive,
+    articleId:$articleId
+  ){
+    id
+    path
+    article{
+      id
+    }
+  }
+}

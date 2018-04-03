@@ -1,0 +1,12 @@
+mutation updateFileTag(
+$id:ID!
+$title:String!
+){
+  updateFileTag(
+    id:$id
+    title:$title
+  ){
+    id
+    title
+  }
+}

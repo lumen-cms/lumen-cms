@@ -1,0 +1,53 @@
+#import './fileReferenceFragment.gql'
+
+mutation createFileReference(
+$alternative: String
+$caption: String
+$linkId: String
+$linkOpenExternal: Boolean
+$linkSlug: String
+$linkType: LINK_TYPE
+$sorting: Int
+$title: String
+#$contentTextImageId: ID
+$fileId: ID
+$mediaId: ID
+$resize:String
+$crop:String
+#$contentLayoutId:ID
+$backgroundStyles:[String!]
+$contentBackgroundId:ID
+$contentId:ID
+) {
+  createFileReference(
+    alternative: $alternative
+    caption: $caption
+    linkId: $linkId
+    linkOpenExternal: $linkOpenExternal
+    linkSlug: $linkSlug
+    linkType: $linkType
+    sorting: $sorting
+    title: $title
+    #contentTextImageId: $contentTextImageId
+    #contentLayoutId:$contentLayoutId
+    contentId:$contentId
+    contentBackgroundId:$contentBackgroundId
+    fileId: $fileId
+    mediaId: $mediaId
+    resize:$resize
+    crop:$crop
+    backgroundStyles:$backgroundStyles
+  ){
+    ...fileReference
+    #contentLayout{id}
+    contentBackground{
+      id
+    }
+    content{
+      id
+    }
+    #contentTextImage {id}
+    file {id}
+    media {id}
+  }
+}

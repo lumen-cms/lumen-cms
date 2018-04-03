@@ -1,0 +1,5 @@
+mutation deleteUrlAlias($id:ID!){
+  deleteUrlAlias(id:$id){
+    id
+  }
+}

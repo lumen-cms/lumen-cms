@@ -1,0 +1,35 @@
+#import './fileReferenceFragment.gql'
+
+mutation updateFileReference(
+$id: ID!
+$alternative: String
+$caption: String
+$linkId: String
+$linkOpenExternal: Boolean
+$linkSlug: String
+$linkType: LINK_TYPE
+$sorting: Int
+$title: String
+$fileId: ID
+$resize:String
+$crop:String
+$backgroundStyles:[String!]
+) {
+  updateFileReference(
+    id: $id
+    alternative: $alternative
+    caption: $caption
+    linkId: $linkId
+    linkOpenExternal: $linkOpenExternal
+    linkSlug: $linkSlug
+    linkType: $linkType
+    title: $title
+    sorting:$sorting
+    fileId: $fileId
+    resize:$resize
+    crop:$crop
+    backgroundStyles:$backgroundStyles
+  ){
+    ...fileReference
+  }
+}

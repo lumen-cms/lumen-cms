@@ -1,0 +1,8 @@
+fragment file on File{
+  id
+  contentType
+  name
+  secret
+  width
+  height
+}

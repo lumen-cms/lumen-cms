@@ -1,0 +1,38 @@
+#import '../fileReference/fileReferenceFragment.gql'
+
+fragment content on Content{
+  id
+  languageKey
+  sorting
+  published
+  description
+  teaser
+  type
+  properties
+  styles
+  fileReferences(orderBy:sorting_ASC){
+    ...fileReference
+  }
+  backgroundFileReferences(orderBy:sorting_ASC){
+    ...fileReference
+  }
+  childs{
+    id
+    languageKey
+    layoutIndex
+    sorting
+    published
+    description
+    teaser
+    type
+    properties
+    styles
+    fileReferences(orderBy:sorting_ASC){
+      ...fileReference
+    }
+    backgroundFileReferences(orderBy:sorting_ASC){
+      ...fileReference
+    }
+  }
+  # defaultLanguage{ id languageKey }
+}

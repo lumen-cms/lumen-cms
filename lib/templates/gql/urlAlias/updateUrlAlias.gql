@@ -1,0 +1,18 @@
+mutation updateUrlAlias(
+$id:ID!
+$path:String
+$isActive:Boolean
+$articleId:ID
+){
+  updateUrlAlias(
+    id:$id
+    path:$path
+    articleId:$articleId
+    isActive:$isActive
+  ){
+    id
+    article{
+      id
+    }
+  }
+}

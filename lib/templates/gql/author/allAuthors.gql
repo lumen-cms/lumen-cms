@@ -1,0 +1,11 @@
+#import '../file/fileFragment.gql'
+
+query allAuthors {
+  allAuthors (orderBy: name_ASC) {
+    id
+    name
+    file {
+      ...file
+    }
+  }
+}

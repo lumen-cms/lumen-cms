@@ -1,0 +1,35 @@
+#import './contentFragment.gql'
+
+mutation updateContent(
+$id: ID!,
+$sorting: Int,
+$published: Boolean
+$articleId:ID
+$contentLayoutElementId:ID
+$layoutIndex:Int
+$fileReferencesIds: [ID!]
+$backgroundFileReferencesIds: [ID!]
+$description: String
+$teaser: String
+$type: String
+$properties: Json
+$styles: Json
+){
+  updateContent(
+    id: $id
+    sorting: $sorting
+    published: $published
+    articleId:$articleId
+    parentId: $contentLayoutElementId
+    layoutIndex:$layoutIndex
+    fileReferencesIds: $fileReferencesIds
+    description: $description
+    teaser:$teaser
+    backgroundFileReferencesIds:$backgroundFileReferencesIds
+    type: $type
+    properties: $properties
+    styles: $styles
+  ){
+    ...content
+  }
+}

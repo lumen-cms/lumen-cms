@@ -1,0 +1,14 @@
+#import './fileFragment.gql'
+
+query allFiles($filter: FileFilter,$first:Int, $skip:Int, $orderBy:FileOrderBy){
+  allFiles(filter:$filter,first:$first,skip:$skip,orderBy:$orderBy) {
+    ...file
+    fileTags{id title}
+    _fileReferencesMeta{count}
+    _mediaFilesMeta{count}
+    _mediaListImagesMeta{count}
+  }
+  _allFilesMeta(filter:$filter){
+    count
+  }
+}

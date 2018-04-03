@@ -1,0 +1,14 @@
+#import './articleFragment.gql'
+#import '../file/fileFragment.gql'
+
+query Article($id:ID!) {
+  Article(id: $id) {
+    ...article
+    media {
+      id
+      previewImage {
+        ...file
+      }
+    }
+  }
+}

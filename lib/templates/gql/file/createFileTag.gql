@@ -1,0 +1,10 @@
+mutation createFileTag(
+$title:String!
+){
+  createFileTag(
+    title:$title
+  ){
+    id
+    title
+  }
+}

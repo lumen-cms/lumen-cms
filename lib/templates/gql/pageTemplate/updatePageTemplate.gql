@@ -1,0 +1,23 @@
+#import './pageTemplateFragment.gql'
+
+mutation updatePageTemplate(
+$id:ID!
+$title:String
+$body:String
+$bodyJson:Json
+$languageKey:LANGUAGE_KEY
+$key:String
+$type:PAGE_TEMPLATE_TYPE
+){
+  updatePageTemplate(
+    id:$id
+    title:$title
+    body:$body
+    languageKey:$languageKey
+    key:$key
+    type:$type
+    bodyJson: $bodyJson
+  ){
+    ...pageTemplate
+  }
+}

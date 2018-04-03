@@ -1,0 +1,9 @@
+#import '../file/fileFragment.gql'
+query Author($id:ID!) {
+  Author(id: $id) {
+    name id
+    file {
+      ...file
+    }
+  }
+}

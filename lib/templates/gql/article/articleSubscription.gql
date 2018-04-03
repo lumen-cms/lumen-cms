@@ -1,0 +1,28 @@
+#import '../content/contentFragment.gql'
+#import './articleFragment.gql'
+#import '../file/fileFragment.gql'
+
+subscription changedArticle($slug:String){
+  Article(
+    filter:{
+      mutation_in:[UPDATED],
+      node:{
+        slug:$slug
+      }
+    }){
+    mutation
+    updatedFields
+    node{
+      ...article
+      contents(orderBy:sorting_ASC){
+        ...content
+      }
+      media(filter:{previewImage:{id_not:null}}){
+        id
+        previewImage{
+          ...file
+        }
+      }
+    }
+  }
+}

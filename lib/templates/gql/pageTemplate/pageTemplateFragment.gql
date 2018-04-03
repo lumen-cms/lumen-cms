@@ -1,0 +1,10 @@
+fragment pageTemplate on PageTemplate{
+  __typename
+  id
+  title
+  body
+  languageKey
+  key
+  type
+  bodyJson
+}

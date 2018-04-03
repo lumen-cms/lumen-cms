@@ -1,0 +1,7 @@
+query allArticlesSelect($filter:ArticleFilter){
+  allArticles(filter:$filter,first:100){
+    id
+    slug
+    title
+  }
+}

@@ -1,0 +1,37 @@
+#import './articleFragment.gql'
+
+mutation updateArticle(
+$id:ID!
+$metaTitle:String
+$teaser:String
+$description:String
+$title:String
+$keywords:String
+$slug:String
+$published:Boolean
+$publishedDate:DateTime
+$categoriesIds:[ID!]
+$isBlogEntry:Boolean
+$languageKey:LANGUAGE_KEY
+$authorsIds: [ID!]
+$modified:DateTime
+){
+  updateArticle(
+    id:$id
+    metaTitle:$metaTitle
+    teaser:$teaser
+    description:$description
+    title:$title
+    keywords:$keywords
+    slug:$slug
+    published:$published
+    publishedDate:$publishedDate
+    categoriesIds:$categoriesIds
+    isBlogEntry:$isBlogEntry
+    languageKey:$languageKey
+    authorsIds:$authorsIds
+    modified:$modified
+  ){
+    ...article
+  }
+}

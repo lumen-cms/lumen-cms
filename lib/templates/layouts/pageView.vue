@@ -1,6 +1,10 @@
 <template>
-  <v-app>
+  <v-app :class="{'jumbo-first': $store.state.hasJumbotron}">
+    <lc-side-nav v-if="hasHelpSideNav"/>
+    <lc-main-sidebar/>
+    <lc-page-toolbar/>
     <h3>fancy layout</h3>
+
 
     <cms-test></cms-test>
     <nuxt/>
@@ -15,7 +19,13 @@
     // component: {
     //   CmsTest: () => import('@@/lib/templates/components/CmsTest').then(m => m.default || m)
     // },
+    data () {
+      return {
+        hasHelpSideNav: false
+      }
+    },
     mounted () {
+      this.hasHelpSideNav = this.$store.getters.isHelpGuide
       console.log(this.$cms) // eslint-disable-line
     }
   }

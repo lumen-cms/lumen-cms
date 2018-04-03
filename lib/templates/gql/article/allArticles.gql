@@ -1,0 +1,24 @@
+#import '../file/fileFragment.gql'
+
+query allArticles ($filter: ArticleFilter, $first:Int, $skip:Int){
+  allArticles (filter: $filter,first:$first,skip:$skip, orderBy: publishedDate_DESC) {
+    id
+    description
+    teaser
+    slug
+    title
+    published
+    publishedDate
+    isBlogEntry
+    categories {id title}
+    media {
+      previewImage {
+        ...file
+      }
+    }
+    authors {id name}
+  }
+  _allArticlesMeta(filter:$filter){
+    count
+  }
+}

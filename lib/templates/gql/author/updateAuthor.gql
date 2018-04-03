@@ -1,0 +1,21 @@
+#import '../file/fileFragment.gql'
+
+mutation updateAutor(
+$id: ID!
+$name: String!
+$fileId: ID
+$articlesIds: [ID!]
+){
+  updateAuthor(
+    id: $id
+    name: $name
+    fileId: $fileId
+    articlesIds: $articlesIds
+  ){
+    id name
+    articles {id}
+    file {
+      ...file
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation updateSlugs($id:ID!,$slug:String!){
+  updateSlugs(id:$id,slug:$slug){
+    count
+  }
+}

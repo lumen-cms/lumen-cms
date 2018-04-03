@@ -1,0 +1,4 @@
+mutation addToMediaOnFile1($mediaFilesMediaId: ID!, $filesFileId: ID!){
+  addToMediaOnFile1(mediaFilesMediaId: $mediaFilesMediaId, filesFileId:$filesFileId){filesFile{id} mediaFilesMedia{id}
+  }
+}

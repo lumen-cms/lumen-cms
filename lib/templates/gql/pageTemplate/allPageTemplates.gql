@@ -1,0 +1,7 @@
+#import './pageTemplateFragment.gql'
+
+query allPageTemplates($languageKey:LANGUAGE_KEY){
+  allPageTemplates(filter:{languageKey:$languageKey}){
+    ...pageTemplate
+  }
+}

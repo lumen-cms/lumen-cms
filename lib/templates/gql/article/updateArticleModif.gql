@@ -1,0 +1,11 @@
+mutation updateArticleModif(
+$id:ID!
+$modified:DateTime
+){
+  updateArticle(
+    id:$id
+    modified:$modified
+  ){
+    id
+  }
+}

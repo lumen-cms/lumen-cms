@@ -1,0 +1,22 @@
+#import '../file/fileFragment.gql'
+
+mutation createMedia (
+$filesIds: [ID!]
+$previewImageId: ID
+$articlesIds: [ID!]
+){
+  createMedia(
+    filesIds: $filesIds
+    previewImageId: $previewImageId
+    articlesIds: $articlesIds
+  ) {
+    id
+    previewImage {
+      ...file
+    },
+    files {
+      ...file
+    }
+    articles{id}
+  }
+}

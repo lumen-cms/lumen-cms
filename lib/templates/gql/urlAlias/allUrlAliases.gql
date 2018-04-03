@@ -1,0 +1,15 @@
+query allUrlAliases($filter:UrlAliasFilter,$first:Int,$skip:Int){
+  allUrlAliases(filter:$filter,first:$first, skip:$skip){
+    id
+    path
+    article{
+      id
+      slug
+      title
+    }
+    isActive
+  },
+  _allUrlAliasesMeta(filter:$filter){
+    count
+  }
+}

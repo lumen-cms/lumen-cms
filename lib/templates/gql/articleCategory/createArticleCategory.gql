@@ -1,0 +1,15 @@
+#import './articleCategoryFragment.gql'
+
+mutation createArticleCategory(
+$title:String!,
+$languageKey:LANGUAGE_KEY!,
+$slug:String!
+){
+  createArticleCategory(
+    title:$title
+    slug:$slug
+    languageKey:$languageKey
+  ){
+    ...articleCategory
+  }
+}

@@ -1,0 +1,19 @@
+#import '../fileReference/fileReferenceFragment.gql'
+#import '../file/fileFragment.gql'
+
+fragment media on Media{
+  id
+  header
+  headerLayout
+  imageColumnSize
+  classNames
+  fileReferences(orderBy:sorting_ASC) {
+    ...fileReference
+  }
+  files {
+    ...file
+  }
+  previewImage {
+    ...file
+  }
+}

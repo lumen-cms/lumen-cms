@@ -1,0 +1,39 @@
+#import './contentFragment.gql'
+
+mutation createContent (
+$languageKey: LANGUAGE_KEY!
+$layoutColumn: LAYOUT_COLUMN
+$layoutIndex: Int
+$published: Boolean
+$sorting: Int
+$articleId:ID
+$contentLayoutElementId: ID
+$description: String
+$teaser: String
+$type: String
+$properties: Json
+$styles: Json
+$fileReferences:[ContentfileReferencesFileReference!]
+$backgroundFileReferences:[ContentbackgroundFileReferencesFileReference!]
+$childs:[ContentchildsContent!]
+){
+  createContent(
+    languageKey: $languageKey
+    layoutColumn: $layoutColumn
+    layoutIndex: $layoutIndex
+    published: $published
+    sorting: $sorting
+    articleId:$articleId
+    parentId: $contentLayoutElementId
+    description: $description
+    teaser:$teaser
+    type: $type
+    properties: $properties
+    styles: $styles
+    fileReferences:$fileReferences
+    backgroundFileReferences:$backgroundFileReferences
+    childs:$childs
+  ){
+    ...content
+  }
+}
