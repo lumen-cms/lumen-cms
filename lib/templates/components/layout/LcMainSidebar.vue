@@ -4,7 +4,7 @@
                        temporary
                        fixed
                        right
-                       v-if="$store.getters['lc/getPageTemplate']('SIDEBAR_TOP')"
+                       v-if="$store.getters.getPageTemplate('SIDEBAR_TOP')"
                        v-model="$store.state.drawer">
     <v-toolbar
       class="transparent" flat>
