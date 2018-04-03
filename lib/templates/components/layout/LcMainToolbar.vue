@@ -6,7 +6,7 @@
              :clipped-left="$vuetify.breakpoint.mdAndUp"
              :clipped-right="clippedRight"
              v-scroll="onScroll"
-             :class="{'search-active': $store.state.searchActive, 'has-jumbo': jumbo, 'transparent': transparentToolbar}"
+             :class="{'search-active': $store.state.lc.searchActive, 'has-jumbo': jumbo, 'transparent': transparentToolbar}"
              ref="toolbar"
              :flat="transparentToolbar"
              :dark="isDark"
@@ -66,7 +66,7 @@
       return {
         flat: false,
         dark: this.darkToolbar,
-        jumbo: this.$store.state.hasJumbotron,
+        jumbo: this.$store.state.lc.hasJumbotron,
         scrolledDown: false,
         toolbarSideIconClass: this.$cms.toolbarSideIconClass
       }
@@ -75,9 +75,9 @@
       this.onScroll()
     },
     watch: {
-      '$store.state.hasJumbotron' (v) {
+      '$store.state.lc.hasJumbotron' (v) {
         if (!process.browser) return
-        this.jumbo = this.$store.state.hasJumbotron
+        this.jumbo = this.$store.state.lc.hasJumbotron
         this.onScroll()
       },
       '$route' () {

@@ -14,7 +14,7 @@
     computed: {
       searchText: {
         get () {
-          return this.$store.state.mainSearch
+          return this.$store.state.lc.mainSearch
         },
         set: debounce(function (value) {
           this.$store.dispatch('setMainSearch', value)

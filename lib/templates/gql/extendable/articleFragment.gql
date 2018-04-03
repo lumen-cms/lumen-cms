@@ -1,0 +1,3 @@
+fragment extendArticle on Article{
+  id
+}

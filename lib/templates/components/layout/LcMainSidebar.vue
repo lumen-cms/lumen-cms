@@ -5,7 +5,7 @@
                        fixed
                        right
                        v-if="$store.getters.getPageTemplate('SIDEBAR_TOP')"
-                       v-model="$store.state.drawer">
+                       v-model="$store.state.lc.drawer">
     <v-toolbar
       class="transparent" flat>
       <v-list class="pa-0">

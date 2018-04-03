@@ -9,26 +9,27 @@
     <lc-main-search class="main-search no-extension mx-3"
                     :class="{'search-field-hidden': (!searchActive && $vuetify.breakpoint.smAndDown)}"
                     v-show="!!showSearch && !hasExtension"/>
-    <!--<v-spacer v-show="hasExtension"/>-->
-    <!--<template v-show="!mobileSearchActive">-->
-      <!--<v-btn icon-->
-             <!--v-show="!!showSearch && $vuetify.breakpoint.smAndDown"-->
-             <!--@click.native.stop="searchActive = !searchActive">-->
-        <!--<v-icon>search</v-icon>-->
-      <!--</v-btn>-->
-      <!--<slot/>-->
-      <!--<lc-vue-renderer :content="$store.getters.getPageTemplate('HEAD_TOP')"/>-->
-      <!--<v-layout v-if="hasExtension"-->
-                <!--row-->
-                <!--slot="extension"-->
-                <!--align-center-->
-                <!--pa-3>-->
-        <!--<lc-main-search v-if="!!showSearch"/>-->
-        <!--<v-spacer v-if="!showSearch"/>-->
-        <!--<lc-vue-renderer v-if="!hideExtensionTemplate"-->
-                         <!--:content="$store.getters.getPageTemplate('HEAD_EXTENSION')"/>-->
-      <!--</v-layout>-->
-    <!--</template>-->
+    <v-spacer v-show="hasExtension"/>
+    <template v-show="!mobileSearchActive">
+      <v-btn icon
+             v-show="!!showSearch && $vuetify.breakpoint.smAndDown"
+             @click.native.stop="searchActive = !searchActive">
+        <v-icon>search</v-icon>
+      </v-btn>
+      <slot/>
+      <lc-vue-renderer :content="$store.getters.getPageTemplate('HEAD_TOP')"
+                       v-if="$store.getters.getPageTemplate('HEAD_TOP')"/>
+      <v-layout v-if="hasExtension"
+                row
+                slot="extension"
+                align-center
+                pa-3>
+        <lc-main-search v-if="!!showSearch"/>
+        <v-spacer v-if="!showSearch"/>
+        <lc-vue-renderer v-if="!hideExtensionTemplate && $store.getters.getPageTemplate('HEAD_EXTENSION')"
+                         :content="$store.getters.getPageTemplate('HEAD_EXTENSION')"/>
+      </v-layout>
+    </template>
   </lc-main-toolbar>
 </template>
 

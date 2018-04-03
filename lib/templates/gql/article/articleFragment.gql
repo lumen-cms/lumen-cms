@@ -1,4 +1,4 @@
-#import '../../../src/gql/extendArticleFragment.gql'
+#import '../extendable/articleFragment.gql'
 #import '../file/fileFragment.gql'
 
 fragment article on Article{
