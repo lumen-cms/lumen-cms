@@ -1,0 +1,31 @@
+main {
+  position relative
+  z-index 1
+}
+
+.toolbar.toolbar--fixed {
+  background-color: transparent
+  &.elevation-0 {
+    .toolbar__extension {
+      //border-top: 1px solid transparent
+    }
+  }
+  .toolbar__title {
+    z-index: 1
+  }
+}
+
+.toolbar__extension {
+  border-top: 1px solid $material-light.dividers
+}
+
+@media screen and (max-width: $grid-breakpoints.sm) {
+  .extended-toolbar.application {
+    .toolbar--fixed:not(.search-active) {
+      .toolbar__extension {
+        display: none;
+      }
+    }
+  }
+}
+

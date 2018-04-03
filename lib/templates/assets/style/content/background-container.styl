@@ -1,0 +1,34 @@
+.page-content {
+  .content-bg {
+    z-index: -1
+    position absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    &.opacity-15 {
+      opacity: 0.15
+    }
+    &.opacity-20 {
+      opacity: 0.2
+    }
+    &.opacity-30 {
+      opacity: 0.3
+    }
+    &.opacity-40 {
+      opacity: 0.4
+    }
+    &.opacity-50 {
+      opacity: 0.5
+    }
+    &.opacity-60 {
+      opacity: 0.6
+    }
+    &.opacity-75 {
+      opacity: 0.75
+    }
+  }
+  .FixedBackground.text-image .fixed-background, .jumbotron .jumbotron__content {
+    z-index: 0 // need to fix overlay issue for z-index of -1 on content-bg
+  }
+}

@@ -1,0 +1,105 @@
+.page-content {
+  .content-element {
+    background-color white
+    @extend .st-mb
+    > .content-header {
+      h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0
+      }
+      > div {
+        @extend .st-pt
+        padding-bottom: $spacers.three.y
+      }
+    }
+    > .rte-content {
+      @extend .st-pb
+    }
+  }
+
+  .content-layout {
+    position: relative
+    @extend .st-mb
+
+    .d-flex.flex {
+      flex-direction column
+    }
+
+    .d-flex > div:not(.content-text-image) {
+      margin-bottom 0
+      padding: 0
+    }
+    .d-flex > div.content-text-image {
+      margin-bottom: 0
+    }
+  }
+
+  .content-tabs {
+    @extend .st-mb
+    .text-image, .content-element, .PageHeader, .read-more-panel {
+      @extend .mb-0
+      @extend .pa-0
+    }
+  }
+  .BesideTextLeft {
+    .rte-content {
+      @extend .ml-3
+    }
+  }
+  .BesideTextRight {
+    .rte-content {
+      @extend .mr-3
+    }
+  }
+  .fixed-background, .parallax__content, .jumbotron__content {
+    .rte-content {
+      @extend .pb-0
+    }
+  }
+}
+
+max-width() {
+  max-width 100%
+  overflow-x auto
+
+}
+
+.fixed-background, .jumbotron__content {
+  > .container > .layout {
+    max-width ()
+  }
+}
+.parallax__content > div{
+  max-width ()
+}
+
+.fixed-background, .jumbotron__content {
+  z-index 0
+}
+
+.page-content {
+  .content-element:not(.max-width-700), .content-element:not(.max-width-900) {
+    > .content-header {
+      > div {
+        @extend .st-plr
+      }
+    }
+    > .rte-content {
+      @extend .st-plr
+    }
+  }
+}
+
+@media $display-breakpoints.xs-only {
+  .page-content {
+    .content-element {
+      > .content-header {
+        > div {
+          @extend .st-plr
+        }
+      }
+      > .rte-content {
+        @extend .st-plr
+      }
+    }
+  }
+}

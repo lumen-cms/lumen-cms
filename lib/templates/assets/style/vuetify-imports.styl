@@ -1,0 +1,42 @@
+@require '~vuetify/src/stylus/settings/_variables'
+@require '~vuetify/src/stylus/settings/_colors'
+@require '~vuetify/src/stylus/trumps/_spacing'
+@require '~vuetify/src/stylus/components/_buttons'
+
+@media all and (min-width: 0) {
+  .text-xs-left {
+    text-align: left !important;
+  }
+
+  .text-xs-center {
+    text-align: center !important;
+  }
+
+  .text-xs-right {
+    text-align: right !important;
+  }
+
+  .text-xs-justify {
+    text-align: justify !important;
+  }
+}
+
+.btn--block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 6px 0;
+  width: 100%;
+}
+
+.btn--large {
+  font-size: 15px;
+  height: 44px;
+}
+
+.btn--large .btn__content {
+  padding: 0 32px;
+}

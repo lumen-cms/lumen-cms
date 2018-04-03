@@ -1,0 +1,38 @@
+.lightbox:hover {
+  cursor: pointer;
+}
+
+.lightbox-dialog {
+  box-shadow: none;
+  overflow: hidden;
+  figure {
+    @extend .text-xs-center
+  }
+  img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .card, .card-text {
+    background-color: transparent;
+  }
+  .carousel {
+    box-shadow: none;
+    background-color: transparent;
+    height: 80vh;
+    .carousel__item {
+      background-size: contain;
+    }
+  }
+  .fade {
+    &-enter-active, &-leave-active, &-leave-to {
+      transition: .3s ease-out
+      position: absolute
+      top: 0
+      left: 0
+    }
+    &-enter, &-leave, &-leave-to {
+      opacity: 0
+    }
+  }
+}

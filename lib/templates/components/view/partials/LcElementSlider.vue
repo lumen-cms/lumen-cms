@@ -1,6 +1,5 @@
 <template>
   <div class="carousel element-slider" :style="'height: ' + height">
-
     <div v-for="(dir, i) in ['left', 'right']" :key="'ctrl' + i"
          class="slide-control"
          :class="'carousel__' + dir">
@@ -23,14 +22,12 @@
 
 <script>
 export default {
-  name: 'ElementSlider',
-
+  name: 'LcElementSlider',
   data () {
     return {
       inputValue: null
     }
   },
-
   props: {
     height: {
       type: String,

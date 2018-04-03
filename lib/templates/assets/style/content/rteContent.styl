@@ -1,0 +1,177 @@
+.rte-content, .quill-ql-editor {
+  white-space: pre-wrap;
+
+  p, b, ul, li, div {
+    white-space: normal
+    > b {
+      line-height: 2.5rem
+    }
+  }
+
+  ol, ul {
+    @extend .pl-0
+    @extend .ml-0
+    @extend .py-1
+    li {
+      line-height: 1.5rem
+      background: inherit
+    }
+  }
+  ol {
+    li {
+      margin-left: 1em
+      @extend .py-1
+    }
+  }
+  ul {
+    list-style-type: none;
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    li {
+      padding: 5px 16px;
+      margin: 0;
+      &:not(:last-child) {
+        border-bottom: 1px solid #e0e0e0;
+      }
+    }
+  }
+
+  > p, > div {
+    @extend .mb-3
+    &:last-of-type {
+      @extend .mb-0
+    }
+  }
+
+  hr {
+    background-color: rgba(97, 97, 97, 0.12)
+    border: none;
+    display: block;
+    height: 1px;
+    flex: 1;
+    width: 100%;
+  }
+
+  .btn {
+    padding: 0 16px
+
+    &.btn-orange {
+      background-color: $themeprimary
+      color: fff
+    }
+    &.btn-block {
+      @extend .btn--block
+    }
+  }
+
+  .ql-size {
+    &-normal_button, &-large_button {
+      color: rgba(0, 0, 0, .87) !important
+    }
+    &-normal_button_primary, &-normal_button, &-normal_button_secondary, &-normal_button_info, &-normal_button_error, &-normal_button_warning, &-normal_button_success {
+      @extend .btn
+      padding: 8px 16px !important;
+      height: auto;
+    }
+    &-large_button_primary, &-large_button, &-large_button_secondary, &-large_button_info, &-large_button_error, &-large_button_warning, &-large_button_success {
+      @extend .btn
+      @extend .btn--large
+      padding: 8px 16px !important;
+      height: auto;
+    }
+    &-large_button_primary, &-normal_button_primary {
+      color: white !important
+      text-decoration none
+      background-color: $themeprimary !important
+    }
+    &-large_button_secondary, &-normal_button_secondary {
+      color: white !important
+      text-decoration none
+      background-color: $themesecondary !important
+    }
+    &-large_button_info, &-normal_button_info {
+      color: white !important
+      text-decoration none
+      background-color: $themeinfo !important
+    }
+    &-large_button_warning, &-normal_button_warning {
+      color: white !important
+      text-decoration none
+      background-color: $themewarning !important
+    }
+    &-large_button_success, &-normal_button_success {
+      color: white !important
+      text-decoration none
+      background-color: $themesuccess !important
+    }
+    &-large_button_error, &-normal_button_error {
+      color: white !important
+      text-decoration none
+      background-color: $themeerror !important
+    }
+  }
+
+  .ql-icon {
+    &-medium, &-standard, &-large, &-x_large, &-x-large {
+      align-items: center
+      font-size: 24px
+      justify-content: center
+      line-height: 1
+      transition: $primary-transition
+      vertical-align: middle
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    &-medium {
+      font-size: $custom-theme_variables.icon-size-medium
+    }
+    &-large {
+      font-size: $custom-theme_variables.icon-size-large
+    }
+    &-x_large {
+      font-size: $custom-theme_variables.icon-size-x_large
+    }
+  }
+
+  .ql-align-center {
+    text-align center
+  }
+
+  .ql-align-left {
+    text-align left
+  }
+
+  .ql-align-right {
+    text-align right
+  }
+
+  .ql-align-justify {
+    text-align justify
+  }
+
+  .ql-indent-1 {
+    padding-left 3em
+  }
+
+  .ql-indent-2 {
+    padding-left 6em
+  }
+
+  .ql-indent-3 {
+    padding-left 9em
+  }
+
+  .ql-indent-4 {
+    padding-left 12em
+  }
+
+}
+

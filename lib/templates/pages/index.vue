@@ -6,10 +6,10 @@
 </template>
 <script>
   import ArticleGql from '../gql/article/ArticleBySlug.gql'
-  // import ContentRenderer from '../components/content/LcContentRenderer.js'
   import getHeadMeta from '../util/getHeadMeta'
   import articleSubGql from '../gql/article/articleSubscription.gql'
   import {initialRenderFunc} from '../util/initialRender'
+  import setPageTemplates from '../util/setPageTemplates'
 
   export default {
     name: 'PageIndex',
@@ -28,7 +28,7 @@
       return {}
     },
     // components: {
-    //   'ContentEditMain': () => import(/* webpackChunkName:'content-edit-chunk' */ '../components/content/edit/ContentEditMain.vue'),
+    //   'ContentEditMain': () => import(/* webpackChunkName:'content-edit-chunk' */ '../components/content/edit/ContentEditMain.vue'), // todo
     //   ContentRenderer
     // },
     data () {
@@ -54,16 +54,16 @@
     },
     async asyncData ({req, app, store, params, error, redirect}) {
       // console.log(app.$cms)
+
       const {locale, host, slug} = initialRenderFunc({req, store, params, CONFIG: app.$cms})
-      if (slug.match(/logo.png|favicon|robots.txt|.css.map/g)) return
-      console.log(slug)
       try {
-        const {data} = await app.apolloProvider.defaultClient.query({query: ArticleGql, variables: {slug}})
-        console.log(data)
+        const apollo = app.apolloProvider.defaultClient
+        const {data} = await apollo.query({query: ArticleGql, variables: {slug}})
+        await setPageTemplates(apollo, store)
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()
-        await store.dispatch('setLanguageKey', {locale: articleLang || locale, $cms: app.$cms})
+        await store.dispatch('lc/setLanguageKey', {locale: articleLang || locale, $cms: app.$cms})
         if (article) {
           if (!store.getters.canEdit && (article.deleted || !article.published)) {
             error({

@@ -1,0 +1,49 @@
+.page-content {
+  /**
+  expension panel read more
+   */
+  .read-more-panel {
+    background-color: white
+    @extend .st-pa
+    @extend .st-mb
+    > div {
+      padding-bottom: $spacers.three.y
+    }
+    .expansion-panel {
+      box-shadow: none
+      .expansion-panel__header {
+        background-color: $grey.darken-3
+        > div {
+          &:not(.header__icon) {
+            display none
+          }
+          &.header__icon {
+            margin-right auto
+            .icon {
+              color: white
+            }
+          }
+        }
+      }
+    }
+    .expansion-panel__body {
+      > div {
+        padding-top: $spacers.three.y
+      }
+    }
+  }
+
+  .content-expansion-panel {
+    @extend .st-mb
+
+    .text-image, .content-element, .PageHeader, .read-more-panel {
+      margin-bottom: 0
+      padding: 0
+    }
+
+    .rte-content ul li {
+    //border-bottom-color white
+    }
+
+  }
+}

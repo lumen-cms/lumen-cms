@@ -1,5 +1,8 @@
 <template>
-  <v-footer absolute clipped inset app
+  <v-footer absolute
+            clipped
+            inset
+            app
             class="d-inline-block">
     <v-layout row wrap align-center class="grey darken-3 text-xs-center ma-0">
       <v-flex xs12>
@@ -10,9 +13,8 @@
       <v-flex xs12>
         <slot name="links"/>
         <slot/>
-
-        <lc-vue-renderer :content="$store.getters.getPageTemplate('FOOTER_TOP')"
-                         v-if="$store.getters.getPageTemplate('FOOTER_TOP')"/>
+        <lc-vue-renderer v-if="$store.getters.getPageTemplate('FOOTER_TOP')"
+                         :content="$store.getters.getPageTemplate('FOOTER_TOP')"/>
         <lc-vue-renderer :content="$store.getters.getPageTemplate('FOOTER_MIDDLE')"
                          v-if="$store.getters.getPageTemplate('FOOTER_MIDDLE')"/>
         <lc-vue-renderer :content="$store.getters.getPageTemplate('FOOTER_BOTTOM')"

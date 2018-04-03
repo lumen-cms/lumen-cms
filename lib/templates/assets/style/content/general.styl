@@ -1,0 +1,182 @@
+.application--wrap .footer--inset {
+  z-index: 0
+}
+
+.content-boxed {
+  box-sizing: border-box
+  max-width: $grid-breakpoints.lg
+  margin-left: auto
+  margin-right: auto
+}
+
+.element-rounded {
+  border-radius: 50%
+}
+
+.max-width-auto, .max-width-900, .max-width-700 {
+  > div:not(.content-bg), > figure, > p {
+    @extend .content-boxed
+  }
+}
+
+.expansion-panel {
+  &.max-width-auto, &.max-width-900, &.max-width-700 {
+    @extend .content-boxed
+    &.max-width-900 {
+      max-width: 900px;
+    }
+    &.max-width-700 {
+      max-width: 700px;
+    }
+  }
+}
+
+// need to make content-boxed strong for container
+.container.fluid.content-boxed {
+  @extend .content-boxed
+}
+
+.display-4, .display-3, .display-2, .display-1, .headline, .title, .subheading, .body-2, .body-1, .caption {
+  p {
+    font-size: inherit
+    font-weight: inherit
+  }
+}
+
+.page-content:not(.edit-mode) {
+  > .parallax:first-of-type {
+    margin-top: -128px
+  }
+}
+
+.page-content {
+
+  .h-separator, .content-element {
+    z-index 0
+  }
+
+  .content-element, .content-header {
+    position relative
+  }
+
+  .align-center {
+    text-align: center
+  }
+
+  a {
+    text-decoration none
+  }
+
+  h1 {
+    text-align: center
+  }
+
+  figure {
+    display: block
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto
+      &.img-rounded {
+        border-radius: 50%
+      }
+    }
+  }
+
+  .rte-content, .tabs__content .card__text, .content-header > div {
+    @extend .content-boxed
+  }
+  .background-transparent {
+    background-color transparent !important
+  }
+  .content-fluid {
+    .rte-content, &.tabs__content .card__text, &.container > .layout, .content-header > div {
+      max-width: inherit
+    }
+  }
+
+  .max-width-900 {
+    > div:not(.content-bg), > figure, > p {
+      max-width 900px
+    }
+  }
+  .max-width-700 {
+    > div:not(.content-bg), > figure, > p {
+      max-width 700px
+    }
+  }
+  .primary {
+    background-color: $themeprimary
+  }
+  .accent {
+    background-color: $themeaccent
+  }
+  .secondary {
+    background-color: $themesecondary
+  }
+  .info {
+    background-color: $themeinfo
+  }
+  .warning {
+    background-color: $themewarning
+  }
+  .error {
+    background-color: $themeerror
+  }
+  .success {
+    background-color: $themesuccess
+  }
+  .grid-cards-centered {
+    > .content-gallery {
+      @extend .content-boxed
+    }
+  }
+
+  .raw-html.responsive-frame {
+    padding: 0
+    > div:not(.content-bg):not(.content-header) {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      > iframe, > object, > embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .media-column {
+    position relative
+    overflow hidden
+    .title-wrap {
+      position absolute
+      top: 0
+      right: 0
+      bottom 0
+      left 0
+    }
+    .img-cover {
+      object-fit cover
+      width 100%
+      height 100%
+    }
+    figure {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.content-edit-mode {
+  .page-content {
+    overflow: visible;
+  }
+}
+
+

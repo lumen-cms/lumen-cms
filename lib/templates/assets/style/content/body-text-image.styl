@@ -1,0 +1,119 @@
+.page-content {
+
+  .text-image {
+    position: relative;
+    background-color: white
+    &.Parallax, &.Jumbotron {
+      color: white // fallback color
+    }
+  }
+  .text-image:not(.Parallax):not(.Jumbotron) {
+    @extend .st-mb // parallax and jumbotron default don't add margin bottoms
+  }
+
+  .fixed-background .layout .flex > .text-image:last-of-type {
+    @extend .mb-0 // in fixed-background the last text does not have margin
+  }
+
+  .fixed-background, .parallax__content {
+    .text-image {
+      background-color: transparent // inside of parallax or fixed-background don't have background-color on default
+    }
+  }
+  .image-floating {
+    > .layout {
+      figure {
+        flex: 0 0 auto
+        max-width 50%
+      }
+      > div {
+        @extend .pa-3
+      }
+    }
+  }
+
+  .AboveCenter, .AboveRight, .AboveLeft {
+    .rte-content {
+      @extend .pt-3
+    }
+  }
+
+  .BelowCenter, .BelowRight, .BelowLeft {
+    .rte-content {
+      @extend .pb-3
+    }
+  }
+
+  .image-floating-inside {
+    background-color: white
+    @extend .st-pa
+  }
+  .image-floating-inside {
+    @extend .clearfix
+    .rte-content {
+      :first-child {
+        @extend .pt-3
+      }
+      p {
+        @extend .pr-3
+      }
+    }
+    &.InTextLeft {
+      > figure, > a, > div.card {
+        @extend .pr-3
+        float: left
+        display: block
+      }
+      > div {
+        display: inline
+      }
+    }
+    &.InTextRight {
+      > figure, > a, > div.card {
+        @extend .pl-3
+        float right
+        display block
+      }
+      > div {
+        display: inline
+      }
+    }
+  }
+
+  .media {
+    &__only-one-image {
+      background-color: white
+    }
+  }
+  .parallax, .jumbotron {
+    .content-header {
+      h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0
+        //font-size: inherit !important
+      }
+      padding: 24px
+      margin: 0 auto
+    }
+    .parallax__content, .jumbotron__content {
+      color: inherit;
+      .content-element {
+        @extend .mb-0
+      }
+    }
+  }
+  .jumbotron {
+    color: white
+    .content-header {
+      display: inline-block
+    }
+  }
+  .grid-cards-no-gap {
+    > .content-gallery {
+      padding-left: 0;
+      padding-right: 0;
+      .flex {
+        padding: 0
+      }
+    }
+  }
+}

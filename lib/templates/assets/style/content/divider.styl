@@ -1,0 +1,99 @@
+.h-separator {
+  height: 24px;
+  //overflow: hidden;
+  clear: both;
+  width: 100%
+  color: $material-light.dividers
+  position relative
+  @extend .st-mb
+  margin-left: auto
+  margin-right: auto
+  &.ma-0, &.my-0 {
+    height: 1px
+  }
+  &.h-separator-icon {
+    text-align center
+    height: $custom-theme_variables.icon-size-default
+  }
+  &.Medium {
+    height: $custom-theme_variables.icon-size-medium
+  }
+  &.Large {
+    height: $custom-theme_variables.icon-size-large
+  }
+  &.XLarge {
+    height: $custom-theme_variables.icon-size-x_large
+  }
+  > div {
+    margin: 0 auto
+    overflow hidden
+  }
+  div > span {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    height: inherit;
+    border-color: inherit;
+    color: inherit;
+    &:before {
+      right: 100%;
+    }
+    &:after {
+      left: 100%;
+    }
+    &:before, &:after {
+      content: '';
+      display: inline-block;
+      vertical-align: top;
+      position: absolute;
+      top: 50%;
+      height: 0;
+      width: 2000px;
+      border-top-width: 1px;
+      border-top-style: solid;
+      border-color: currentColor;
+    }
+    > .icon {
+      color: inherit
+    }
+  }
+
+  &.h-separator-icon {
+    text-align center
+    div > div > span {
+      &:before {
+        margin-right: 15px;
+      }
+      &:after {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  &.divider-width-40 {
+    > div {
+
+      width 40%
+    }
+  }
+  &.divider-width-50 {
+    > div {
+      width 50%
+    }
+  }
+  &.divider-width-60 {
+    > div {
+      width 60%
+    }
+  }
+  &.divider-width-70 {
+    > div {
+      width 70%
+    }
+  }
+  &.divider-width-30 {
+    > div {
+      width 30%
+    }
+  }
+}

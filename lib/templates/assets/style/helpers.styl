@@ -1,0 +1,71 @@
+.clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.st-pa {
+  padding: $spacers.three.x $spacers.three.y
+}
+
+.st-pb {
+  padding-bottom: $spacers.three.y
+}
+
+.st-pt {
+  padding-top: $spacers.three.y
+}
+
+.st-mb {
+  margin-bottom: $spacers.three.y
+}
+
+.st-plr {
+  padding-left: $spacers.three.x
+  padding-right: $spacers.three.x
+}
+
+.text-center {
+  text-align center
+}
+
+.vert-center {
+  position: relative
+  top: 50%
+  transform: translateY(-50%)
+}
+
+.active {
+  a {
+    color: $themeprimary !important
+  }
+}
+
+.not-visible {
+  visibility: hidden
+}
+
+@media only screen and (min-width: $grid-breakpoints.sm) {
+  .st-pa {
+    padding: $spacers.five.x $spacers.five.y
+  }
+
+  .st-pt {
+    padding-top: $spacers.five.y
+  }
+
+  .st-plr {
+    padding-left: $spacers.five.x
+    padding-right: $spacers.five.x
+  }
+
+  .st-pb {
+    padding-bottom: $spacers.five.y
+  }
+
+  .st-mb {
+    margin-bottom: $spacers.five.y
+  }
+}
