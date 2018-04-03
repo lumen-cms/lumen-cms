@@ -17,7 +17,7 @@
         <v-icon>search</v-icon>
       </v-btn>
       <slot/>
-      <lc-vue-renderer :content="$store.getters.getPageTemplate('HEAD_TOP')"/>
+      <lc-vue-renderer :content="$store.getters['lc/getPageTemplate']('HEAD_TOP')"/>
       <v-layout v-if="hasExtension"
                 row
                 slot="extension"
@@ -26,7 +26,7 @@
         <lc-main-search v-if="!!showSearch"/>
         <v-spacer v-if="!showSearch"/>
         <lc-vue-renderer v-if="!hideExtensionTemplate"
-                         :content="$store.getters.getPageTemplate('HEAD_EXTENSION')"/>
+                         :content="$store.getters['lc/getPageTemplate']('HEAD_EXTENSION')"/>
       </v-layout>
     </template>
   </lc-main-toolbar>
@@ -66,10 +66,11 @@
       }
     },
     mounted () {
+      console.log(this.$cms)
       if (process.browser) {
         this.$nextTick(() => {
           setTimeout(() => {
-            this.hasExtension = CONFIG.PAGE_TOOLBAR_EXTENSION && this.$vuetify.breakpoint.mdAndUp // need to do this for SSR
+            this.hasExtension = this.$cms.PAGE_TOOLBAR_EXTENSION && this.$vuetify.breakpoint.mdAndUp // need to do this for SSR
           }, 0)
         })
       }

@@ -39,6 +39,7 @@
     "npm": "^5.8.0",
     "slugify": "^1.2.9",
     "subscriptions-transport-ws": "^0.9.7",
+    "vue-i18n": "^7.6.0",
     "vue-ls": "^3.0.0"
   },
   "devDependencies": {

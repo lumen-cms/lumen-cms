@@ -20,7 +20,7 @@
     </v-btn>
 
     <v-toolbar-title v-show="!mobileSearchActive">
-      <main-logo/>
+      <lc-main-logo/>
     </v-toolbar-title>
     <slot/>
     <template slot="extension">
@@ -33,8 +33,6 @@
 </template>
 
 <script>
-  // import CONFIG from '../../../src/config'
-
   export default {
     name: 'LcMainToolbar',
     props: {

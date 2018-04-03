@@ -5,8 +5,6 @@
     <lc-page-toolbar/>
     <h3>fancy layout</h3>
 
-
-    <cms-test></cms-test>
     <nuxt/>
   </v-app>
 </template>
