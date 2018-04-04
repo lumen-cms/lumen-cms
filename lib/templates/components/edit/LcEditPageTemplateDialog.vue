@@ -1,19 +1,17 @@
 <template>
   <div> <!-- important div wrapper because form-dialog-container has v-if -->
-    <lc-form-dialog-container
-      v-model="showDialog"
-      @onSubmit="onSubmit"
-      @onDelete="onDelete"
-      v-if="showDialog"
-      :show-delete="!!model.id"
-      text="SAVE"
-      ref="dialogContainer">
-      <v-text-field
-        name="title"
-        label="Title"
-        v-model="model.title"
-        validate-on-blur
-        :required="true"/>
+    <lc-form-dialog-container v-model="showDialog"
+                              @onSubmit="onSubmit"
+                              @onDelete="onDelete"
+                              v-if="showDialog"
+                              :show-delete="!!model.id"
+                              text="SAVE"
+                              ref="dialogContainer">
+      <v-text-field name="title"
+                    label="Title"
+                    v-model="model.title"
+                    validate-on-blur
+                    :required="true"/>
       <v-select name="key"
                 :items="keyItems"
                 label="Key"
