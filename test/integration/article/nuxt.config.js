@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const {resolve} = require('path')
 
 module.exports = {
   rootDir: resolve(__dirname, '../../..'),
@@ -12,5 +12,7 @@ module.exports = {
     GRAPH_FILE_API: 'cj8yj66xc01740164lh5bv4fz',
     GRAPHQL_SUBSRIPTION: 'subscriptions.us-west-2.graph.cool'
   },
-  modules: ['@@']
+  modules: [['@@', {
+    pluginRoot: resolve(__dirname, '../../../lib/templates')
+  }]]
 }
