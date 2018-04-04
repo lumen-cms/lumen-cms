@@ -8,11 +8,6 @@
   import getHeadMeta from '../util/getHeadMeta'
   import {initialRenderFunc} from '../util/initialRender' // todo need to customize
 
-  const langByRouteName = {
-    'blog': 'de',
-    'articles': 'en'
-  }
-
   export default {
     layout: 'list',
     head () {
@@ -30,16 +25,8 @@
       })
     },
     async asyncData ({route, store, req, params, app}) {
-      const {host} = initialRenderFunc({req, store, params, CONFIG: app.$cms})
-      let locale
-      app.$cms.routesAlias.list.forEach(i => {
-        Object.keys(i).find(k => {
-          if (i[k] === route.name) {
-            locale = k
-          }
-        })
-      })
-      console.log(locale)
+      let {host, locale} = initialRenderFunc({req, store, params, CONFIG: app.$cms})
+      locale = (app.$cms.routes.listMapLocale && app.$cms.routes.listMapLocale[route.name]) || locale
       await store.dispatch('setLanguageKey', {locale, $cms: app.$cms})
       return {host}
     }
