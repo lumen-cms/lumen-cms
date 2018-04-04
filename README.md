@@ -10,11 +10,32 @@
 
 [📖 **Release Notes**](./CHANGELOG.md)
 
+# Lumen CMS 
+#### GraphQl + NuxtJs + Vuetify + graph.cool backend
+
 # WIP [very early preview work in progress]
 
 ## Features
 
-The module features
+#### The module features
+* Content management system
+* Google Analytics integration
+* Sitemap generator
+* SEO handling 
+* SPA feel of static website
+* Imageproxy (CDN + scale/crop)
+* Image source maps
+* In-Page-Editing
+* SSR rendered
+* configurable
+* 95%+ on GooglePageSpeed
+
+#### Technology stack
+* NuxtJs
+* Vuetify
+* GraphQL managed backend by graph.cool
+* Fast deplyoment with zeit.co/now
+
 
 ## Setup
 - Add `nuxt-graphql-cms` dependency using yarn or npm to your project
