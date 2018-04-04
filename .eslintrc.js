@@ -23,10 +23,20 @@ module.exports = {
     // Allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // Do not allow console.logs etc...
-    'no-console': 2,
+    'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     "rules": {
       "indent": ["error", 2]
-    }
+    },
+    'vue/max-attributes-per-line': [2, {
+      'singleline': 4,
+      'multiline': {
+        'max': 4,
+        'allowFirstLine': true
+      }
+    }],
+    'vue/order-in-components': 0,
+    'vue/attributes-order': 0,
+    'vue/require-default-prop': 0
   },
   overrides: [
     {

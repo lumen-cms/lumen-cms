@@ -19,7 +19,7 @@
   import ArticleGql from '../gql/article/ArticleBySlug.gql'
   import getHeadMeta from '../util/getHeadMeta'
   import articleSubGql from '../gql/article/articleSubscription.gql'
-  import {initialRenderFunc} from '../util/initialRender'
+  import {initialRenderFunc} from '../util/initialRender' // todo need to customize
   import setPageTemplates from '../util/setPageTemplates'
 
   export default {
