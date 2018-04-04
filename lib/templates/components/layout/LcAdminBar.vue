@@ -30,7 +30,7 @@
           <v-btn fab dark small
                  class="red"
                  slot="activator"
-                 :to="addLinkComputed || addLink || {name:'edit-article'}">
+                 :to="addLinkComputed || addLink || {name:'articleEdit'}">
             <v-icon>add</v-icon>
           </v-btn>
           <span>Add New ... </span>
@@ -132,12 +132,13 @@
       },
       editArticleLink () {
         return this.isBlog
-          ? {name: 'edit-article-id', params: {id: this.$store.state.lc.pageProps.articleId}} : {}
+          ? {name: 'articleEdit', params: {id: this.$store.state.lc.pageProps.articleId}} : {}
       },
       hideContentEditing () {
         return this.hideEditProperty || ['articles-admin', 'url-alias', 'page-template'].includes(this.$route.name)
       },
       addLinkComputed () {
+        // todo this needs to be a prop or configurable through this.$cms
         if (['travels', 'reisen'].includes(this.$route.name)) {
           return 'edit-travel'
         } else if (['articles', 'blog'].includes(this.$route.name)) {

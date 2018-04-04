@@ -2,7 +2,9 @@
   <div class="has-toolbar-wrap">
     <lc-edit-toolbar>
       <v-spacer/>
-      <v-btn icon @click="refetch" :loading="!!loadingApollo">
+      <v-btn icon
+             @click="refetch"
+             :loading="!!loadingApollo">
         <v-icon>cached</v-icon>
       </v-btn>
       <lc-main-search/>
@@ -34,10 +36,16 @@
                 slot-scope="props">
         <td>
           <v-layout row>
-            <v-btn icon :to="`/${props.item.slug}`" color="info" class="white--text">
+            <v-btn icon
+                   :to="`/${props.item.slug}`"
+                   color="info"
+                   class="white--text">
               <v-icon>search</v-icon>
             </v-btn>
-            <v-btn icon :to="{name:'edit-article-id',params:{id:props.item.id}}" color="warning" class="white--text">
+            <v-btn icon
+                   :to="{name:'articleEdit',params:{id:props.item.id}}"
+                   color="warning"
+                   class="white--text">
               <v-icon>edit</v-icon>
             </v-btn>
           </v-layout>
@@ -64,7 +72,7 @@
            bottom
            right
            color="primary"
-           to="/edit-article">
+           :to="{name:'articleEdit'}">
       <v-icon>add</v-icon>
     </v-btn>
 
@@ -77,7 +85,8 @@
   import {pagination, getSkipFirst} from '../util/pagination'
 
   export default {
-    middleware: 'isAuth',// todo
+    middleware: 'isAuth',
+    layout: 'admin',
     data () {
       return {
         pagination: Object.assign({}, pagination),
