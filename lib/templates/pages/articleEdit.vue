@@ -222,7 +222,7 @@
 
   export default {
     mixins: [mediaFileMixin],
-    middleware: 'isAuth',
+    middleware: ['isAuth'],
     layout: 'admin',
     data () {
       return {

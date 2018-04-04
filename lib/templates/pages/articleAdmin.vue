@@ -85,7 +85,7 @@
   import {pagination, getSkipFirst} from '../util/pagination'
 
   export default {
-    middleware: 'isAuth',
+    middleware: ['isAuth'],
     layout: 'admin',
     data () {
       return {

@@ -87,7 +87,6 @@
     },
     methods: {
       async onLogin () {
-        debugger
         const v = this.$refs.form.validate()
         if (!v) return
         this.loading = true

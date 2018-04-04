@@ -28,7 +28,6 @@
     // todo missing middleware setPageTemplates
     mounted () {
       this.hasHelpSideNav = this.$store.getters.isHelpGuide
-      console.log(this.$cms) // eslint-disable-line
     },
     watch: {
       '$store.state.lc.currentArticleCategories' (val) {
