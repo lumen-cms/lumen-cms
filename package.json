@@ -1,6 +1,6 @@
 {
   "name": "nuxt-graphql-cms",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Module for a cms based on Nuxt and GraphQl",
   "license": "MIT",
   "contributors": [
