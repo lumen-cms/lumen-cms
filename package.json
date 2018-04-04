@@ -41,7 +41,8 @@
     "slugify": "^1.2.9",
     "subscriptions-transport-ws": "^0.9.7",
     "vue-i18n": "^7.6.0",
-    "vue-ls": "^3.0.0"
+    "vue-ls": "^3.0.3",
+    "vuetify": "^1.0.12"
   },
   "devDependencies": {
     "babel-eslint": "8.2.2",

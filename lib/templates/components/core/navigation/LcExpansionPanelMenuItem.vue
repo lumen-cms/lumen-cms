@@ -22,12 +22,12 @@
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <expansion-panel-menu-item v-for="(subItem, j) in item.items"
-                                 :item="subItem"
-                                 :i="j"
-                                 :level="item.level + 1"
-                                 :sub-group="true"
-                                 :key="subItem.title + j"/>
+      <lc-expansion-panel-menu-item v-for="(subItem, j) in item.items"
+                                    :item="subItem"
+                                    :i="j"
+                                    :level="item.level + 1"
+                                    :sub-group="true"
+                                    :key="subItem.title + j"/>
     </v-list-group>
     <v-list-tile v-else-if="item.to"
                  :to="item.to"
@@ -39,7 +39,8 @@
         <v-list-tile-title>{{ item.title }}</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
-    <v-divider v-else-if="item.divider" :key="'div' + i"/>
+    <v-divider v-else-if="item.divider"
+               :key="'div' + i"/>
   </div>
 </template>
 <script>

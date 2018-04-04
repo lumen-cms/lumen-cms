@@ -46,7 +46,7 @@
           <span>Enable Content Editing</span>
         </v-tooltip>
         <v-tooltip right
-                   v-for="(item,i) in $options.links"
+                   v-for="(item,i) in links"
                    :key="i">
           <v-btn fab
                  dark
@@ -95,35 +95,35 @@
         type: String
       }
     },
-    get links () {
-      let links = []
-      const CONFIG = this.$cms
-      if (CONFIG.adminBarLinks && Array.isArray(CONFIG.adminBarLinks)) {
-        links = links.concat(CONFIG.adminBarLinks)
-      }
-      return links.concat([{
-        title: 'Page templates',
-        to: {name: 'page-template'},
-        color: 'yellow darken-2',
-        icon: 'code'
-      }, {
-        title: 'Blog admin',
-        to: '/articles/admin',
-        color: 'teal darken-4',
-        icon: 'list'
-      }, {
-        title: 'URL 301 redirects',
-        to: {name: 'url-alias'},
-        color: 'yellow darken-4',
-        icon: 'forward'
-      }])
-    },
     data () {
       return {
         fab: false
       }
     },
     computed: {
+      links () {
+        let links = []
+        const CONFIG = this.$cms
+        if (CONFIG.adminBarLinks && Array.isArray(CONFIG.adminBarLinks)) {
+          links = links.concat(CONFIG.adminBarLinks)
+        }
+        return links.concat([{
+          title: 'Page templates',
+          to: {name: 'page-template'},
+          color: 'yellow darken-2',
+          icon: 'code'
+        }, {
+          title: 'Blog admin',
+          to: '/admin/article-admin',
+          color: 'teal darken-4',
+          icon: 'list'
+        }, {
+          title: 'URL 301 redirects',
+          to: {name: 'url-alias'},
+          color: 'yellow darken-4',
+          icon: 'forward'
+        }])
+      },
       isBlog () {
         return ['blog-slug', 'article', 'index'].includes(this.$route.name)
       },
