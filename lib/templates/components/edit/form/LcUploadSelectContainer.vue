@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import {getImageSrc} from '../../util/imageSrcHelper'
+  import {getImageSrc} from '../../../util/imageSrcHelper'
 
   export default {
     name: 'LcUploadSelectContainer',

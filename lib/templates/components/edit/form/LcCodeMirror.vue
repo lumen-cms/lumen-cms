@@ -20,7 +20,7 @@
     /* eslint-disable import/no-unassigned-import */
     require('codemirror/addon/fold/xml-fold')
     /* eslint-disable import/no-unassigned-import */
-    require('../../util/codeformatFormatting')
+    require('../../../util/codeformatFormatting')
   }
   export default {
     name: 'LcCodeMirror',

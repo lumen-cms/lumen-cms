@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import updateFileGql from '../../gql/file/fileUpdate.gql'
+  import updateFileGql from '../../../gql/file/fileUpdate.gql'
 
   export default {
     name: 'LcUploadContainer',

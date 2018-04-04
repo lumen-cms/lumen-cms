@@ -1,7 +1,18 @@
 <template>
   <div class="article-detail-page">
-    <lc-content-renderer v-if="pageContent.length"
+    <lc-content-edit-main v-if="$store.state.lc.isContentEditMode"
+                          :page-props="pageProps"
+                          :content="pageContent"/>
+    <lc-content-renderer v-else-if="pageContent.length"
                          :elements="pageContent"/>
+    <div class="content-boxed white elevation-1 pa-3 max-width-700"
+         v-if="!pageContent.length && Article && Article.description">
+      <h1 v-text="Article.title" class="display-1"/>
+      <blockquote v-text="Article.teaser"
+                  v-if="Article.teaser"
+                  class="my-5"/>
+      <div v-html="Article.description"/>
+    </div>
   </div>
 </template>
 <script>
@@ -27,10 +38,6 @@
       }
       return {}
     },
-    // components: {
-    //   'ContentEditMain': () => import(/* webpackChunkName:'content-edit-chunk' */ '../components/content/edit/ContentEditMain.vue'), // todo
-    //   ContentRenderer
-    // },
     data () {
       return {
         Article: null,

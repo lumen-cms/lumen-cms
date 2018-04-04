@@ -11,8 +11,8 @@
             class="page-selection"/>
 </template>
 <script>
-  import allArticlesGql from '../../gql/article/allArticlesSelect.gql'
-  import {firstCharToUpper} from '../../util/string'
+  import allArticlesGql from '../../../gql/article/allArticlesSelect.gql'
+  import {firstCharToUpper} from '../../../util/string'
   import debounce from 'lodash.debounce'
 
   export default {
