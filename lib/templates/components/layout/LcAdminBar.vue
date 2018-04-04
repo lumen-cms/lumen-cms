@@ -109,7 +109,7 @@
         }
         return links.concat([{
           title: 'Page templates',
-          to: {name: 'page-template'},
+          to: {name: 'pageTemplates'},
           color: 'yellow darken-2',
           icon: 'code'
         }, {

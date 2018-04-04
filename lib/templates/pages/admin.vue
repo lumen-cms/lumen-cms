@@ -64,7 +64,7 @@
   import signupUserGql from '../gql/user/signupUser.gql'
 
   export default {
-    layout: 'default',
+    layout: 'admin',
     data () {
       return {
         loading: false,
