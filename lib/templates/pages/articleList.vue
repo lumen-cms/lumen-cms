@@ -17,6 +17,7 @@
     layout: 'list',
     head () {
       return getHeadMeta({
+        article: {},
         languagekey: this.$store.state.lc.locale,
         path: this.$route.path,
         host: this.host,

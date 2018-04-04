@@ -1,9 +1,9 @@
 <template>
-  <v-app toolbar
-         :class="{'extended-toolbar': hasExtension}">
+  <v-app>
     <lc-page-toolbar show-search/>
     <lc-main-sidebar/>
-    <v-content class="main page-view-layout" :class="{'is-loading':$store.state.cmsLoading}">
+    <v-content class="main page-view-layout"
+               :class="{'is-loading':$store.state.lc.cmsLoading}">
       <v-container fluid class="pa-0">
         <v-slide-y-transition mode="out-in">
           <nuxt/>
@@ -19,11 +19,6 @@
 <script>
 
   export default {
-    name: 'LcListLayout',
-    data () {
-      return {
-        hasExtension: false
-      }
-    }
+    name: 'LcListLayout'
   }
 </script>
