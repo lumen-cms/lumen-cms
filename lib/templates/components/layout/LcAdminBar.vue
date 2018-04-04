@@ -119,7 +119,7 @@
           icon: 'list'
         }, {
           title: 'URL 301 redirects',
-          to: {name: 'url-alias'},
+          to: {name: 'redirects'},
           color: 'yellow darken-4',
           icon: 'forward'
         }])
