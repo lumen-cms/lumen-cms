@@ -45,12 +45,16 @@
     "subscriptions-transport-ws": "^0.9.7",
     "vue-i18n": "^7.6.0",
     "vue-ls": "^3.0.3",
-    "vuetify": "^1.0.12"
+    "vuetify": "^1.0.12",
+    "style-loader": "^0.20.3",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-style-loader": "^4.1.0",
+    "css-loader": "^0.28.11"
   },
   "devDependencies": {
     "babel-eslint": "8.2.2",
     "codecov": "latest",
-    "css-loader": "^0.28.11",
     "eslint": "latest",
     "eslint-config-standard": "latest",
     "eslint-plugin-import": "latest",
@@ -62,10 +66,6 @@
     "jest": "latest",
     "jsdom": "latest",
     "nuxt": "latest",
-    "standard-version": "latest",
-    "style-loader": "^0.20.3",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
-    "vue-style-loader": "^4.1.0"
+    "standard-version": "latest"
   }
 }
