@@ -54,7 +54,7 @@
     },
     data () {
       return {
-        hasExtension: this.$cms.PAGE_TOOLBAR_EXTENSION, // CONFIG
+        hasExtension: this.$cms.pageToolbarExtension, // CONFIG
         searchActive: false
       }
     },
@@ -63,21 +63,21 @@
         return this.searchActive && this.$vuetify.breakpoint.smAndDown
       },
       darkToolbar () {
-        return this.$cms.PAGE_TOOLBAR_DARK // CONFIG
+        return this.$cms.pageToolbarDark // CONFIG
       }
     },
     mounted () {
       if (process.browser) {
         this.$nextTick(() => {
           setTimeout(() => {
-            this.hasExtension = this.$cms.PAGE_TOOLBAR_EXTENSION && this.$vuetify.breakpoint.mdAndUp // need to do this for SSR
+            this.hasExtension = this.$cms.pageToolbarExtension && this.$vuetify.breakpoint.mdAndUp // need to do this for SSR
           }, 0)
         })
       }
     },
     watch: {
       '$vuetify.breakpoint.mdAndUp' (val) {
-        this.hasExtension = !!(this.$cms.PAGE_TOOLBAR_EXTENSION && val)
+        this.hasExtension = !!(this.$cms.pageToolbarExtension && val)
         val && (this.searchActive = false)
       }
     }
