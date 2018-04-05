@@ -1,9 +1,9 @@
 # nuxt-graphql-cms
 [![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-graphql-cms/latest.svg?style=flat-square)](https://npmjs.com/package/nuxt-graphql-cms)
 [![npm](https://img.shields.io/npm/dt/nuxt-graphql-cms.svg?style=flat-square)](https://npmjs.com/package/nuxt-graphql-cms)
-[![CircleCI](https://img.shields.io/circleci/project/github/.svg?style=flat-square)](https://circleci.com/gh/)
+[![CircleCI](https://img.shields.io/circleci/project/github/.svg?style=flat-square)](https://circleci.com/gh/lumen-cms/nuxtjs-graphql-cms)
 [![Codecov](https://img.shields.io/codecov/c/github/.svg?style=flat-square)](https://codecov.io/gh/)
-[![Dependencies](https://david-dm.org//status.svg?style=flat-square)](https://david-dm.org/)
+[![Dependencies](https://david-dm.org/lumen-cms/nuxtjs-graphql-cms.svg?style=flat-square)](https://david-dm.org/lumen-cms/nuxtjs-graphql-cms)
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com)
 
 > Module for a cms based on Nuxt and GraphQl
