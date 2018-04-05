@@ -28,7 +28,7 @@
     "collectCoverage": true
   },
   "dependencies": {
-    "@nuxtjs/apollo": "^3.0.5",
+    "@nuxtjs/apollo": "^3.0.6",
     "@nuxtjs/vuetify": "^0.4.1",
     "accept-language-parser": "^1.5.0",
     "apollo-link-http": "^1.5.3",

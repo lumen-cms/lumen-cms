@@ -11,7 +11,7 @@
 [📖 **Release Notes**](./CHANGELOG.md)
 
 # Lumen CMS 
-#### GraphQl + NuxtJs + Vuetify + graph.cool backend
+#### GraphQl | Vue 2.x | NuxtJs | Vuetify | graph.cool backend
 
 # WIP [very early preview work in progress]
 
@@ -27,7 +27,7 @@
 * Image source maps
 * In-Page-Editing
 * SSR rendered
-* configurable
+* Configurable
 * 95%+ on GooglePageSpeed
 
 #### Technology stack
