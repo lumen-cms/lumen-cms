@@ -26,7 +26,7 @@
 
 <script>
   export default {
-    name: 'LcErrorLayout',
+    name: 'LcError',
     props: {
       error: {
         type: Object | String,
@@ -52,7 +52,7 @@
       }
     },
     mounted () {
-      this.hasExtension = this.$cms.PAGE_TOOLBAR_EXTENSION && this.$vuetify.breakpoint.mdAndUp
+      this.hasExtension = this.$cms.pageToolbarExtension && this.$vuetify.breakpoint.mdAndUp
       this.mounted = true
     },
     methods: {

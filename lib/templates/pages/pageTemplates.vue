@@ -83,6 +83,11 @@
   import {slugifyTemplateKey} from '../util/slugifyHelpers'
   import slugify from 'slugify'
 
+  const TEMPLATE_TYPE = {
+    CODE: 'CODE',
+    JSON: 'JSON'
+  }
+
   export default {
     layout: 'admin',
     middleware: ['isAuth'],
@@ -97,7 +102,7 @@
     },
     computed: {
       templateTypes () {
-        return this.$cms.TEMPLATE_TYPE
+        return TEMPLATE_TYPE
       },
       pageTemplatesByCurrentLocale () {
         const currentLocaleUpper = this.$store.state.lc.locale.toUpperCase()
@@ -130,7 +135,7 @@
               replacement: ' ',
               remove: /[$*_+~.()'"!\-:@]/g
             }),
-            type: this.$cms.TEMPLATE_TYPE.CODE,
+            type: TEMPLATE_TYPE.CODE,
             key: key,
             body: '<div><!-- place your content here --></div>',
             languageKey: this.$store.state.lc.locale.toUpperCase()

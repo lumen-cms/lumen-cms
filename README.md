@@ -21,10 +21,11 @@
 * Content management system
 * Google Analytics integration
 * Sitemap generator
-* SEO handling 
+* SEO optimized 
 * SPA feel of static website
 * Imageproxy (CDN + scale/crop)
 * Image source maps
+* fontloader
 * In-Page-Editing
 * SSR rendered
 * Configurable
