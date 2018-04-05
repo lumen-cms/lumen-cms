@@ -64,8 +64,11 @@
       const {locale, host, slug} = initialRenderFunc({req, store, params, CONFIG: app.$cms})
       try {
         const apollo = app.apolloProvider.defaultClient
-        const {data} = await apollo.query({query: ArticleGql, variables: {slug}})
-        await setPageTemplates(apollo, store)
+        const res = await Promise.all([
+          apollo.query({query: ArticleGql, variables: {slug}}),
+          setPageTemplates(apollo, store)
+        ])
+        const data = res[0].data
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()
