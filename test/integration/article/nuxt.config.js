@@ -18,5 +18,9 @@ module.exports = {
   //   GRAPH_FILE_API: 'ciwyoxmas3amt0129hec6zpvl',
   //   COPYRIGHT: 'studentsgoabroad.com'
   // },
-  modules: [['@@']]
+  modules: [['@@', {
+    cms: {
+      pageToolbarExtension: false
+    }
+  }]]
 }
