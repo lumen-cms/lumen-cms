@@ -61,7 +61,6 @@
     },
     async asyncData ({req, app, store, params, error, redirect}) {
       // console.log(app.$cms)
-
       const {locale, host, slug} = initialRenderFunc({req, store, params, CONFIG: app.$cms})
       try {
         const apollo = app.apolloProvider.defaultClient

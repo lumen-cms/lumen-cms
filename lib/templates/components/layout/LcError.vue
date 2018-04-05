@@ -26,7 +26,7 @@
 
 <script>
   export default {
-    name: 'LcErrorLayout',
+    name: 'LcError',
     props: {
       error: {
         type: Object | String,

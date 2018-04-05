@@ -67,7 +67,6 @@
       }
     },
     mounted () {
-      console.log(this.$cms)
       if (process.browser) {
         this.$nextTick(() => {
           setTimeout(() => {
