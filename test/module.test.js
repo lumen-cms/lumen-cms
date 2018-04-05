@@ -13,7 +13,7 @@ describe('basic', () => {
     nuxt = new Nuxt(config)
     await new Builder(nuxt).build()
     await nuxt.listen(3000)
-  }, 60000)
+  }, 100000)
 
   afterAll(async () => {
     await nuxt.close()
@@ -21,6 +21,6 @@ describe('basic', () => {
 
   test('render', async () => {
     let html = await get('/')
-    expect(html).toContain('Works!')
+    expect(html).toContain('<main')
   })
 })

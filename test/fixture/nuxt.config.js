@@ -7,5 +7,10 @@ module.exports = {
   render: {
     resourceHints: false
   },
-  modules: ['@@']
+  modules: ['@@'],
+  env: {
+    GRAPHQL_ALIAS: 'lumen-cms-demo',
+    GRAPH_FILE_API: 'cj8yj66xc01740164lh5bv4fz',
+    GRAPHQL_SUBSRIPTION: 'subscriptions.us-west-2.graph.cool'
+  }
 }
