@@ -56,7 +56,17 @@
 
 ## Usage
 
-Module Description
+Lumen CMS is the right choice for you if you are a Vue 2 developer and familiar with graph-ql.
+
+#### Requirement
+* NodeJS v >=8 (check out https://nuxtjs.org dependencies)
+* Account at graph.cool to deploy your own graphql endpoint (coming soon...)
+
+### Configuration
+
+#### Options
+
+
 
 ## Development
 
