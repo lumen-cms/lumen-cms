@@ -51,9 +51,8 @@
         return data && data.content && data.content.type
       },
       componentName () {
-        const contentElements = this.$cms.componentMapping.contentElements
-        console.log('inside computed', contentElements)
-        const mapping = contentElements.edit // todo need to verify that this works
+        const components = this.$cms.componentMapping
+        const mapping = components.edit // todo need to verify that this works
         return mapping[this.typename]
       },
       isShown () {
