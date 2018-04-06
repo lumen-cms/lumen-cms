@@ -7,7 +7,7 @@
     <template v-if="!!$store.getters.getDialogType">
       <lc-content-create/>
       <lc-content-delete-dialog :page-props="pageProps"
-                             v-if="$store.getters.getDialogType === 'delete'"/>
+                                v-if="$store.getters.getDialogType === 'delete'"/>
       <lc-content-edit-dialog v-if="$store.getters.getDialogType === 'edit'"/>
     </template>
   </div>
@@ -97,7 +97,7 @@
         const {cleanSchemaForClone} = require('../../../util/contentClone')
         const content = this.$store.state.lc.contentCopyPasteData
         const element = content.contentElement
-        const cloned = cleanSchemaForClone(element)
+        const cloned = cleanSchemaForClone(element, this.$cms)
         // const typename = element.__typename
         // variables[firstCharToLower(typename)] = cloned
         const variables = Object.assign({}, cloned)
