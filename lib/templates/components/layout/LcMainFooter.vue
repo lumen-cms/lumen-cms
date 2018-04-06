@@ -13,12 +13,9 @@
       <v-flex xs12>
         <slot name="links"/>
         <slot/>
-        <lc-vue-renderer v-if="$store.getters.getPageTemplate('FOOTER_TOP')"
-                         :content="$store.getters.getPageTemplate('FOOTER_TOP')"/>
-        <lc-vue-renderer :content="$store.getters.getPageTemplate('FOOTER_MIDDLE')"
-                         v-if="$store.getters.getPageTemplate('FOOTER_MIDDLE')"/>
-        <lc-vue-renderer :content="$store.getters.getPageTemplate('FOOTER_BOTTOM')"
-                         v-if="$store.getters.getPageTemplate('FOOTER_BOTTOM')"/>
+        <lc-vue-renderer template-region="FOOTER_TOP"/>
+        <lc-vue-renderer template-region="FOOTER_MIDDLE"/>
+        <lc-vue-renderer template-region="FOOTER_BOTTOM"/>
       </v-flex>
     </v-layout>
   </v-footer>

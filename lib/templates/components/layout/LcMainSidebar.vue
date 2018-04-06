@@ -18,8 +18,7 @@
       </v-list>
     </v-toolbar>
     <v-divider/>
-    <lc-vue-renderer :content="$store.getters.getPageTemplate('SIDEBAR_TOP')"
-                     v-if="$store.getters.getPageTemplate('SIDEBAR_TOP')"/>
+    <lc-vue-renderer template-region="SIDEBAR_TOP"/>
     <slot/>
   </v-navigation-drawer>
 </template>
