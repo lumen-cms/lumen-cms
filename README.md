@@ -32,10 +32,11 @@
 * 95%+ on GooglePageSpeed
 
 #### Technology stack
-* NuxtJs
-* Vuetify
-* GraphQL managed backend by graph.cool
-* Fast deplyoment with zeit.co/now
+* Vue 2.x (https://vuejs.org/)
+* NuxtJs (https://nuxtjs.org/)
+* Vuetify (https://vuetifyjs.com)
+* GraphQL managed backend by graph.cool (https://graph.cool/)
+* Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
 
 ## Setup
