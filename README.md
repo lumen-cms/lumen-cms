@@ -1,4 +1,4 @@
-# nuxt-graphql-cms
+# nuxtjs/lumen-cms
 [![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-graphql-cms/latest.svg?style=flat-square)](https://npmjs.com/package/nuxt-graphql-cms)
 [![npm](https://img.shields.io/npm/dt/nuxt-graphql-cms.svg?style=flat-square)](https://npmjs.com/package/nuxt-graphql-cms)
 [![CircleCI](https://img.shields.io/circleci/project/github/.svg?style=flat-square)](https://circleci.com/gh/lumen-cms/nuxtjs-graphql-cms)
@@ -39,17 +39,17 @@
 
 
 ## Setup
-- Add `nuxt-graphql-cms` dependency using yarn or npm to your project
-- Add `nuxt-graphql-cms` to `modules` section of `nuxt.config.js`
+- Add `nuxtjs/lumen-cms` dependency using yarn or npm to your project
+- Add `lumen-cms` to `modules` section of `nuxt.config.js`
 
 ```js
 {
   modules: [
     // Simple usage
-    'nuxt-graphql-cms',
+    'lumen-cms',
 
     // With options
-    ['nuxt-graphql-cms', { modules }],
+    ['lumen-cms', { modules }]   
  ]
 }
 ```
