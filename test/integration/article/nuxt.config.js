@@ -21,11 +21,6 @@ module.exports = {
   modules: [['@@', {
     cms: {
       pageToolbarExtension: false
-    },
-    components: {
-      layout: {
-        MainFooter: '~/components/CmsTest.vue'
-      }
     }
   }]]
 }
