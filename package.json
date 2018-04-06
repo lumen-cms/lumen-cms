@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "@nuxtjs/apollo": "^3.0.6",
-    "@nuxtjs/vuetify": "^0.4.1",
     "accept-language-parser": "^1.5.0",
     "apollo-link-http": "^1.5.3",
     "apollo-link-ws": "^1.0.7",
@@ -49,7 +48,7 @@
     "vue-i18n": "^7.6.0",
     "vue-ls": "^3.0.3",
     "vue-style-loader": "^4.1.0",
-    "vuetify": "1.0.13",
+    "vuetify": "^1.0.13",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
