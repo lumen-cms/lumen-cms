@@ -1,4 +1,4 @@
-#import '../extendable/articleFragment.gql'
+#import '~extendedArticleFragment'
 #import '../file/fileFragment.gql'
 
 fragment article on Article{
@@ -25,5 +25,5 @@ fragment article on Article{
   categories{
     id title
   }
-  ...extendArticle
+  ...extended
 }

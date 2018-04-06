@@ -22,5 +22,10 @@ module.exports = {
     cms: {
       pageToolbarExtension: false
     }
-  }]]
+  }]],
+  build: {
+    extend (config) {
+      // config.resolve.alias['~articleUpdate'] = resolve(__dirname, './gql/UpdateArticle.gql')
+    }
+  }
 }

@@ -1,0 +1,3 @@
+fragment extended on Article{
+  id
+}

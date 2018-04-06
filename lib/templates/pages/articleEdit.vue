@@ -192,8 +192,9 @@
 
 <script>
   import slugify from 'slugify'
-  import mutationUpdateArticle from '../gql/article/updateArticle.gql' // todo needs to be overwritable
-  import mutationCreateArticle from '../gql/article/createArticle.gql' // todo needs to be overwritable
+
+  import mutationUpdateArticle from '~updateArticle' // todo needs to be overwritable
+  import mutationCreateArticle from '~createArticle' // todo needs to be overwritable
   import updateSlugsGql from '../gql/functions/updateSlugs.gql'
   import ArticleGql from '../gql/article/Article.gql'
   import ArticleWithContent from '../gql/article/ArticleById.gql'
