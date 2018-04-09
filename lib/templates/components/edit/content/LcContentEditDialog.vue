@@ -51,9 +51,15 @@
         return data && data.content && data.content.type
       },
       componentName () {
-        const components = this.$cms.componentMapping
-        const mapping = components.edit // todo need to verify that this works
-        return mapping[this.typename]
+        const components = this.$cms.componentMapping.edit
+        const componentName = components[this.typename] && components[this.typename].name
+        if (componentName) {
+          return componentName
+        } else {
+          console.warn('component is not recognized: ', this.typename)
+          console.warn('Did you add the component into this.$cms.componentMapping?')
+          return null
+        }
       },
       isShown () {
         return this.$store.getters.getDialogType === 'edit'
