@@ -16,6 +16,7 @@ module.exports = {
     'vue'
   ],
   rules: {
+    'semi': 0,
     // Allow paren-less arrow functions
     'arrow-parens': 0,
     // Allow async-await
@@ -24,8 +25,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // Do not allow console.logs etc...
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
-    "rules": {
-      "indent": ["error", 2]
+    'rules': {
+      'indent': ['error', 2]
     },
     'vue/max-attributes-per-line': [2, {
       'singleline': 4,
@@ -40,10 +41,10 @@ module.exports = {
   },
   overrides: [
     {
-      "files": ["*.vue"],
-      "rules": {
-        "indent": "off",
-        "vue/script-indent": ["error", 2, { "baseIndent": 1 }]
+      'files': ['*.vue'],
+      'rules': {
+        'indent': 'off',
+        'vue/script-indent': ['error', 2, { 'baseIndent': 1 }]
       }
     }
   ],

@@ -90,7 +90,7 @@
 
   export default {
     layout: 'admin',
-    middleware: ['isAuth'],
+    middleware: 'isAuth',
     data () {
       return {
         selectedModel: {},
