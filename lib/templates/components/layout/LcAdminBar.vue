@@ -102,12 +102,13 @@
     },
     computed: {
       links () {
-        let links = []
+        // let links = []
         const CONFIG = this.$cms
-        if (CONFIG.adminBarLinks && Array.isArray(CONFIG.adminBarLinks)) {
-          links = links.concat(CONFIG.adminBarLinks)
-        }
-        return links.concat([{
+        let configAdminBarLinks = (CONFIG.adminBarLinks && Array.isArray(CONFIG.adminBarLinks) && CONFIG.adminBarLinks.slice(0)) || []
+        // if (CONFIG.adminBarLinks && Array.isArray(CONFIG.adminBarLinks)) {
+        //   links = links.concat(CONFIG.adminBarLinks)
+        // }
+        return configAdminBarLinks.concat([{
           title: 'Page templates',
           to: {name: 'pageTemplates'},
           color: 'yellow darken-2',

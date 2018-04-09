@@ -70,8 +70,8 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
     <v-snackbar v-model="showFileRefDelete"
-                style="bottom: auto;"
                 dark
+                absolute
                 :timeout="0"
                 color="secondary">
       Are you sure to delete the image?

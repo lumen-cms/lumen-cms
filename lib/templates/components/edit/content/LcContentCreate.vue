@@ -9,8 +9,8 @@
       <v-card-text class="text-xs-center">
         <v-list>
           <v-list-tile v-for="(item, i) in createItems"
-                       :key="i" @click="item.clickHandler"
-                       v-show="!item.hide">
+                       :key="i" @click="setSelectedType(item.name)"
+                       v-show="!item.hideInLayout">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -27,43 +27,14 @@
     name: 'LcContentCreate',
     computed: {
       createItems () {
-        // todo need to render items based on componentMapping
         const dialogData = this.$store.state.lc.contentEditDialogData
-        return [
-          {
-            text: 'Divider',
-            icon: 'remove',
-            clickHandler: () => this.setSelectedType('Divider')
-          },
-          {
-            text: 'Layout Element',
-            icon: 'view_column',
-            clickHandler: () => this.setSelectedType('Layout'),
-            hide: !!dialogData.contentLayoutElementId || dialogData.isNewLayoutCol
-          },
-          {
-            text: 'Text + Image',
-            icon: 'photo_size_select_large',
-            clickHandler: () => this.setSelectedType('TextImage')
-          },
-          //  {text: 'Media', icon: 'perm_media', clickHandler: () => (this.selectedType = 'Media')}, //=> deprecated
-          {
-            text: 'Read More Accordion',
-            icon: 'dns',
-            clickHandler: () => this.setSelectedType('ReadMore'),
-            hide: !!dialogData.contentLayoutElementId || dialogData.isNewLayoutCol
-          },
-          {
-            text: 'HTML',
-            icon: 'code',
-            clickHandler: () => this.setSelectedType('Html')
-          },
-          {
-            text: 'ContentListWidget',
-            icon: 'view_list',
-            clickHandler: () => this.setSelectedType('ListWidget')
-          }
-        ]
+        const components = this.$cms.componentMapping.edit
+        return Object.keys(components).map(component => {
+          return Object.assign({}, components[component], {
+            name: component,
+            hideInLayout: components[component].hideInLayout && (!!dialogData.contentLayoutElementId || dialogData.isNewLayoutCol)
+          })
+        })
       },
       isShown: {
         get () {
@@ -79,7 +50,7 @@
     methods: {
       setSelectedType (val) {
         const dialogData = this.$store.getters.getDialogData
-        this.$store.dispatch('setContentEditDialogData', Object.assign(dialogData, {
+        this.$store.dispatch('setContentEditDialogData', Object.assign({}, dialogData, {
           dialogType: 'edit',
           content: {
             id: null,

@@ -19,8 +19,8 @@
   import ArticleGql from '../gql/article/ArticleBySlug.gql'
   import getHeadMeta from '../util/getHeadMeta'
   import articleSubGql from '../gql/article/articleSubscription.gql'
-  import {initialRenderFunc} from '../util/initialRender' // todo need to customize
   import setPageTemplates from '../util/setPageTemplates'
+  import initialAsyncData from '~initialAsyncData'
 
   export default {
     name: 'PageIndex',
@@ -60,8 +60,7 @@
       }
     },
     async asyncData ({req, app, store, params, error, redirect}) {
-      // console.log(app.$cms)
-      const {locale, host, slug} = initialRenderFunc({req, store, params, CONFIG: app.$cms})
+      const {locale, host, slug} = initialAsyncData({req, store, params, $cms: app.$cms})
       try {
         const apollo = app.apolloProvider.defaultClient
         const res = await Promise.all([
@@ -116,7 +115,7 @@
         changedArticle: {
           query: articleSubGql,
           variables () {
-            const {slug} = initialRenderFunc({store: this.$store, params: this.$route.params})
+            const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
             return {slug}
           },
           result ({data}) {
