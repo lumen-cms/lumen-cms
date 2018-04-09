@@ -18,6 +18,13 @@ module.exports = {
   //   GRAPH_FILE_API: 'ciwyoxmas3amt0129hec6zpvl',
   //   COPYRIGHT: 'studentsgoabroad.com'
   // },
+  'google-analytics': {
+    id: 'UA-22494234-1',
+    set: [
+      {field: 'anonymizeIp', value: true},
+      {field: 'forceSSL', value: true}
+    ]
+  },
   modules: [['@@', {
     cms: {
       pageToolbarExtension: false
