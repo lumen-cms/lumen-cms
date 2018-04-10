@@ -52,7 +52,6 @@
     "subscriptions-transport-ws": "^0.9.7",
     "vue-i18n": "^7.6.0",
     "vue-ls": "^3.0.3",
-    "vue-style-loader": "^4.1.0",
     "vuetify": "^1.0.13",
     "webfontloader": "^1.6.28"
   },
