@@ -28,6 +28,7 @@ module.exports = {
 
   modules: [['@@', {
     cms: {
+      languages:['de'],
       pageToolbarExtension: false
     }
   }]],
