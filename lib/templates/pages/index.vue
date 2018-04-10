@@ -79,6 +79,12 @@
               message: 'This page could not be found'
             })
           }
+          if (app.$cms.languageMustMatch && locale.toUpperCase() !== article.languageKey) {
+            error({
+              statusCode: 404,
+              message: 'This page could not be found'
+            })
+          }
           await store.dispatch('setPageProps', {
             articleId: article.id,
             languageKey: article.languageKey
