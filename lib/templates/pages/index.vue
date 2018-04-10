@@ -71,7 +71,7 @@
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()
-        await store.dispatch('setLanguageKey', {locale: articleLang || locale, $cms: app.$cms})
+        await store.dispatch('setLanguageKey', articleLang || locale)
         if (article) {
           if (!store.getters.canEdit && (article.deleted || !article.published)) {
             error({

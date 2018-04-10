@@ -27,7 +27,7 @@
     async asyncData ({route, store, req, params, app}) {
       let {host, locale} = initialAsyncData({req, store, params, CONFIG: app.$cms})
       locale = (app.$cms.routes.listMapLocale && app.$cms.routes.listMapLocale[route.name]) || locale
-      await store.dispatch('setLanguageKey', {locale, $cms: app.$cms})
+      await store.dispatch('setLanguageKey', locale)
       return {host}
     }
   }

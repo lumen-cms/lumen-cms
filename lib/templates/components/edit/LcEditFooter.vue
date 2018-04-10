@@ -31,7 +31,7 @@
         if (this.$store.state.lc.locale === lang) {
           return
         }
-        await this.$store.dispatch('setLanguageKey', {locale: lang, $cms: this.$cms})
+        await this.$store.dispatch('setLanguageKey', lang)
         return Promise.resolve(true)
       }
     }

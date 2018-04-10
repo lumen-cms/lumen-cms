@@ -247,7 +247,7 @@
     },
     watch: {
       'model.languageKey' (v) {
-        v && this.$store.dispatch('setLanguageKey', {locale: v.toLowerCase(), $cms: this.$cms})
+        v && this.$store.dispatch('setLanguageKey', v.toLowerCase())
       },
       'model.authorsIds' (v) {
         this.onAutorsIdsChange(v)
