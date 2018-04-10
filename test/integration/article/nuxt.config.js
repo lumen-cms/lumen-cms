@@ -25,9 +25,6 @@ module.exports = {
             {field: 'forceSSL', value: true}
         ]
     },
-    router: {
-        middleware: ['auth']
-    },
 
     modules: [['@@', {
         cms: {
