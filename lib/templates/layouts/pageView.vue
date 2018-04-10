@@ -28,7 +28,6 @@
     },
     // todo missing middleware setPageTemplates
     mounted () {
-      console.log(this.$store.getters)
       this.hasHelpSideNav = this.$store.getters.isHelpGuide
     },
     watch: {
