@@ -12,10 +12,10 @@
              :dark="isDark"
              :light="!isDark">
 
-    <v-btn v-show="$store.getters.isHelpGuide && !mobileSearchActive"
+    <v-btn v-show="$store.getters.hasSecondaryNav($cms) && !mobileSearchActive"
            icon flat
            class="hidden-md-and-up"
-           @click.native.stop="$store.dispatch('toggleHelpNav')">
+           @click.native.stop="$store.dispatch('toggleSecondaryNav')">
       <v-icon>apps</v-icon>
     </v-btn>
 

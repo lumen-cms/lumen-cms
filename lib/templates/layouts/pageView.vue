@@ -1,6 +1,6 @@
 <template>
   <v-app :class="{'jumbo-first': $store.state.lc.hasJumbotron}">
-    <lc-side-nav v-if="hasHelpSideNav"/>
+    <lc-side-nav v-if="hasSecondaryNav"/>
     <lc-main-sidebar/>
     <lc-page-toolbar/>
     <v-content class="page-view-layout"
@@ -23,13 +23,12 @@
     name: 'LcPageViewLayout',
     data () {
       return {
-        hasHelpSideNav: false
+        hasSecondaryNav: false
       }
     },
     // todo missing middleware setPageTemplates
     mounted () {
-      console.log(this.$store.getters)
-      this.hasHelpSideNav = this.$store.getters.isHelpGuide
+      this.hasSecondaryNav = this.$store.getters.hasSecondaryNav(this.$cms)
     },
     watch: {
       '$store.state.lc.currentArticleCategories' (val) {
@@ -42,8 +41,8 @@
     },
     methods: {
       setHelpSideNav (v) {
-        this.$store.commit('SET_HELP_NAV', v)
-        this.hasHelpSideNav = v
+        this.$store.commit('SET_SECONDARY_NAV', v)
+        this.hasSecondaryNav = v
       }
     }
   }
