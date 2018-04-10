@@ -66,6 +66,52 @@ Lumen CMS is the right choice for you if you are a Vue 2 developer and familiar 
 
 #### Options
 
+##### [disableCSS] - Boolean (default: false)
+disable the CSS import and manualy add it with import
+```js
+'lumen-cms':{ disableCSS:true } 
+ css: [
+    {src: '~assets/style/app.styl', lang: 'styl'}
+  ]
+```
+```stylus
+@import '~lumen-cms/lib/templates/assets/style/vuetify-imports.styl'
+$themeprimary = #ff6f00
+$themeaccent = #ffc400
+$themesecondary = $grey.darken-3
+$themeinfo = $light-blue.darken-1
+$themewarning = $orange.darken-1
+$themeerror = $red.darken-1
+$themesuccess = $light-green.darken-1
+@import '~lumen-cms/lib/templates/assets/style/imports.styl'
+```
+
+###### [fonts] - Object (default: roboto)
+add as many google fonts to get loading with fontloader API (included in this module)
+```js
+fonts:{montserrat: 'Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800'}
+```
+
+##### [components] - Object (default: {})
+
+Modify components to exchange them with customized. Keep the same naming and then the component will be replaced.
+
+```
+components: {
+  layout: {
+     LcLanguageSwitch: '~/components/overwrites/LanguageSwitch.vue',
+     LcMainFooter: '~/components/overwrites/MainFooter.vue'
+  },
+  view: {
+     LcArticleList: '~/components/overwrites/ArticleList.vue',
+     LcListWidget: '~/components/overwrites/ListWidget.js'
+  }
+}
+```
+
+##### [cms] - Object 
+
+Injected customization into this.$cms or this.app.$cms through NuxtJs inject. Check the defaults
 
 
 ## Development
