@@ -111,7 +111,17 @@ components: {
 
 ##### [cms] - Object 
 
-Injected customization into this.$cms or this.app.$cms through NuxtJs inject. Check the defaults
+Injected customization into this.$cms or this.app.$cms through NuxtJs inject. Check the defaults - its straight forward to overwrite them:
+['lumen-cms' default cms configuration](lib/defaults.js)
+```js
+cms:{
+  pageToolbarExtension: false,
+  Head:{
+    site_name: 'Your domain',
+  }
+}
+
+```
 
 
 ## Development
