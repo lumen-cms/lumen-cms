@@ -92,7 +92,7 @@
           </v-container>
           <v-btn block outline color="primary"
                  @click="loadMore()" :loading="!!loadingApollo"
-                 v-show="totalCount > pagination.itemsPerPage">
+                 v-show="totalCount > pagination.rowsPerPage">
             Load more...
           </v-btn>
         </v-card-text>
@@ -140,7 +140,7 @@
     },
     computed: {
       itemsShown () {
-        return this.pagination.itemsPerPage * parseInt(this.pagination.page)
+        return this.pagination.rowsPerPage * parseInt(this.pagination.page)
       },
       sortOptions () {
         return [

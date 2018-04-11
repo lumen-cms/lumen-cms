@@ -54,12 +54,12 @@
   import allArticleGql from '../../../gql/article/allArticles.gql'
 
   const pagination = {
-    itemsPerPage: 20,
+    rowsPerPage: 20,
     page: 1
   }
   const getSkipFirst = function (pagination) {
-    const {page, itemsPerPage} = pagination
-    const first = itemsPerPage
+    const {page, rowsPerPage} = pagination
+    const first = rowsPerPage
     const skip = (page - 1) * first
     return {
       first, skip
