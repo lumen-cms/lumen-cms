@@ -12,12 +12,6 @@ module.exports = {
     GRAPH_FILE_API: 'cj8yj66xc01740164lh5bv4fz',
     GRAPHQL_SUBSRIPTION: 'subscriptions.us-west-2.graph.cool'
   },
-  // env: {
-  //   GRAPHQL_ALIAS: 'students-admin',
-  //   GRAPHQL_SUBSRIPTION: 'subscriptions.graph.cool',
-  //   GRAPH_FILE_API: 'ciwyoxmas3amt0129hec6zpvl',
-  //   COPYRIGHT: 'studentsgoabroad.com'
-  // },
   'google-analytics': {
     id: 'UA-22494234-1',
     set: [
@@ -28,7 +22,6 @@ module.exports = {
 
   modules: [['@@', {
     cms: {
-      languages: ['de'],
       pageToolbarExtension: false
     }
   }]],

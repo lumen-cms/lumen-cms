@@ -21,8 +21,7 @@
     },
     computed: {
       languages () {
-        const CONFIG = this.$cms
-        return CONFIG.languages
+        return this.$cms.languages
       }
     },
     methods: {
