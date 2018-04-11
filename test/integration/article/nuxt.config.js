@@ -25,11 +25,19 @@ module.exports = {
       {field: 'forceSSL', value: true}
     ]
   },
-
+  plugins: ['~/plugins/additionalComponents.js'],
   modules: [['@@', {
     cms: {
-      languages:['de'],
-      pageToolbarExtension: false
+      languages: ['de'],
+      pageToolbarExtension: false,
+      componentMapping: {
+        'CmsTest': {
+          name: 'lc-divider-edit',
+          icon: 'clear',
+          text: 'Cms Test',
+          view: 'cms-test'
+        }
+      }
     }
   }]],
   build: {

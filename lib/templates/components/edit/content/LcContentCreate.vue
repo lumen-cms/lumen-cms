@@ -28,7 +28,7 @@
     computed: {
       createItems () {
         const dialogData = this.$store.state.lc.contentEditDialogData
-        const components = this.$cms.componentMapping.edit
+        const components = this.$cms.componentMapping
         return Object.keys(components).map(component => {
           return Object.assign({}, components[component], {
             name: component,

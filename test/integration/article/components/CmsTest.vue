@@ -1,5 +1,5 @@
 <template>
   <h4>
-    This is overwritten CmsTest inside of component src
+    This is an additional page component
   </h4>
 </template>

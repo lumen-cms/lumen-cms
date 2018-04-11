@@ -51,7 +51,7 @@
         return data && data.content && data.content.type
       },
       componentName () {
-        const components = this.$cms.componentMapping.edit
+        const components = this.$cms.componentMapping
         const componentName = components[this.typename] && components[this.typename].name
         if (componentName) {
           return componentName

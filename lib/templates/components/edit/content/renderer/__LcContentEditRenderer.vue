@@ -90,15 +90,14 @@
         return this.sortedElements.map(content => {
           const type = content.type
           return {
-            componentName: type,
-            // renderComponent: contentElements[type],
-            renderComponent: `Lc${type}`,
-            contentLayoutElementId: content.id,
             id: content.id,
-            content: content,
-            languageKey: content.languageKey,
+            contentLayoutElementId: content.id,
             published: content.published,
+            content,
+            languageKey: content.languageKey,
             sorting: content.sorting,
+            componentName: type,
+            renderComponent: `Lc${type}`,
             layoutIndex: content.layoutIndex
           }
         })

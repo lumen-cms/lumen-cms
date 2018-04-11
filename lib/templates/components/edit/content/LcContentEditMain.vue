@@ -44,7 +44,6 @@
     methods: {
       onContentUpdate ({variables}) {
         // const dialogData = this.$store.getters.getDialogData
-        console.log()
         return this.mutateGql({
           mutation: updateContent,
           variables
