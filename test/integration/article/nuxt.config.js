@@ -28,7 +28,7 @@ module.exports = {
           name: 'lc-divider-edit',
           icon: 'clear',
           text: 'Cms Test',
-          view: 'cms-test'
+          view: 'lc-cms-test'
         }
       }
     }
