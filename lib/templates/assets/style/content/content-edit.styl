@@ -1,0 +1,49 @@
+.page-content.edit-mode {
+  > * {
+    // min-height: 24px;
+    position: relative;
+    .edit-toolbar {
+      margin-left: 20px !important
+    }
+    .edit-toolbar:not(.controls-visible) {
+      transform: scale(.5) translate(-50%, -50%) !important;
+      &:hover {
+        //display: block;
+        transform: scale(1, 1) translate(0, 0) !important;
+      }
+    }
+  }
+
+  .new-btn-wrap {
+    min-height: 0
+    overflow visible
+  }
+  .content-edit-of-layout {
+    > .edit-toolbar {
+      margin-top: -30px !important;
+    }
+  }
+  .content-edit-of-layout:first-of-type {
+    > .edit-toolbar {
+      margin-top: 0px !important;
+      margin-left: 120px !important;
+    }
+  }
+  .content-edit-of-various {
+    min-height 64px
+  }
+
+  > .h-separator {
+    //  min-height 24px
+    overflow: visible !important
+  }
+}
+
+/*
+.page-view-layout .page-content.edit-mode > {
+div:first-child {
+  .edit-toolbar {
+    margin-top: 128px !important;
+  }
+}
+}*/

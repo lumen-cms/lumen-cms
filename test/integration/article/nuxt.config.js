@@ -19,10 +19,18 @@ module.exports = {
       {field: 'forceSSL', value: true}
     ]
   },
-
+  plugins: ['~/plugins/additionalComponents.js'],
   modules: [['@@', {
     cms: {
-      pageToolbarExtension: false
+      pageToolbarExtension: false,
+      componentMapping: {
+        'CmsTest': {
+          name: 'lc-divider-edit',
+          icon: 'clear',
+          text: 'Cms Test',
+          view: 'cms-test'
+        }
+      }
     }
   }]],
   build: {
