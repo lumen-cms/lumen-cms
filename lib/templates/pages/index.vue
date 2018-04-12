@@ -130,8 +130,13 @@
               articleId: article.id,
               languageKey: article.languageKey
             }
-            this.Article = article
-            this.pageContent = article.contents
+            // this.Article = article
+            // console.log(this.pageContent, article.contents)
+            article.contents.forEach((item, i) => {
+              this.$set(this.pageContent, i, item)
+            })
+            // this.pageContent = contents.slice(0)
+            // console.log(this.pageContent, contents)
           }
         }
       }
