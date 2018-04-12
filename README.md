@@ -30,7 +30,7 @@ This project aims to combine very popular open-source projects and a solid manag
 * 95%+ on GooglePageSpeed
 
 #### Technology stack
-* NodeJS
+* NodeJS (https://nodejs.org)
 * Vue 2.x (https://vuejs.org/)
 * NuxtJs (https://nuxtjs.org/)
 * Vuetify (https://vuetifyjs.com)
