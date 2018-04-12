@@ -104,7 +104,7 @@ h1, h2, h3 {
 }
 ```
 
-#### [components] - Object (default: {})
+#### [components] - Object (default: empty)
 
 Overwrite build-in components with overwriting the component path. All components are prefixed with `Lc`ComponentName. Compoents are loaded asynchronous and are devided in three sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) 
 
