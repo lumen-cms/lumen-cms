@@ -44,10 +44,20 @@ This project aims to combine very popular open-source projects and a solid manag
 * GraphQL endpoint (https://graph.cool)
 You need a graph.cool endpoint and backend. Head over to [lumen-graphcool](https://github.com/lumen-cms/lumen-graphcool) to install and deploy your backend.
 
-## Installation
+## Installation 
+### New project
+Make use of the vue-cli [starter-template](https://github.com/lumen-cms/starter-template)
+```bash
+$ vue init lumen-cms/starter-template my-project  
+$ cd my-project                     
+# install dependencies
+$ npm install # Or yarn install
+```
+
+### Existing project
 - Add `nuxtjs/lumen-cms` dependency using yarn or npm to your project
 - Add `lumen-cms` to `modules` section of `nuxt.config.js`
-```
+```bash
 npm i lumen-cms --save
 ```
 
