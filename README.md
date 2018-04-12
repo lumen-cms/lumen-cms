@@ -13,7 +13,7 @@
 #### GraphQl | Vue 2.x | NuxtJs | Vuetify | graph.cool backend
 
 ## Motivation
-This project aims to combine very popular open-source projects and a solid managed backend service of graph.cool. It is API-Driven and easy extensible with graphql knowledge. Due to the nature of NuxtJs and the powerful modularization concept you can do basically everything with it what is in the scope of NuxtJs itself. `lumen-cms`is built as module to extend the featureset of your NuxtJs project. It features frontend-editing as well as targeting all SEO criterias for common website projects.
+This project aims to combine very popular open-source projects and a solid managed backend service of graph.cool. It is API-Driven and easy extensible with graphql knowledge. Due to the nature of NuxtJs and the powerful modularization concept you can do basically everything with it what is in the scope of NuxtJs itself. As a component framework Vuetify runs the core components and brings Google Material Design specification out of the box.
 
 #### Features
 * Content management system
