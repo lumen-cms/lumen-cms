@@ -86,10 +86,12 @@ export default = {
 #### [disableCSS] - Boolean (default: false)
 Disable the CSS import and manualy add it with stylus
 ```js
-'lumen-cms':{ disableCSS:true } 
+ 'lumen-cms':{
+    disableCSS: true 
+ } 
  css: [
-    {src: '~assets/style/app.styl', lang: 'styl'}
-  ]
+   {src: '~assets/style/app.styl', lang: 'styl'}
+ ]
 ```
 ```stylus
 @import '~lumen-cms/lib/templates/assets/style/vuetify-imports.styl'
