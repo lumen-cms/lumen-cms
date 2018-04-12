@@ -132,6 +132,14 @@ cms:{
 
 ```
 
+## Deploy
+With https://zeit.now the deploy of your Lumen CMS is as simple as typing:
+```
+$ npm i now -g
+$ pathOfProject/now
+```
+To connect the now deployment with your custom domain head over to the [documentation](https://zeit.co/docs/features/aliases) 
+
 ## Website built with Lumen CMS
 * https://planet.training
 * https://www.studentsgoabroad.com | https://www.studentsgoabroad.org
