@@ -71,10 +71,10 @@ export default = {
 
 ## Configuration
 
-#### Options
+### Options
 
-##### [disableCSS] - Boolean (default: false)
-disable the CSS import and manualy add it with import
+#### [disableCSS] - Boolean (default: false)
+Disable the CSS import and manualy add it with stylus
 ```js
 'lumen-cms':{ disableCSS:true } 
  css: [
@@ -93,13 +93,13 @@ $themesuccess = $light-green.darken-1
 @import '~lumen-cms/lib/templates/assets/style/imports.styl'
 ```
 
-###### [fonts] - Object (default: roboto)
+##### [fonts] - Object (default: roboto)
 add as many google fonts to get loading with fontloader API (included in this module)
 ```js
 fonts:{montserrat: 'Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800'}
 ```
 
-##### [components] - Object (default: {})
+#####[components] - Object (default: {})
 
 Overwrite build-in components with overwriting the component path. All components are prefixed with `Lc`ComponentName. Compoents are loaded asynchronous and are devided in three sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) 
 
@@ -116,7 +116,7 @@ components: {
 }
 ```
 
-##### [cms] - Object 
+#### [cms] - Object 
 
 The `cms` config object is getting injected into the context of your app (https://nuxtjs.org/guide/plugins#inject-in-root-amp-context). 
 * `Vuex` - actions as `this.app.$cms`
