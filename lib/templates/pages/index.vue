@@ -90,7 +90,6 @@
             languageKey: article.languageKey
           })
           await store.dispatch('setCurrentArticleCategories', article.categories.map(c => c.title).slice(0))
-
           return {
             host,
             Article: article,
@@ -120,23 +119,21 @@
       $subscribe: {
         changedArticle: {
           query: articleSubGql,
+          skip () {
+            const canEdit = this.$store.getters.canEdit
+            return !canEdit
+          },
           variables () {
             const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
             return {slug}
           },
           result ({data}) {
-            const article = data.Article.node
+            const article = JSON.parse(JSON.stringify(data.Article.node))
             this.pageProps = {
               articleId: article.id,
               languageKey: article.languageKey
             }
-            // this.Article = article
-            // console.log(this.pageContent, article.contents)
-            article.contents.forEach((item, i) => {
-              this.$set(this.pageContent, i, item)
-            })
-            // this.pageContent = contents.slice(0)
-            // console.log(this.pageContent, contents)
+            this.pageContent = article.contents.slice(0)
           }
         }
       }
