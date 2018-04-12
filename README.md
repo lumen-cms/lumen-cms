@@ -12,11 +12,10 @@
 # Lumen CMS 
 #### GraphQl | Vue 2.x | NuxtJs | Vuetify | graph.cool backend
 
-# WIP [very early preview work in progress]
+## Motivation
+This project aims to combine very popular open-source projects and a solid managed backend service of graph.cool. It is API-Driven and easy extensible with graphql knowledge. Due to the nature of NuxtJs and the powerful modularization concept you can do basically everything with it what is in the scope of NuxtJs itself. `lumen-cms`is built as module to extend the featureset of your NuxtJs project. It features frontend-editing as well as targeting all SEO criterias for common website projects.
 
-## Features
-
-#### The module features
+#### Features
 * Content management system
 * Google Analytics integration
 * Sitemap generator
@@ -31,27 +30,40 @@
 * 95%+ on GooglePageSpeed
 
 #### Technology stack
+* NodeJS
 * Vue 2.x (https://vuejs.org/)
 * NuxtJs (https://nuxtjs.org/)
 * Vuetify (https://vuetifyjs.com)
 * GraphQL managed backend by graph.cool (https://graph.cool/)
 * Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
+## Requirement
+You need a graph.cool endpoint and backend. Head over to https://github.com/lumen-cms/lumen-graphcool to install and deploy your backend.
 
-## Setup
+## Installation
 - Add `nuxtjs/lumen-cms` dependency using yarn or npm to your project
 - Add `lumen-cms` to `modules` section of `nuxt.config.js`
+```
+npm i lumen-cms --save
+```
 
 ```js
-{
+// nuxt.config.js
+export default = {
+  // check out https://github.com/lumen-cms/lumen-graphcool to set it up
+  env:{
+    GRAPHQL_ALIAS: '[Project ID]', // alternative Project Alias
+    GRAPH_FILE_API: '[Project ID]', // alternative Project Alias
+    GRAPHQL_SUBSRIPTION: '[SUBSCRIPTION]'
+  },
   modules: [
     // Simple usage
-    'lumen-cms',
-
-    // With options
-    ['lumen-cms', { modules }]   
- ]
-}
+    ['lumen-cms']
+  ],
+  // some settings
+  'lumen-cms':{
+    // here comes your configuration
+  }
 ```
 
 ## Usage
@@ -94,7 +106,7 @@ fonts:{montserrat: 'Montserrat:thin,extra-light,light,100,200,300,400,500,600,70
 
 ##### [components] - Object (default: {})
 
-Modify components to exchange them with customized. Keep the same naming and then the component will be replaced.
+Overwrite build-in components with overwriting the component path. All components are prefixed with `Lc`ComponentName. Compoents are loaded asynchronous and are devided in three sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) 
 
 ```
 components: {
