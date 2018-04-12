@@ -120,15 +120,14 @@
         changedArticle: {
           query: articleSubGql,
           skip () {
-            const canEdit = this.$store.getters.canEdit
-            return !canEdit
+            return !this.$store.getters.canEdit
           },
           variables () {
             const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
             return {slug}
           },
           result ({data}) {
-            const article = JSON.parse(JSON.stringify(data.Article.node))
+            const article = JSON.parse(JSON.stringify(data.Article.node)) // important to clean due to reactivity
             this.pageProps = {
               articleId: article.id,
               languageKey: article.languageKey
