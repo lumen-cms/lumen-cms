@@ -5,7 +5,6 @@
         <nuxt/>
       </v-container>
     </v-content>
-    haolo
     <lc-error-widget/>
     <lc-admin-bar v-if="$store.getters.canEdit"
                   hide-edit-property/>

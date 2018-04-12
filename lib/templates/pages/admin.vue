@@ -47,11 +47,11 @@
                           @keyup.enter="onRegister"/>
             <v-btn flat @click="onRegister"
                    class="primary--text"
-                   :loading="loading">Register
+                   :loading="loading">Sign up
             </v-btn>
           </template>
           <v-alert color="info" v-model="showAfterRegister" icon="info">
-            Your register is successful. Please wait for the admin to apply your privileges.
+            Your registration was successful. Please wait for the admin to apply your privileges.
           </v-alert>
         </lc-form-container>
       </template>
@@ -99,15 +99,19 @@
           await this.$store.dispatch('LOGIN', result)
         } catch (e) {
           this.loading = false
-          this.$store.commit('SET_ERROR', e.message)
-          return
+          this.$store.commit('SET_ERROR', e)
+          return Promise.reject(e)
         }
 
         this.loading = false
+
         if (this.$store.getters.canEdit) {
           this.$router.push('/')
+          return Promise.resolve(true)
         } else {
-          this.$store.commit('SET_ERROR', 'You are not logged in or you missing some priviliges')
+          const err = {message: 'You are not logged in or you missing some priviliges'}
+          this.$store.commit('SET_ERROR', err)
+          return Promise.reject(err)
         }
       },
       samePasswordRule (value) {
