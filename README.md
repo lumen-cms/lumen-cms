@@ -20,12 +20,13 @@ This project aims to combine very popular open-source projects and a solid manag
 * Google Analytics integration
 * Sitemap generator
 * SEO optimized 
-* SPA feel of static website
+* SSR-rendered SPA feel of static website
 * Imageproxy (CDN + scale/crop)
 * Image source maps
 * fontloader
 * In-Page-Editing
-* SSR rendered
+* Multi-Language
+* Multi-Domain
 * Configurable
 * 95%+ on GooglePageSpeed
 
