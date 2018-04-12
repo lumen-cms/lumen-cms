@@ -71,10 +71,9 @@ export default = {
     GRAPHQL_SUBSRIPTION: '[SUBSCRIPTION]'
   },
   modules: [
-    // Simple usage
-    ['lumen-cms']
+    'lumen-cms' // add lumen-cms module
   ],
-  // some settings
+  // customize settings
   'lumen-cms':{
     // here comes your configuration
   }
