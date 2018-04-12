@@ -94,9 +94,14 @@ $themesuccess = $light-green.darken-1
 ```
 
 #### [fonts] - Object (default: roboto)
-add as many google fonts to get loading with fontloader API (included in this module)
+Modify fonts of Google to get loading with fontloader API
 ```js
 fonts:{montserrat: 'Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800'}
+```
+```css
+h1, h2, h3 {
+  font-family: 'Montserrat'
+}
 ```
 
 #### [components] - Object (default: {})
