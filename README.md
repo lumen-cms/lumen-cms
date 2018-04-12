@@ -132,8 +132,11 @@ cms:{
 
 ```
 
+## Website built with Lumen CMS
+* https://planet.training
+* https://www.studentsgoabroad.com | https://www.studentsgoabroad.org
 
-## Development
+## Contribute
 
 - Clone this repository
 - Install dependencies using `yarn install` or `npm install`
