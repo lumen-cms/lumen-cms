@@ -118,7 +118,7 @@ components: {
 
 ##### [cms] - Object 
 
-The `cms` object is configuration which is injected into the context of your app (https://nuxtjs.org/guide/plugins#inject-in-root-amp-context). 
+The `cms` config object is getting injected into the context of your app (https://nuxtjs.org/guide/plugins#inject-in-root-amp-context). 
 * `Vuex` - actions as `this.app.$cms`
 * Vue Components as `this.$cms`
 * Check out all [options](lib/defaults.js)
