@@ -38,7 +38,7 @@ This project aims to combine very popular open-source projects and a solid manag
 * Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
 ## Requirement
-You need a graph.cool endpoint and backend. Head over to https://github.com/lumen-cms/lumen-graphcool to install and deploy your backend.
+You need a graph.cool endpoint and backend. Head over to [lumen-graphcool](https://github.com/lumen-cms/lumen-graphcool) to install and deploy your backend.
 
 ## Installation
 - Add `nuxtjs/lumen-cms` dependency using yarn or npm to your project
