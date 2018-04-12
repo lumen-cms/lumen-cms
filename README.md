@@ -123,8 +123,10 @@ components: {
 
 ##### [cms] - Object 
 
-Injected customization into this.$cms or this.app.$cms through NuxtJs inject. Check the defaults - its straight forward to overwrite them:
-['lumen-cms' default cms configuration](lib/defaults.js)
+The `cms` object is configuration which is injected into the context of your app (https://nuxtjs.org/guide/plugins#inject-in-root-amp-context). 
+* `Vuex` - actions as `this.app.$cms`
+* Vue Components as `this.$cms`
+* Check out all [options](lib/defaults.js)
 ```js
 cms:{
   pageToolbarExtension: false,
