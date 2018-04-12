@@ -38,6 +38,9 @@ This project aims to combine very popular open-source projects and a solid manag
 * Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
 ## Requirement
+* NodeJS v >=8 (check out https://nuxtjs.org dependencies)
+* NPM/Yarn
+* GraphQL endpoint (https://graph.cool)
 You need a graph.cool endpoint and backend. Head over to [lumen-graphcool](https://github.com/lumen-cms/lumen-graphcool) to install and deploy your backend.
 
 ## Installation
@@ -66,15 +69,7 @@ export default = {
   }
 ```
 
-## Usage
-
-Lumen CMS is the right choice for you if you are a Vue 2 developer and familiar with graph-ql.
-
-#### Requirement
-* NodeJS v >=8 (check out https://nuxtjs.org dependencies)
-* Account at graph.cool to deploy your own graphql endpoint (coming soon...)
-
-### Configuration
+## Configuration
 
 #### Options
 
