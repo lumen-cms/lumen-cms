@@ -16,7 +16,7 @@
   "scripts": {
     "dev-fix": "nuxt test/fixture",
     "dev": "nuxt test/integration/article",
-    "lint": "eslint --ignore-pattern '/lib/templates/' --ext .js,.vue lib test",
+    "lint": "eslint --ignore-pattern '/lib/templates/plugins' --ext .js,.vue lib test",
     "test": "npm run lint && jest",
     "release": "standard-version && git push --follow-tags && npm publish"
   },
@@ -61,6 +61,7 @@
     "eslint-config-standard": "latest",
     "eslint-plugin-import": "2.11.0",
     "eslint-plugin-jest": "21.15.0",
+    "eslint-plugin-lodash": "2.7.0",
     "eslint-plugin-node": "latest",
     "eslint-plugin-promise": "latest",
     "eslint-plugin-standard": "latest",
