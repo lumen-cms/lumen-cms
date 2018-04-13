@@ -7,3 +7,5 @@ node_modules
 .DS_STORE
 coverage
 dist
+graphql.config.json
+graphql.schema.json

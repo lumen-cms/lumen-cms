@@ -1,60 +1,83 @@
 <template>
-  <div column align-center class="login-page">
-    <div>
-      <v-btn @click="isLogin=true" flat :class="{'primary--text':isLogin}">Login</v-btn>
-      <v-btn @click="isLogin=false" flat :class="{'primary--text':!isLogin}">Register</v-btn>
-    </div>
-    <div class="white pa-5 elevation-3">
-      <template v-if="isLogin">
-        <lc-form-container ref="form">
+  <div column align-center class="login-page ma-5">
+    <div class="white pa-5">
+      <div class="text-xs-center mb-4">
 
-          <v-alert :value="err" v-text="err"/>
+        <nuxt-link to="/">
+          <lc-main-logo></lc-main-logo>
+        </nuxt-link>
+      </div>
+      <v-tabs grow
+              slider-color="primary">
+        <v-tab ripple>
+          Login
+        </v-tab>
+        <v-tab ripple>
+          Register
+        </v-tab>
+        <v-tab-item class="white pa-5">
+          <lc-form-container ref="form">
 
-          <v-text-field type="email" required name="email"
-                        v-model="credentials.email"
-                        label="Enter your email" @keyup.enter="onLogin"/>
-          <v-text-field v-model="credentials.password" name="password"
-                        required type="password"
-                        label="Enter your password" @keyup.enter="onLogin"/>
-          <v-btn flat @click="onLogin" class="primary--text" :loading="loading">Login</v-btn>
-        </lc-form-container>
-      </template>
-      <template v-else>
-        <lc-form-container ref="formRegister">
-          <template v-if="!showAfterRegister">
-            <v-text-field type="text" v-model="credentials.firstName"
-                          name="firstName"
-                          label="First Name"
-                          required/>
-            <v-text-field type="text" v-model="credentials.lastName"
-                          name="lastName"
-                          label="Last Name"
-                          required/>
+            <v-alert :value="err" v-text="err"/>
+
             <v-text-field type="email" required name="email"
                           v-model="credentials.email"
-                          label="Enter your email"
-                          @keyup.enter="onRegister"/>
-            <v-text-field v-model="credentials.password"
-                          name="password"
+                          label="Enter your email" @keyup.enter="onLogin"/>
+            <v-text-field v-model="credentials.password" name="password"
                           required type="password"
-                          label="Enter your password"
-                          @keyup.enter="onRegister"/>
-            <v-text-field v-model="passwordRepeat"
-                          name="passwordRepeat"
-                          required type="password"
-                          :rules="[samePasswordRule]"
-                          label="Repeat your password"
-                          @keyup.enter="onRegister"/>
-            <v-btn flat @click="onRegister"
-                   class="primary--text"
-                   :loading="loading">Sign up
+                          label="Enter your password" @keyup.enter="onLogin"/>
+            <v-btn flat
+                   outline
+                   block
+                   color="primary"
+                   @click="onLogin"
+                   :loading="loading">
+              Login
             </v-btn>
-          </template>
-          <v-alert color="info" v-model="showAfterRegister" icon="info">
-            Your registration was successful. Please wait for the admin to apply your privileges.
-          </v-alert>
-        </lc-form-container>
-      </template>
+          </lc-form-container>
+        </v-tab-item>
+        <v-tab-item class="white pa-5">
+
+          <lc-form-container ref="formRegister">
+            <template v-if="!showAfterRegister">
+              <v-text-field type="text"
+                            v-model="credentials.firstName"
+                            name="firstName"
+                            label="First Name"
+                            required/>
+              <v-text-field type="text" v-model="credentials.lastName"
+                            name="lastName"
+                            label="Last Name"
+                            required/>
+              <v-text-field type="email" required name="email"
+                            v-model="credentials.email"
+                            label="Enter your email"
+                            @keyup.enter="onRegister"/>
+              <v-text-field v-model="credentials.password"
+                            name="password"
+                            required type="password"
+                            label="Enter your password"
+                            @keyup.enter="onRegister"/>
+              <v-text-field v-model="passwordRepeat"
+                            name="passwordRepeat"
+                            required type="password"
+                            :rules="[samePasswordRule]"
+                            label="Repeat your password"
+                            @keyup.enter="onRegister"/>
+              <v-btn flat
+                     @click="onRegister"
+                     block
+                     outline
+                     color="primary"
+                     :loading="loading">Sign up
+              </v-btn>
+            </template>
+            <v-alert color="success" v-model="showAfterRegister" icon="done">
+              Your registration was successful. Please wait for the admin to confirm your registration.
+            </v-alert>
+          </lc-form-container>
+        </v-tab-item>
+      </v-tabs>
     </div>
   </div>
 </template>
@@ -62,6 +85,7 @@
 <script>
   import userSignInMutationGql from '../gql/user/userSignInMutation.gql'
   import signupUserGql from '../gql/user/signupUser.gql'
+  import hasArticlesGql from '../gql/article/hasArticles.gql'
 
   export default {
     layout: 'admin',
@@ -77,12 +101,25 @@
         err: null,
         passwordRepeat: null,
         isLogin: true,
-        showAfterRegister: false
+        showAfterRegister: false,
+        hasArticles: false
       }
     },
     mounted () {
       if (this.$store.getters.canEdit) {
-        this.$router.push('/')
+        const redirectUrl = this.hasArticles ? '/' : {name: 'install'}
+        this.$router.push(redirectUrl)
+      }
+    },
+    async asyncData ({app}) {
+      const apollo = app.apolloProvider.defaultClient
+      const res = await apollo.query({
+        query: hasArticlesGql
+      }).then(({data}) => data.allArticles)
+      if (res.length) {
+        return {
+          hasArticles: true
+        }
       }
     },
     methods: {
@@ -99,17 +136,18 @@
           await this.$store.dispatch('LOGIN', result)
         } catch (e) {
           this.loading = false
-          this.$store.commit('SET_ERROR', e)
+          this.$store.commit('SET_ERROR', (e && e.message) || e)
           return Promise.reject(e)
         }
 
         this.loading = false
 
         if (this.$store.getters.canEdit) {
-          this.$router.push('/')
+          const redirectUrl = this.hasArticles ? '/' : {name: 'install'}
+          this.$router.push(redirectUrl)
           return Promise.resolve(true)
         } else {
-          const err = {message: 'You are not logged in or you missing some priviliges'}
+          const err = 'You are not logged in or you missing some priviliges'
           this.$store.commit('SET_ERROR', err)
           return Promise.reject(err)
         }

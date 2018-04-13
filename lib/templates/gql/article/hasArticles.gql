@@ -1,0 +1,5 @@
+query hasArticles{
+  allArticles(first:1){
+    id
+  }
+}
