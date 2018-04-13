@@ -23,8 +23,8 @@
         <span>{{ item.name }}, used {{ used }} times</span>
         <v-spacer/>
         <lc-confirm-btn v-if="used === 0"
-                     label="delete"
-                     @onConfirm="$emit('remove',item)"/>
+                        label="delete"
+                        @onConfirm="$emit('remove',item)"/>
       </v-card-text>
     </v-slide-y-transition>
   </v-card>

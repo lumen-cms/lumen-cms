@@ -21,69 +21,69 @@
 </template>
 
 <script>
-export default {
-  name: 'LcElementSlider',
-  data () {
-    return {
-      inputValue: null
-    }
-  },
-  props: {
-    height: {
-      type: String,
-      default: '500px'
+  export default {
+    name: 'LcElementSlider',
+    data () {
+      return {
+        inputValue: null
+      }
     },
-    hideBottomBar: {
-      type: Boolean,
-      default: false
+    props: {
+      height: {
+        type: String,
+        default: '500px'
+      },
+      hideBottomBar: {
+        type: Boolean,
+        default: false
+      },
+      value: {
+        type: Number,
+        default: null
+      }
     },
-    value: {
-      type: Number,
-      default: null
-    }
-  },
 
-  watch: {
-    inputValue (v, oldV) {
-      this.getItems().forEach((item, i) => {
-        const el = item && (item.elm || item.$el)
-        if (!(el && el.classList)) return
-        el.classList.add('slide-item')
-        el.classList[i < v ? 'add' : 'remove']('left-outside')
-        el.classList[i === v ? 'add' : 'remove']('active')
-        el.classList[i > v ? 'add' : 'remove']('right-outside')
-      })
+    watch: {
+      inputValue (v, oldV) {
+        this.getItems().forEach((item, i) => {
+          const el = item && (item.elm || item.$el)
+          if (!(el && el.classList)) return
+          el.classList.add('slide-item')
+          el.classList[i < v ? 'add' : 'remove']('left-outside')
+          el.classList[i === v ? 'add' : 'remove']('active')
+          el.classList[i > v ? 'add' : 'remove']('right-outside')
+        })
+      },
+      value (val) {
+        this.inputValue = val
+      }
     },
-    value (val) {
-      this.inputValue = val
-    }
-  },
-  mounted () {
-    setTimeout(() => {
-      // @TODO - workaround
+    mounted () {
+      setTimeout(() => {
+        // @TODO - workaround
+        if (!this.inputValue) this.inputValue = this.value || 0
+      }, 1000)
+    },
+    updated () {
       if (!this.inputValue) this.inputValue = this.value || 0
-    }, 1000)
-  },
-  updated () {
-    if (!this.inputValue) this.inputValue = this.value || 0
-  },
+    },
 
-  methods: {
-    next () {
-      this.inputValue = (this.inputValue + 1) % this.getItems().length
-    },
-    prev () {
-      const n = this.getItems().length
-      this.inputValue = (this.inputValue + n - 1) % n
-    },
-    select (v) {
-      this.inputValue = v
-    },
-    getItems () {
-      return this.$slots.default || []
+    methods: {
+      next () {
+        this.inputValue = (this.inputValue + 1) % this.getItems().length
+      },
+      prev () {
+        const n = this.getItems().length
+        this.inputValue = (this.inputValue + n - 1) % n
+      },
+      select (v) {
+        this.inputValue = v
+      },
+      getItems () {
+        return this.$slots.default || []
+      }
     }
   }
-}
 </script>
 
 <style lang="stylus">

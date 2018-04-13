@@ -17,9 +17,9 @@
       </v-card-text>
       <v-card-actions>
         <lc-confirm-btn v-if="showDelete"
-                     label="Delete"
-                     btn-class="red--text"
-                     @onConfirm="$emit('onDelete',true)"/>
+                        label="Delete"
+                        btn-class="red--text"
+                        @onConfirm="$emit('onDelete',true)"/>
         <v-spacer/>
         <v-btn class="blue--text darken-1" flat @click="$emit('input',false)">Close</v-btn>
         <lc-trigger-save-btn text="SAVE"/>

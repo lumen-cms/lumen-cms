@@ -113,12 +113,12 @@
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
 
         return getImageSrc(ref.file,
-          false,
-          isSmDown
-            // Jumbotron crop
-            ? `${xCropAmount}x${yCropAmount}centro`
-            // Parallax crop
-            : `${xCropAmount}x${Math.min(file.height, h)}centro`
+                           false,
+                           isSmDown
+                             // Jumbotron crop
+                             ? `${xCropAmount}x${yCropAmount}centro`
+                             // Parallax crop
+                             : `${xCropAmount}x${Math.min(file.height, h)}centro`
         ).src
       }
     }

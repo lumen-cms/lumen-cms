@@ -9,8 +9,7 @@ module.exports = {
   },
   modules: ['@@'],
   env: {
-    GRAPHQL_ALIAS: 'lumen-cms-demo',
-    GRAPH_FILE_API: 'cj8yj66xc01740164lh5bv4fz',
-    GRAPHQL_SUBSRIPTION: 'subscriptions.us-west-2.graph.cool'
+    GRAPHQL_PROJECT_ID: 'cj8yj66xc01740164lh5bv4fz',
+    GRAPHQL_SUBSCRIPTION: 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo'
   }
 }
