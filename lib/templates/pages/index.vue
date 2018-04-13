@@ -90,7 +90,6 @@
             languageKey: article.languageKey
           })
           await store.dispatch('setCurrentArticleCategories', article.categories.map(c => c.title).slice(0))
-          console.log(article.contents)
           return {
             host,
             Article: article,
