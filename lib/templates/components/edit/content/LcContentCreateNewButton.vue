@@ -36,7 +36,7 @@
 <style scoped lang="stylus">
   .content-create-btn {
     z-index 1
-    position absolute;
+    position: absolute;
     transform: scale(0.5, 0.5) translate(-48px, 48px)
     &:hover {
       transform: scale(1, 1) translate(-24px, 24px)
