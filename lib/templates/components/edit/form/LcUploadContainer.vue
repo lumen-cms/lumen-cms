@@ -97,7 +97,7 @@
         this.$emit('deleted', fileId)
       },
       async fileUpload () {
-        const endpoint = `https://api.graph.cool/file/v1/${process.env.GRAPH_FILE_API}`
+        const endpoint = `https://api.graph.cool/file/v1/${process.env.GRAPHQL_PROJECT_ID}`
         if (this.forms.length) {
           this.uploading = true
           const results = []
