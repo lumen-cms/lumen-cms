@@ -61,10 +61,10 @@
         <v-card>
           <v-card-text class="grey lighten-3">
             <lc-file-reference-edit :content="item"
-                                 :is-background="typename === 'Layout'"
-                                 @onFormDirty="onDirty(item,$event)"
-                                 @fileReferenceUpdate="onFileRefSubmit('fileReference'+i,item,$event)"
-                                 :ref="'fileReference'+i"/>
+                                    :is-background="typename === 'Layout'"
+                                    @onFormDirty="onDirty(item,$event)"
+                                    @fileReferenceUpdate="onFileRefSubmit('fileReference'+i,item,$event)"
+                                    :ref="'fileReference'+i"/>
           </v-card-text>
         </v-card>
       </v-expansion-panel-content>

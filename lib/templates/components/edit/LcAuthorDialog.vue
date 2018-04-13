@@ -18,9 +18,9 @@
       </v-card-text>
       <v-card-actions>
         <lc-confirm-btn label="Delete"
-                     btn-class="red--text"
-                     v-if="mutationType === 'update'"
-                     @onConfirm="onDelete"/>
+                        btn-class="red--text"
+                        v-if="mutationType === 'update'"
+                        @onConfirm="onDelete"/>
         <v-spacer/>
         <v-btn @click="onSave"
                color="primary"

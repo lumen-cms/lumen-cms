@@ -13,19 +13,19 @@
 <script>
   export default {
     name: 'LcSideNav',
-    data() {
+    data () {
       return {
         active: this.$store.state.lc.activeSecondaryNav
       }
     },
     methods: {
-      onInput(v) {
+      onInput (v) {
         if (v === this.$store.state.lc.activeSecondaryNav) return
         this.$store.dispatch('setSecondaryNav', v)
       }
     },
     watch: {
-      '$store.state.lc.activeSecondaryNav'(val, oldVal) {
+      '$store.state.lc.activeSecondaryNav' (val, oldVal) {
         this.active = val
       }
     }

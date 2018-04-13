@@ -19,9 +19,9 @@
       </v-card-text>
       <v-card-actions>
         <lc-confirm-btn v-if="!!selected"
-                     label="Delete"
-                     btn-class="red--text"
-                     @onConfirm="onDelete"/>
+                        label="Delete"
+                        btn-class="red--text"
+                        @onConfirm="onDelete"/>
         <v-spacer/>
         <v-btn icon @click="selected=null" v-if="!!selected">
           <v-icon>clear</v-icon>

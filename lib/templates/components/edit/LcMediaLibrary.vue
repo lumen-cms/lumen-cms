@@ -70,9 +70,9 @@
                        @edReady="editorLoadData = null"
                        :load-data="editorLoadData"
                        @uploaded="onUploaded"/>
-            <!--<addon0 @uploaded="onUploaded"-->
-                    <!--@edReady="editorLoadData = null"-->
-                    <!--:load-data="editorLoadData"/>-->
+                       <!--<addon0 @uploaded="onUploaded"-->
+                       <!--@edReady="editorLoadData = null"-->
+                       <!--:load-data="editorLoadData"/>-->
           </template>
           <v-container fluid grid-list-lg>
             <v-layout row wrap>
