@@ -67,7 +67,7 @@ export default = {
   // check out https://github.com/lumen-cms/lumen-graphcool to set it up
   env:{
     GRAPHQL_PROJECT_ID: '[Project ID]', // alternative Project Alias
-    GRAPHQL_SUBSRIPTION: '[SUBSCRIPTION]'
+    GRAPHQL_SUBSCRIPTION: '[SUBSCRIPTION]'
   },
   modules: [
     'lumen-cms' // add lumen-cms module

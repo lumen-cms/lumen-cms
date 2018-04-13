@@ -9,7 +9,7 @@ module.exports = {
   },
   env: {
     GRAPHQL_PROJECT_ID: 'cj8yj66xc01740164lh5bv4fz',
-    GRAPHQL_SUBSRIPTION: 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo'
+    GRAPHQL_SUBSCRIPTION: 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo'
   },
   plugins: ['~/plugins/additionalComponents.js'],
   modules: [['@@', {
