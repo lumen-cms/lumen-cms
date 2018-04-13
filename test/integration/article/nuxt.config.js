@@ -8,16 +8,8 @@ module.exports = {
     resourceHints: false
   },
   env: {
-    GRAPHQL_ALIAS: 'lumen-cms-demo',
-    GRAPH_FILE_API: 'cj8yj66xc01740164lh5bv4fz',
-    GRAPHQL_SUBSRIPTION: 'subscriptions.us-west-2.graph.cool'
-  },
-  'google-analytics': {
-    id: 'UA-22494234-1',
-    set: [
-      {field: 'anonymizeIp', value: true},
-      {field: 'forceSSL', value: true}
-    ]
+    GRAPHQL_PROJECT_ID: 'cj8yj66xc01740164lh5bv4fz',
+    GRAPHQL_SUBSRIPTION: 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo'
   },
   plugins: ['~/plugins/additionalComponents.js'],
   modules: [['@@', {

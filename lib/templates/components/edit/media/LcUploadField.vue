@@ -47,7 +47,7 @@
         this.file = fileInput.files.length ? fileInput.files[0] : null
       },
       async uploadFile () {
-        const endpoint = `https://api.graph.cool/file/v1/${process.env.GRAPH_FILE_API}`
+        const endpoint = `https://api.graph.cool/file/v1/${process.env.GRAPHQL_PROJECT_ID}`
         const data = new FormData()
         data.append('data', this.file)
 
