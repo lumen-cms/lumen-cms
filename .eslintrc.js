@@ -10,7 +10,7 @@ module.exports = {
     node: true,
     jest: true
   },
-  extends: ['plugin:vue/recommended', 'plugin:jest/recommended', 'standard' ],
+  extends: ['plugin:vue/recommended', 'plugin:jest/recommended', 'standard'],
   plugins: [
     'jest',
     'vue'
@@ -44,7 +44,7 @@ module.exports = {
       'files': ['*.vue'],
       'rules': {
         'indent': 'off',
-        'vue/script-indent': ['error', 2, { 'baseIndent': 1 }]
+        'vue/script-indent': ['error', 2, {'baseIndent': 1}]
       }
     }
   ],

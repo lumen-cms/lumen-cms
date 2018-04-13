@@ -10,69 +10,88 @@
 [📖 **Release Notes**](./CHANGELOG.md)
 
 # Lumen CMS 
-#### GraphQl | Vue 2.x | NuxtJs | Vuetify | graph.cool backend
+#### NodeJS | Vue 2.x | NuxtJs | Vuetify | GraphQl - graph.cool
 
-# WIP [very early preview work in progress]
+## Motivation
+This project aims to combine very popular open-source projects and a solid managed backend service of graph.cool. It is API-Driven and extendable with graphql schema definition. Due to the nature of NuxtJs and the powerful modularization concept it extends your NuxtJs project with a fully-featured CMS. As a component framework Vuetify is included and brings Google Material Design specification out of the box.
 
-## Features
-
-#### The module features
+#### Features
 * Content management system
 * Google Analytics integration
 * Sitemap generator
 * SEO optimized 
-* SPA feel of static website
+* SSR-rendered SPA feel of static website
 * Imageproxy (CDN + scale/crop)
 * Image source maps
 * fontloader
 * In-Page-Editing
-* SSR rendered
+* Multi-Language
+* Multi-Domain
 * Configurable
 * 95%+ on GooglePageSpeed
 
 #### Technology stack
+* NodeJS (https://nodejs.org)
 * Vue 2.x (https://vuejs.org/)
 * NuxtJs (https://nuxtjs.org/)
 * Vuetify (https://vuetifyjs.com)
 * GraphQL managed backend by graph.cool (https://graph.cool/)
 * Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
+## Requirement
+* NodeJS v >=8 (check out https://nuxtjs.org dependencies)
+* NPM/Yarn
+* GraphQL endpoint (https://graph.cool)
+You need a graph.cool endpoint and backend. Head over to [lumen-graphcool](https://github.com/lumen-cms/lumen-graphcool) to install and deploy your backend.
 
-## Setup
-- Add `nuxtjs/lumen-cms` dependency using yarn or npm to your project
-- Add `lumen-cms` to `modules` section of `nuxt.config.js`
-
-```js
-{
-  modules: [
-    // Simple usage
-    'lumen-cms',
-
-    // With options
-    ['lumen-cms', { modules }]   
- ]
-}
+## Installation 
+### New project
+Make use of the vue-cli [starter-template](https://github.com/lumen-cms/starter-template)
+```bash
+$ vue init lumen-cms/starter-template my-project  
+$ cd my-project                     
+# install dependencies
+$ npm install # Or yarn install
 ```
 
-## Usage
+### Existing project
+- Add `nuxtjs/lumen-cms` dependency using yarn or npm to your project
+- Add `lumen-cms` to `modules` section of `nuxt.config.js`
+```bash
+npm i lumen-cms --save
+```
 
-Lumen CMS is the right choice for you if you are a Vue 2 developer and familiar with graph-ql.
-
-#### Requirement
-* NodeJS v >=8 (check out https://nuxtjs.org dependencies)
-* Account at graph.cool to deploy your own graphql endpoint (coming soon...)
-
-### Configuration
-
-#### Options
-
-##### [disableCSS] - Boolean (default: false)
-disable the CSS import and manualy add it with import
 ```js
-'lumen-cms':{ disableCSS:true } 
+// nuxt.config.js
+export default = {
+  // check out https://github.com/lumen-cms/lumen-graphcool to set it up
+  env:{
+    GRAPHQL_ALIAS: '[Project ID]', // alternative Project Alias
+    GRAPH_FILE_API: '[Project ID]', // alternative Project Alias
+    GRAPHQL_SUBSRIPTION: '[SUBSCRIPTION]'
+  },
+  modules: [
+    'lumen-cms' // add lumen-cms module
+  ],
+  // customize settings
+  'lumen-cms':{
+    // here comes your configuration
+  }
+```
+
+## Configuration
+
+### Options
+
+#### [disableCSS] - Boolean (default: false)
+Disable the CSS import and manualy add it with stylus
+```js
+ 'lumen-cms':{
+    disableCSS: true 
+ } 
  css: [
-    {src: '~assets/style/app.styl', lang: 'styl'}
-  ]
+   {src: '~assets/style/app.styl', lang: 'styl'}
+ ]
 ```
 ```stylus
 @import '~lumen-cms/lib/templates/assets/style/vuetify-imports.styl'
@@ -86,15 +105,20 @@ $themesuccess = $light-green.darken-1
 @import '~lumen-cms/lib/templates/assets/style/imports.styl'
 ```
 
-###### [fonts] - Object (default: roboto)
-add as many google fonts to get loading with fontloader API (included in this module)
+#### [fonts] - Object (default: roboto)
+Modify fonts of Google to get loading with fontloader API
 ```js
 fonts:{montserrat: 'Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800'}
 ```
+```css
+h1, h2, h3 {
+  font-family: 'Montserrat'
+}
+```
 
-##### [components] - Object (default: {})
+#### [components] - Object (default: empty)
 
-Modify components to exchange them with customized. Keep the same naming and then the component will be replaced.
+Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) 
 
 ```
 components: {
@@ -109,10 +133,12 @@ components: {
 }
 ```
 
-##### [cms] - Object 
+#### [cms] - Object 
 
-Injected customization into this.$cms or this.app.$cms through NuxtJs inject. Check the defaults - its straight forward to overwrite them:
-['lumen-cms' default cms configuration](lib/defaults.js)
+The `cms` config object is getting injected into the context of your app (https://nuxtjs.org/guide/plugins#inject-in-root-amp-context). 
+* `Vuex` - actions as `this.app.$cms`
+* Vue Components as `this.$cms`
+* Check out all [options](lib/defaults.js)
 ```js
 cms:{
   pageToolbarExtension: false,
@@ -123,8 +149,20 @@ cms:{
 
 ```
 
+## Deploy
+With https://zeit.now the deploy of your Lumen CMS is as simple as typing:
+```
+$ npm i now -g
+$ cd pathOfProject
+$ now
+```
+To connect the now deployment with your custom domain head over to the [documentation](https://zeit.co/docs/features/aliases) 
 
-## Development
+## Website built with Lumen CMS
+* https://planet.training
+* https://www.studentsgoabroad.com | https://www.studentsgoabroad.org
+
+## Contribute
 
 - Clone this repository
 - Install dependencies using `yarn install` or `npm install`
