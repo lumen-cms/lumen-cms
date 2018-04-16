@@ -194,7 +194,7 @@ The backend is configured to fit most website usecases. The main top-level schem
 * graph.cool internal user schema for authentication
 
 ## Content Elements
-All content elments can be added/edited for each article. Lumen CMS ships 5 content elements while each of them is pretty customizable through stylesheets and properties. The most common element is `LcTextImage` which has many configuration option and can fit many usecases. You can overwrite either the content element with providing a custom path or create custom elements and add them to your project [read more]().
+All content elments can be added/edited for each article. Lumen CMS ships 5 content elements while each of them is pretty customizable through stylesheets and properties. The most common element is `LcTextImage` which has many configuration option and can fit many usecases. You can overwrite either the content element with providing a custom path or create custom elements and add them to your project [read more](README.md#customize-content-elements).
 
 ### Text with image (LcTextImage)
 * Header (h1 - h6)
