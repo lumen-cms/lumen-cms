@@ -2,6 +2,7 @@
   <div class="page-content">
     <component v-for="(component,i) in getChunkedElements"
                :key="i"
+               v-scroll="isVisible"
                v-bind="component.props"
                :is="component.viewName"/>
   </div>
@@ -19,10 +20,8 @@
     },
     mounted () {
       window.addEventListener('load', () => {
-        setTimeout(() => {
-          // run after everything is in-place
-          this.$store.dispatch('setWindowLoaded', true)
-        }, 500)
+        // run after everything is in-place
+        this.$store.dispatch('setWindowLoaded', true)
       })
     },
     computed: {
@@ -55,6 +54,9 @@
       }
     },
     methods: {
+      isVisible () {
+
+      },
       mapElement (element) {
         return {
           id: element.id,
