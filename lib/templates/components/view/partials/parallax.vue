@@ -81,7 +81,7 @@
       },
       fixedBackgroundStyle () {
         if (!this.isFixedBackground || !this.fileReference) return
-        const ref = Object.assign({}, this.fileReference, {resize: false})
+        // const ref = Object.assign({}, this.fileReference, {resize: false})
         let backgroundAttachment = 'fixed'
         if (process.browser) {
           const userAgent = window.navigator.userAgent
@@ -90,9 +90,11 @@
             backgroundAttachment = 'scroll'
           }
         }
-
+        // const src = getImageSrc(ref.file).src
+        const src = this.getSrc()
+        // console.log(src)
         return {
-          backgroundImage: `url(${getImageSrc(ref.file).src})`,
+          backgroundImage: `url(${src})`,
           backgroundAttachment,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
@@ -104,7 +106,7 @@
     },
     methods: {
       getSrc () {
-        if (!this.fileReference || !process.browser || this.isFixedBackground) return ''
+        if (!this.fileReference || !process.browser) return ''
         const isSmDown = this.$vuetify.breakpoint.smAndDown
         const {vh} = getViewportDimensions()
         const h = Math.max(Math.round(vh * 1.4), this.height)
@@ -113,12 +115,12 @@
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
 
         return getImageSrc(ref.file,
-                           false,
-                           isSmDown
-                             // Jumbotron crop
-                             ? `${xCropAmount}x${yCropAmount}centro`
-                             // Parallax crop
-                             : `${xCropAmount}x${Math.min(file.height, h)}centro`
+          false,
+          isSmDown
+            // Jumbotron crop
+            ? `${xCropAmount}x${yCropAmount}centro`
+            // Parallax crop
+            : `${xCropAmount}x${Math.min(file.height, h)}centro`
         ).src
       }
     }
