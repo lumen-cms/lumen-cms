@@ -190,9 +190,45 @@ The backend is configured to fit most website usecases. The main top-level schem
 ### UrlAlias (301 redirects) [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
 * 301 in case of renamed paths/slugs
 
-
 ### User [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L142)
 * graph.cool internal user schema for authentication
+
+## Content Elements
+All content elments can be added/edited for each article. Lumen CMS ships 5 content elements while each of them is pretty customizable through stylesheets and properties. The most common element is `LcTextImage` which has many configuration option and can fit many usecases. You can overwrite either the content element with providing a custom path or create custom elements and add them to your project [read more]().
+
+### Text with image (LcTextImage)
+* Header (h1 - h6)
+* Text (enabled richt text editor from QuillJs)
+* Image(s) as gallery or single
+* Parallax/Jumbotron/Fixed-Background effect
+* Flexible arrangement
+* Highly customizable through styles
+
+### Divider (LcDivider)
+* Recognizes google material icons
+* Different sizing
+* Colorization
+* Border widths
+
+### Layout (LcLayout)
+* Tabs
+* Columns
+  - Parralax/Jumbotron/Fixed-Background images
+* Slider
+* Expansion-panel
+ => holds as many content elmements inside each row/column
+
+### List Widget (LcListWidget)
+* List of articles
+* Different list styles
+* Filter based on taxonomy
+
+### Read more accordion (LcReadMore)
+* Teaser text (richt text)
+* Body text (rich text)
+
+### Customize content elements
+* TODO
 
 ## Deploy
 With https://zeit.now the deploy of your Lumen CMS is as simple as typing:
