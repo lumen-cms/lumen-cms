@@ -151,57 +151,48 @@ cms:{
 
 ## Data Schema
 The backend is configured to fit most website usecases. The main top-level schema is called Article, its the main schema for all pages/articles. The difference between a page and article is marginal - you can change it with a switch and its made to differenciate inside of the content list widget. 
-### Article
+### Article [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L1)
 * holds the top level schema
 * can hold many content elements
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L1)
 
-### ArticleCategory
+### ArticleCategory [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L26)
 * categorization/taxonomy/tagging for each article
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L26)
 
 ### Author [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L38)
 * basic author schema
 
 
-### Content
+### Content [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L47)
 * holds the content element schema for any content element
 * extandable through 
   - properties JSON
   - styles JSON
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L47)
 
-### File
+### File [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L71)
 * graph.cool internal file schema
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L71)
 
-### FileReference
+### FileReference [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L89)
 * holds the reference to each file via media browser
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L89)
 
-### FileTag
+### FileTag [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L110)
 * categorization/taxonomy/tagging for each file
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L110)
 
-### Media
+### Media [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L116)
 * media image for preview images of articles
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L116)
 
-### PageTemplate
+### PageTemplate [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
 * holds generic content for different and global layout positions
   - toolbars
   - navigation drawer
   - footer 
   - configurable
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
 
-### UrlAlias (301 redirects)
+### UrlAlias (301 redirects) [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
 * 301 in case of renamed paths/slugs
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
 
-### User
+
+### User [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L142)
 * graph.cool internal user schema for authentication
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L142)
 
 ## Deploy
 With https://zeit.now the deploy of your Lumen CMS is as simple as typing:
