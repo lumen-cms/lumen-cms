@@ -151,52 +151,52 @@ cms:{
 
 ## Data Schema
 The backend is configured to fit most website usecases. The main top-level schema is called Article, its the main schema for all pages/articles. The difference between a page and article is marginal - you can change it with a switch and its made to differenciate inside of the content list widget. 
-### Article [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L1)
+### Article - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L1)
 * holds the top level schema
 * can hold many content elements
 
-### ArticleCategory [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L26)
+### ArticleCategory - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L26)
 * categorization/taxonomy/tagging for each article
 
-### Author [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L38)
+### Author - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L38)
 * basic author schema
 
 
-### Content [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L47)
+### Content - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L47)
 * holds the content element schema for any content element
 * extandable through 
   - properties JSON
   - styles JSON
 
-### File [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L71)
+### File - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L71)
 * graph.cool internal file schema
 
-### FileReference [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L89)
+### FileReference - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L89)
 * holds the reference to each file via media browser
 
-### FileTag [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L110)
+### FileTag - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L110)
 * categorization/taxonomy/tagging for each file
 
-### Media [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L116)
+### Media - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L116)
 * media image for preview images of articles
 
-### PageTemplate [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
+### PageTemplate - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
 * holds generic content for different and global layout positions
   - toolbars
   - navigation drawer
   - footer 
   - configurable
 
-### UrlAlias (301 redirects) [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
+### UrlAlias (301 redirects) - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
 * 301 in case of renamed paths/slugs
 
-### User [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L142)
+### User - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L142)
 * graph.cool internal user schema for authentication
 
 ## Content Elements
 All content elments can be added/edited for each article. Lumen CMS ships 5 content elements while each of them is pretty customizable through stylesheets and properties. The most common element is `LcTextImage` which has many configuration option and can fit many usecases. You can overwrite either the content element with providing a custom path or create custom elements and add them to your project [read more](README.md#customize-content-elements).
 
-### Text with image (LcTextImage)
+### Text with image (`LcTextImage)
 * Header (h1 - h6)
 * Text (enabled richt text editor from QuillJs)
 * Image(s) as gallery or single
@@ -204,13 +204,13 @@ All content elments can be added/edited for each article. Lumen CMS ships 5 cont
 * Flexible arrangement
 * Highly customizable through styles
 
-### Divider (LcDivider)
+### Divider (`LcDivider`)
 * Recognizes google material icons
 * Different sizing
 * Colorization
 * Border widths
 
-### Layout (LcLayout)
+### Layout (`LcLayout`)
 * Tabs
 * Columns
   - Parralax/Jumbotron/Fixed-Background images
@@ -218,12 +218,12 @@ All content elments can be added/edited for each article. Lumen CMS ships 5 cont
 * Expansion-panel
  => holds as many content elmements inside each row/column
 
-### List Widget (LcListWidget)
+### List Widget (`LcListWidget`)
 * List of articles
 * Different list styles
 * Filter based on taxonomy
 
-### Read more accordion (LcReadMore)
+### Read more accordion (`LcReadMore`)
 * Teaser text (richt text)
 * Body text (rich text)
 
