@@ -26,6 +26,19 @@ module.exports = {
       }
     }
   }]],
+  head: {
+    title: 'Studentsgoabroad',
+    meta: [
+      {charset: 'utf-8'},
+      {hid: 'robots', name: 'robots', content: 'noindex, nofollow'},
+      {
+        hid: 'viewport',
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui'
+      },
+      {hid: 'description', name: 'description', content: 'Studentsgoabroad project'}
+    ]
+  },
   build: {
     extend (config) {
       // config.resolve.alias['~articleUpdate'] = resolve(__dirname, './gql/UpdateArticle.gql')
