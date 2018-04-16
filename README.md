@@ -238,7 +238,7 @@ $ cd pathOfProject
 $ now
 ```
 To connect the now deployment with your custom domain head over to the [documentation](https://zeit.co/docs/features/aliases) 
-
+Sidenote: you need at least a premium account due to the size of the website bundle.
 ## Website built with Lumen CMS
 * https://planet.training
 * https://www.studentsgoabroad.com | https://www.studentsgoabroad.org
