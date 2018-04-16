@@ -160,9 +160,9 @@ The backend is configured to fit most website usecases. The main top-level schem
 * categorization/taxonomy/tagging for each article
 [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L26)
 
-### Author
+### Author [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L38)
 * basic author schema
-[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L38)
+
 
 ### Content
 * holds the content element schema for any content element
