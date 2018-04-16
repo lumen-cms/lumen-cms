@@ -22,8 +22,8 @@ This project aims to combine very popular open-source projects and a solid manag
 * SEO optimized 
 * SSR-rendered SPA feel of static website
 * Imageproxy (CDN + scale/crop)
-* Image source maps
-* fontloader
+* Responsive images 
+* Fontloader
 * In-Page-Editing
 * Multi-Language
 * Multi-Domain
@@ -36,6 +36,7 @@ This project aims to combine very popular open-source projects and a solid manag
 * NuxtJs (https://nuxtjs.org/)
 * Vuetify (https://vuetifyjs.com)
 * GraphQL managed backend by graph.cool (https://graph.cool/)
+* Apollo (https://www.apollographql.com/client/, https://github.com/Akryum/vue-apollo)
 * Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
 ## Requirement
@@ -147,6 +148,60 @@ cms:{
 }
 
 ```
+
+## Data Schema
+The backend is configured to fit most website usecases. The main top-level schema is called Article, its the main schema for all pages/articles. The difference between a page and article is marginal - you can change it with a switch and its made to differenciate inside of the content list widget. 
+### Article
+* holds the top level schema
+* can hold many content elements
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L1)
+
+### ArticleCategory
+* categorization/taxonomy/tagging for each article
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L26)
+
+### Author
+* basic author schema
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L38)
+
+### Content
+* holds the content element schema for any content element
+* extandable through 
+  - properties JSON
+  - styles JSON
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L47)
+
+### File
+* graph.cool internal file schema
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L71)
+
+### FileReference
+* holds the reference to each file via media browser
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L89)
+
+### FileTag
+* categorization/taxonomy/tagging for each file
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L110)
+
+### Media
+* media image for preview images of articles
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L116)
+
+### PageTemplate
+* holds generic content for different and global layout positions
+  - toolbars
+  - navigation drawer
+  - footer 
+  - configurable
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
+
+### UrlAlias (301 redirects)
+* 301 in case of renamed paths/slugs
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L132)
+
+### User
+* graph.cool internal user schema for authentication
+[View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L142)
 
 ## Deploy
 With https://zeit.now the deploy of your Lumen CMS is as simple as typing:
