@@ -263,21 +263,22 @@ Every content element has a unique type as the component name. It should be Uppe
 To extend/overwrite the default behaviour there are following paths to overwrite the default functionality:
 ```js
 // nuxt.config.js  
-  build:{
-    extend(config){
-      // next gql alias files can be overwritten in nuxt.config build section
-      config.resolve.alias['~updateArticle'] = '~/customPath/updateArticle.gql' // in case you customized article
-      config.resolve.alias['~createArticle'] = '~/customPath/createArticle.gql' // in case you customized article
-      config.resolve.alias['~extendedArticleFragment'] = '~/customPath/extendedArticleFragment.gql' // in case you customized article
-      config.resolve.alias['~createMedia'] = '~/customPath/createMedia.gql' // in case you need to add media in some other schemas
-      // hooks for data render and setup
-      config.resolve.alias['~initialAsyncData'] = '~/customPath/initialAsyncData.js' // initial render of asyncData
-      config.resolve.alias['~getCanonical'] = '~/customPath/getCanonical.js' // receive canonical tag
-      config.resolve.alias['~getMeta'] = '~/customPath/getMeta.js' // get default head meta
-      // extend pre-defined content element options
-      config.resolve.alias['~predefinedStyles'] = '~/customPath/predefinedStyles.js' // array of pre-defined custom layout
-    }
-  }
+build:{
+ extend(config){
+   // next gql alias files can be overwritten in nuxt.config build section
+   config.resolve.alias['~updateArticle'] = '~/customPath/updateArticle.gql' // in case you customized article
+   config.resolve.alias['~createArticle'] = '~/customPath/createArticle.gql' // in case you customized article
+   config.resolve.alias['~extendedArticleFragment'] = '~/customPath/extendedArticleFragment.gql' // in case you customized article
+   config.resolve.alias['~createMedia'] = '~/customPath/createMedia.gql' // in case you need to add media in some other schemas
+   // hooks for data render and setup
+   // needed to get initial languageKey, host and path ([view](lib/templates/util/hooks/initialAsyncData.js))
+   config.resolve.alias['~initialAsyncData'] = '~/customPath/initialAsyncData.js' // initial render of asyncData
+   config.resolve.alias['~getCanonical'] = '~/customPath/getCanonical.js' // receive canonical tag
+   config.resolve.alias['~getMeta'] = '~/customPath/getMeta.js' // get default head meta
+   // extend pre-defined content element options
+   config.resolve.alias['~predefinedStyles'] = '~/customPath/predefinedStyles.js' // array of pre-defined custom layout
+ }
+}
 ```
  
 
