@@ -120,7 +120,9 @@ h1, h2, h3 {
 
 #### [components] - Object (default: empty)
 
-Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) and check out further explanation in [customize the website](README.md#overwrite)
+Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. 
+* Find all available components [here](/lib/templates/plugins/components) 
+* Further custumization options follow overwrite [section](README.md#overwrite)
 
 #### [pages] - Object (default: empty)
 
