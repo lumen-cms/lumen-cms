@@ -120,18 +120,7 @@ h1, h2, h3 {
 
 Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) 
 
-```
-components: {
-  layout: {
-     LcLanguageSwitch: '~/components/overwrites/LanguageSwitch.vue',
-     LcMainFooter: '~/components/overwrites/MainFooter.vue'
-  },
-  view: {
-     LcArticleList: '~/components/overwrites/ArticleList.vue',
-     LcListWidget: '~/components/overwrites/ListWidget.js'
-  }
-}
-```
+
 
 #### [cms] - Object 
 
@@ -228,7 +217,22 @@ All content elments can be added/edited for each article. Lumen CMS ships 5 cont
 * Body text (rich text)
 
 ### Customize content elements
-* TODO
+There are two ways of customizing your website render. Either you overwrite an existing component or you want to create a new custom content element. 
+#### Overwrite
+Overwrite existing components with keeping the exact name and pass a new path. Keep the same [group and componentName](/lib/templates/plugins/components) and webpack will bundle your customized file instead of the default file.
+```
+components: {
+  layout: {
+     LcLanguageSwitch: '~/components/overwrites/LanguageSwitch.vue',
+     LcMainFooter: '~/components/overwrites/MainFooter.vue'
+  },
+  view: {
+     LcArticleList: '~/components/overwrites/ArticleList.vue',
+     LcListWidget: '~/components/overwrites/ListWidget.js'
+  }
+}
+```
+ 
 
 ## Deploy
 With https://zeit.now the deploy of your Lumen CMS is as simple as typing:
