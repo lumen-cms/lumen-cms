@@ -192,6 +192,7 @@ All content elments can be added/edited for each article. Lumen CMS ships 5 cont
 * Parallax/Jumbotron/Fixed-Background effect
 * Flexible arrangement
 * Highly customizable through styles
+* "Component-Pre-Set" as a collection of class names can be defined or added to the [defaults](lib/templates/util/contentElementStylePresets.js)
 
 ### Divider (`LcDivider`)
 * Recognizes google material icons
