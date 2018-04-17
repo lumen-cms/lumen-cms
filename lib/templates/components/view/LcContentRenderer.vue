@@ -1,6 +1,6 @@
 <template>
   <div class="page-content">
-    <component v-for="(component,i) in getChunkedElements"
+    <component v-for="(component,i) in getElements"
                :key="i"
                v-scroll="isVisible"
                v-bind="component.props"
@@ -13,11 +13,6 @@
       elements: Array,
       pageProps: Object
     },
-    data () {
-      return {
-        isLoaded: false
-      }
-    },
     mounted () {
       window.addEventListener('load', () => {
         // run after everything is in-place
@@ -25,20 +20,14 @@
       })
     },
     computed: {
-      getChunkedElements () {
-        if (this.$store.state.lc.windowLoaded) {
-          return this.getElements
-        }
-        return this.getElements.slice(0, 1)
-      },
       getElements () {
         const elements = this.elements
-        const sorted = elements.slice(0)
+        const sorted = elements
+          .slice(0)
           .sort((a, b) => a.sorting - b.sorting)
         const clonedElements = sorted.filter(el => el.published)
-        const mappedElements = clonedElements.map((content, i) => {
+        return clonedElements.map((content, i) => {
           const mappedContent = this.mapElement(content)
-          // const viewName = this.$cms.componentMapping[content.type] && this.$cms.componentMapping[content.type].view
           const viewName = `Lc${content.type}`
           return {
             viewName,
@@ -50,7 +39,6 @@
             })
           }
         })
-        return mappedElements
       }
     },
     methods: {

@@ -1,14 +1,15 @@
 <template>
   <div :class="currentClass"
        v-bind="currentAttrs">
-    <v-parallax v-if="src && !isFixedBackground"
+    <v-parallax v-if="!isFixedBackground"
                 :height="height"
                 :jumbotron="$vuetify.breakpoint.smAndDown"
                 :src="src">
       <slot/>
     </v-parallax>
     <div v-else
-         class="fixed-background"
+         class="fixed-background lazyload"
+         :data-bg="fixedBackgroundUrl"
          :style="fixedBackgroundStyle">
       <slot/>
     </div>
@@ -79,6 +80,10 @@
           return this.parallaxHeight || 300
         }
       },
+      fixedBackgroundUrl () {
+        if (!this.isFixedBackground || !this.fileReference) return
+        return 'url(' + this.getSrc() + ')'
+      },
       fixedBackgroundStyle () {
         if (!this.isFixedBackground || !this.fileReference) return
         // const ref = Object.assign({}, this.fileReference, {resize: false})
@@ -90,11 +95,7 @@
             backgroundAttachment = 'scroll'
           }
         }
-        // const src = getImageSrc(ref.file).src
-        const src = this.getSrc()
-        // console.log(src)
         return {
-          backgroundImage: `url(${src})`,
           backgroundAttachment,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
