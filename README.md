@@ -122,7 +122,26 @@ h1, h2, h3 {
 
 Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) and check out further explanation in [customize the website](README.md#overwrite)
 
+#### [pages] - Object (default: empty)
 
+Overwrite built-in pages by provide a custom page path. Following pages are provided. Provide a `pages` object with the exact name and custom path to overwrite the default:
+```js
+pages:{
+  admin: resolve(__dirname, './templates/pages/admin.vue'),
+  install: resolve(__dirname, './templates/pages/install.vue'),
+  articleAdmin: resolve(__dirname, './templates/pages/articleAdmin.vue'),
+  articleEdit: resolve(__dirname, './templates/pages/articleEdit.vue'),
+  pageTemplates: resolve(__dirname, './templates/pages/pageTemplates.vue'),
+  redirects: resolve(__dirname, './templates/pages/redirects.vue',
+  articleList: resolve(__dirname, './templates/pages/articleList.vue'),
+  index: resolve(__dirname, './templates/pages/index.vue')
+}
+
+// in case you want to overwrite articleList page
+pages:{
+  articleList: '~/pages/customArticleList.vue'
+}
+```
 
 #### [cms] - Object 
 
