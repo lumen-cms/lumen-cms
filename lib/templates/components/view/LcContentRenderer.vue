@@ -1,6 +1,6 @@
 <template>
   <div class="page-content">
-    <component v-for="(component,i) in getElements"
+    <component v-for="(component,i) in getChunkedElements"
                :key="i"
                v-scroll="isVisible"
                v-bind="component.props"
@@ -20,6 +20,12 @@
       })
     },
     computed: {
+      getChunkedElements () {
+        if (this.$store.state.lc.windowLoaded) {
+          return this.getElements
+        }
+        return this.getElements.slice(0, 1)
+      },
       getElements () {
         const elements = this.elements
         const sorted = elements
