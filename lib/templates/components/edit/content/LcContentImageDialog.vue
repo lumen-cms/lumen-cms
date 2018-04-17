@@ -40,6 +40,7 @@
             <v-avatar slot="activator">
               <img :data-src="getFileUrl(item)"
                    class="lazyload"
+                   alt="activator"
                    v-if="item.file">
               <v-icon v-else>photo</v-icon>
             </v-avatar>

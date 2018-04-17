@@ -43,6 +43,7 @@
         <figure class="">
           <img class="img-rounded lazyload"
                :data-src="previewImageRound"
+               alt="preview-image"
                width="80%" height="auto" style="max-height: 80%; max-width: 300px;">
         </figure>
       </v-flex>
@@ -59,6 +60,7 @@
                :to="`/${item.slug}`">
     <v-list-tile-avatar v-if="styleType === 'AvatarList'">
       <img class="img-rounded lazyload"
+           alt="avatar"
            :data-src="previewImageAvatar"
            :style="previewImgStyle">
     </v-list-tile-avatar>
