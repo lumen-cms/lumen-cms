@@ -41,8 +41,8 @@
     <v-layout row wrap align-center>
       <v-flex sm4>
         <figure class="">
-          <img class="img-rounded"
-               :src="previewImageRound"
+          <img class="img-rounded lazyload"
+               :data-src="previewImageRound"
                width="80%" height="auto" style="max-height: 80%; max-width: 300px;">
         </figure>
       </v-flex>
@@ -58,8 +58,8 @@
                :avatar="styleType === 'AvatarList'"
                :to="`/${item.slug}`">
     <v-list-tile-avatar v-if="styleType === 'AvatarList'">
-      <img class="img-rounded"
-           :src="previewImageAvatar"
+      <img class="img-rounded lazyload"
+           :data-src="previewImageAvatar"
            :style="previewImgStyle">
     </v-list-tile-avatar>
     <v-list-tile-content>

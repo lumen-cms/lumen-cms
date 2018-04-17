@@ -4,7 +4,7 @@
     <v-list v-if="mediaList">
       <v-list-tile v-for="(item,i) in mediaList" :key="i">
         <v-list-tile-avatar @click="onItemClick(item.url)">
-          <img :src="item.src" :alt="item.name" :title="item.name">
+          <img :data-src="item.src" :alt="item.name" :title="item.name" class="lazyload">
         </v-list-tile-avatar>
         <v-list-tile-content @click="onItemClick(item.url)">
           <v-list-tile-title>{{ item.name }}</v-list-tile-title>
