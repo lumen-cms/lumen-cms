@@ -233,7 +233,7 @@ components: {
 }
 ```
 #### Extend content elements
-Every content element has a unique type as the component name - it is prefixed with `LC`. Example: `LcCustomComponentName`. To extend the default elements two options needs to get passed: a new componentMapping declaration and the edit and view component files. Check out the source code of default components to get an idea what is possible.
+Every content element has a unique type as the component name. It should be UpperCamelCase and inside the componentMapping it takes the prefix `LC`. Example: `LcCustomComponentName`. To extend the default elements two options needs to get passed: a new componentMapping declaration and the edit and view component files.
 ```js
 'lumen-cms':{
   components:{
@@ -247,10 +247,10 @@ Every content element has a unique type as the component name - it is prefixed w
   cms:{
    componentMapping:{
     'CustomComponent':{
-      name: 'lc-custom-component-edit', // important to use the prefix `lc-` | component to edit the content element
+      name: 'lc-custom-component-edit', // component to render the edit dialog
       icon: 'material-icon', // shows the icon in the bottom bar
       text: 'My custom component', // readable component title
-      view: 'lc-custom-component' // important to use the prefix `lc-` | component to view the content element 
+      view: 'lc-custom-component' // component to render the view
     }
    }
   }
