@@ -260,23 +260,32 @@ Every content element has a unique type as the component name. It should be Uppe
 ```
 
 ## Custom Webpack Alias
-To extend/overwrite the default behaviour there are following paths to overwrite the default functionality:
+To extend/overwrite the default behaviour there are following paths to overwrite the default functionality. Following is a complete example to extend your Webpack config with all available path alias. 
+* Pass file with predefinedStyles
+* Customize GQL main schema files to fits your needs
+* Three hooks are available to customize the output of your render:
+1. initialAsync Data
+Returns `locale`, `host` and `slug` to process further website render
+2. getCanonical
+In case you want to render a canonical tag
+3. getMeta
+Default meta data as robots or google-site-verification in case you have multi-domain setup.
+
 ```js
 // nuxt.config.js  
 build:{
  extend(config){
+   // extend pre-defined content element options
+   config.resolve.alias['~predefinedStyles'] = '~/customPath/predefinedStyles.js' // array of pre-defined custom layout
    // next gql alias files can be overwritten in nuxt.config build section
    config.resolve.alias['~updateArticle'] = '~/customPath/updateArticle.gql' // in case you customized article
    config.resolve.alias['~createArticle'] = '~/customPath/createArticle.gql' // in case you customized article
    config.resolve.alias['~extendedArticleFragment'] = '~/customPath/extendedArticleFragment.gql' // in case you customized article
    config.resolve.alias['~createMedia'] = '~/customPath/createMedia.gql' // in case you need to add media in some other schemas
-   // hooks for data render and setup
-   // needed to get initial languageKey, host and path ([view](lib/templates/util/hooks/initialAsyncData.js))
+   // hooks for initial data render
    config.resolve.alias['~initialAsyncData'] = '~/customPath/initialAsyncData.js' // initial render of asyncData
    config.resolve.alias['~getCanonical'] = '~/customPath/getCanonical.js' // receive canonical tag
    config.resolve.alias['~getMeta'] = '~/customPath/getMeta.js' // get default head meta
-   // extend pre-defined content element options
-   config.resolve.alias['~predefinedStyles'] = '~/customPath/predefinedStyles.js' // array of pre-defined custom layout
  }
 }
 ```
