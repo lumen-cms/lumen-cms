@@ -178,6 +178,13 @@ The backend is configured to fit most website usecases. The main top-level schem
 ### Article - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L1)
 * holds the top level schema
 * can hold many content elements
+* `languageKey` is important to represent the locale of the content
+* `slug` has to be unique
+  * locale is always the root of a landing page (`en` for english, `de` for german)
+  * you can pass in directives `parent/my/subpage` 
+  * every string will get slugified 
+  * no leading slashes - no `.html` endings needed (they will get redirected automatically)
+  * there is no locale directive as `/en/any-page` | `/de/german-page` needed due to uniqness of the slug
 
 ### ArticleCategory - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L26)
 * categorization/taxonomy/tagging for each article
