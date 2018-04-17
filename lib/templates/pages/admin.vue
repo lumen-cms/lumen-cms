@@ -8,14 +8,15 @@
         </nuxt-link>
       </div>
       <v-tabs grow
-              slider-color="primary">
+              slider-color="primary"
+              v-if="!passwordForget">
         <v-tab ripple>
           Login
         </v-tab>
         <v-tab ripple>
           Register
         </v-tab>
-        <v-tab-item class="white pa-5">
+        <v-tab-item class="white pt-4">
           <lc-form-container ref="form">
 
             <v-alert :value="err" v-text="err"/>
@@ -35,8 +36,13 @@
               Login
             </v-btn>
           </lc-form-container>
+          <div class="text-xs-center mt-3">
+            <v-btn flat
+                   @click="passwordForget = !passwordForget">Forgot password?
+            </v-btn>
+          </div>
         </v-tab-item>
-        <v-tab-item class="white pa-5">
+        <v-tab-item class="white pt-4">
 
           <lc-form-container ref="formRegister">
             <template v-if="!showAfterRegister">
@@ -78,6 +84,30 @@
           </lc-form-container>
         </v-tab-item>
       </v-tabs>
+      <div v-else>
+        <lc-form-container ref="passwordForget">
+          <v-alert :value="err" v-text="err"/>
+
+          <v-text-field type="email" required name="email"
+                        v-model="credentials.email"
+                        label="Enter your email" @keyup.enter="onPasswordForget"/>
+          <v-btn flat
+                 @click="onPasswordForget"
+                 block
+                 outline
+                 color="primary"
+                 :loading="loading">Request new password
+          </v-btn>
+          <v-alert color="success" v-model="requestPasswordProcessed" icon="done">
+            We sent you an email with further instructions to request a new password.
+          </v-alert>
+        </lc-form-container>
+        <div class="text-xs-center mt-3">
+          <v-btn flat
+                 @click="passwordForget = !passwordForget">Back to login
+          </v-btn>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -102,7 +132,9 @@
         passwordRepeat: null,
         isLogin: true,
         showAfterRegister: false,
-        hasArticles: false
+        hasArticles: false,
+        passwordForget: false,
+        requestPasswordProcessed: false
       }
     },
     mounted () {
@@ -165,6 +197,15 @@
         }
         this.loading = false
         this.showAfterRegister = true
+      },
+      async onPasswordForget () {
+        const v = this.$refs.passwordForget.validate()
+        if (!v) return
+        this.loading = true
+
+        this.loading = false
+        this.requestPasswordProcessed = true
+
       }
     }
   }
