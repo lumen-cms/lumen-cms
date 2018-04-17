@@ -183,7 +183,8 @@ The backend is configured to fit most website usecases. The main top-level schem
 * graph.cool internal user schema for authentication
 
 ## Content Elements
-All content elments can be added/edited for each article. Lumen CMS ships 5 content elements while each of them is pretty customizable through stylesheets and properties. The most common element is `LcTextImage` which has many configuration option and can fit many usecases. You can overwrite either the content element with providing a custom path or create custom elements and add them to your project [read more](README.md#customize-content-elements).
+All content elments can be added/edited for each article. Lumen CMS ships 5 content elements while each of them is 
+customizable through stylesheets and properties. The most common element is `LcTextImage` which has many configuration option and fit many usecases. You can overwrite either the content element with providing a custom path or create custom elements and add them to your project [read more](README.md#customize-content-elements).
 
 ### Text with image (`LcTextImage`)
 * Header (h1 - h6)
@@ -256,6 +257,27 @@ Every content element has a unique type as the component name. It should be Uppe
    }
   }
 }
+```
+
+## Custom Webpack Alias
+To extend/overwrite the default behaviour there are following paths to overwrite the default functionality:
+```js
+// nuxt.config.js  
+  build:{
+    extend(config){
+      // next gql alias files can be overwritten in nuxt.config build section
+      config.resolve.alias['~updateArticle'] = '~/customPath/updateArticle.gql' // in case you customized article
+      config.resolve.alias['~createArticle'] = '~/customPath/createArticle.gql' // in case you customized article
+      config.resolve.alias['~extendedArticleFragment'] = '~/customPath/extendedArticleFragment.gql' // in case you customized article
+      config.resolve.alias['~createMedia'] = '~/customPath/createMedia.gql' // in case you need to add media in some other schemas
+      // hooks for data render and setup
+      config.resolve.alias['~initialAsyncData'] = '~/customPath/initialAsyncData.js' // initial render of asyncData
+      config.resolve.alias['~getCanonical'] = '~/customPath/getCanonical.js' // receive canonical tag
+      config.resolve.alias['~getMeta'] = '~/customPath/getMeta.js' // get default head meta
+      // extend pre-defined content element options
+      config.resolve.alias['~predefinedStyles'] = '~/customPath/predefinedStyles.js' // array of pre-defined custom layout
+    }
+  }
 ```
  
 
