@@ -87,7 +87,7 @@
       <div v-else>
         <lc-form-container ref="passwordForget">
           <v-alert :value="err" v-text="err"/>
-
+          <v-alert color="info" :value="true"> Currently not implemented !</v-alert>
           <v-text-field type="email" required name="email"
                         v-model="credentials.email"
                         label="Enter your email" @keyup.enter="onPasswordForget"/>

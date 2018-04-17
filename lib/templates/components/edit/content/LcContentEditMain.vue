@@ -46,7 +46,6 @@
       onContentUpdate ({variables}) {
         // const dialogData = this.$store.getters.getDialogData
         variables = JSON.parse(JSON.stringify(variables))
-        console.log('update following variables: ', variables)
         delete variables.__typename
         return this.mutateGql({
           mutation: updateContent,
