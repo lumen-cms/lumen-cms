@@ -13,7 +13,7 @@
 #### NodeJS | Vue 2.x | NuxtJs | Vuetify | GraphQl - graph.cool
 
 ## Motivation
-This project aims to combine very popular open-source projects and a solid managed backend service of graph.cool. It is API-Driven and extendable with graphql schema definition. Due to the nature of NuxtJs and the powerful modularization concept it extends your NuxtJs project with a fully-featured CMS. As a component framework Vuetify is included and brings Google Material Design specification out of the box.
+This project aims to combine very popular open-source projects and a solid managed backend service of graph.cool. It is API-Driven and extendable with graphql schema definition. Due to the nature of NuxtJs and the powerful modularization concept it extends your NuxtJs project with a fully-featured CMS. As a component framework Vuetify is included and brings Google Material Design specification out of the box. It offers best practices for SEO combined with a lot of performance optimization for the website render process.
 
 #### Features
 * Content management system
