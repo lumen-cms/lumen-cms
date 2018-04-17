@@ -39,6 +39,7 @@ This project aims to combine very popular open-source projects and a solid manag
 * Vuetify (https://vuetifyjs.com)
 * GraphQL managed backend by graph.cool (https://graph.cool/)
 * Apollo (https://www.apollographql.com/client/, https://github.com/Akryum/vue-apollo)
+* Vue-i18n (https://kazupon.github.io/vue-i18n/en/)
 * Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
 ## Requirement
