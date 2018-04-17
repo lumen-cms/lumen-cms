@@ -19,9 +19,11 @@ This project aims to combine very popular open-source projects and a solid manag
 * Content management system
 * Google Analytics integration
 * Sitemap generator
+* 301 Redirects
 * SEO optimized 
 * SSR-rendered SPA feel of static website
 * Imageproxy (CDN + scale/crop)
+* Lazy-loading
 * Responsive images 
 * Fontloader
 * In-Page-Editing
