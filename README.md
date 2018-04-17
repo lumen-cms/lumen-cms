@@ -19,9 +19,11 @@ This project aims to combine very popular open-source projects and a solid manag
 * Content management system
 * Google Analytics integration
 * Sitemap generator
+* 301 Redirects
 * SEO optimized 
 * SSR-rendered SPA feel of static website
 * Imageproxy (CDN + scale/crop)
+* Lazy-loading
 * Responsive images 
 * Fontloader
 * In-Page-Editing
@@ -118,20 +120,9 @@ h1, h2, h3 {
 
 #### [components] - Object (default: empty)
 
-Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) 
+Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) and check out further explanation in [customize the website](README.md#overwrite)
 
-```
-components: {
-  layout: {
-     LcLanguageSwitch: '~/components/overwrites/LanguageSwitch.vue',
-     LcMainFooter: '~/components/overwrites/MainFooter.vue'
-  },
-  view: {
-     LcArticleList: '~/components/overwrites/ArticleList.vue',
-     LcListWidget: '~/components/overwrites/ListWidget.js'
-  }
-}
-```
+
 
 #### [cms] - Object 
 
@@ -194,7 +185,8 @@ The backend is configured to fit most website usecases. The main top-level schem
 * graph.cool internal user schema for authentication
 
 ## Content Elements
-All content elments can be added/edited for each article. Lumen CMS ships 5 content elements while each of them is pretty customizable through stylesheets and properties. The most common element is `LcTextImage` which has many configuration option and can fit many usecases. You can overwrite either the content element with providing a custom path or create custom elements and add them to your project [read more](README.md#customize-content-elements).
+All content elments can be added/edited for each article. Lumen CMS ships 5 content elements while each of them is 
+customizable through stylesheets and properties. The most common element is `LcTextImage` which has many configuration option and fit many usecases. You can overwrite either the content element with providing a custom path or create custom elements and add them to your project [read more](README.md#customize-content-elements).
 
 ### Text with image (`LcTextImage`)
 * Header (h1 - h6)
@@ -203,6 +195,7 @@ All content elments can be added/edited for each article. Lumen CMS ships 5 cont
 * Parallax/Jumbotron/Fixed-Background effect
 * Flexible arrangement
 * Highly customizable through styles
+* "Component-Pre-Set" as a collection of class names can be defined or added to the [defaults](lib/templates/util/contentElementStylePresets.js)
 
 ### Divider (`LcDivider`)
 * Recognizes google material icons
@@ -227,8 +220,78 @@ All content elments can be added/edited for each article. Lumen CMS ships 5 cont
 * Teaser text (richt text)
 * Body text (rich text)
 
-### Customize content elements
-* TODO
+### Customize content elements and layout
+There are two ways of customizing your website render. Either you overwrite an existing component or you want to create a new custom content element or you extend the current content elements
+#### Overwrite components
+Overwrite existing components with keeping the exact name and pass a new path. Keep the same [group and componentName](/lib/templates/plugins/components) and webpack will bundle your customized file instead of the default file.
+```
+components: {
+  layout: {
+     LcLanguageSwitch: '~/components/overwrites/LanguageSwitch.vue',
+     LcMainFooter: '~/components/overwrites/MainFooter.vue'
+  },
+  view: {
+     LcArticleList: '~/components/overwrites/ArticleList.vue',
+     LcListWidget: '~/components/overwrites/ListWidget.js'
+  }
+}
+```
+#### Extend content elements
+Every content element has a unique type as the component name. It should be UpperCamelCase and inside the componentMapping it takes the prefix `LC`. Example: `LcCustomComponentName`. To extend the default elements two options needs to get passed: a new componentMapping declaration and the edit and view component files.
+```js
+'lumen-cms':{
+  components:{
+    view:{
+      LcCustomComponent: '~/component/MyCustomComponent.vue' // must match componentMapping view
+    },
+    edit:{
+      LcCustomComponentEdit: '~/component/MyCustomComponentEdit.vue' // must match componentMapping name
+    }
+  },
+  cms:{
+   componentMapping:{
+    'CustomComponent':{
+      name: 'lc-custom-component-edit', // component to render the edit dialog
+      icon: 'material-icon', // shows the icon in the bottom bar
+      text: 'My custom component', // readable component title
+      view: 'lc-custom-component' // component to render the view
+    }
+   }
+  }
+}
+```
+
+## Custom Webpack Alias
+To extend/overwrite the default behaviour there are following paths to overwrite the default functionality. Following is a complete example to extend your Webpack config with all available path alias. 
+* Pass file with [predefinedStyles](lib/templates/util/contentElementStylePresets.js)
+* Customize GQL main schema files to fits your needs
+* [Three hooks](lib/templates/util/hooks) are available to customize the output of your render:
+1. initialAsync Data
+Returns `locale`, `host` and `slug` to process further website render
+2. getCanonical
+In case you want to render a canonical tag
+3. getMeta
+Default meta data as robots or google-site-verification in case you have multi-domain setup.
+
+```js
+// nuxt.config.js  
+build:{
+ extend(config){
+   // extend pre-defined content element options
+   config.resolve.alias['~predefinedStyles'] = '~/customPath/predefinedStyles.js' // array of pre-defined custom layout
+   // gql schema and mutation files for top level schemas 
+   config.resolve.alias['~updateArticle'] = '~/customPath/updateArticle.gql' // in case you customized article
+   config.resolve.alias['~createArticle'] = '~/customPath/createArticle.gql' // in case you customized article
+   config.resolve.alias['~extendedArticleFragment'] = '~/customPath/extendedArticleFragment.gql' // in case you customized article
+   config.resolve.alias['~createMedia'] = '~/customPath/createMedia.gql' // in case you need to add media in some other schemas
+   // hooks for initial data render
+   config.resolve.alias['~initialAsyncData'] = '~/customPath/initialAsyncData.js' // initial render of asyncData
+   config.resolve.alias['~getCanonical'] = '~/customPath/getCanonical.js' // receive canonical tag
+   config.resolve.alias['~getMeta'] = '~/customPath/getMeta.js' // get default head meta
+ }
+}
+```
+ 
 
 ## Deploy
 With https://zeit.now the deploy of your Lumen CMS is as simple as typing:
