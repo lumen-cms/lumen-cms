@@ -13,7 +13,7 @@
 #### NodeJS | Vue 2.x | NuxtJs | Vuetify | GraphQl - graph.cool
 
 ## Motivation
-This project aims to combine very popular open-source projects and a solid managed backend service of graph.cool. It is API-Driven and extendable with graphql schema definition. Due to the nature of NuxtJs and the powerful modularization concept it extends your NuxtJs project with a fully-featured CMS. As a component framework Vuetify is included and brings Google Material Design specification out of the box.
+This project aims to combine very popular open-source projects and a solid managed backend service of graph.cool. It is API-Driven and extendable with graphql schema definition. Due to the nature of NuxtJs and the powerful modularization concept it extends your NuxtJs project with a fully-featured CMS. As a component framework Vuetify is included and brings Google Material Design specification out of the box. It offers best practices for SEO combined with a lot of performance optimization for the website render process.
 
 #### Features
 * Content management system
@@ -39,6 +39,7 @@ This project aims to combine very popular open-source projects and a solid manag
 * Vuetify (https://vuetifyjs.com)
 * GraphQL managed backend by graph.cool (https://graph.cool/)
 * Apollo (https://www.apollographql.com/client/, https://github.com/Akryum/vue-apollo)
+* Vue-i18n (https://kazupon.github.io/vue-i18n/en/)
 * Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
 ## Requirement
@@ -55,6 +56,7 @@ $ vue init lumen-cms/starter-template my-project
 $ cd my-project                     
 # install dependencies
 $ npm install # Or yarn install
+# open localhost:3000/admin to proceed with login
 ```
 
 ### Existing project
@@ -80,8 +82,19 @@ export default = {
     // here comes your configuration
   }
 ```
+## First Start
+* Visit http://localhost:3000/admin and register a user
+* Visit your graphcool backend and add `Moderator/Admin` role to the user
+* Now you can log in and start a very basic installation (htt://localhost:3000/installation)
+  * your installation respects the `'lumen-cms':{cms:{languages:['en','de']}}` array and create for each locale one default root page
+  * keep in mind: every language starts with the "/[locale]" slug
+  * you can configure canonical tags or any custom behaviour for multi-language websites
+* You will be redirected to the root of your website and be able to add new content
 
 ## Configuration
+You can customize your website bundle in several ways: 
+* `lumen-cms` configuration options from the nuxt.config.js file
+* `Webpack alias` to provide a custom file and replace the default
 
 ### Options
 
@@ -120,9 +133,30 @@ h1, h2, h3 {
 
 #### [components] - Object (default: empty)
 
-Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. Find all available components in the [source code](/lib/templates/plugins/components) and check out further explanation in [customize the website](README.md#overwrite)
+Overwrite build-in components by provide a custom component path. All components are prefixed with `Lc`ComponentName. Components are loaded as asynchronous and are devided in four sections: `core|layout|view|edit`. 
+* Find all available components [here](/lib/templates/plugins/components) 
+* Further custumization options follow overwrite [section](README.md#overwrite)
 
+#### [pages] - Object (default: empty)
 
+Overwrite built-in pages by provide a custom page path. Following pages are provided. Provide a `pages` object with the exact name and custom path to overwrite the default:
+```js
+pages:{
+  admin: resolve(__dirname, './templates/pages/admin.vue'),
+  install: resolve(__dirname, './templates/pages/install.vue'),
+  articleAdmin: resolve(__dirname, './templates/pages/articleAdmin.vue'),
+  articleEdit: resolve(__dirname, './templates/pages/articleEdit.vue'),
+  pageTemplates: resolve(__dirname, './templates/pages/pageTemplates.vue'),
+  redirects: resolve(__dirname, './templates/pages/redirects.vue',
+  articleList: resolve(__dirname, './templates/pages/articleList.vue'),
+  index: resolve(__dirname, './templates/pages/index.vue')
+}
+
+// in case you want to overwrite articleList page
+pages:{
+  articleList: '~/pages/customArticleList.vue'
+}
+```
 
 #### [cms] - Object 
 
@@ -137,7 +171,6 @@ cms:{
     site_name: 'Your domain',
   }
 }
-
 ```
 
 ## Data Schema
@@ -145,6 +178,15 @@ The backend is configured to fit most website usecases. The main top-level schem
 ### Article - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L1)
 * holds the top level schema
 * can hold many content elements
+* Taxonomy with `ArticleCategory`
+* Add a media image to show a picture in `ListWidget`-lists
+* `languageKey` is important to represent the locale of the content
+* `slug` has to be unique
+  * locale is always the root of a landing page (`en` for english, `de` for german)
+  * you can pass in directives `parent/my/subpage` 
+  * every string will get slugified 
+  * no leading slashes - no `.html` endings needed (they will get redirected automatically)
+  * there is no locale directive as `/en/any-page` | `/de/german-page` needed due to uniqness of the slug
 
 ### ArticleCategory - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L26)
 * categorization/taxonomy/tagging for each article
@@ -237,7 +279,7 @@ components: {
 }
 ```
 #### Extend content elements
-Every content element has a unique type as the component name. It should be UpperCamelCase and inside the componentMapping it takes the prefix `LC`. Example: `LcCustomComponentName`. To extend the default elements two options needs to get passed: a new componentMapping declaration and the edit and view component files.
+Every content element needs a unique component name. It should be UpperCamelCase and inside the componentMapping it takes the prefix `LC`. Example: `LcCustomComponentName`. To extend the default elements two options needs to get passed: a new componentMapping declaration and the edit and view component files.
 ```js
 'lumen-cms':{
   components:{
