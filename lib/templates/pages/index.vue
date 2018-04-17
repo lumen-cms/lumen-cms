@@ -119,9 +119,6 @@
       $subscribe: {
         changedArticle: {
           query: articleSubGql,
-          skip () {
-            return !this.$store.getters.canEdit
-          },
           variables () {
             const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
             return {slug}

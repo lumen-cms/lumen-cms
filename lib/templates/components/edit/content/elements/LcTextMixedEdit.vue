@@ -48,7 +48,7 @@
       <div id="tab-styles" v-if="active === 'tab-styles'">
 
         <v-select v-model="predefinedLayoutValue"
-                  :items="$options.inputFields.predifinedLayouts"
+                  :items="$options.selectOptions.predifinedLayouts"
                   label="Component Pre-sets"
                   return-object
                   clearable/>
@@ -246,7 +246,7 @@
   import contentEditMixin from '../../../../mixins/contentEditMixin'
   import styles from '../../../../util/contentEditStyleDefinitions'
   import ENUMS from '../../../../gql/ENUMS'
-  import contentElementStylePreSets from '../../../../util/contentElementStylePreset'
+  import contentElementStylePreSets from '~predefinedStyles'
 
   const imageSizeOptions = {
     'Size_1': '8% (12 each row)',

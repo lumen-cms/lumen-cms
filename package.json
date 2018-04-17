@@ -32,6 +32,7 @@
     "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/sitemap": "0.0.3",
     "accept-language-parser": "^1.5.0",
+    "apollo-link-error": "^1.0.9",
     "apollo-link-http": "1.5.4",
     "apollo-link-ws": "1.0.8",
     "apollo-utilities": "^1.0.11",
