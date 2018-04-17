@@ -216,9 +216,9 @@ All content elments can be added/edited for each article. Lumen CMS ships 5 cont
 * Teaser text (richt text)
 * Body text (rich text)
 
-### Customize content elements
-There are two ways of customizing your website render. Either you overwrite an existing component or you want to create a new custom content element. 
-#### Overwrite
+### Customize content elements and layout
+There are two ways of customizing your website render. Either you overwrite an existing component or you want to create a new custom content element or you extend the current content elements
+#### Overwrite components
 Overwrite existing components with keeping the exact name and pass a new path. Keep the same [group and componentName](/lib/templates/plugins/components) and webpack will bundle your customized file instead of the default file.
 ```
 components: {
@@ -229,6 +229,30 @@ components: {
   view: {
      LcArticleList: '~/components/overwrites/ArticleList.vue',
      LcListWidget: '~/components/overwrites/ListWidget.js'
+  }
+}
+```
+#### Extend content elements
+Every content element has a unique type as the component name - it is prefixed with `LC`. Example: `LcCustomComponentName`. To extend the default elements two options needs to get passed: a new componentMapping declaration and the edit and view component files. Check out the source code of default components to get an idea what is possible.
+```js
+'lumen-cms':{
+  components:{
+    view:{
+      LcCustomComponent: '~/component/MyCustomComponent.vue' // must match componentMapping view
+    },
+    edit:{
+      LcCustomComponentEdit: '~/component/MyCustomComponentEdit.vue' // must match componentMapping name
+    }
+  },
+  cms:{
+   componentMapping:{
+    'CustomComponent':{
+      name: 'lc-custom-component-edit', // important to use the prefix `lc-` | component to edit the content element
+      icon: 'material-icon', // shows the icon in the bottom bar
+      text: 'My custom component', // readable component title
+      view: 'lc-custom-component' // important to use the prefix `lc-` | component to view the content element 
+    }
+   }
   }
 }
 ```
