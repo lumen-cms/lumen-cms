@@ -56,6 +56,7 @@ $ vue init lumen-cms/starter-template my-project
 $ cd my-project                     
 # install dependencies
 $ npm install # Or yarn install
+# open localhost:3000/admin to proceed with login
 ```
 
 ### Existing project
@@ -81,8 +82,19 @@ export default = {
     // here comes your configuration
   }
 ```
+## First Start
+* Visit http://localhost:3000/admin and register a user
+* Visit your graphcool backend and add `Moderator/Admin` role to the user
+* Now you can log in and start a very basic installation (htt://localhost:3000/installation)
+  * your installation respects the `'lumen-cms':{cms:{languages:['en','de']}}` array and create for each locale one default root page
+  * keep in mind: every language starts with the "/[locale]" slug
+  * you can configure canonical tags or any custom behaviour for multi-language websites
+* You will be redirected to the root of your website and be able to add new content
 
 ## Configuration
+You can customize your website bundle in several ways: 
+* `lumen-cms` configuration options from the nuxt.config.js file
+* `Webpack alias` to provide a custom file and replace the default
 
 ### Options
 
@@ -159,7 +171,6 @@ cms:{
     site_name: 'Your domain',
   }
 }
-
 ```
 
 ## Data Schema
