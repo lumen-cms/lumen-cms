@@ -178,6 +178,8 @@ The backend is configured to fit most website usecases. The main top-level schem
 ### Article - [View](https://github.com/lumen-cms/lumen-graphcool/blob/master/types.graphql#L1)
 * holds the top level schema
 * can hold many content elements
+* Taxonomy with `ArticleCategory`
+* Add a media image to show a picture in `ListWidget`-lists
 * `languageKey` is important to represent the locale of the content
 * `slug` has to be unique
   * locale is always the root of a landing page (`en` for english, `de` for german)
