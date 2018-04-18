@@ -2,6 +2,7 @@
   <img :src="path || ($vuetify.breakpoint.lgAndUp ? logoPath : logoMobilePath)"
        height="100%"
        width="auto"
+       alt="logo"
        @click="$router.push('/')"
        class="toolbar-logo">
 </template>
