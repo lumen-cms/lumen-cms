@@ -85,11 +85,106 @@ export default = {
 ## First Start
 * Visit http://localhost:3000/admin and register a user
 * Visit your graphcool backend and add `Moderator/Admin` role to the user
-* Now you can log in and start a very basic installation (htt://localhost:3000/installation)
-  * your installation respects the `'lumen-cms':{cms:{languages:['en','de']}}` array and create for each locale one default root page
+* Now you can log in and start a very basic installation (http://localhost:3000/installation)
+  * your installation respects the [languages](#install-routepath-admininstall) array and create for each locale one default root page
   * keep in mind: every language starts with the "/[locale]" slug
   * you can configure canonical tags or any custom behaviour for multi-language websites
-* You will be redirected to the root of your website and be able to add new content
+=> After successful installation will be redirected to the root of your website and you can start adding content
+
+## Pages
+Lumen CMS provides admin interfaces and render entry points for your top-level article/page schema. Below is the list and routePath of all pre-configured routes. Make sure that these paths does not collide with any of your NuxtJs pages setup. All of the pages are accessible through the [Admin-Bar](#admin-bar) 
+
+### Root - Index.vue (routePath "/any/path")
+Catches all requests and renders the schema [`Article`](#article---view) based on the slug. The slug can be any slug as
+* /simple-slug
+* /directory/slug/deep/nested
+* On Error / Not found
+  * try to find a 301 => redirect
+  * render 404 if no article found
+  * render 500 if any error occurs
+Important: make sure you don't provide any index.vue file inside your `pages` folder otherwise the CMS won't be able to render the content.
+
+### Admin (routePath: '/admin')
+Login/Sign Up for the website administration. After successful login you get forwarded to the root of your website. In case of sign up a new user: you have to enable a permission role (Admin|Moderator) to the user in your graph.cool console interface. 
+
+### Install (routePath: '/admin/install')
+Creates the root page/entry point for each locale you provide in your configuration:
+```js
+'lumen-cms':{
+  cms:{
+    languages:['en','de','it','fr'] // => install would create all 4 articles with a basic content element as a starter 
+  }
+}
+```
+
+### Article-Admin (routePath: '/admin/article-admin'
+Datatable lists all articles and you can view/edit it. The Footer shows a language switch to change the locale for your listing.
+
+### Article-Edit (routePath: '/admin/article-edit/:id?')
+Creates/updates the article schema. You can either click on the edit inside of the `Admin-Bar` or inside of the `Article Admin` to reach the edit page.
+
+### Page-Templates (routePath: '/admin/page-templates')
+Overview over all page templates. Page templates is `vue-rendered` content you can specify inside of footer/header/sidebars/toolbars. Basically it holds generic content which should be displayed in static parts of the layout.
+
+### Redirects (routePath: '/admin/redirects')
+Datatable lists all redirects in case you moved pages/paths to a different location
+
+### Article/Blog list (routePath: '/blog|articles')
+Configurable alias path to render an article list. 
+```js
+'lumen-cms':{
+  cms:{
+    routes: {
+      // map locale to each routes.path
+      listMapLocale: {
+        articles: 'en',
+        blog: 'de'
+      },
+      // all available path alias for the article list
+      list: ['articles', 'blog']
+    }
+  }
+}
+```
+
+## Admin-Bar
+On logged in you will see on the bottom left corner a floating speed-dial button this action menu buttons:
+* Logout
+* Media Gallery (only visible if content edit mode is ON)
+* Redirects
+* Blog admin list
+* Page templates
+* Content-Edit-Mode toggle
+* Add new article
+* Edit article
+#### Use Admin-Bar
+You can include the `LcAdminBar` into your own template. You can enable `add` or `edit` action with 2 props:
+```vue
+<lc-admin-bar v-if="$store.getters.canEdit"
+              :edit-route="{name: 'articleEdit', params: {id: $store.state.lc.pageProps.articleId}}"
+              :add-route="{name:'articleEdit'}"/>
+```
+#### Customize Admin-Bar
+Add links into the Admin-Bar panel
+```js
+'lumen-cms':{
+  // overwrite the entire widget
+  component:{
+    edit:{
+      LcAdminBar: '~/component/yourCustomAdminBar.vue' 
+    }
+  },
+  cms:{
+    // add some link(s) to the admin bar
+    adminBarLinks:[{
+      title: 'Some custom page',
+      to: {name: 'customPageRouteName'},
+      color: 'yellow darken-2', // any color variant
+      icon: 'code' //material icon name
+    }]
+  }
+}
+```
 
 ## Configuration
 You can customize your website bundle in several ways: 
