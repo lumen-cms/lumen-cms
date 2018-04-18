@@ -4,7 +4,7 @@
     <nuxt-link :to="'/' + item.slug">
       <v-card-media class="card-media lazyload"
                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                    :data-bg-card-nested="previewImageCard"
+                    :data-bg-card-media="previewImageCard"
                     height="200px"/>
     </nuxt-link>
     <v-card-text style="cursor: default; min-height: 100px;">
