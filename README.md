@@ -161,12 +161,19 @@ On logged in you will see on the bottom left corner a floating speed-dial button
 Add links into the Admin-Bar panel
 ```js
 'lumen-cms':{
+  // overwrite the entire widget
+  component:{
+    edit:{
+      LcAdminBar: '~/component/yourCustomAdminBar.vue' 
+    }
+  },
   cms:{
+    // add some link(s) to the admin bar
     adminBarLinks:[{
-          title: 'Some custom page',
-          to: {name: 'customPageRouteName'},
-          color: 'yellow darken-2', // any color variant
-          icon: 'code' //material icon name
+      title: 'Some custom page',
+      to: {name: 'customPageRouteName'},
+      color: 'yellow darken-2', // any color variant
+      icon: 'code' //material icon name
     }]
   }
 }
