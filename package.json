@@ -30,7 +30,7 @@
   "dependencies": {
     "@nuxtjs/apollo": "^3.0.6",
     "@nuxtjs/google-analytics": "^2.0.2",
-    "@nuxtjs/sitemap": "0.0.3",
+    "@nuxtjs/sitemap": "0.1.1",
     "accept-language-parser": "^1.5.0",
     "apollo-link-error": "^1.0.9",
     "apollo-link-http": "1.5.4",
@@ -57,7 +57,7 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "babel-eslint": "8.2.2",
+    "babel-eslint": "8.2.3",
     "codecov": "latest",
     "eslint": "latest",
     "eslint-config-standard": "latest",
