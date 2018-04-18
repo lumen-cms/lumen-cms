@@ -92,13 +92,13 @@ export default = {
 => After successful installation will be redirected to the root of your website and you can start adding content
 
 ## Pages
-Lumen CMS provides admin interfaces and render entry points for your top-level article/page schema. Below is the list and routePath of all pre-configured routes. Make sure that these paths does not collide with any of your NuxtJs pages setup. All of the pages are accessible through the [Admin-Bar](README.md#admin-bar) 
+Lumen CMS provides admin interfaces and render entry points for your top-level article/page schema. Below is the list and routePath of all pre-configured routes. Make sure that these paths does not collide with any of your NuxtJs pages setup. All of the pages are accessible through the [Admin-Bar](#admin-bar) 
 
 ### Root - Index.vue (routePath "/any/path")
-Catches all requests and renders the schema [`Article`]() based on the slug. The slug can be any slug as
+Catches all requests and renders the schema [`Article`](#article---view) based on the slug. The slug can be any slug as
 * /simple-slug
 * /directory/slug/deep/nested
-* On Error/Not found
+* On Error / Not found
   * try to find a 301 => redirect
   * render 404 if no article found
   * render 500 if any error occurs
