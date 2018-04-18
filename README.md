@@ -157,6 +157,20 @@ On logged in you will see on the bottom left corner a floating speed-dial button
 * Content-Edit-Mode toggle
 * Add new article
 * Edit article
+### Customize Admin-Bar
+Add links into the Admin-Bar panel
+```js
+'lumen-cms':{
+  cms:{
+    adminBarLinks:[{
+          title: 'Some custom page',
+          to: {name: 'customPageRouteName'},
+          color: 'yellow darken-2', // any color variant
+          icon: 'code' //material icon name
+    }]
+  }
+}
+```
 
 ## Configuration
 You can customize your website bundle in several ways: 
