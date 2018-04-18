@@ -17,7 +17,8 @@
 
     <lc-admin-bar v-if="$store.getters.canEdit"
                   :edit-route="{name: 'articleEdit', params: {id: $store.state.lc.pageProps.articleId}}"
-                  :add-route="{name:'articleEdit'}"/>
+                  :add-route="{name:'articleEdit'}"
+                  :content-edit-toggle="true"/>
   </v-app>
 </template>
 <script>
