@@ -157,6 +157,13 @@ On logged in you will see on the bottom left corner a floating speed-dial button
 * Content-Edit-Mode toggle
 * Add new article
 * Edit article
+#### Use Admin-Bar
+You can include the `LcAdminBar` into your own template. You can enable `add` or `edit` action with 2 props:
+```vue
+<lc-admin-bar v-if="$store.getters.canEdit"
+              :edit-route="{name: 'articleEdit', params: {id: $store.state.lc.pageProps.articleId}}"
+              :add-route="{name:'articleEdit'}"/>
+```
 #### Customize Admin-Bar
 Add links into the Admin-Bar panel
 ```js
