@@ -147,6 +147,16 @@ Configurable alias path to render an article list.
 }
 ```
 
+## Admin-Bar
+On logged in you will see on the bottom left corner a floating speed-dial button this action menu buttons:
+* Logout
+* Media Gallery (only visible if content edit mode is ON)
+* Redirects
+* Blog admin list
+* Page templates
+* Content-Edit-Mode toggle
+* Add new article
+* Edit article
 
 ## Configuration
 You can customize your website bundle in several ways: 
