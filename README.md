@@ -85,11 +85,68 @@ export default = {
 ## First Start
 * Visit http://localhost:3000/admin and register a user
 * Visit your graphcool backend and add `Moderator/Admin` role to the user
-* Now you can log in and start a very basic installation (htt://localhost:3000/installation)
+* Now you can log in and start a very basic installation (http://localhost:3000/installation)
   * your installation respects the `'lumen-cms':{cms:{languages:['en','de']}}` array and create for each locale one default root page
   * keep in mind: every language starts with the "/[locale]" slug
   * you can configure canonical tags or any custom behaviour for multi-language websites
-* You will be redirected to the root of your website and be able to add new content
+=> After successful installation will be redirected to the root of your website and you can start adding content
+
+## Pages
+Lumen CMS provides admin interfaces and render entry points for your top-level article/page schema. Below is the list and routePath of all pre-configured routes. Make sure that these paths does not collide with any of your NuxtJs pages setup. Most of the pages are accessible through the [Admin-Bar]() 
+
+### Root - Index.vue (routePath "/any/path")
+Catches all requests and renders the schema [`Article`]() based on the slug. The slug can be any slug as
+* /simple-slug
+* /directory/slug/deep/nested
+* On Error/Not found
+  * try to find a 301 => redirect
+  * render 404 if no article found
+  * render 500 if any error occurs
+Important: make sure you don't provide any index.vue file inside your `pages` folder otherwise the CMS won't be able to render the content.
+
+### Admin (routePath: '/admin')
+Login/Sign Up for the website administration. After successful login you get forwarded to the root of your website. In case of sign up a new user: you have to enable a permission role (Admin|Moderator) to the user in your graph.cool console interface. 
+
+### Install (routePath: '/admin/install')
+Creates the root page/entry point for each locale you provide in your configuration:
+```js
+'lumen-cms':{
+  cms:{
+    languages:['en','de','it','fr'] // => install would create all 4 articles with a basic content element as a starter 
+  }
+}
+```
+
+### Article-Admin (routePath: '/admin/article-admin'
+Datatable lists all articles and you can view/edit it. The Footer shows a language switch to change the locale for your listing.
+
+### Article-Edit (routePath: '/admin/article-edit/:id?')
+Creates/updates the article schema. You can either click on the edit inside of the `Admin-Bar` or inside of the `Article Admin` to reach the edit page.
+
+### Page-Templates (routePath: '/admin/page-templates')
+Overview over all page templates. Page templates is `vue-rendered` content you can specify inside of footer/header/sidebars/toolbars. Basically it holds generic content which should be displayed in static parts of the layout.
+
+### Redirects (routePath: '/admin/redirects')
+Datatable lists all redirects in case you moved pages/paths to a different location
+
+### Article/Blog list (routePath: '/blog|articles')
+Configurable alias path to render an article list. 
+```js
+'lumen-cms':{
+  cms:{
+    routes: {
+      // map locale to each routes.path
+      listMapLocale: {
+        articles: 'en',
+        blog: 'de'
+      },
+      // all available path alias for the article list
+      list: ['articles', 'blog']
+    }
+  }
+}
+```
+
 
 ## Configuration
 You can customize your website bundle in several ways: 
