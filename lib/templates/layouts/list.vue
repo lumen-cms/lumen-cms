@@ -11,8 +11,7 @@
       </v-container>
     </v-content>
     <lc-main-footer/>
-    <lc-admin-bar v-if="$store.getters.canEdit"
-                  :hide-edit-property="true"/>
+    <lc-admin-bar v-if="$store.getters.canEdit"/>
   </v-app>
 </template>
 

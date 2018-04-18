@@ -15,28 +15,27 @@
           <v-icon>account_circle</v-icon>
           <v-icon>close</v-icon>
         </v-btn>
-        <v-tooltip right>
+        <v-tooltip right v-if="editRoute">
           <v-btn fab dark small
                  class="green"
                  slot="activator"
-                 v-if="showEdit"
-                 :to="editArticleLink">
+                 :to="editRoute">
             <v-icon>edit</v-icon>
           </v-btn>
           <span>Edit Properties</span>
         </v-tooltip>
 
-        <v-tooltip right>
+        <v-tooltip right v-if="addRoute">
           <v-btn fab dark small
                  class="red"
                  slot="activator"
-                 :to="addLinkComputed || addLink || {name:'articleEdit'}">
+                 :to="addRoute">
             <v-icon>add</v-icon>
           </v-btn>
           <span>Add New ... </span>
         </v-tooltip>
 
-        <v-tooltip right v-if="!hideContentEditing">
+        <v-tooltip right v-if="!hideEditProperty">
           <v-btn fab dark small
                  class="indigo"
                  slot="activator"
@@ -82,16 +81,13 @@
   </no-ssr>
 </template>
 <script>
-  // import CONFIG from '../../../src/config'
-
   export default {
     name: 'LcAdminBar',
     props: {
-      hideEditProperty: {
-        type: Boolean,
-        'default': false
+      editRoute: {
+        type: Boolean
       },
-      addLink: {
+      addRoute: {
         type: String
       }
     },
@@ -102,12 +98,8 @@
     },
     computed: {
       links () {
-        // let links = []
         const CONFIG = this.$cms
         let configAdminBarLinks = (CONFIG.adminBarLinks && Array.isArray(CONFIG.adminBarLinks) && CONFIG.adminBarLinks.slice(0)) || []
-        // if (CONFIG.adminBarLinks && Array.isArray(CONFIG.adminBarLinks)) {
-        //   links = links.concat(CONFIG.adminBarLinks)
-        // }
         return configAdminBarLinks.concat([{
           title: 'Page templates',
           to: {name: 'pageTemplates'},
@@ -124,38 +116,12 @@
           color: 'yellow darken-4',
           icon: 'forward'
         }])
-      },
-      isBlog () {
-        return ['blog-slug', 'article', 'index'].includes(this.$route.name)
-      },
-      showEdit () {
-        return this.isBlog
-      },
-      editArticleLink () {
-        return this.isBlog
-          ? {name: 'articleEdit', params: {id: this.$store.state.lc.pageProps.articleId}} : {}
-      },
-      hideContentEditing () {
-        return this.hideEditProperty || ['articles-admin', 'url-alias', 'page-template'].includes(this.$route.name)
-      },
-      addLinkComputed () {
-        // todo this needs to be a prop or configurable through this.$cms
-        if (['travels', 'reisen'].includes(this.$route.name)) {
-          return 'edit-travel'
-        } else if (['articles', 'blog'].includes(this.$route.name)) {
-          return 'edit-article'
-        }
       }
     },
     methods: {
       async onLogout () {
         await this.$store.dispatch('LOGOUT')
         this.$nextTick(() => this.$router.push('/admin'))
-      },
-      onEdit () {
-        if (this.isBlog) {
-          this.$router.push({name: 'edit-article-id', params: {id: this.$store.state.lc.pageProps.articleId}})
-        }
       }
     }
   }

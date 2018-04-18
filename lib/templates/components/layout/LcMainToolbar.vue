@@ -61,12 +61,10 @@
         'default': false
       }
     },
-    // toolbarSideIconClass: CONFIG.toolbarSideIconClass,
     data () {
       return {
         flat: false,
         dark: this.darkToolbar,
-        jumbo: this.$store.state.lc.hasJumbotron,
         scrolledDown: false,
         toolbarSideIconClass: this.$cms.toolbarSideIconClass
       }
@@ -75,9 +73,8 @@
       this.onScroll()
     },
     watch: {
-      '$store.state.lc.hasJumbotron' (v) {
+      '$store.state.lc.hasJumbotron' () {
         if (!process.browser) return
-        this.jumbo = this.$store.state.lc.hasJumbotron
         this.onScroll()
       },
       '$route' () {
@@ -86,6 +83,9 @@
       }
     },
     computed: {
+      jumbo () {
+        return this.$store.state.lc.hasJumbotron
+      },
       transparentToolbar () {
         return this.jumbo && !this.scrolledDown
       },

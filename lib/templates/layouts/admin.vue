@@ -6,8 +6,7 @@
       </v-container>
     </v-content>
     <lc-error-widget/>
-    <lc-admin-bar v-if="$store.getters.canEdit"
-                  hide-edit-property/>
+    <lc-admin-bar v-if="$store.getters.canEdit"/>
   </v-app>
 </template>
 <script>
