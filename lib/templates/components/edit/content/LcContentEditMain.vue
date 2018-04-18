@@ -45,11 +45,14 @@
     methods: {
       onContentUpdate ({variables}) {
         // const dialogData = this.$store.getters.getDialogData
+        variables = JSON.parse(JSON.stringify(variables))
+        delete variables.__typename
         return this.mutateGql({
           mutation: updateContent,
           variables
         }, 'updateContent')
           .catch(e => {
+            console.debug('failed variables:', variables)
             console.error('update content fails', e)
           })
       },
