@@ -1,7 +1,8 @@
 <template>
   <v-card hover :class="{'active':active,'fixed-active':isFixedActive}">
-    <v-card-media class="grey lighten-2 white--text"
-                  :src="src"
+    <v-card-media class="grey lighten-2 white--text lazyload"
+                  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==""
+                  :data-bg-nested="src"
                   :contain="true"
                   :height="height"
                   @click.native="onItemSelect"/>
