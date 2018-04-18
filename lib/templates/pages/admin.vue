@@ -4,7 +4,7 @@
       <div class="text-xs-center mb-4">
 
         <nuxt-link to="/">
-          <lc-main-logo></lc-main-logo>
+          <lc-main-logo/>
         </nuxt-link>
       </div>
       <v-tabs grow
@@ -205,7 +205,6 @@
 
         this.loading = false
         this.requestPasswordProcessed = true
-
       }
     }
   }
