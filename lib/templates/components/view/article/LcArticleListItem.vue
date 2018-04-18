@@ -2,8 +2,9 @@
 
   <v-card v-if="styleType === 'Cards'" hover class="mb-3">
     <nuxt-link :to="'/' + item.slug">
-      <v-card-media class="card-media"
-                    :src="previewImageCard"
+      <v-card-media class="card-media lazyload"
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    :data-bg-card-nested="previewImageCard"
                     height="200px"/>
     </nuxt-link>
     <v-card-text style="cursor: default; min-height: 100px;">
@@ -71,7 +72,7 @@
 </template>
 
 <script>
-  import {getImageSrc} from '../../../util/imageSrcHelper'
+  import { getImageSrc } from '../../../util/imageSrcHelper'
 
   export default {
     name: 'LcArticleListItem',
