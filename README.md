@@ -86,7 +86,7 @@ export default = {
 * Visit http://localhost:3000/admin and register a user
 * Visit your graphcool backend and add `Moderator/Admin` role to the user
 * Now you can log in and start a very basic installation (http://localhost:3000/installation)
-  * your installation respects the `'lumen-cms':{cms:{languages:['en','de']}}` array and create for each locale one default root page
+  * your installation respects the [languages](#install-routepath-admininstall) array and create for each locale one default root page
   * keep in mind: every language starts with the "/[locale]" slug
   * you can configure canonical tags or any custom behaviour for multi-language websites
 => After successful installation will be redirected to the root of your website and you can start adding content
