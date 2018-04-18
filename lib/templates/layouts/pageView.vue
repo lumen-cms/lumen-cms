@@ -15,7 +15,9 @@
     <lc-main-footer/>
     <lc-error-widget/>
 
-    <lc-admin-bar v-if="$store.getters.canEdit"/>
+    <lc-admin-bar v-if="$store.getters.canEdit"
+                  :edit-route="{name: 'articleEdit', params: {id: $store.state.lc.pageProps.articleId}}"
+                  :add-route="{name:'articleEdit'}"/>
   </v-app>
 </template>
 <script>

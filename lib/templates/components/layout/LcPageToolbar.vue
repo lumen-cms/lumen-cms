@@ -1,5 +1,5 @@
 <template>
-  <lc-main-toolbar :extended="$options.hasExtension"
+  <lc-main-toolbar :extended="hasExtension"
                    :mobile-search-active="mobileSearchActive"
                    :class="{'search-active' : searchActive}"
                    :dark-toolbar="darkToolbar"
@@ -33,8 +33,6 @@
 </template>
 
 <script>
-  // import CONFIG from '../../../src/config'
-
   export default {
     name: 'LcPageToolbar',
     props: {
@@ -53,7 +51,6 @@
     },
     data () {
       return {
-        hasExtension: this.$cms.pageToolbarExtension, // CONFIG
         searchActive: false
       }
     },
@@ -63,20 +60,13 @@
       },
       darkToolbar () {
         return this.$cms.pageToolbarDark // CONFIG
-      }
-    },
-    mounted () {
-      if (process.browser) {
-        this.$nextTick(() => {
-          setTimeout(() => {
-            this.hasExtension = this.$cms.pageToolbarExtension && this.$vuetify.breakpoint.mdAndUp // need to do this for SSR
-          }, 0)
-        })
+      },
+      hasExtension () {
+        return this.$cms.pageToolbarExtension
       }
     },
     watch: {
       '$vuetify.breakpoint.mdAndUp' (val) {
-        this.hasExtension = !!(this.$cms.pageToolbarExtension && val)
         val && (this.searchActive = false)
       }
     }
