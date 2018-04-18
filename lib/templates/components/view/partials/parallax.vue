@@ -3,6 +3,7 @@
        v-bind="currentAttrs">
     <v-parallax v-if="src && currentAttrs && height && !isFixedBackground"
                 class="lazyload"
+                alt="parallax-image"
                 :height="height"
                 :jumbotron="$vuetify.breakpoint.smAndDown"
                 :src="''"
