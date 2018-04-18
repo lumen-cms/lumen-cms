@@ -1,10 +1,11 @@
 <template>
   <div :class="currentClass"
        v-bind="currentAttrs">
-    <v-parallax v-if="currentAttrs && height && !isFixedBackground"
+    <v-parallax v-if="src && currentAttrs && height && !isFixedBackground"
                 class="lazyload"
                 :height="height"
                 :jumbotron="$vuetify.breakpoint.smAndDown"
+                :src="''"
                 :data-prx="src">
       <slot/>
     </v-parallax>
