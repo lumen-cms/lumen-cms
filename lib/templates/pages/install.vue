@@ -9,12 +9,12 @@
              outline>Start basic installation
       </v-btn>
       <v-alert color="info" :value="true" class="my-5" icon="info">
-        Create pages with following locales: {{$cms.languages}}<br/>Modify:<br/>
+        Create pages with following locales: {{ $cms.languages }}<br>Modify:<br>
         'lumen-cms':{ cms: { languages: [array-of-locales] } }
       </v-alert>
       <div class="my-5" v-if="progress">
         <h2 class="pl-3">Installation is running...</h2>
-        <v-progress-linear indeterminate></v-progress-linear>
+        <v-progress-linear indeterminate/>
       </div>
     </div>
   </div>
@@ -55,23 +55,23 @@
       },
       getContent (lang) {
         const data = {
-          "languageKey": lang,
-          "sorting": 0,
-          "published": true,
-          "description": "<p class=\"ql-align-center\">Now you can start building up your new website. Enable content editing to start modify the content.</p>",
-          "teaser": null,
-          "type": "TextImage",
-          "properties": {"headerLayout": "H1", "header": `Welcome to ${lang} page`},
-          "styles": {
-            "rootClassNames": [],
-            "headerClassNames": [],
-            "backgroundHeaderClassNames": [],
-            "backgroundClassNames": [],
-            "contentClassNames": []
+          'languageKey': lang,
+          'sorting': 0,
+          'published': true,
+          'description': '<p class="ql-align-center">Now you can start building up your new website. Enable content editing to start modify the content.</p>',
+          'teaser': null,
+          'type': 'TextImage',
+          'properties': {'headerLayout': 'H1', 'header': `Welcome to ${lang} page`},
+          'styles': {
+            'rootClassNames': [],
+            'headerClassNames': [],
+            'backgroundHeaderClassNames': [],
+            'backgroundClassNames': [],
+            'contentClassNames': []
           },
-          "fileReferences": [],
-          "backgroundFileReferences": [],
-          "childs": []
+          'fileReferences': [],
+          'backgroundFileReferences': [],
+          'childs': []
         }
         return data
       }

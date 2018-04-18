@@ -15,17 +15,17 @@
           <v-icon>account_circle</v-icon>
           <v-icon>close</v-icon>
         </v-btn>
-        <v-tooltip right v-if="editRoute">
+        <v-tooltip right v-if="articleId">
           <v-btn fab dark small
                  class="green"
                  slot="activator"
-                 :to="editRoute">
+                 :to="{name: 'edit-article-id', params: {id: articleId}}">
             <v-icon>edit</v-icon>
           </v-btn>
           <span>Edit Properties</span>
         </v-tooltip>
 
-        <v-tooltip right v-if="addRoute">
+        <v-tooltip right v-if="!!addRoute">
           <v-btn fab dark small
                  class="red"
                  slot="activator"
@@ -84,11 +84,12 @@
   export default {
     name: 'LcAdminBar',
     props: {
-      editRoute: {
-        type: Boolean
-      },
       addRoute: {
-        type: String
+        type: String|Object
+      },
+      hideEditProperty: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -116,6 +117,9 @@
           color: 'yellow darken-4',
           icon: 'forward'
         }])
+      },
+      articleId () {
+        return this.$store.state.lc.pageProps.articleId
       }
     },
     methods: {
