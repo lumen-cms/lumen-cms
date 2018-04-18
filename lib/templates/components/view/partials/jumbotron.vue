@@ -1,6 +1,7 @@
 <template>
   <v-jumbotron v-if="src"
                class="lazyload"
+               alt="jumbotron-image"
                :height="height+'px'"
                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                :data-prx="src"
