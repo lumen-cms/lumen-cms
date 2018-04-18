@@ -13,11 +13,6 @@
       elements: Array,
       pageProps: Object
     },
-    data () {
-      return {
-        isLoaded: false
-      }
-    },
     mounted () {
       window.addEventListener('load', () => {
         // run after everything is in-place
@@ -33,12 +28,12 @@
       },
       getElements () {
         const elements = this.elements
-        const sorted = elements.slice(0)
+        const sorted = elements
+          .slice(0)
           .sort((a, b) => a.sorting - b.sorting)
         const clonedElements = sorted.filter(el => el.published)
-        const mappedElements = clonedElements.map((content, i) => {
+        return clonedElements.map((content, i) => {
           const mappedContent = this.mapElement(content)
-          // const viewName = this.$cms.componentMapping[content.type] && this.$cms.componentMapping[content.type].view
           const viewName = `Lc${content.type}`
           return {
             viewName,
@@ -50,7 +45,6 @@
             })
           }
         })
-        return mappedElements
       }
     },
     methods: {

@@ -1,6 +1,9 @@
 <template>
-  <v-jumbotron :height="height+'px'"
-               :src="src"
+  <v-jumbotron v-if="src"
+               class="lazyload"
+               :height="height+'px'"
+               src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+               :data-prx="src"
                dark>
     <v-container fill-height>
       <v-layout :align-center="!alignEnd" :align-end="alignEnd">
@@ -12,7 +15,7 @@
   </v-jumbotron>
 </template>
 <script>
-  import {getImageSrc} from '../../../util/imageSrcHelper'
+  import { getImageSrc } from '../../../util/imageSrcHelper'
   import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
   import getViewportDimensions from '../../../util/getViewportDimensions'
 
