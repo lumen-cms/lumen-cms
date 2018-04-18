@@ -157,7 +157,7 @@ On logged in you will see on the bottom left corner a floating speed-dial button
 * Content-Edit-Mode toggle
 * Add new article
 * Edit article
-### Customize Admin-Bar
+#### Customize Admin-Bar
 Add links into the Admin-Bar panel
 ```js
 'lumen-cms':{
