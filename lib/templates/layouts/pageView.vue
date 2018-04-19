@@ -3,6 +3,7 @@
     <lc-side-nav v-if="hasSecondaryNav"/>
     <lc-main-sidebar/>
     <lc-page-toolbar/>
+    <lc-spinner/>
     <v-content class="page-view-layout"
                :class="{'is-loading':$store.state.lc.cmsLoading, 'content-edit-mode': $store.state.lc.isContentEditMode}">
       <v-container fluid
