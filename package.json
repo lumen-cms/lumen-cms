@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "babel-eslint": "8.2.3",
+    "babel-plugin-transform-imports": "^1.5.0",
     "codecov": "latest",
     "eslint": "latest",
     "eslint-config-standard": "latest",
