@@ -9,8 +9,6 @@
 </template>
 
 <script>
-  // import CONFIG from '../../../src/config'
-
   export default {
     name: 'LcLanguageSwitch',
     props: {
