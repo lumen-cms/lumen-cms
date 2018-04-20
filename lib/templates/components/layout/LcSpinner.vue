@@ -60,4 +60,11 @@
       opacity: 0;
     }
   }
+
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    /* IE10+ CSS styles go here */
+    .preloader {
+      display: none !important;
+    }
+  }
 </style>
