@@ -11,6 +11,11 @@
         <v-layout slot="header" row align-center>
           <span>{{ item.title }}</span>
           <v-spacer/>
+          <v-btn v-if="item.type === templateTypes.JSON"
+                 icon
+                 @click.stop="openMenuBuilder(item)">
+            <v-icon>dashboard</v-icon>
+          </v-btn>
           <v-btn @click.stop="onEdit(item)" icon>
             <v-icon>edit</v-icon>
           </v-btn>
@@ -74,6 +79,8 @@
     <lc-edit-page-template-dialog @refetchTemplates="onRefetch"
                                   v-model="selectedModel"
                                   ref="pageTemplateDialog"/>
+    <lc-menu-builder :content="selectedModel"
+                     ref="menuBuilder"/>
     <lc-edit-footer/>
   </div>
 </template>
@@ -119,6 +126,10 @@
       openDialog () {
         const ref = this.$refs.pageTemplateDialog
         ref.openDialog()
+      },
+      openMenuBuilder (item) {
+        this.selectedModel = item
+        this.$refs.menuBuilder.toggleVisibility()
       },
       onEdit (item) {
         this.selectedModel = item
