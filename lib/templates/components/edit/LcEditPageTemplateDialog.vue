@@ -15,6 +15,7 @@
       <v-select name="key"
                 :items="keyItems"
                 label="Key"
+                combobox
                 v-model="model.key"
                 required/>
       <div style="max-height: 500px;" v-if="model.type==='CODE'">

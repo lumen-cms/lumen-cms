@@ -17,7 +17,7 @@
         <v-icon>search</v-icon>
       </v-btn>
       <slot/>
-      <lc-vue-renderer template-region="HEAD_TOP"/>
+      <lc-vue-renderer template-region="HEAD_TOP" navigation="menu"/>
       <v-layout v-if="hasExtension"
                 row
                 slot="extension"
@@ -26,6 +26,7 @@
         <lc-main-search v-if="!!showSearch"/>
         <v-spacer v-if="!showSearch"/>
         <lc-vue-renderer v-if="!hideExtensionTemplate"
+                         navigation="menu"
                          template-region="HEAD_EXTENSION"/>
       </v-layout>
     </template>
