@@ -7,6 +7,7 @@
             combobox
             :hint="(link && link.value) ? JSON.stringify(link) : null"
             persistent-hint
+            :required="required"
             clearable
             class="page-selection"/>
 </template>
@@ -22,7 +23,8 @@
       value: {
         type: Object,
         default: () => ({})
-      }
+      },
+      required: Boolean
     },
     data () {
       return {

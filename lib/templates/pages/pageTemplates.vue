@@ -89,6 +89,7 @@
   import allPageTemplatesGql from '../gql/pageTemplate/allPageTemplates.gql'
   import {slugifyTemplateKey} from '../util/slugifyHelpers'
   import slugify from 'slugify'
+  import LcMenuBuilder from '../components/edit/form/LcMenuBuilder'
 
   const TEMPLATE_TYPE = {
     CODE: 'CODE',
@@ -98,6 +99,7 @@
   export default {
     layout: 'admin',
     middleware: 'isAuth',
+    components: {LcMenuBuilder},
     data () {
       return {
         selectedModel: {},
