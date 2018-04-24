@@ -4,36 +4,40 @@
     <v-dialog v-model="show"
               persistent
               scrollable
+              lazy
               v-if="model">
       <v-card>
         <v-toolbar dense flat>
           <v-toolbar-title>Menu Builder</v-toolbar-title>
           <v-spacer/>
-          <v-btn icon @click="show = false">
+          <v-btn icon @click="onClose">
             <v-icon>clear</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card-text style="max-height: 500px">
-          <v-container grid-list-md>
-            <v-layout>
-              <v-flex>
-                <v-text-field name="title"
-                              label="Title"
-                              v-model="model.title"
-                              validate-on-blur
-                              required/>
-              </v-flex>
-              <v-flex>
-                <v-select name="key"
-                          :items="keyItems"
-                          label="Key"
-                          combobox
-                          v-model="model.key"
-                          required/>
-              </v-flex>
-            </v-layout>
-          </v-container>
-          <div>
+        <v-card-text style="height: 60vh">
+          <lc-form-container ref="baseForm">
+
+            <v-container grid-list-md>
+              <v-layout>
+                <v-flex>
+                  <v-text-field name="title"
+                                label="Title"
+                                v-model="model.title"
+                                validate-on-blur
+                                required/>
+                </v-flex>
+                <v-flex>
+                  <v-select name="key"
+                            :items="keyItems"
+                            label="Key"
+                            combobox
+                            required
+                            v-model="model.key"/>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </lc-form-container>
+          <div v-if="model.id">
             <v-list>
               <lc-menu-builder-item v-for="(item,i) in navigation"
                                     :item="item"
@@ -45,10 +49,16 @@
               <a href="#" @click="$store.dispatch('setMenuEdit', {isNew:true})">[ &#x2b; ] Create New...</a>
             </div>
           </div>
+          <v-alert v-else :value="true" color="info" icon="info">Please save initial values before you start..</v-alert>
         </v-card-text>
         <v-card-actions>
+          <lc-confirm-btn v-if="model.id"
+                          label="Delete"
+                          :loading="deleting"
+                          btn-class="red--text"
+                          @onConfirm="onDelete"/>
           <v-spacer/>
-          <v-btn flat @click="show = false">
+          <v-btn flat @click="onClose">
             CANCEL
           </v-btn>
           <v-btn flat
@@ -63,12 +73,13 @@
     <v-dialog v-model="editShow"
               max-width="500"
               persistent
-              v-if="editModel">
+              lazy
+              v-if="editModel && model">
       <v-card>
         <v-toolbar dense flat>
           <v-toolbar-title>Edit</v-toolbar-title>
           <v-spacer/>
-          <v-btn icon @click="editShow=false;editModel = null;">
+          <v-btn icon @click="editShow=false;editModel = {};$refs.editFormModel.resetForm()">
             <v-icon>clear</v-icon>
           </v-btn>
         </v-toolbar>
@@ -77,10 +88,20 @@
 
             <v-select :items="['link','directory','subheader','divider']"
                       v-model="editModel.type"
+                      name="type"
                       required
                       label="Type"/>
-            <v-text-field required v-model="editModel.subheader" label="Title" v-if="editModel.type === 'subheader'"/>
-            <v-text-field required v-model="editModel.title" label="Title" v-else/>
+            <template v-if="editModel.type !== 'divider'">
+              <template v-if="editModel.type === 'subheader'">
+                <v-text-field name="subheader" required v-model="editModel.subheader" label="Title"/>
+              </template>
+              <v-text-field name="title"
+                            required
+                            v-model="editModel.title"
+                            label="Title"
+                            v-else/>
+            </template>
+            <v-text-field v-if="editModel.type === 'subheader'" name="action" v-model="editModel.action" label="Icon"/>
             <template v-if="editModel.type !== 'directory' && editModel.type !== 'divider'">
               <lc-page-href-select required
                                    @updated="onPageSelection"
@@ -90,6 +111,7 @@
           </lc-form-container>
         </v-card-text>
         <v-card-actions>
+          <v-btn color="error" flat @click="removeEditItem" v-if="!editModel.originId"> Remove</v-btn>
           <v-spacer/>
           <v-btn flat @click.stop="saveEditDialog">Save</v-btn>
         </v-card-actions>
@@ -121,7 +143,8 @@
         },
         navigation: [],
         editModel: null,
-        loading: false
+        loading: false,
+        deleting: false
       }
     },
     watch: {
@@ -146,8 +169,21 @@
         }
       },
       content (value) {
+        this.setModel(value)
+      }
+    },
+    computed: {
+      keyItems () {
+        return Object.keys(this.$cms.TEMPLATE).map(e => ({
+          value: slugifyTemplateKey(e, this.$store.state.lc.locale),
+          text: e
+        }))
+      }
+    },
+    methods: {
+      setModel (value) {
         // main model
-        this.model = Object.assign({}, {
+        this.model = !value ? {} : Object.assign({}, {
           title: value.title,
           key: value.key,
           id: value.id
@@ -166,17 +202,7 @@
           }
         })
         this.navigation = this.addIdToNavigation(navigation)
-      }
-    },
-    computed: {
-      keyItems () {
-        return Object.keys(this.$cms.TEMPLATE).map(e => ({
-          value: slugifyTemplateKey(e, this.$store.state.lc.locale),
-          text: e
-        }))
-      }
-    },
-    methods: {
+      },
       addIdToNavigation (navigation) {
         let id = 0
         return mapItems(navigation)
@@ -192,6 +218,37 @@
           })
         }
       },
+      afterEditSave () {
+        this.$refs.editFormModel.resetForm()
+        this.editShow = false
+      },
+      /**
+       * click on edit triggered
+       */
+      removeEditItem () {
+        const currentNavigation = JSON.parse(JSON.stringify(this.navigation.slice(0)))
+        const form = this.editModel
+
+        this.navigation = []
+        this.navigation = removeItem(currentNavigation)
+        this.afterEditSave()
+
+        function removeItem (array) {
+          let findIndex = array.findIndex(i => i.id === form.id)
+          if (findIndex !== -1) {
+            array.splice(findIndex, 1)
+          }
+          return array.map(item => {
+            if (item.items) {
+              item.items = removeItem(item.items)
+            }
+            return item
+          })
+        }
+      },
+      /**
+       * click on save edit form triggered
+       */
       saveEditDialog () {
         const v = this.$refs.editFormModel.validate()
         if (!v) return
@@ -200,9 +257,17 @@
         if (form.type === 'directory' && !form.items) {
           form.items = []
         }
+        if (form.type === 'divider') {
+          form.divider = true
+        }
         const currentNavigation = JSON.parse(JSON.stringify(this.navigation.slice(0)))
+        if (!currentNavigation.length) {
+          this.navigation = this.addIdToNavigation([form])
+          this.afterEditSave()
+          return
+        }
         this.navigation = []
-        if (form.originId) {
+        if (typeof form.originId === 'number') {
           // create element inside
           if (form.firstChild) {
             const tempNavigation = insertFirstChild(currentNavigation)
@@ -219,7 +284,7 @@
           this.navigation = updateItems(currentNavigation)
         }
         // this.editModel = null
-        this.editShow = false
+        this.afterEditSave()
 
         function insertFirstChild (array) {
           return array.map(item => {
@@ -285,6 +350,9 @@
       },
       toggleVisibility () {
         this.show = !this.show
+        if (this.show) {
+          this.setModel(this.content)
+        }
       },
       onPageSelection (value) {
         const link = {
@@ -295,28 +363,51 @@
         this.$set(this.editModel, 'link', link)
         this.$set(this.editModel, 'to', value.value)
       },
+      onClose () {
+        this.loading = false
+        this.deleting = false
+        this.model = {}
+        this.navigation = []
+        this.show = false
+      },
       async saveMenu () {
+        const v = this.$refs.baseForm.validate()
+        if (!v) return
         this.loading = true
         const navigation = JSON.parse(JSON.stringify(this.navigation))
         const variables = Object.assign({}, this.model, {
           bodyJson: {
             NAV: navigation
           },
-          languageKey: this.$store.state.lc.locale.toUpperCase()
+          type: 'JSON',
+          languageKey: this.$store.state.lc.locale.toUpperCase(),
+          key: slugifyTemplateKey(this.model.key, this.$store.state.lc.locale)
         })
         if (variables.id) {
           // update template
           await this.mutateGql({
             mutation: updateTemplateGql,
             variables
-          }, 'updateTemplate')
+          })
         } else {
           // create template
+          const res = await this.mutateGql({
+            mutation: createTemplateGql,
+            variables
+          }, 'createPageTemplate')
+          this.model = res
+          this.$emit('refetchTemplates', true)
         }
         this.loading = false
-        this.model = {}
-        this.navigation = []
-        this.show = false
+      },
+      async onDelete () {
+        this.deleting = true
+        await this.mutateGql({
+          mutation: deleteTemplateGql,
+          variables: {id: this.model.id},
+        })
+        this.$emit('refetchTemplates', true)
+        this.onClose()
       }
     }
   }

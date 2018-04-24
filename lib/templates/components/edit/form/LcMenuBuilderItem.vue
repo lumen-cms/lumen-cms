@@ -37,7 +37,6 @@
                             :sub-group="true"
                             :key="subItem.title + j"/>
       <div class="ml-5 pa-1" v-if="!item.items.length">
-
         <a href="#" @click.stop="editItem(item,true,true)">[ &#x2b; ] Create new...</a>
       </div>
     </v-list-group>
@@ -47,12 +46,19 @@
         <v-list-tile-title>
           <a href="#" @click.stop="editItem(item,true)">[ &#x2b; ]</a>
           {{ item.title }}
-          (<a href="#" :to="item.to" router target="__blank">{{item.to}}</a>)
+          (<a href="#" :to="item.to" router target="__blank">{{ item.to }}</a>)
           <a @click.stop="editItem(item)">[edit]</a>
         </v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
-    <v-divider v-else-if="item.divider"/>
+    <template v-else-if="item.divider">
+      <v-divider/>
+      <div class="pl-3" style="margin-top:-11px">
+        <a href="#" @click.stop="editItem(item,true)">[ &#x2b; ]</a>
+        ---- DIVIDER ----
+        <a @click.stop="editItem(item)">[edit]</a>
+      </div>
+    </template>
   </div>
 </template>
 <script>

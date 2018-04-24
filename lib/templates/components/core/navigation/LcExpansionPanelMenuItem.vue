@@ -3,8 +3,8 @@
     <v-subheader v-if="item.subheader"
                  :key="'subhead' + i">
       <nuxt-link
-        v-if="item['subheader-link']"
-        :to="item['subheader-link']"
+        v-if="item['subheader-link'] || item.to"
+        :to="item['subheader-link'] || item.to"
         exact-active-class="primary--text"
         style="text-decoration: none; color: inherit;"
         nuxt>{{ item.subheader }}

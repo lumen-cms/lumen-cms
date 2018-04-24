@@ -61,9 +61,15 @@
             </v-list-tile>
             <v-list-tile @click="bottomSheet=false;onEdit({type:templateTypes.JSON})">
               <v-list-tile-action>
-                <v-icon>menu</v-icon>
+                <v-icon>dns</v-icon>
               </v-list-tile-action>
-              <v-list-tile-title>Navigation => currently WIP not ready for usage</v-list-tile-title>
+              <v-list-tile-title>JSON - Object</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="bottomSheet=false;openMenuBuilder({})">
+              <v-list-tile-action>
+                <v-icon>dashboard</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-title>Menu</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="syncDefaultTemplates()">
               <v-list-tile-action>
@@ -80,6 +86,7 @@
                                   v-model="selectedModel"
                                   ref="pageTemplateDialog"/>
     <lc-menu-builder :content="selectedModel"
+                     @refetchTemplates="onRefetch"
                      ref="menuBuilder"/>
     <lc-edit-footer/>
   </div>
@@ -130,11 +137,11 @@
         ref.openDialog()
       },
       openMenuBuilder (item) {
-        this.selectedModel = item
+        this.selectedModel = item || {}
         this.$refs.menuBuilder.toggleVisibility()
       },
       onEdit (item) {
-        this.selectedModel = item
+        this.selectedModel = item || {}
         this.openDialog()
       },
       async syncDefaultTemplates () {

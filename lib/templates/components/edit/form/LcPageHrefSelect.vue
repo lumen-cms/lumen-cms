@@ -4,6 +4,7 @@
             v-model="url"
             :search-input.sync="searchInput"
             label="Link"
+            name="page-selector"
             combobox
             :hint="(link && link.value) ? JSON.stringify(link) : null"
             persistent-hint
