@@ -9,7 +9,7 @@
     props: {
       customElements: {
         type: Array,
-        'default': () => ['html-field', 'page-select'] // add all custom form elements
+        'default': () => ['html-field', 'page-select', 'lc-page-href-select'] // add all custom form elements
       }
     },
     data () {

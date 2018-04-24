@@ -11,6 +11,11 @@
         <v-layout slot="header" row align-center>
           <span>{{ item.title }}</span>
           <v-spacer/>
+          <v-btn v-if="item.type === templateTypes.JSON"
+                 icon
+                 @click.stop="openMenuBuilder(item)">
+            <v-icon>dashboard</v-icon>
+          </v-btn>
           <v-btn @click.stop="onEdit(item)" icon>
             <v-icon>edit</v-icon>
           </v-btn>
@@ -56,9 +61,15 @@
             </v-list-tile>
             <v-list-tile @click="bottomSheet=false;onEdit({type:templateTypes.JSON})">
               <v-list-tile-action>
-                <v-icon>menu</v-icon>
+                <v-icon>dns</v-icon>
               </v-list-tile-action>
-              <v-list-tile-title>Navigation => currently WIP not ready for usage</v-list-tile-title>
+              <v-list-tile-title>JSON - Object</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="bottomSheet=false;openMenuBuilder({})">
+              <v-list-tile-action>
+                <v-icon>dashboard</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-title>Menu</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="syncDefaultTemplates()">
               <v-list-tile-action>
@@ -74,6 +85,9 @@
     <lc-edit-page-template-dialog @refetchTemplates="onRefetch"
                                   v-model="selectedModel"
                                   ref="pageTemplateDialog"/>
+    <lc-menu-builder :content="selectedModel"
+                     @refetchTemplates="onRefetch"
+                     ref="menuBuilder"/>
     <lc-edit-footer/>
   </div>
 </template>
@@ -82,6 +96,7 @@
   import allPageTemplatesGql from '../gql/pageTemplate/allPageTemplates.gql'
   import {slugifyTemplateKey} from '../util/slugifyHelpers'
   import slugify from 'slugify'
+  import LcMenuBuilder from '../components/edit/form/LcMenuBuilder'
 
   const TEMPLATE_TYPE = {
     CODE: 'CODE',
@@ -91,6 +106,7 @@
   export default {
     layout: 'admin',
     middleware: 'isAuth',
+    components: {LcMenuBuilder},
     data () {
       return {
         selectedModel: {},
@@ -120,8 +136,12 @@
         const ref = this.$refs.pageTemplateDialog
         ref.openDialog()
       },
+      openMenuBuilder (item) {
+        this.selectedModel = item || {}
+        this.$refs.menuBuilder.toggleVisibility()
+      },
       onEdit (item) {
-        this.selectedModel = item
+        this.selectedModel = item || {}
         this.openDialog()
       },
       async syncDefaultTemplates () {
