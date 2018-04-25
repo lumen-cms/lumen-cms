@@ -27,11 +27,19 @@
         </v-card-text>
       </v-card>
     </v-bottom-sheet>
-    <v-dialog v-model="showPaste">
+    <v-dialog v-model="showPaste"
+              max-width="500">
       <v-card>
         <v-card-text>
-          <textarea name="inputTextArea" id="inputTextArea"/>
+          <textarea name="inputTextArea" id="inputTextArea" style="width: 100%;height: 250px"></textarea>
         </v-card-text>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn color="primary"
+                 flat>
+            Insert
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -71,11 +79,16 @@
       onPaste () {
         this.showPaste = true
         this.$nextTick(() => {
-          const field = document.getElementById('inputTextArea')
-          console.log('hier', field)
-          field.select()
-          field.focus()
-          document.execCommand('Paste', null, null)
+
+          const el = document.getElementById('inputTextArea')
+          // const el = document.createElement('textarea')
+          console.log('hier', el)
+          el.contentEditable = true
+          el.textContent = '';
+          el.select()
+          const v = document.execCommand('paste')
+
+          console.log(v)
         })
       },
       setSelectedType (val) {
