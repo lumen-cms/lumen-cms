@@ -170,6 +170,9 @@
       },
       content (value) {
         this.setModel(value)
+      },
+      '$store.state.lc.menuCutPaste.toItem.id' () {
+        !!this.$store.state.lc.menuCutPaste && this.pasteItemToNewPosition()
       }
     },
     computed: {
@@ -181,6 +184,33 @@
       }
     },
     methods: {
+      pasteItemToNewPosition () {
+        const currentNavigation = JSON.parse(JSON.stringify(this.navigation.slice(0)))
+        const pasteObject = JSON.parse(JSON.stringify(this.$store.state.lc.menuCutPaste))
+        this.navigation = []
+        this.navigation = findReplace(currentNavigation)
+        this.$nextTick(() => {
+          this.$store.dispatch('setMenuCutPaste', null)
+        })
+
+        function findReplace (array) {
+          // first look for old item position and remove the item from there
+          let findOldIndex = array.findIndex(i => i.id === pasteObject.item.id)
+          if (findOldIndex !== -1) {
+            array.splice(findOldIndex, 1)
+          }
+          let findNewPosition = array.findIndex(i => i.id === pasteObject.toItem.id)
+          if (findNewPosition !== -1) {
+            array.splice(findNewPosition + 1, 0, Object.assign({}, pasteObject.item))
+          }
+          return array.map(item => {
+            if (item.items) {
+              item.items = findReplace(item.items)
+            }
+            return item
+          })
+        }
+      },
       setModel (value) {
         // main model
         this.model = !value ? {} : Object.assign({}, {
@@ -253,7 +283,6 @@
         const v = this.$refs.editFormModel.validate()
         if (!v) return
         const form = JSON.parse(JSON.stringify(this.editModel))
-        console.log(form)
         if (form.type === 'directory' && !form.items) {
           form.items = []
         }
