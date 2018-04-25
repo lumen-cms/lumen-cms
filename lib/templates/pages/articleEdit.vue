@@ -20,7 +20,7 @@
               View article
             </v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="$router.push({name:'edit-article'})">
+          <v-list-tile @click="$router.push({name:'articleEdit'})">
             <v-list-tile-title>
               Add new article
             </v-list-tile-title>
@@ -385,11 +385,11 @@
         const id = this.model.id
         const slug = this.model.slug + '_' + id
         await this.mutateGql({mutation: mutationUpdateDeleteArticle, variables: {id, slug}}, 'updateArticle')
-        this.$router.push('/articles/admin')
+        this.$router.push({name: 'articleAdmin'})
       },
       async createNewArticle (variables) {
         const article = await this.mutateGql({mutation: mutationCreateArticle, variables}, 'createArticle')
-        this.$router.push(`/edit-article/${article.id}`)
+        this.$router.push({name: 'articleEdit', params: {id: article.id}})
       },
       slugifySlug (string) {
         return string.indexOf('/') !== -1
