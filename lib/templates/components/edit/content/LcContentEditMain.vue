@@ -40,6 +40,9 @@
       },
       '$store.state.lc.contentCopyPasteData.id' (id) {
         id && this.onContentCopy()
+      },
+      '$store.state.lc.crossDomainContent': async (v) => {
+
       }
     },
     methods: {

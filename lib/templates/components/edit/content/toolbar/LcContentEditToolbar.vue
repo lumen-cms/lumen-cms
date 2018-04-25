@@ -66,6 +66,10 @@
         </v-icon>
       </v-btn>
 
+      <v-btn icon @click="onCrossCopy">
+        <v-icon> backup</v-icon>
+      </v-btn>
+
       <v-btn icon
              :disabled="$store.state.lc.cmsLoading"
              v-if="canDelete"
@@ -207,6 +211,24 @@
         const data = this.content
         const state = currentCopyId ? {id: null} : data
         this.$store.dispatch('setContentCopyData', state)
+      },
+      onCrossCopy () {
+        const data = this.content
+        let message = JSON.stringify(data)
+        try {
+          const el = document.createElement('textarea')
+          el.value = message
+          el.setAttribute('readonly', '')
+          el.style.position = 'absolute'
+          el.style.left = '-9999px'
+          document.body.appendChild(el)
+          el.select()
+          document.execCommand('copy')
+          document.body.removeChild(el)
+          this.$store.dispatch('setCrossDomainContent', data)
+        } catch (err) {
+          this.dispatch('setError', 'could not copy')
+        }
       },
 
       /**
