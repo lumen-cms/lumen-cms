@@ -1,0 +1,8 @@
+#import './fileFragment.gql'
+
+query allFilesOfOrigin($origin:String){
+  allFiles(filter:{origin:$origin}) {
+    ...file
+    origin
+  }
+}
