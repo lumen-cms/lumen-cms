@@ -66,8 +66,10 @@
         </v-icon>
       </v-btn>
 
-      <v-btn icon @click="onCrossCopy">
-        <v-icon> backup</v-icon>
+      <v-btn icon
+             v-if="content && ['TextImage','Layout','Divider','Html'].includes(content.type)"
+             @click="onCrossCopy">
+        <v-icon>content_paste</v-icon>
       </v-btn>
 
       <v-btn icon
@@ -213,7 +215,10 @@
         this.$store.dispatch('setContentCopyData', state)
       },
       onCrossCopy () {
-        const data = this.content
+        // add project ID for file copy on different project
+        const data = Object.assign({}, this.content, {
+          __projectId: process.env.GRAPHQL_PROJECT_ID
+        })
         let message = JSON.stringify(data)
         try {
           const el = document.createElement('textarea')
@@ -225,7 +230,6 @@
           el.select()
           document.execCommand('copy')
           document.body.removeChild(el)
-          this.$store.dispatch('setCrossDomainContent', data)
         } catch (err) {
           this.dispatch('setError', 'could not copy')
         }

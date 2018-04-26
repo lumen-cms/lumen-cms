@@ -31,12 +31,18 @@
               max-width="500">
       <v-card>
         <v-card-text>
-          <textarea name="inputTextArea" id="inputTextArea" style="width: 100%;height: 250px"></textarea>
+          <v-text-field name="inputTextArea"
+                        label="Please paste (CMD + V) your copied content here"
+                        multi-line
+                        ref="inputTextArea"
+                        style="width: 100%;height: 250px"/>
         </v-card-text>
         <v-card-actions>
           <v-spacer/>
           <v-btn color="primary"
-                 flat>
+                 flat
+                 @click="onInsertPaste"
+                 :loading="$store.state.lc.updating">
             Insert
           </v-btn>
         </v-card-actions>
@@ -76,19 +82,29 @@
       }
     },
     methods: {
+      closeWindows () {
+        this.showPaste = false
+        this.$store.dispatch('setContentEditDialogData', {})
+      },
+      onInsertPaste () {
+        this.$store.dispatch('setCrossDomainContent', this.$refs.inputTextArea.inputValue)
+      },
       onPaste () {
         this.showPaste = true
         this.$nextTick(() => {
-
-          const el = document.getElementById('inputTextArea')
+          const area = this.$refs.inputTextArea
+          area.focus()
+          // following not working (paste)
+          // https://stackoverflow.com/questions/37204498/copy-pasting-on-chrome-using-javascript-document-execcommandpaste-doesnt-w
           // const el = document.createElement('textarea')
-          console.log('hier', el)
-          el.contentEditable = true
-          el.textContent = '';
-          el.select()
-          const v = document.execCommand('paste')
-
-          console.log(v)
+          // el.contentEditable = true
+          // el.style.position = 'absolute'
+          // el.style.left = '-9999px'
+          // document.body.appendChild(el)
+          // el.focus()
+          // // el.select()
+          // document.execCommand('paste')
+          // const v = el.innerText
         })
       },
       setSelectedType (val) {

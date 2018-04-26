@@ -1,0 +1,11 @@
+#import './fileReferenceFragment.gql'
+
+query findUnusedFileReferences{
+  allFileReferences(filter:{
+    media:null,
+    content:null,
+    contentBackground:null
+  }){
+    ...fileReference
+  }
+}
