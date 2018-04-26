@@ -6,12 +6,14 @@ $name:String
 $fileTagsIds:[ID!]
 $width:Int,
 $height:Int,
+$origin:String
 ){
   updateFile(
     id:$id
     name:$name
     width:$width
     height:$height
+    origin:$origin
     fileTagsIds:$fileTagsIds){
     ...file
   }

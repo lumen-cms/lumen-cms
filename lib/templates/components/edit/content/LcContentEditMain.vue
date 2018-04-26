@@ -6,7 +6,7 @@
     <lc-media-library/>
     {{ $store.getters.getDialogType }}
     <template v-if="!!$store.getters.getDialogType">
-      <lc-content-create/>
+      <lc-content-create ref="contentCreate"/>
       <lc-content-delete-dialog :page-props="pageProps"
                                 v-if="$store.getters.getDialogType === 'delete'"/>
       <lc-content-edit-dialog v-if="$store.getters.getDialogType === 'edit'"/>
@@ -19,6 +19,10 @@
   import updateContent from '../../../gql/content/updateContent.gql'
   import updateArticleGql from '../../../gql/article/updateArticleModif.gql'
   import storageWatcher from '../../../mixins/storageWatcher'
+  import {cleanSchemaForClone, getFilesOfSchema, replaceFileIds} from '../../../util/contentClone'
+  import {uploadFile} from '../../../util/fileUpload'
+  import updateFileGql from '../../../gql/file/fileUpdate.gql'
+  import allFilesOfOriginGql from '../../../gql/file/allFilesOfOrigin.gql'
 
   export default {
     name: 'LcContentEditMain',
@@ -40,9 +44,57 @@
       },
       '$store.state.lc.contentCopyPasteData.id' (id) {
         id && this.onContentCopy()
+      },
+      '$store.state.lc.crossDomainContent' (v) {
+        v && this.onCrossDomainContentPaste(v)
       }
     },
     methods: {
+      async processSingleFileImport (file, projectIdOfCopy) {
+        let origin = `https://files.graph.cool/${projectIdOfCopy}/${file.secret}`
+        const fileExist = await this.queryGql({
+          query: allFilesOfOriginGql,
+          variables: {origin}
+        }, 'allFiles')
+        if (fileExist && fileExist.length) {
+          return fileExist[0]
+        }
+        const uploaded = await uploadFile(projectIdOfCopy, file)
+        await this.mutateGql({
+          mutation: updateFileGql,
+          variables: {
+            id: uploaded.id,
+            origin: origin
+          }
+        })
+        return uploaded
+      },
+      async onCrossDomainContentPaste (v) {
+        if (typeof v === 'string' && v.indexOf('"__typename":"Content"') !== -1) {
+          // insertable content element
+          const copy = JSON.parse(v)
+          const projectIdOfCopy = copy.__projectId
+          if (!projectIdOfCopy) {
+            console.error('no project ID inside of paste')
+            return
+          }
+          this.$store.dispatch('setUpdating', true)
+          let cleaned = cleanSchemaForClone(copy, this.$cms)
+          if (projectIdOfCopy !== process.env.GRAPHQL_PROJECT_ID) {
+            // if its cross copy accross domain handle import fileId
+            const filesOfCopy = getFilesOfSchema(copy)
+            const mapped = {}
+            for (const file of filesOfCopy) {
+              // process file import
+              mapped[file.id] = await this.processSingleFileImport(file, projectIdOfCopy)
+            }
+            cleaned = replaceFileIds(cleaned, mapped)
+          }
+          await this.onContentCreate({variables: cleaned})
+        }
+        this.$refs.contentCreate.closeWindows()
+        this.$store.dispatch('setCrossDomainContent', null)
+      },
       onContentUpdate ({variables}) {
         // const dialogData = this.$store.getters.getDialogData
         variables = JSON.parse(JSON.stringify(variables))
@@ -97,7 +149,6 @@
        * @returns {Promise.<void>}
        */
       async onContentCopy () {
-        const {cleanSchemaForClone} = require('../../../util/contentClone')
         const content = this.$store.state.lc.contentCopyPasteData
         const element = content.contentElement
         const cloned = cleanSchemaForClone(element, this.$cms)

@@ -67,6 +67,12 @@
       </v-btn>
 
       <v-btn icon
+             v-if="content && ['TextImage','Layout','Divider','Html'].includes(content.type)"
+             @click="onCrossCopy">
+        <v-icon>content_paste</v-icon>
+      </v-btn>
+
+      <v-btn icon
              :disabled="$store.state.lc.cmsLoading"
              v-if="canDelete"
              @click.stop="$store.dispatch('setContentEditDialogData', {id, dialogType: 'delete'})">
@@ -207,6 +213,26 @@
         const data = this.content
         const state = currentCopyId ? {id: null} : data
         this.$store.dispatch('setContentCopyData', state)
+      },
+      onCrossCopy () {
+        // add project ID for file copy on different project
+        const data = Object.assign({}, this.content, {
+          __projectId: process.env.GRAPHQL_PROJECT_ID
+        })
+        let message = JSON.stringify(data)
+        try {
+          const el = document.createElement('textarea')
+          el.value = message
+          el.setAttribute('readonly', '')
+          el.style.position = 'absolute'
+          el.style.left = '-9999px'
+          document.body.appendChild(el)
+          el.select()
+          document.execCommand('copy')
+          document.body.removeChild(el)
+        } catch (err) {
+          this.dispatch('setError', 'could not copy')
+        }
       },
 
       /**
