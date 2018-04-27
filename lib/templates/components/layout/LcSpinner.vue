@@ -1,6 +1,6 @@
 <template>
   <div class="preloader">
-    <div class="spinner"></div>
+    <div class="spinner"/>
   </div>
 </template>
 <script>

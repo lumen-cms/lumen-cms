@@ -7,7 +7,7 @@
       <span>&nbsp;{{ item.subheader }}</span>
       (
       <router-link v-if="item.to || item['subheader-link']" :to="item.to || item['subheader-link']" router
-                   target="__blank">{{item.to || item['subheader-link']}}
+                   target="__blank">{{ item.to || item['subheader-link'] }}
       </router-link>
       )
       <a href="#" @click.stop="editItem(item)">[
