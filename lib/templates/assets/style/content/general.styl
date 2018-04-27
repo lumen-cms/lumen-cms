@@ -95,17 +95,6 @@
       max-width: inherit
     }
   }
-
-  .max-width-900 {
-    > div:not(.content-bg), > figure, > p {
-      max-width 900px
-    }
-  }
-  .max-width-700 {
-    > div:not(.content-bg), > figure, > p {
-      max-width 700px
-    }
-  }
   .primary {
     background-color: $themeprimary
   }
@@ -169,6 +158,16 @@
     figure {
       width: 100%;
       height: 100%;
+    }
+  }
+  .max-width-900, .raw-html.responsive-frame.max-width-900 {
+    > div:not(.content-bg), > figure, > p {
+      max-width 900px
+    }
+  }
+  .max-width-700, .raw-html.responsive-frame.max-width-700 {
+    > div:not(.content-bg), > figure, > p {
+      max-width 700px
     }
   }
 }
