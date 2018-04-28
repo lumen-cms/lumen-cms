@@ -13,15 +13,15 @@
       <v-flex xs12>
         <slot name="links"/>
         <slot/>
-        <lc-vue-renderer template-region="FOOTER_TOP"/>
-        <lc-vue-renderer template-region="FOOTER_MIDDLE"/>
-        <lc-vue-renderer template-region="FOOTER_BOTTOM"/>
+        <lc-vue-renderer :template-region="$cms.TEMPLATE.FOOTER_TOP"/>
+        <lc-vue-renderer :template-region="$cms.TEMPLATE.FOOTER_MIDDLE"/>
+        <lc-vue-renderer :template-region="$cms.TEMPLATE.FOOTER_BOTTOM"/>
       </v-flex>
     </v-layout>
   </v-footer>
 </template>
 <script>
-  export default {
-    name: 'LcMainFooter'
-  }
+export default {
+  name: "LcMainFooter"
+};
 </script>

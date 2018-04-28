@@ -26,97 +26,97 @@
     <template slot="extension">
       <slot name="extension"/>
     </template>
-    <v-toolbar-side-icon :class="toolbarSideIconClass"
+    <v-toolbar-side-icon :class="$cms.toolbarSideIconClass"
                          v-show="!mobileSearchActive"
                          @click.native.stop="$store.dispatch('toggleDrawer')"/>
   </v-toolbar>
 </template>
 
 <script>
-  export default {
-    name: 'LcMainToolbar',
-    props: {
-      fixed: {
-        type: Boolean,
-        'default': true
-      },
-      prominent: {
-        type: Boolean,
-        'default': true
-      },
-      extended: {
-        type: Boolean,
-        'default': false
-      },
-      mobileSearchActive: {
-        type: Boolean,
-        'default': false
-      },
-      darkToolbar: {
-        type: Boolean,
-        'default': false
-      },
-      clippedRight: {
-        type: Boolean,
-        'default': false
-      }
+export default {
+  name: "LcMainToolbar",
+  props: {
+    fixed: {
+      type: Boolean,
+      default: true
     },
-    data () {
-      return {
-        flat: false,
-        dark: this.darkToolbar,
-        scrolledDown: false,
-        toolbarSideIconClass: this.$cms.toolbarSideIconClass
-      }
+    prominent: {
+      type: Boolean,
+      default: true
     },
-    mounted () {
-      this.onScroll()
+    extended: {
+      type: Boolean,
+      default: false
     },
-    watch: {
-      '$store.state.lc.hasJumbotron' () {
-        if (!process.browser) return
-        this.onScroll()
-      },
-      '$route' () {
-        if (!process.browser) return
-        this.onScroll()
-      }
+    mobileSearchActive: {
+      type: Boolean,
+      default: false
     },
-    computed: {
-      jumbo () {
-        return this.$store.state.lc.hasJumbotron
-      },
-      transparentToolbar () {
-        return this.jumbo && !this.scrolledDown
-      },
-      isDark () {
-        return this.darkToolbar || this.dark || this.transparentToolbar
-      }
+    darkToolbar: {
+      type: Boolean,
+      default: false
     },
-    methods: {
-      onScroll () {
-        if (!process.browser) return
-        this.scrolledDown = (window && window.pageYOffset >= 128)
-      }
+    clippedRight: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      flat: false,
+      dark: this.darkToolbar,
+      scrolledDown: false
+    };
+  },
+  mounted() {
+    this.onScroll();
+  },
+  watch: {
+    "$store.state.lc.hasJumbotron"() {
+      if (!process.browser) return;
+      this.onScroll();
+    },
+    $route() {
+      if (!process.browser) return;
+      this.onScroll();
+    }
+  },
+  computed: {
+    jumbo() {
+      return this.$store.state.lc.hasJumbotron;
+    },
+    transparentToolbar() {
+      return this.jumbo && !this.scrolledDown;
+    },
+    isDark() {
+      return this.darkToolbar || this.dark || this.transparentToolbar;
+    }
+  },
+  methods: {
+    onScroll() {
+      if (!process.browser) return;
+      this.scrolledDown = window && window.pageYOffset >= 128;
     }
   }
+};
 </script>
 
 <style lang="stylus">
-  .toolbar:not(.transparent) {
-    &:not(.theme--dark) {
-      background-color: white !important;
-    }
-    transition: background-color 0.3s ease-in-out;
+.toolbar:not(.transparent) {
+  &:not(.theme--dark) {
+    background-color: white !important;
   }
 
-  .toolbar.transparent.has-jumbo .toolbar__extension {
-    border-top-color: transparent !important;
-  }
+  transition: background-color 0.3s ease-in-out;
+}
 
-  .toolbar.transparent.has-jumbo {
-    .btn.btn--flat, .toolbar__side-icon, .dialog__activator .btn--outline {
-      background-color: rgba(0, 0, 0, 0.4) !important;
-    }
+.toolbar.transparent.has-jumbo .toolbar__extension {
+  border-top-color: transparent !important;
+}
+
+.toolbar.transparent.has-jumbo {
+  .btn.btn--flat, .toolbar__side-icon, .dialog__activator .btn--outline {
+    background-color: rgba(0, 0, 0, 0.4) !important;
   }
+}
 </style>
