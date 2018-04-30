@@ -1,6 +1,6 @@
 {
   "name": "lumen-cms",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Module for a cms based on Nuxt and GraphQl",
   "license": "MIT",
   "contributors": [
@@ -37,11 +37,11 @@
     "apollo-link-http": "1.5.4",
     "apollo-link-ws": "1.0.8",
     "apollo-utilities": "^1.0.11",
-    "codemirror": "^5.36.0",
+    "codemirror": "^5.37.0",
     "cookie": "^0.3.1",
     "css-loader": "^0.28.11",
     "graphql": "^0.13.2",
-    "graphql-tag": "^2.8.0",
+    "graphql-tag": "^2.9.1",
     "js-cookie": "^2.2.0",
     "lazysizes": "4.0.2",
     "lodash.debounce": "^4.0.8",
@@ -53,22 +53,22 @@
     "stylus-loader": "^3.0.2",
     "subscriptions-transport-ws": "^0.9.7",
     "vue-i18n": "^7.6.0",
-    "vue-ls": "^3.0.3",
-    "vuetify": "1.0.16"
+    "vue-ls": "^3.0.5",
+    "vuetify": "1.0.17"
   },
   "devDependencies": {
-    "babel-eslint": "8.2.3",
-    "codecov": "latest",
+    "babel-eslint": "^8.2.3",
+    "codecov": "^3.0.1",
     "eslint": "latest",
     "eslint-config-standard": "latest",
-    "eslint-plugin-import": "2.11.0",
-    "eslint-plugin-jest": "21.15.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1",
     "eslint-plugin-node": "latest",
     "eslint-plugin-promise": "latest",
-    "eslint-plugin-standard": "latest",
+    "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-vue": "latest",
     "jest": "latest",
-    "jsdom": "^11.8.0",
+    "jsdom": "^11.10.0",
     "nuxt": "latest",
     "standard-version": "latest"
   }
