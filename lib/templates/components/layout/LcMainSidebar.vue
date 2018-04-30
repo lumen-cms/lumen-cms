@@ -4,8 +4,8 @@
                        temporary
                        fixed
                        right
-                       v-if="$store.getters.getPageTemplate('SIDEBAR_TOP')"
-                       v-model="$store.state.lc.drawer">
+                       v-if="$store.getters.getPageTemplate($cms.TEMPLATE.SIDEBAR_RIGHT)"
+                       v-model="drawer">
     <v-toolbar
       class="transparent" flat>
       <v-list class="pa-0">
@@ -18,18 +18,26 @@
       </v-list>
     </v-toolbar>
     <v-divider/>
-    <lc-vue-renderer template-region="SIDEBAR_TOP"/>
+    <lc-vue-renderer :template-region="$cms.TEMPLATE.SIDEBAR_RIGHT"/>
     <slot/>
   </v-navigation-drawer>
 </template>
 
 <script>
-  export default {
-    name: 'LcMainSidebar',
-    computed: {
-      logoPath () {
-        return this.$cms.logoPath// always use the desktop-logo for the sidebar
+export default {
+  name: "LcMainSidebar",
+  computed: {
+    drawer: {
+      get() {
+        return this.$store.state.lc.drawer;
+      },
+      set(v) {
+        this.$store.commit("SET_DRAWER", v);
       }
+    },
+    logoPath() {
+      return this.$cms.logoPath; // always use the desktop-logo for the sidebar
     }
   }
+};
 </script>
