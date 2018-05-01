@@ -13,7 +13,7 @@
         <v-list-tile v-for="(subItem, j) in item.items"
                      :i="j"
                      :key="subItem.title + j"
-                     :to="'/'+subItem.to"
+                     :to="ensureLeadingSlash(item.to)"
                      nuxt
                      router
                      :prepend-icon="subItem.action">
@@ -27,7 +27,7 @@
               :key="'div' + i"/>
     <v-btn v-else
            flat
-           :to="item.to ? '/'+item.to : '/'+item['subheader-link']"
+           :to="ensureLeadingSlash(item['subheader-link'] || item.to)"
            :key="'tile' + i"
            :prepend-icon="item.action"
            nuxt>
@@ -43,6 +43,11 @@
       i: {type: Number, 'default': 0},
       level: {type: Number, 'default': 0},
       subGroup: {type: Boolean}
+    },
+    methods: {
+      ensureLeadingSlash(string) {
+        return string && string.startsWith('/', string) ? string : '/' + string
+      }
     }
   }
 </script>

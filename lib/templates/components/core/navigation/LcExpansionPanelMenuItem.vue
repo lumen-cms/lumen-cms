@@ -4,7 +4,7 @@
                  :key="'subhead' + i">
       <nuxt-link
         v-if="item['subheader-link'] || item.to"
-        :to="item.to ? '/'+item.to : '/'+item['subheader-link']"
+        :to="ensureLeadingSlash(item['subheader-link'] || item.to)"
         exact-active-class="primary--text"
         style="text-decoration: none; color: inherit;"
         nuxt>{{ item.subheader }}
@@ -30,7 +30,7 @@
                                     :key="subItem.title + j"/>
     </v-list-group>
     <v-list-tile v-else-if="item.to"
-                 :to="'/'+item.to"
+                 :to="ensureLeadingSlash(item.to)"
                  :key="'tile' + i"
                  :prepend-icon="item.action"
                  ripple
@@ -51,6 +51,11 @@
       i: {type: Number, 'default': 0},
       level: {type: Number, 'default': 0},
       subGroup: {type: Boolean}
+    },
+    methods: {
+      ensureLeadingSlash(string) {
+        return string && string.startsWith('/', string) ? string : '/' + string
+      }
     }
   }
 </script>

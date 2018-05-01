@@ -1,11 +1,17 @@
 <template>
-  <div class="preloader">
+  <div class="preloader" ref="preloader">
     <div class="spinner"/>
   </div>
 </template>
 <script>
   export default {
-    name: 'LcSpinner'
+    name: 'LcSpinner',
+    mounted() {
+      setTimeout(() => {
+        // ensure that spinner is gone after 3 sec
+        this.$refs.preloader.style.display = 'none'
+      }, 3000)
+    }
   }
 </script>
 <style lang="styl">
