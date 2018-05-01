@@ -13,8 +13,9 @@
         <v-list-tile v-for="(subItem, j) in item.items"
                      :i="j"
                      :key="subItem.title + j"
-                     :to="subItem.to"
+                     :to="'/'+subItem.to"
                      nuxt
+                     router
                      :prepend-icon="subItem.action">
           <v-list-tile-content>
             <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
@@ -26,7 +27,7 @@
               :key="'div' + i"/>
     <v-btn v-else
            flat
-           :to="item.to || item['subheader-link']"
+           :to="item.to ? '/'+item.to : '/'+item['subheader-link']"
            :key="'tile' + i"
            :prepend-icon="item.action"
            nuxt>

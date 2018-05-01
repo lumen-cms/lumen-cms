@@ -4,7 +4,7 @@
                  :key="'subhead' + i">
       <nuxt-link
         v-if="item['subheader-link'] || item.to"
-        :to="item['subheader-link'] || item.to"
+        :to="item.to ? '/'+item.to : '/'+item['subheader-link']"
         exact-active-class="primary--text"
         style="text-decoration: none; color: inherit;"
         nuxt>{{ item.subheader }}
@@ -30,7 +30,7 @@
                                     :key="subItem.title + j"/>
     </v-list-group>
     <v-list-tile v-else-if="item.to"
-                 :to="item.to"
+                 :to="'/'+item.to"
                  :key="'tile' + i"
                  :prepend-icon="item.action"
                  ripple
