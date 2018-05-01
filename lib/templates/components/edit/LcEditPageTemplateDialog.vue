@@ -56,7 +56,7 @@
       value: Object,
       default: model
     },
-    data () {
+    data() {
       return {
         showDialog: false,
         isValidJson: true,
@@ -64,25 +64,25 @@
       }
     },
     watch: {
-      showDialog (v) {
+      showDialog(v) {
         if (!v && this.$refs.dialogContainer) {
           this.$refs.dialogContainer.resetForm()
           this.model = model
           this.$emit('input', null)
         }
       },
-      value (value) {
+      value(value) {
         this.model = Object.assign({}, model, value)
       },
-      'model.body' () {
+      'model.body'() {
         this.$store.dispatch('setCanSave', true)
       }
     },
     computed: {
-      mode () {
+      mode() {
         return this.model.type === 'JSON' ? {name: 'javascript', json: true} : 'vue'
       },
-      keyItems () {
+      keyItems() {
         return Object.keys(this.$cms.TEMPLATE).map(e => ({
           value: slugifyTemplateKey(e, this.$store.state.lc.locale),
           text: e
@@ -90,7 +90,7 @@
       }
     },
     methods: {
-      onJsonChanged (v) {
+      onJsonChanged(v) {
         try {
           this.model = Object.assign({}, this.model, {bodyJson: JSON.parse(v)})
           this.isValidJson = true
@@ -101,18 +101,19 @@
           this.$store.dispatch('setCanSave', false)
         }
       },
-      openDialog () {
+      openDialog() {
         this.showDialog = !this.showDialog
       },
-      submitTemplate (variables) {
+      submitTemplate(variables) {
         // call this outside of this template
         this.model = variables
         return this.onSubmit()
       },
-      async onSubmit () {
+      async onSubmit() {
         const model = Object.assign({}, this.model, {
           languageKey: this.$store.state.lc.locale.toUpperCase()
         })
+        model.key = slugifyTemplateKey(this.model.key, this.$store.state.lc.locale)
         if (model.id) {
           await this.mutateGql({
             mutation: updateTemplateGql,
@@ -126,7 +127,7 @@
         }
         this.$emit('refetchTemplates', true)
       },
-      async onDelete () {
+      async onDelete() {
         await this.mutateGql({
           mutation: deleteTemplateGql,
           variables: {id: this.model.id},
