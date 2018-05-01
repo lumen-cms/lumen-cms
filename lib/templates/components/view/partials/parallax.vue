@@ -1,12 +1,13 @@
 <template>
   <div :class="currentClass"
-       v-bind="currentAttrs">
-    <v-parallax v-if="src && currentAttrs && height && !isFixedBackground"
+       v-bind="currentAttrs"
+       v-if="src">
+    <v-parallax v-if="currentAttrs && height && !isFixedBackground"
                 class="lazyload"
                 alt="parallax-image"
                 :height="height"
                 :jumbotron="$vuetify.breakpoint.smAndDown"
-                :src="''"
+                :src="browserSniffer().isChrome ? '': src"
                 :data-prx="src">
       <slot/>
     </v-parallax>
@@ -54,28 +55,28 @@
         type: Object
       }
     },
-    data () {
+    data() {
       return {
         src: ''
       }
     },
-    mounted () {
+    mounted() {
       if (this.isFirstOfPage) {
         this.$store.dispatch('setCmsJumbotron', true)
       }
       this.src = this.getSrc()
     },
-    destroyed () {
+    destroyed() {
       if (this.isFirstOfPage) {
         this.$store.dispatch('setCmsJumbotron', false)
       }
     },
     computed: {
-      fileReference () {
+      fileReference() {
         const refs = this.content.fileReferences || []
         return Object.assign({}, refs.length && refs[0])
       },
-      height () {
+      height() {
         const {vh} = getViewportDimensions()
         if (this.fileReference.resize) {
           return Math.min(vh, Number(this.fileReference.resize.replace(/\D/g, '')))
@@ -83,11 +84,11 @@
           return this.parallaxHeight || 300
         }
       },
-      fixedBackgroundUrl () {
+      fixedBackgroundUrl() {
         if (!this.isFixedBackground || !this.fileReference) return
         return 'url(' + this.getSrc() + ')'
       },
-      fixedBackgroundStyle () {
+      fixedBackgroundStyle() {
         if (!this.isFixedBackground || !this.fileReference) return
         // const ref = Object.assign({}, this.fileReference, {resize: false})
         let backgroundAttachment = 'fixed'
@@ -109,7 +110,33 @@
       }
     },
     methods: {
-      getSrc () {
+      browserSniffer() {
+        // https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+        // Opera 8.0+
+        const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
+
+        // Firefox 1.0+
+        const isFirefox = typeof InstallTrigger !== 'undefined'
+
+        // Safari 3.0+ "[object HTMLElementConstructor]"
+        const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
+          return p.toString() === '[object SafariRemoteNotification]'
+        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
+
+        // Internet Explorer 6-11
+        const isIE = /*@cc_on!@*/false || !!document.documentMode
+
+        // Edge 20+
+        const isEdge = !isIE && !!window.StyleMedia
+
+        // Chrome 1+
+        const isChrome = !!window.chrome && !!window.chrome.webstore
+
+        // Blink engine detection
+        const isBlink = (isChrome || isOpera) && !!window.CSS
+        return {isOpera, isFirefox, isSafari, isIE, isEdge, isChrome, isBlink}
+      },
+      getSrc() {
         if (!this.fileReference || !process.browser) return ''
         const isSmDown = this.$vuetify.breakpoint.smAndDown
         const {vh} = getViewportDimensions()
@@ -119,12 +146,12 @@
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
 
         return getImageSrc(ref.file,
-                           false,
-                           isSmDown
-                             // Jumbotron crop
-                             ? `${xCropAmount}x${yCropAmount}centro`
-                             // Parallax crop
-                             : `${xCropAmount}x${Math.min(file.height, h)}centro`
+          false,
+          isSmDown
+            // Jumbotron crop
+            ? `${xCropAmount}x${yCropAmount}centro`
+            // Parallax crop
+            : `${xCropAmount}x${Math.min(file.height, h)}centro`
         ).src
       }
     }
