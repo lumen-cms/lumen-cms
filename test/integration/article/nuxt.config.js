@@ -23,6 +23,13 @@ module.exports = {
           text: 'Cms Test',
           view: 'lc-cms-test'
         }
+      },
+      templateVisibility: {
+        SIDEBAR_LEFT: 'test'
+        // HEAD_TOP (context) {
+        //   console.log(context)
+        //   return true
+        // }
       }
     }
   }]],
@@ -40,7 +47,7 @@ module.exports = {
     ]
   },
   build: {
-    extend (config) {
+    extend(config) {
       // config.resolve.alias['~articleUpdate'] = resolve(__dirname, './gql/UpdateArticle.gql')
     }
   }

@@ -89,7 +89,7 @@
             articleId: article.id,
             languageKey: article.languageKey
           })
-          await store.dispatch('setCurrentArticleCategories', article.categories.map(c => c.title).slice(0))
+          await store.dispatch('setCurrentArticleCategories', article.categories.slice(0))
           return {
             host,
             Article: article,

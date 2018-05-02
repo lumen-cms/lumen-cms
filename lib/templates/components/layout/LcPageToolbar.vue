@@ -34,57 +34,57 @@
 </template>
 
 <script>
-export default {
-  name: "LcPageToolbar",
-  props: {
-    showSearch: {
-      type: Boolean,
-      default: false
+  export default {
+    name: 'LcPageToolbar',
+    props: {
+      showSearch: {
+        type: Boolean,
+        default: false
+      },
+      clippedRight: {
+        type: Boolean,
+        default: false
+      },
+      hideExtensionTemplate: {
+        type: Boolean,
+        default: false
+      }
     },
-    clippedRight: {
-      type: Boolean,
-      default: false
+    data () {
+      return {
+        searchActive: false
+      }
     },
-    hideExtensionTemplate: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      searchActive: false
-    };
-  },
-  computed: {
-    mobileSearchActive() {
-      return this.searchActive && this.$vuetify.breakpoint.smAndDown;
+    computed: {
+      mobileSearchActive () {
+        return this.searchActive && this.$vuetify.breakpoint.smAndDown
+      },
+      darkToolbar () {
+        return this.$cms.pageToolbarDark // CONFIG
+      },
+      hasExtension () {
+        return this.$cms.pageToolbarExtension
+      }
     },
-    darkToolbar() {
-      return this.$cms.pageToolbarDark; // CONFIG
-    },
-    hasExtension() {
-      return this.$cms.pageToolbarExtension;
-    }
-  },
-  watch: {
-    "$vuetify.breakpoint.mdAndUp"(val) {
-      val && (this.searchActive = false);
+    watch: {
+      '$vuetify.breakpoint.mdAndUp' (val) {
+        val && (this.searchActive = false)
+      }
     }
   }
-};
 </script>
 
 <style lang="stylus">
-.main-search.no-extension {
-  flex-grow: 1;
-  opacity: 1;
-  transition: flex-grow 0.15s ease-in-out;
-}
+  .main-search.no-extension {
+    flex-grow: 1;
+    opacity: 1;
+    transition: flex-grow 0.15s ease-in-out;
+  }
 
-.main-search.no-extension.search-field-hidden {
-  flex-grow: 0.0001;
-  overflow: hidden;
-  opacity: 0;
-  min-width: 0;
-}
+  .main-search.no-extension.search-field-hidden {
+    flex-grow: 0.0001;
+    overflow: hidden;
+    opacity: 0;
+    min-width: 0;
+  }
 </style>
