@@ -4,7 +4,7 @@
                        temporary
                        fixed
                        right
-                       v-if="$store.getters.getPageTemplate($cms.TEMPLATE.SIDEBAR_RIGHT)"
+                       v-if="$store.getters.getPageTemplate($cms.pageTemplate.SIDEBAR_RIGHT)"
                        v-model="drawer">
     <v-toolbar
       class="transparent" flat>
@@ -18,7 +18,7 @@
       </v-list>
     </v-toolbar>
     <v-divider/>
-    <lc-vue-renderer :template-region="$cms.TEMPLATE.SIDEBAR_RIGHT"/>
+    <lc-vue-renderer :template-region="$cms.pageTemplate.SIDEBAR_RIGHT"/>
     <slot/>
   </v-navigation-drawer>
 </template>

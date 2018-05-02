@@ -17,7 +17,7 @@
         <v-icon>search</v-icon>
       </v-btn>
       <slot/>
-      <lc-vue-renderer :template-region="$cms.TEMPLATE.HEAD_TOP" navigation="menu" :class="$cms.toolbarTopVisibility"/>
+      <lc-vue-renderer :template-region="$cms.pageTemplate.HEAD_TOP" navigation="menu" :class="$cms.toolbarTopVisibility"/>
       <v-layout v-if="hasExtension"
                 row
                 slot="extension"
@@ -27,7 +27,7 @@
         <v-spacer v-if="!showSearch"/>
         <lc-vue-renderer v-if="!hideExtensionTemplate"
                          navigation="menu"
-                         :template-region="$cms.TEMPLATE.HEAD_EXTENSION"/>
+                         :template-region="$cms.pageTemplate.HEAD_EXTENSION"/>
       </v-layout>
     </template>
   </lc-main-toolbar>

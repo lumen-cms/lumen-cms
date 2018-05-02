@@ -13,9 +13,9 @@
       <v-flex xs12>
         <slot name="links"/>
         <slot/>
-        <lc-vue-renderer :template-region="$cms.TEMPLATE.FOOTER_TOP"/>
-        <lc-vue-renderer :template-region="$cms.TEMPLATE.FOOTER_MIDDLE"/>
-        <lc-vue-renderer :template-region="$cms.TEMPLATE.FOOTER_BOTTOM"/>
+        <lc-vue-renderer :template-region="$cms.pageTemplate.FOOTER_TOP"/>
+        <lc-vue-renderer :template-region="$cms.pageTemplate.FOOTER_MIDDLE"/>
+        <lc-vue-renderer :template-region="$cms.pageTemplate.FOOTER_BOTTOM"/>
       </v-flex>
     </v-layout>
   </v-footer>

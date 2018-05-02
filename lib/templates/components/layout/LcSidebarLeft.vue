@@ -6,7 +6,7 @@
                        v-if="$store.getters.isPageTemplateVisible(this.$cms, 'SIDEBAR_LEFT')"
                        v-model="drawer">
     <v-divider/>
-    <lc-vue-renderer :template-region="$cms.TEMPLATE.SIDEBAR_LEFT"/>
+    <lc-vue-renderer :template-region="$cms.pageTemplate.SIDEBAR_LEFT"/>
   </v-navigation-drawer>
 </template>
 

@@ -83,7 +83,7 @@
         return this.model.type === 'JSON' ? {name: 'javascript', json: true} : 'vue'
       },
       keyItems() {
-        return Object.keys(this.$cms.TEMPLATE).map(e => ({
+        return Object.keys(this.$cms.pageTemplate).map(e => ({
           value: slugifyTemplateKey(e, this.$store.state.lc.locale),
           text: e
         }))

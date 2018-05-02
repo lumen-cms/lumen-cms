@@ -146,7 +146,7 @@
       },
       async syncDefaultTemplates () {
         const ref = this.$refs.pageTemplateDialog
-        const templates = Object.keys(this.$cms.TEMPLATE)
+        const templates = Object.keys(this.$cms.pageTemplate)
         this.processTemplateSync = true
         for (const template of templates) {
           const key = slugifyTemplateKey(template, this.$store.state.lc.locale)
