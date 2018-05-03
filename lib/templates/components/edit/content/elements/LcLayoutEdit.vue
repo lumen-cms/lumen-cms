@@ -48,6 +48,11 @@
                     label="Grow"/>
         </template>
 
+        <v-text-field v-if="model.properties.type === 'Slider'"
+                      label="height"
+                      v-model="model.properties.height"
+                      type="number" />
+
         <v-select :items="['inset', 'popout', 'expand', 'focusable']"
                   v-if="model.properties.type === 'ExpansionPanel'"
                   v-model="model.properties.properties"

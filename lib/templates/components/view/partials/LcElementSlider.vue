@@ -1,10 +1,12 @@
 <template>
-  <div class="carousel element-slider" :style="'height: ' + height">
+  <div :class="wrapClassNames"
+       :style="style">
     <div v-for="(dir, i) in ['left', 'right']" :key="'ctrl' + i"
          class="slide-control"
          :class="'carousel__' + dir">
       <v-btn @click="dir === 'left' ? prev() : next()"
-             class="pa-0" icon>
+             class="pa-0"
+             icon>
         <v-icon v-text="'chevron_' + dir"/>
       </v-btn>
     </div>
@@ -40,9 +42,32 @@
       value: {
         type: Number,
         default: null
+      },
+      content: {
+        type: Object
       }
     },
+    computed: {
 
+      wrapClassNames () {
+        let styles = (this.content && this.content.styles) || {}
+        let rootClasses = (styles && styles.rootClassNames) || []
+        // add specific max-width classes
+        rootClasses = rootClasses.map(e => e.includes('max-width-') ? 'slider-' + e : e)
+        if (styles.backgroundClassNames) {
+          rootClasses = rootClasses.concat(styles.backgroundClassNames)
+        }
+        console.log(styles)
+        return rootClasses.length ? rootClasses.join(' ') + ' carousel element-slider' : 'carousel element-slider'
+      },
+      style () {
+        const height = this.content && this.content.properties && this.content.properties.height
+        const style = {
+          height: height ? `${height}px` : this.height
+        }
+        return style
+      }
+    },
     watch: {
       inputValue (v, oldV) {
         this.getItems().forEach((item, i) => {
@@ -62,7 +87,7 @@
       setTimeout(() => {
         // @TODO - workaround
         if (!this.inputValue) this.inputValue = this.value || 0
-      }, 1000)
+      }, 100)
     },
     updated () {
       if (!this.inputValue) this.inputValue = this.value || 0
@@ -88,20 +113,42 @@
 
 <style lang="stylus">
   .element-slider {
+    &.slider-max-width-900 {
+      display block
+      max-width: 900px
+      margin-left auto !important
+      margin-right auto !important
+    }
     .slide-item {
+      &.card {
+        box-shadow: none
+
+      }
       position: absolute;
       left: 0;
       width: 100%;
       max-width: none;
+      top: 50%
+      > div {
+        margin-bottom 0 !important
+      }
+      .flex > .card {
+        // center non-equal heights of img
+        top: 50%
+        transform translateY(-50%)
+      }
+      .content-element {
+        background-color transparent !important
+      }
       &.left-outside {
-        transform: translateX(-100%)
+        transform: translateX(-100%) translateY(-50%)
       }
       &.active {
         transition: all 0.3s;
-        transform: translateX(0)
+        transform: translateX(0) translateY(-50%)
       }
       &.right-outside {
-        transform: translateX(200%)
+        transform: translateX(200%) translateY(-50%)
       }
     }
   }

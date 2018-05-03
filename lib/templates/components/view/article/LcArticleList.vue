@@ -182,7 +182,6 @@
           if (properties.listItemsType && properties.listItemsType !== 'All') {
             variables.filter.isBlogEntry = (properties.listItemsType === 'Articles')
           }
-          console.log(variables)
           return variables
         },
         manual: true,
