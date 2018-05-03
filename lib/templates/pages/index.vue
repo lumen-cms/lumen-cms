@@ -4,6 +4,7 @@
                           :page-props="pageProps"
                           :content="pageContent"/>
     <lc-content-renderer v-else-if="pageContent.length"
+                         :device="$device"
                          :elements="pageContent"/>
     <div class="content-boxed white elevation-1 pa-3 max-width-700"
          v-if="!pageContent.length && Article && Article.description">

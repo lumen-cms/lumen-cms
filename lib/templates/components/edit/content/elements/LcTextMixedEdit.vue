@@ -46,7 +46,9 @@
       </div>
 
       <div id="tab-styles" v-if="active === 'tab-styles'">
-
+        <v-select v-model="model.properties.hideOnDivice"
+                  :items="[{value:'mobile',text:'Hide on mobile'},{value:'mobileTablet',text:'Hide on tablet/mobile'},{value:'tabletDesktop',text:'Hide on tablet/desktop'},{value:'desktop',text:'Hide on desktop'}]"
+                  label="Hide on device"/>
         <v-select v-model="predefinedLayoutValue"
                   :items="$options.selectOptions.predifinedLayouts"
                   label="Component Pre-sets"

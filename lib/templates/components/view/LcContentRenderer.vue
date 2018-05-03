@@ -11,7 +11,8 @@
   export default {
     props: {
       elements: Array,
-      pageProps: Object
+      pageProps: Object,
+      device: Object
     },
     mounted () {
       window.addEventListener('load', () => {
