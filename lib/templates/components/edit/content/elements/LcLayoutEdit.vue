@@ -13,7 +13,9 @@
                :class="{'info--text':active==='tab-content'}">
           Settings
         </v-btn>
-        <v-btn @click="active = 'tab-media'" flat
+        <v-btn @click="active = 'tab-media'"
+               v-if="model.properties.type !== 'Tabs'"
+               flat
                :class="{'info--text':active==='tab-media'}">
           Background
         </v-btn>
@@ -26,6 +28,26 @@
     <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent">
       <div id="tab-content" v-show="active === 'tab-content'">
         <v-select v-model="model.properties.type" :items="options.typeOptions" label="Layout Type"/>
+
+        <template v-if="model.properties.type === 'Tabs'">
+          <component v-for="style in $options.inputFields.bgColors"
+                     :is="style.tag"
+                     :items="style.items"
+                     v-model="selections[style.region][style.modelName]"
+                     :multiple="!!style.multiple"
+                     :key="style.modelName"
+                     :label="style.label"
+                     clearable
+                     :autocomplete="style.autocomplete"
+                     @input="onSelectionsChange(style.region)"/>
+          <v-switch v-model="model.properties.dark"
+                    color="info"
+                    label="Dark design"/>
+          <v-switch v-model="model.properties.grow"
+                    color="info"
+                    label="Grow"/>
+        </template>
+
         <v-select :items="['inset', 'popout', 'expand', 'focusable']"
                   v-if="model.properties.type === 'ExpansionPanel'"
                   v-model="model.properties.properties"
@@ -66,7 +88,7 @@
         </v-alert>
       </div>
 
-      <div id="tab-media" v-if="active === 'tab-media'">
+      <div id="tab-media" v-if="active === 'tab-media' && model.properties.type !== 'Tabs'">
         <component v-for="style in $options.inputFields.backgroundStyles"
                    :is="style.tag"
                    :items="style.items"
@@ -77,6 +99,7 @@
                    clearable
                    :autocomplete="style.autocomplete"
                    @input="onSelectionsChange(style.region)"/>
+
         <lc-content-image-dialog v-if="model.id"
                                  :content="model"
                                  ref="contentImageDialog"/>
@@ -95,7 +118,8 @@
     mixins: [contentEditMixin, mediaFileMixin],
     inputFields: {
       styles: [styles.textColor, styles.margin, styles.padding, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
-      backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity]
+      backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
+      bgColors: [styles.backgroundColor]
     }
   }
 </script>
