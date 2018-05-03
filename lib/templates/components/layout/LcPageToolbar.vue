@@ -2,7 +2,7 @@
   <lc-main-toolbar :extended="hasExtension"
                    :mobile-search-active="mobileSearchActive"
                    :class="{'search-active' : searchActive}"
-                   :dark-toolbar="darkToolbar"
+                   :dark-toolbar="$cms.pageToolbarDark"
                    :clipped-right="clippedRight"
                    prominent>
     <v-spacer v-show="$vuetify.breakpoint.smAndDown ? !mobileSearchActive : !(showSearch && !hasExtension)"/>
@@ -58,9 +58,6 @@
     computed: {
       mobileSearchActive () {
         return this.searchActive && this.$vuetify.breakpoint.smAndDown
-      },
-      darkToolbar () {
-        return this.$cms.pageToolbarDark // CONFIG
       },
       hasExtension () {
         return this.$cms.pageToolbarExtension

@@ -167,15 +167,22 @@
             if (!variables.filter.AND) variables.filter.AND = [{OR: variables.filter.OR}]
             delete variables.filter.OR
 
-            variables.filter.AND.push({
-              categories_some: {
-                id_in: this.content.properties.categoriesIds
-              }
-            })
+            if (properties.allCategoriesMustMatch) {
+              variables.filter.AND.push({
+                AND: this.content.properties.categoriesIds.map(id => ({categories_some: {id: id}}))
+              })
+            } else {
+              variables.filter.AND.push({
+                categories_some: {
+                  id_in: this.content.properties.categoriesIds
+                }
+              })
+            }
           }
           if (properties.listItemsType && properties.listItemsType !== 'All') {
             variables.filter.isBlogEntry = (properties.listItemsType === 'Articles')
           }
+          console.log(variables)
           return variables
         },
         manual: true,

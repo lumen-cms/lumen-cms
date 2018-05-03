@@ -29,6 +29,10 @@
                   chips
                   item-value="id"
                   item-text="title"/>
+        <v-switch v-model="model.properties.allCategoriesMustMatch"
+                  color="info"
+                  :disabled="!(model.properties.categoriesIds && model.properties.categoriesIds.length)"
+                  label="All categories must match"/>
         <slot/>
         <v-select label="Limit list items"
                   v-model="model.properties.listItemsLimit"
