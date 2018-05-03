@@ -57,7 +57,6 @@
         if (styles.backgroundClassNames) {
           rootClasses = rootClasses.concat(styles.backgroundClassNames)
         }
-        console.log(styles)
         return rootClasses.length ? rootClasses.join(' ') + ' carousel element-slider' : 'carousel element-slider'
       },
       style () {
