@@ -2,7 +2,9 @@
   <div>
     <v-menu v-if="item.items"
             :value="item.active"
-            bottom left
+            bottom
+            attach
+            left
             :key="item.title + i">
       <v-btn slot="activator"
              flat>

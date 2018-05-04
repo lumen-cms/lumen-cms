@@ -12,7 +12,7 @@
              :dark="isDark"
              :light="!isDark">
 
-    <v-btn v-show="$store.getters.isPageTemplateVisible($cms,'SIDEBAR_LEFT') && !mobileSearchActive"
+    <v-btn v-show="$store.getters.isPageTemplateVisible($cms,'SIDEBAR_LEFT')"
            :class="$cms.toolbarSidebarLeftIconClass"
            icon
            flat
@@ -20,7 +20,7 @@
       <v-icon>apps</v-icon>
     </v-btn>
 
-    <v-toolbar-title v-show="!mobileSearchActive">
+    <v-toolbar-title>
       <lc-main-logo/>
     </v-toolbar-title>
     <slot/>
@@ -28,7 +28,6 @@
       <slot name="extension"/>
     </template>
     <v-toolbar-side-icon :class="$cms.toolbarSidebarRightIconClass"
-                         v-show="!mobileSearchActive"
                          @click.native.stop="$store.dispatch('toggleSidebarRight')"/>
   </v-toolbar>
 </template>
@@ -46,10 +45,6 @@
         default: true
       },
       extended: {
-        type: Boolean,
-        default: false
-      },
-      mobileSearchActive: {
         type: Boolean,
         default: false
       },
