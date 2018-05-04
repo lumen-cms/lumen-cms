@@ -48,10 +48,20 @@
                     label="Grow"/>
         </template>
 
-        <v-text-field v-if="model.properties.type === 'Slider'"
-                      label="height"
-                      v-model="model.properties.height"
-                      type="number"/>
+        <template v-if="model.properties.type === 'Slider'">
+
+          <v-text-field label="Height"
+                        v-model="model.properties.height"
+                        type="number"/>
+          <v-switch label="Enable transparent toolbar"
+                    v-model="model.properties.transparentToolbar"/>
+          <v-switch label="Has Fixed Background"
+                    v-model="model.properties.sliderFixedBackground"/>
+          <v-switch label="Zoom images (jumbotron|static background)"
+                    v-model="model.properties.sliderZoomImages"/>
+
+        </template>
+
 
         <v-select :items="['inset', 'popout', 'expand', 'focusable']"
                   v-if="model.properties.type === 'ExpansionPanel'"

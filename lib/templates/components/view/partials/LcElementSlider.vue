@@ -48,7 +48,6 @@
       }
     },
     computed: {
-
       wrapClassNames () {
         let styles = (this.content && this.content.styles) || {}
         let rootClasses = (styles && styles.rootClassNames) || []
@@ -57,7 +56,13 @@
         if (styles.backgroundClassNames) {
           rootClasses = rootClasses.concat(styles.backgroundClassNames)
         }
-        return rootClasses.length ? rootClasses.join(' ') + ' carousel element-slider' : 'carousel element-slider'
+        if (!(this.content && this.content.properties.sliderFixedBackground)) {
+          rootClasses.push('center-child-elements')
+        }
+        if (!(this.content && this.content.properties.sliderZoomImages)) {
+          rootClasses.push('zoom-images')
+        }
+        return rootClasses.length ? rootClasses.join(' ') + ' carousel lc-element-slider' : 'carousel lc-element-slider'
       },
       style () {
         const height = this.content && this.content.properties && this.content.properties.height
@@ -82,7 +87,16 @@
         this.inputValue = val
       }
     },
+    destroyed () {
+      if (this.content && this.content.properties && this.content.properties.transparentToolbar) {
+        this.$store.dispatch('setCmsJumbotron', false)
+      }
+    },
     mounted () {
+      if (this.content && this.content.properties && this.content.properties.transparentToolbar) {
+        this.$store.dispatch('setCmsJumbotron', true)
+      }
+
       setTimeout(() => {
         // @TODO - workaround
         if (!this.inputValue) this.inputValue = this.value || 0
@@ -111,7 +125,33 @@
 </script>
 
 <style lang="stylus">
-  .element-slider {
+
+  .lc-element-slider {
+    &.center-child-elements {
+      .slide-item {
+        top: 50%
+        &.left-outside {
+          transform: translateX(-100%) translateY(-50%)
+        }
+        &.active {
+          transform: translateX(0) translateY(-50%)
+        }
+        &.right-outside {
+          transform: translateX(200%) translateY(-50%)
+        }
+      }
+    }
+    &.zoom-images {
+      .fixed-background, .jumbotron__wrapper img {
+        animation: zoomin 30s ease-in infinite;
+        transition: all .5s ease-in-out;
+      }
+      .jumbotron__wrapper img {
+        top:0
+        left:0
+      }
+    }
+
     &.slider-max-width-900 {
       display block
       max-width: 900px
@@ -121,13 +161,12 @@
     .slide-item {
       &.card {
         box-shadow: none
-
       }
       position: absolute;
       left: 0;
       width: 100%;
       max-width: none;
-      top: 50%
+      /*top: 50%*/
       > div {
         margin-bottom 0 !important
       }
@@ -140,15 +179,19 @@
         background-color transparent !important
       }
       &.left-outside {
-        transform: translateX(-100%) translateY(-50%)
+        transform: translateX(-100%)
+        //transform: translateX(-100%) translateY(-50%)
       }
       &.active {
         transition: all 0.3s;
-        transform: translateX(0) translateY(-50%)
+        transform: translateX(0)
+        //transform: translateX(0) translateY(-50%)
       }
       &.right-outside {
-        transform: translateX(200%) translateY(-50%)
+        transform: translateX(200%)
+        //transform: translateX(200%) translateY(-50%)
       }
     }
   }
+
 </style>

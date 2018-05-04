@@ -1,5 +1,5 @@
 <template>
-  <v-app :class="{'jumbo-first': $store.state.lc.hasJumbotron}">
+  <v-app :class="{'jumbo-first': $store.state.lc.hasJumbotron && !$store.state.lc.isContentEditMode}">
     <lc-sidebar-left/>
     <lc-sidebar-right/>
     <lc-page-toolbar/>
