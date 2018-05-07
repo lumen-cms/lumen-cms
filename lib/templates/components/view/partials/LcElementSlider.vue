@@ -59,7 +59,7 @@
         if (!(this.content && this.content.properties.sliderFixedBackground)) {
           rootClasses.push('center-child-elements')
         }
-        if (!(this.content && this.content.properties.sliderZoomImages)) {
+        if (this.content && this.content.properties.sliderZoomImages) {
           rootClasses.push('zoom-images')
         }
         return rootClasses.length ? rootClasses.join(' ') + ' carousel lc-element-slider' : 'carousel lc-element-slider'
@@ -142,8 +142,8 @@
       }
     }
     &.zoom-images {
-      .fixed-background, .jumbotron__wrapper img {
-        animation: zoomin 30s ease-in infinite;
+      .fixed-background .bg-image, .jumbotron__wrapper img {
+        animation: zoomin 20s ease-in infinite;
         transition: all .5s ease-in-out;
       }
       .jumbotron__wrapper img {

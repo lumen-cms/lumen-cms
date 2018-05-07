@@ -12,10 +12,14 @@
       <slot/>
     </v-parallax>
     <div v-else
-         class="fixed-background lazyload"
-         :data-bg="fixedBackgroundUrl"
+         class="fixed-background"
          :style="fixedBackgroundStyle">
-      <slot/>
+      <div class="bg-image lazyload"
+           :data-bg="fixedBackgroundUrl"
+           :style="fixedBackgroundStyle"/>
+      <div class="fixed-background__content">
+        <slot/>
+      </div>
     </div>
   </div>
 </template>
@@ -55,28 +59,28 @@
         type: Object
       }
     },
-    data() {
+    data () {
       return {
         src: ''
       }
     },
-    mounted() {
+    mounted () {
       if (this.isFirstOfPage) {
         this.$store.dispatch('setCmsJumbotron', true)
       }
       this.src = this.getSrc()
     },
-    destroyed() {
+    destroyed () {
       if (this.isFirstOfPage) {
         this.$store.dispatch('setCmsJumbotron', false)
       }
     },
     computed: {
-      fileReference() {
+      fileReference () {
         const refs = this.content.fileReferences || []
         return Object.assign({}, refs.length && refs[0])
       },
-      height() {
+      height () {
         const {vh} = getViewportDimensions()
         if (this.fileReference.resize) {
           return Math.min(vh, Number(this.fileReference.resize.replace(/\D/g, '')))
@@ -84,11 +88,11 @@
           return this.parallaxHeight || 300
         }
       },
-      fixedBackgroundUrl() {
+      fixedBackgroundUrl () {
         if (!this.isFixedBackground || !this.fileReference) return
         return 'url(' + this.getSrc() + ')'
       },
-      fixedBackgroundStyle() {
+      fixedBackgroundStyle () {
         if (!this.isFixedBackground || !this.fileReference) return
         // const ref = Object.assign({}, this.fileReference, {resize: false})
         let backgroundAttachment = 'fixed'
@@ -104,13 +108,13 @@
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           position: 'relative',
-          overflowX: 'hidden',
+          overflow: 'hidden',
           height: this.parallaxHeight ? `${this.parallaxHeight}px` : `${this.height}px`
         }
       }
     },
     methods: {
-      browserSniffer() {
+      browserSniffer () {
         // https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
         // Opera 8.0+
         const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
@@ -136,7 +140,7 @@
         const isBlink = (isChrome || isOpera) && !!window.CSS
         return {isOpera, isFirefox, isSafari, isIE, isEdge, isChrome, isBlink}
       },
-      getSrc() {
+      getSrc () {
         if (!this.fileReference || !process.browser) return ''
         const isSmDown = this.$vuetify.breakpoint.smAndDown
         const {vh} = getViewportDimensions()
@@ -164,6 +168,21 @@
       transform: none !important;
       left: 0;
       top: 0;
+    }
+  }
+
+  .fixed-background .fixed-background__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0
+  }
+
+  .zoom-enabled {
+    .fixed-background .bg-image {
+      animation: zoomin 20s ease-in infinite;
+      transition: all .5s ease-in-out;
     }
   }
 </style>

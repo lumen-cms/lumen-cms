@@ -189,6 +189,9 @@
                   clearable
                   :items="['Parallax', 'Jumbotron', 'FixedBackground']"
                   @change="delete model.properties.imageOrient; delete model.properties.isLightbox; delete model.properties.imageColumnSize"/>
+        <v-switch label="Enable zoom effect"
+                  v-model="model.properties.enableBackgroundZoom"
+                  v-if="['FixedBackground'].includes(model.properties.layoutPanel)"/>
 
         <v-select name="imageOrient"
                   v-model="model.properties.imageOrient"
