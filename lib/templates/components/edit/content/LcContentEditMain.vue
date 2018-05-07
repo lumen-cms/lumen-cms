@@ -4,7 +4,6 @@
       :page-props="pageProps"
       :elements="content || []"/>
     <lc-media-library/>
-    {{ $store.getters.getDialogType }}
     <template v-if="!!$store.getters.getDialogType">
       <lc-content-create ref="contentCreate"/>
       <lc-content-delete-dialog :page-props="pageProps"

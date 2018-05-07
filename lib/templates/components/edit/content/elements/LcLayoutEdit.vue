@@ -49,7 +49,7 @@
         </template>
 
         <template v-if="model.properties.type === 'Slider'">
-
+          <!-- this should match with properties of lc-list-widget -->
           <v-text-field label="Height"
                         v-model="model.properties.height"
                         type="number"/>
@@ -57,6 +57,8 @@
                     v-model="model.properties.transparentToolbar"/>
           <v-switch label="Show delimiters"
                     v-model="model.properties.sliderShowDelimiters"/>
+          <v-switch label="Light design"
+                    v-model="model.properties.sliderLightDesign"/>
           <v-text-field label="Auto rotation (ms)"
                         v-model="model.properties.sliderAutoRotation"
                         type="number"/>

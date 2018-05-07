@@ -19,17 +19,21 @@
       <v-flex xs12 sm6 md4
               v-for="(item, i) in list"
               :key="`cards${i}`">
-        <lc-article-list-item :item="item" style-type="Cards"/>
+        <lc-article-list-item :item="item"
+                              :properties="properties"
+                              style-type="Cards"/>
       </v-flex>
     </template>
 
-    <template v-else-if="styleType === 'Slider'">
-      <lc-element-slider :hide-bottom-bar="content.properties.bottomBarHidden"
-                         :height="`${content.properties.sliderHeight}px`">
-        <lc-article-list-item v-for="(item, i) in list" :key="`slider${i}`"
+    <template v-else-if="styleType === 'Slider' && list.length">
+      <lc-carousel :hide-bottom-bar="content.properties.bottomBarHidden"
+                   :content="content">
+        <lc-article-list-item v-for="(item, i) in list"
+                              :key="`slider${i}`"
                               :height="content.properties.sliderHeight"
-                              :item="item" style-type="Slider"/>
-      </lc-element-slider>
+                              :item="item"
+                              style-type="Slider"/>
+      </lc-carousel>
     </template>
 
     <v-flex xs12 v-else>
@@ -52,6 +56,7 @@
 
 <script>
   import allArticleGql from '../../../gql/article/allArticles.gql'
+  import LcCarousel from '../partials/LcCarousel'
 
   const pagination = {
     rowsPerPage: 20,
@@ -72,6 +77,7 @@
    */
   export default {
     name: 'LcArticleList',
+    components: {LcCarousel},
     props: {
       showCount: {
         type: Boolean,
@@ -112,6 +118,9 @@
     computed: {
       styleType () {
         return this.content.properties.styleType || 'Cards'
+      },
+      properties () {
+        return this.content.properties || {}
       }
     },
     apollo: {
@@ -120,7 +129,6 @@
         prefetch ({store}) {
           const {skip, first} = getSkipFirst(pagination)
           const properties = this.content.properties || {}
-          console.log(store.state)
           const filter = {
             OR: [{deleted: null}, {deleted: false}],
             languageKey: store.state.lc.locale.toUpperCase(),

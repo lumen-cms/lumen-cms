@@ -24,7 +24,7 @@
           <br>
         </template>
 
-        <template v-if="item.categories && item.categories.length">
+        <template v-if="item.categories && item.categories.length && !properties.hideTagNames">
           <v-icon class="grey--text darken-2 body-2 pr-1">folder_open</v-icon>
           <span class="body-1"
                 v-for="(cat, i) in item.categories"
@@ -41,12 +41,14 @@
   <v-container v-else-if="styleType === 'Slider'" fill-height class="scroll-y">
     <v-layout row wrap align-center>
       <v-flex sm4>
-        <figure class="">
-          <img class="img-rounded lazyload"
-               :data-src="previewImageRound"
-               alt="preview-image"
-               width="80%" height="auto" style="max-height: 80%; max-width: 300px;">
-        </figure>
+        <nuxt-link :to="'/' + item.slug">
+          <figure>
+            <img class="img-rounded lazyload"
+                 :data-src="previewImageRound"
+                 alt="preview-image"
+                 width="80%" height="auto" style="max-height: 80%; max-width: 300px;">
+          </figure>
+        </nuxt-link>
       </v-flex>
       <v-flex xs12 sm8 class="text-xs-left">
         <h2>{{ item.title }}</h2>
@@ -72,7 +74,7 @@
 </template>
 
 <script>
-  import { getImageSrc } from '../../../util/imageSrcHelper'
+  import {getImageSrc} from '../../../util/imageSrcHelper'
 
   export default {
     name: 'LcArticleListItem',
@@ -88,6 +90,11 @@
       height: {
         type: Number | null | false,
         'default': null
+      },
+      properties: {
+        type: Object,
+        'default': () => {
+        }
       }
     },
     computed: {

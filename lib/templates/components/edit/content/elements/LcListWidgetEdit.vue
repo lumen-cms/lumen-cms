@@ -50,17 +50,25 @@
                   clearable
                   :items="options.styleTypes"/>
 
+        <template v-if="model.properties.styleType === 'Cards'">
+          <v-switch v-model="model.properties.hideTagNames"
+                    label="Hide tag categories"/>
+        </template>
+
         <template v-if="(model.properties.styleType === 'Slider')">
 
-          <v-select label="Slider height in px"
-                    v-model="model.properties.sliderHeight"
-                    name="sliderHeight"
-                    clearable
-                    :items="[300,400,500,600,700,800]"/>
+          <v-text-field label="Height"
+                        v-model="model.properties.height"
+                        type="number"/>
+          <v-switch label="Show delimiters"
+                    v-model="model.properties.sliderShowDelimiters"/>
+          <v-switch label="Light design"
+                    v-model="model.properties.sliderLightDesign"/>
 
-          <v-checkbox label="Hide bottom bar?"
-                      name="bottomBarHidden"
-                      v-model="model.properties.bottomBarHidden"/>
+          <v-text-field label="Auto rotation (ms)"
+                        v-model="model.properties.sliderAutoRotation"
+                        type="number"/>
+
         </template>
 
       </div>
