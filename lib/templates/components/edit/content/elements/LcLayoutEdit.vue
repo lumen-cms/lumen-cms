@@ -55,11 +55,11 @@
                         type="number"/>
           <v-switch label="Enable transparent toolbar"
                     v-model="model.properties.transparentToolbar"/>
-          <v-switch label="Has Fixed Background"
-                    v-model="model.properties.sliderFixedBackground"/>
-          <v-switch label="Zoom images (jumbotron|static background)"
-                    v-model="model.properties.sliderZoomImages"/>
-
+          <v-switch label="Show delimiters"
+                    v-model="model.properties.sliderShowDelimiters"/>
+          <v-text-field label="Auto rotation (ms)"
+                        v-model="model.properties.sliderAutoRotation"
+                        type="number"/>
         </template>
 
 

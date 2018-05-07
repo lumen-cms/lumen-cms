@@ -227,6 +227,16 @@
                 <v-switch v-model="model.properties.isLightbox"
                           :disabled="!!model.properties.layoutPanel"
                           label="Enable Lightbox"/>
+                <template v-if="!model.properties.imageColumnSize">
+                  <v-text-field label="Slideshow height"
+                                v-model="model.properties.slideshowHeight"
+                                type="number"/>
+                  <v-switch label="Hide delimiters"
+                            v-model="model.properties.slideshowHideDelimiters"/>
+                  <v-text-field label="Auto rotation (ms)"
+                                v-model="model.properties.slideshowAutoRotation"
+                                type="number"/>
+                </template>
               </v-card-text>
             </v-card>
           </v-expansion-panel-content>
