@@ -220,7 +220,7 @@
     })
     const IconClass = new Parchment.Attributor.Class('icon', 'ql-icon', {
       scope: Parchment.Scope.INLINE,
-      whitelist: ['standard', 'medium', 'large', 'x_large']
+      whitelist: ['standard', 'medium', 'large', 'x_large', 'x_x_large', 'x_x_x_large']
     })
 
     class MyLink extends Link {
@@ -349,6 +349,8 @@
           {value: 'medium', text: 'Medium'},
           {value: 'large', text: 'Large'},
           {value: 'x_large', text: 'X-Large'},
+          {value: 'x_x_large', text: 'X-X-Large'},
+          {value: 'x_x_x_large', text: 'X-X-X-Large'},
           {value: false, text: 'None'}
         ]
       },
