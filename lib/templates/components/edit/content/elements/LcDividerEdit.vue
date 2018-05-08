@@ -11,26 +11,7 @@
     </v-toolbar>
     <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent">
 
-      <v-select :items="materialIcons"
-                name="icon"
-                v-model="model.properties.icon"
-                label="Icon"
-                autocomplete
-                cache-items
-                hint="Leave empty if you only want to show a line-divider">
-        <template slot="selection" slot-scope="data">
-          <v-icon>{{ data.item }}</v-icon> &nbsp;
-          {{ data.item }}
-        </template>
-        <template slot="item" slot-scope="data">
-          <v-list-tile-avatar>
-            <v-icon>{{ data.item }}</v-icon>
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ data.item }}</v-list-tile-title>
-          </v-list-tile-content>
-        </template>
-      </v-select>
+      <lc-material-icon-picker v-model="model.properties.icon"/>
 
       <v-select name="iconSize"
                 v-model="model.properties.iconSize"
@@ -62,9 +43,11 @@
 <script>
   import contentEditMixin from '../../../../mixins/contentEditMixin'
   import styles from '../../../../util/contentEditStyleDefinitions'
+  import LcMaterialIconPicker from '../../LcMaterialIconPicker'
 
   export default {
     name: 'LcDividerEdit',
+    components: {LcMaterialIconPicker},
     mixins: [contentEditMixin],
     inputFields: {
       styles:
@@ -73,17 +56,6 @@
     data () {
       return {
         materialIcons: []
-      }
-    },
-    mounted () {
-      this.getMaterialNames()
-    },
-    methods: {
-      async getMaterialNames () {
-        const fetched = await fetch('https://raw.githubusercontent.com/google/material-design-icons/224895a8/iconfont/codepoints')
-          .then(res => res.text())
-        const array = fetched.split('\n').map(item => item.split(' ')[0])
-        this.materialIcons = array
       }
     }
   }
