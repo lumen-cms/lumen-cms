@@ -56,6 +56,9 @@
         </template>
 
         <template v-if="(model.properties.styleType === 'Slider')">
+          <v-select label="Slider Style"
+                    :items="$options.inputFields.sliderStyles"
+                    v-model="model.properties.sliderStyle"/>
 
           <v-text-field label="Height"
                         v-model="model.properties.height"
@@ -150,7 +153,8 @@
     },
     inputFields: {
       backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
-      rootStyles: [styles.padding, styles.margin, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint]
+      rootStyles: [styles.padding, styles.margin, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
+      sliderStyles: [{value: 'round', text: 'Rounded image'}, {value: 'slideshow', text: 'Slideshow'}]
     },
     apollo: {
       allArticleCategories: {

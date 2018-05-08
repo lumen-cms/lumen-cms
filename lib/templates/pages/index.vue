@@ -52,11 +52,9 @@
     beforeDestroy () {
       this.$off('routeChanged', this.onRouteChange)
     },
-    destroyed () {
-      this.$store.dispatch('setPageProps', {})
-    },
     methods: {
       onRouteChange () {
+        this.$store.dispatch('setPageProps', {})
         this.$store.dispatch('setCurrentArticleCategories', [])
       }
     },
