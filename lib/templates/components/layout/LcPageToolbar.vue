@@ -1,6 +1,6 @@
 <template>
   <div>
-    <lc-system-bar v-if="$cms.systemBar.enable"
+    <lc-system-bar v-if="$cms.systemBar.enable && !$device.isMobile"
                    :lights-out="transparentToolbar"/>
     <v-toolbar app
                fixed
