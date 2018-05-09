@@ -24,6 +24,11 @@ module.exports = {
           view: 'lc-cms-test'
         }
       },
+      systemBar: {
+        enable: true,
+        dark: false,
+        color: 'white'
+      },
       templateVisibility: {
         SIDEBAR_LEFT: 'test'
         // HEAD_TOP (context) {
@@ -47,7 +52,7 @@ module.exports = {
     ]
   },
   build: {
-    extend(config) {
+    extend (config) {
       // config.resolve.alias['~articleUpdate'] = resolve(__dirname, './gql/UpdateArticle.gql')
     }
   }

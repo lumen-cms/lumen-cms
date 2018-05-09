@@ -1,31 +1,58 @@
 <template>
-  <lc-main-toolbar :extended="hasExtension"
-                   class="lc-page-toolbar"
-                   :class="{'mobile-search-active' : mobileSearchActive}"
-                   :dark-toolbar="$cms.pageToolbarDark"
-                   :clipped-right="clippedRight"
-                   prominent>
-    <v-spacer/>
-    <lc-main-search class="lc-main-search no-extension mx-3"
-                    v-if="!!showSearch"
-                    @mobileSearchActive="mobileSearchActive = $event"/>
+  <div>
+    <lc-system-bar v-if="$cms.systemBar.enable"
+                   :lights-out="transparentToolbar"/>
+    <v-toolbar app
+               fixed
+               :extended="hasExtension"
+               prominent
+               :clipped-left="$vuetify.breakpoint.mdAndUp"
+               :clipped-right="clippedRight"
+               v-scroll="onScroll"
+               class="lc-page-toolbar"
+               :class="{'search-active': $store.state.lc.searchActive, 'has-jumbo': jumbo, 'transparent': transparentToolbar}"
+               ref="toolbar"
+               :flat="transparentToolbar"
+               :dark="isDark"
+               :light="!isDark">
 
-    <template v-show="!mobileSearchActive">
+      <v-btn v-show="$store.getters.isPageTemplateVisible($cms,'SIDEBAR_LEFT')"
+             :class="$cms.toolbarSidebarLeftIconClass"
+             icon
+             flat
+             @click.native.stop="$store.dispatch('toggleSidebarLeft')">
+        <v-icon>apps</v-icon>
+      </v-btn>
 
-      <slot/>
-      <lc-vue-renderer :template-region="$cms.pageTemplate.HEAD_TOP" navigation="menu"
-                       :class="$cms.toolbarTopVisibility"/>
-      <v-layout v-if="hasExtension"
-                row
-                slot="extension"
-                align-center
-                pa-3>
-        <lc-vue-renderer v-if="!hideExtensionTemplate"
+      <v-toolbar-title>
+        <lc-main-logo/>
+      </v-toolbar-title>
+
+      <v-spacer/>
+      <lc-main-search class="lc-main-search no-extension mx-3"
+                      v-if="!!showSearch"
+                      @mobileSearchActive="mobileSearchActive = $event"/>
+
+      <template v-show="!mobileSearchActive">
+        <slot/>
+        <lc-vue-renderer :template-region="$cms.pageTemplate.HEAD_TOP"
                          navigation="menu"
-                         :template-region="$cms.pageTemplate.HEAD_EXTENSION"/>
-      </v-layout>
-    </template>
-  </lc-main-toolbar>
+                         :class="$cms.toolbarTopVisibility"/>
+        <v-layout v-if="hasExtension"
+                  row
+                  slot="extension"
+                  align-center
+                  pa-3>
+          <lc-vue-renderer v-if="!hideExtensionTemplate"
+                           navigation="menu"
+                           :template-region="$cms.pageTemplate.HEAD_EXTENSION"/>
+        </v-layout>
+      </template>
+      <v-toolbar-side-icon :class="$cms.toolbarSidebarRightIconClass"
+                           @click.native.stop="$store.dispatch('toggleSidebarRight')"/>
+    </v-toolbar>
+  </div>
+
 </template>
 
 <script>
@@ -47,12 +74,43 @@
     },
     data () {
       return {
-        mobileSearchActive: false
+        mobileSearchActive: false,
+        flat: false,
+        dark: this.darkToolbar,
+        scrolledDown: false
+      }
+    },
+    mounted () {
+      this.onScroll()
+    },
+    watch: {
+      '$store.state.lc.hasJumbotron' () {
+        if (!process.browser) return
+        this.onScroll()
+      },
+      $route () {
+        if (!process.browser) return
+        this.onScroll()
       }
     },
     computed: {
       hasExtension () {
         return this.$cms.pageToolbarExtension
+      },
+      jumbo () {
+        return this.$store.state.lc.hasJumbotron
+      },
+      transparentToolbar () {
+        return this.jumbo && !this.scrolledDown
+      },
+      isDark () {
+        return this.$cms.pageToolbarDark || this.dark || this.transparentToolbar
+      }
+    },
+    methods: {
+      onScroll () {
+        if (!process.browser) return
+        this.scrolledDown = window && window.pageYOffset >= 128
       }
     }
   }
@@ -69,9 +127,27 @@
 
   .lc-page-toolbar.mobile-search-active {
     .toolbar__content {
-      > div:not(.lc-main-search),>button{
+      > div:not(.lc-main-search), > button {
         display none
       }
+    }
+  }
+
+  .toolbar:not(.transparent) {
+    &:not(.theme--dark) {
+      background-color: white !important;
+    }
+
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .toolbar.transparent.has-jumbo .toolbar__extension {
+    border-top-color: transparent !important;
+  }
+
+  .toolbar.transparent.has-jumbo {
+    .btn.btn--flat, .toolbar__side-icon, .dialog__activator .btn--outline {
+      background-color: rgba(0, 0, 0, 0.4) !important;
     }
   }
 </style>

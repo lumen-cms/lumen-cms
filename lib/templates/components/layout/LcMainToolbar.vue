@@ -1,35 +1,39 @@
 <template>
-  <v-toolbar app
-             :fixed="fixed"
-             :extended="extended"
-             :prominent="prominent"
-             :clipped-left="$vuetify.breakpoint.mdAndUp"
-             :clipped-right="clippedRight"
-             v-scroll="onScroll"
-             :class="{'search-active': $store.state.lc.searchActive, 'has-jumbo': jumbo, 'transparent': transparentToolbar}"
-             ref="toolbar"
-             :flat="transparentToolbar"
-             :dark="isDark"
-             :light="!isDark">
+  <div>
+    <lc-system-bar :lights-out="transparentToolbar"/>
+    <v-toolbar app
+               :fixed="fixed"
+               :extended="extended"
+               :prominent="prominent"
+               :clipped-left="$vuetify.breakpoint.mdAndUp"
+               :clipped-right="clippedRight"
+               v-scroll="onScroll"
+               :class="{'search-active': $store.state.lc.searchActive, 'has-jumbo': jumbo, 'transparent': transparentToolbar}"
+               ref="toolbar"
+               :flat="transparentToolbar"
+               :dark="isDark"
+               :light="!isDark">
 
-    <v-btn v-show="$store.getters.isPageTemplateVisible($cms,'SIDEBAR_LEFT')"
-           :class="$cms.toolbarSidebarLeftIconClass"
-           icon
-           flat
-           @click.native.stop="$store.dispatch('toggleSidebarLeft')">
-      <v-icon>apps</v-icon>
-    </v-btn>
+      <v-btn v-show="$store.getters.isPageTemplateVisible($cms,'SIDEBAR_LEFT')"
+             :class="$cms.toolbarSidebarLeftIconClass"
+             icon
+             flat
+             @click.native.stop="$store.dispatch('toggleSidebarLeft')">
+        <v-icon>apps</v-icon>
+      </v-btn>
 
-    <v-toolbar-title>
-      <lc-main-logo/>
-    </v-toolbar-title>
-    <slot/>
-    <template slot="extension">
-      <slot name="extension"/>
-    </template>
-    <v-toolbar-side-icon :class="$cms.toolbarSidebarRightIconClass"
-                         @click.native.stop="$store.dispatch('toggleSidebarRight')"/>
-  </v-toolbar>
+      <v-toolbar-title>
+        <lc-main-logo/>
+      </v-toolbar-title>
+      <slot/>
+      <template slot="extension">
+        <slot name="extension"/>
+      </template>
+      <v-toolbar-side-icon :class="$cms.toolbarSidebarRightIconClass"
+                           @click.native.stop="$store.dispatch('toggleSidebarRight')"/>
+    </v-toolbar>
+  </div>
+
 </template>
 
 <script>
