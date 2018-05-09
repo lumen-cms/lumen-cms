@@ -101,7 +101,8 @@
                             label="Title"
                             v-else/>
             </template>
-            <v-text-field v-if="editModel.type === 'subheader'" name="action" v-model="editModel.action" label="Icon"/>
+            <lc-material-icon-picker v-if="editModel.type !== 'divider'"
+                                     v-model="editModel.action"/>
             <template v-if="editModel.type !== 'directory' && editModel.type !== 'divider'">
               <lc-page-href-select required
                                    @updated="onPageSelection"
@@ -155,9 +156,9 @@
           // update a menu entry
           const currentModel = model.item
           this.editModel = Object.assign({}, currentModel, {
-            link: currentModel.to ? this.getHrefValue(currentModel) : null,
-            type: currentModel.type || this.getItemType(currentModel)
-          }
+              link: currentModel.to ? this.getHrefValue(currentModel) : null,
+              type: currentModel.type || this.getItemType(currentModel)
+            }
           )
         } else {
           let originId = model.item && model.item.id

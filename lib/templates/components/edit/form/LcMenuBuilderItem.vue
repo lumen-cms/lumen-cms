@@ -4,6 +4,7 @@
       <a href="#" @click.stop="editItem(item,true)">[
         <v-icon small>add</v-icon>
         ]</a>
+      <v-icon v-if="item.action" small>{{item.action}}</v-icon>
       <span>&nbsp;{{ item.subheader }}</span>
       (
       <router-link v-if="item.to || item['subheader-link']" :to="item.to || item['subheader-link']" router
@@ -36,6 +37,7 @@
             <a href="#" @click.stop="editItem(item,true)">[
               <v-icon small>add</v-icon>
               ]</a>
+            <v-icon v-if="item.action" small>{{item.action}}</v-icon>
             {{ item.title }}
             <a href="#" @click.stop="editItem(item)">[
               <v-icon small>edit</v-icon>
@@ -72,6 +74,7 @@
           <a href="#" @click.stop="editItem(item,true)">[
             <v-icon small>add</v-icon>
             ]</a>
+          <v-icon v-if="item.action" small>{{item.action}}</v-icon>
           {{ item.title }}
           (
           <router-link v-if="item.to" :to="item.to" target="__blank">{{ item.to }}</router-link>
@@ -95,10 +98,9 @@
       </v-list-tile-content>
     </v-list-tile>
     <template v-else-if="item.divider">
-      <v-divider/>
       <div class="pl-3" style="margin-top:-11px">
         <a href="#" @click.stop="editItem(item,true)">[ &#x2b; ]</a>
-        ---- DIVIDER ----
+        ---- DIVIDER|SPACER ----
         <a @click.stop="editItem(item)">[
           <v-icon small>edit</v-icon>
           ]</a>

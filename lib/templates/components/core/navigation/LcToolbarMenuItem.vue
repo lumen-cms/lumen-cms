@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <component :is="item.divider ? 'v-layout':'div'">
     <v-menu v-if="item.items"
             :value="item.active"
             bottom
@@ -7,6 +7,7 @@
             left
             :key="item.title + i">
       <v-btn slot="activator"
+             :small="small"
              flat>
         {{ item.title }}
         <v-icon>arrow_drop_down</v-icon>
@@ -25,31 +26,40 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-    <v-spacer v-else-if="item.spacer || item.divider"
+    <v-spacer v-else-if="item.divider"
               :key="'div' + i"/>
     <v-btn v-else
            flat
-           :to="link"
+           :small="small"
+           v-bind="attrs"
            :key="'tile' + i"
            :prepend-icon="item.action"
            nuxt>
+      <v-icon v-if="item.action">{{item.action}}</v-icon>
       {{ item.title || item.subheader }}
     </v-btn>
-  </div>
+  </component>
 </template>
 <script>
   export default {
     name: 'LcToolbarMenuItem',
     props: {
+      small: Boolean,
       item: Object,
       i: {type: Number, 'default': 0},
       level: {type: Number, 'default': 0},
       subGroup: {type: Boolean}
     },
     computed: {
+      attrs () {
+        console.log(this.item)
+        return {
+          [this.item.linkOpenExternal ? 'href' : 'to']: this.link
+        }
+      },
       link () {
         const link = this.item['subheader-link'] || this.item.to
-        if (link) {
+        if (link && !this.item.linkOpenExternal) {
           return link.startsWith('/', link) ? link : '/' + link
         }
         return link

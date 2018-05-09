@@ -5,6 +5,7 @@
                 :dark="$cms.systemBar.dark"
                 :color="$cms.systemBar.color">
     <lc-vue-renderer navigation="menu"
+                     :small="true"
                      :template-region="$cms.pageTemplate.SYSTEM_BAR"/>
   </v-system-bar>
 </template>
