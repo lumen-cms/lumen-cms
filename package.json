@@ -55,7 +55,8 @@
     "subscriptions-transport-ws": "^0.9.7",
     "vue-i18n": "^7.6.0",
     "vue-ls": "^3.0.5",
-    "vuetify": "1.0.17"
+    "vuetify": "1.0.17",
+    "vue-apollo": "3.0.0-beta.5"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
