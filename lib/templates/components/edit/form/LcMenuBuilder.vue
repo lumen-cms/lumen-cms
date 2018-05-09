@@ -250,8 +250,10 @@
         }
       },
       afterEditSave () {
-        this.$refs.editFormModel.resetForm()
         this.editShow = false
+        this.$nextTick(() => {
+          this.$refs.editFormModel.resetForm()
+        })
       },
       /**
        * click on edit triggered
@@ -327,7 +329,7 @@
               return item
             }
             if (item.items) {
-              item.items = insertItem(item.items)
+              item.items = insertFirstChild(item.items)
             }
             return item
           })
