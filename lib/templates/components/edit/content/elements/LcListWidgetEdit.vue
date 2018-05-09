@@ -39,6 +39,9 @@
                   name="listItemsLimit"
                   clearable
                   :items="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"/>
+        <v-select label="Sort items"
+                  v-model="model.properties.orderBy"
+                  :items="[{value:'createdAt_DESC',text:'Created'},{value:'updatedAt_DESC',text: 'Updated'},{value:'publishedDate_DESC',text:'Published'},{value:'title_ASC',text:'Title'}]"/>
 
         <v-switch label="Hide show more"
                   v-model="model.properties.hideShowMore"/>

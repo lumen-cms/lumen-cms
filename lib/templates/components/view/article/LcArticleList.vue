@@ -131,11 +131,11 @@
             published: true
           }
           this.onlyBlogPosts && (filter.isBlogEntry = true)
-
           return {
             first: properties.listItemsLimit || first,
             skip,
-            filter
+            filter,
+            orderBy: properties.orderBy || 'publishedDate_DESC'
           }
         },
         variables () {
@@ -144,6 +144,7 @@
           const variables = {
             first: properties.listItemsLimit || first,
             skip,
+            orderBy: properties.orderBy || 'publishedDate_DESC',
             filter: {
               languageKey: this.$store.state.lc.locale.toUpperCase(),
               // contents_some: {id_not: null}, // testing purpose
