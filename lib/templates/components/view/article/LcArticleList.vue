@@ -37,7 +37,7 @@
       </v-list>
     </v-flex>
 
-    <v-flex v-if="count > list.length && showPagination" xs12
+    <v-flex v-if="count > list.length && hasLoadMore" xs12
             class="text-xs-center">
       <v-btn color="primary" :block="$vuetify.breakpoint.smAndDown" outline
              :loading="!!loadingApollo"
@@ -112,6 +112,11 @@
       },
       properties () {
         return this.content.properties || {}
+      },
+      hasLoadMore () {
+        console.log(this.properties)
+        const hideShowMore = this.properties && this.properties.hideShowMore
+        return !hideShowMore && this.showPagination
       }
     },
     apollo: {

@@ -40,6 +40,9 @@
                   clearable
                   :items="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"/>
 
+        <v-switch label="Hide show more"
+                  v-model="model.properties.hideShowMore"/>
+
         <v-select label="List item type"
                   v-model="model.properties.listItemsType"
                   name="listItemsType"
@@ -60,9 +63,19 @@
                     :items="$options.inputFields.sliderStyles"
                     v-model="model.properties.sliderStyle"/>
 
+          <template v-if="model.properties.sliderStyle === 'slideshow'">
+
+            <v-switch v-model="model.properties.sliderImageCover"
+                      label="Image cover"/>
+            <v-select v-model="model.properties.sliderHeaderSize"
+                      label="Header Size"
+                      :items="['display-4','display-3','display-2','display-1','headline','title']"/>
+          </template>
+
           <v-text-field label="Height"
                         v-model="model.properties.height"
                         type="number"/>
+
           <v-switch label="Show delimiters"
                     v-model="model.properties.sliderShowDelimiters"/>
           <v-switch label="Light design"
@@ -71,7 +84,6 @@
           <v-text-field label="Auto rotation (ms)"
                         v-model="model.properties.sliderAutoRotation"
                         type="number"/>
-
         </template>
 
       </div>
