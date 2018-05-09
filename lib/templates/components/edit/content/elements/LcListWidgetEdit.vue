@@ -64,6 +64,9 @@
                     v-model="model.properties.sliderStyle"/>
 
           <template v-if="model.properties.sliderStyle === 'slideshow'">
+            <v-select label="Items on each slide"
+                      v-model="model.properties.sliderItemsRow"
+                      :items="[1,2,3,4]"/>
 
             <v-switch v-model="model.properties.sliderImageCover"
                       label="Image cover"/>

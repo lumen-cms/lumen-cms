@@ -114,7 +114,6 @@
         return this.content.properties || {}
       },
       hasLoadMore () {
-        console.log(this.properties)
         const hideShowMore = this.properties && this.properties.hideShowMore
         return !hideShowMore && this.showPagination
       }

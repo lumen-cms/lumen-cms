@@ -26,6 +26,7 @@
   export default {
     name: 'PageIndex',
     layout: 'pageView',
+    middleware: ['auth'],
     head () {
       if (this.Article && this.Article.id) {
         const lang = this.Article.languageKey.toLowerCase()
