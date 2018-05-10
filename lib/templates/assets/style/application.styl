@@ -66,12 +66,18 @@ body {
   font-size: $custom-theme_variables.icon-size-x_x_x_large
 }
 
+// fix menu case sensitive
 .system-bar, .toolbar {
   .btn {
     text-transform initial
   }
 }
 
+// fix zIndex issues for layout
 .system-bar.system-bar--fixed {
+  z-index: 5
+}
+
+.lc-page-toolbar.toolbar {
   z-index: 4
 }
