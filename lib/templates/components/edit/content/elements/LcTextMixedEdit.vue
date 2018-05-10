@@ -33,6 +33,8 @@
 
         <template v-if="typename==='Html'">
           <v-text-field name="body" v-model="model.description" label="Code" multi-line/>
+          <v-switch v-model="model.properties.isVueRenderer"
+                    label="Is Vue Code"/>
           <v-switch v-model="iframeResponsiveValue"
                     label="Enable Youtube Iframe Responsive"/>
         </template>
