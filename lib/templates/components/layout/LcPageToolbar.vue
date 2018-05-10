@@ -37,6 +37,7 @@
         <slot/>
         <lc-vue-renderer :template-region="$cms.pageTemplate.HEAD_TOP"
                          navigation="menu"
+                         v-if="!hideToolbarRenderer"
                          :class="$cms.toolbarTopVisibility"/>
         <v-layout v-if="hasExtension"
                   row
@@ -70,6 +71,9 @@
       hideExtensionTemplate: {
         type: Boolean,
         default: false
+      },
+      hideToolbarRenderer: {
+        type: Boolean
       }
     },
     data () {
