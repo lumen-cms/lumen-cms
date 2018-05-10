@@ -103,12 +103,18 @@
             </template>
             <lc-material-icon-picker v-if="editModel.type !== 'divider'"
                                      v-model="editModel.action"/>
-            <v-text-field label="Class name(s)"
-                          v-model="editModel.linkClass"/>
+            <v-select label="Item visibility"
+                      clearable
+                      :items="['hidden-xs-only', 'hidden-sm-and-down', 'hidden-sm-and-up', 'hidden-md-only', 'hidden-md-and-down', 'hidden-md-and-up', 'hidden-lg-only', 'hidden-lg-and-down', 'hidden-lg-and-up', 'hidden-xl-only']"
+                      v-model="editModel.linkClass"/>
             <template v-if="editModel.type !== 'directory' && editModel.type !== 'divider'">
 
-              <v-text-field label="Icon class breakpoint"
-                            v-model="editModel.iconBreakpoint"/>
+              <v-select label="Icon class breakpoint"
+                        clearable
+                        :items="['xsOnly','smAndDown','mdAndDown','lgAndDown','xlOnly','smAndUp','mdAndUp','lgAndUp']"
+                        v-model="editModel.iconBreakpoint"
+                        persistent-hint
+                        hint="On which breakpoint shall be icon only?"/>
               <v-switch v-model="editModel.isVuexAction" label="Is vuex action"/>
               <v-text-field label="Vuex action name"
                             v-if="editModel.isVuexAction"
