@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <lc-page-toolbar show-search/>
-    <lc-main-sidebar/>
+    <lc-sidebar-right/>
     <v-content class="main page-view-layout"
                :class="{'is-loading':$store.state.lc.cmsLoading}">
       <v-container fluid class="pa-0">

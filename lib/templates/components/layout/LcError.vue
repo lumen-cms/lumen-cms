@@ -2,7 +2,7 @@
   <no-ssr>
     <v-app :class="{'extended-toolbar': hasExtension}">
       <lc-page-toolbar :has-extension="hasExtension"/>
-      <lc-main-sidebar/>
+      <lc-sidebar-right/>
       <v-content :class="{'is-loading':$store.state.lc.cmsLoading, 'content-edit-mode': false}">
         <v-container fluid
                      class="pa-0">
