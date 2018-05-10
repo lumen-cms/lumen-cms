@@ -104,10 +104,18 @@
             <lc-material-icon-picker v-if="editModel.type !== 'divider'"
                                      v-model="editModel.action"/>
             <template v-if="editModel.type !== 'directory' && editModel.type !== 'divider'">
+              <v-switch v-model="editModel.isVuexAction" label="Is vuex action"/>
+              <v-text-field label="Vuex action name"
+                            v-if="editModel.isVuexAction"
+                            required
+                            v-model="editModel.vuexAction"/>
               <lc-page-href-select required
+                                   v-if="!editModel.isVuexAction"
                                    @updated="onPageSelection"
                                    :value="editModel.link"/>
-              <v-switch v-model="editModel.linkOpenExternal" label="Open external"/>
+              <v-switch v-model="editModel.linkOpenExternal"
+                        label="Open external"
+                        v-if="!editModel.isVuexAction"/>
             </template>
           </lc-form-container>
         </v-card-text>
@@ -127,6 +135,16 @@
   import updateTemplateGql from '../../../gql/pageTemplate/updatePageTemplate.gql'
   import deleteTemplateGql from '../../../gql/pageTemplate/deletePageTemplate.gql'
 
+  const editModel = {
+    type: null,
+    title: null,
+    subheader: null,
+    link: null,
+    linkOpenExternal: false,
+    isVuexAction: false,
+    vuexAction: null,
+    to: null
+  }
   export default {
     name: 'LcMenuBuilder',
     props: {
@@ -143,7 +161,7 @@
           key: null
         },
         navigation: [],
-        editModel: null,
+        editModel: Object.assign({}, editModel),
         loading: false,
         deleting: false
       }
@@ -251,6 +269,7 @@
       },
       afterEditSave () {
         this.editShow = false
+        this.editModel = Object.assign({}, editModel)
         this.$nextTick(() => {
           this.$refs.editFormModel.resetForm()
         })
@@ -260,7 +279,7 @@
        */
       removeEditItem () {
         const currentNavigation = JSON.parse(JSON.stringify(this.navigation.slice(0)))
-        const form = this.editModel
+        const form = Object.assign({}, this.editModel)
 
         this.navigation = []
         this.navigation = removeItem(currentNavigation)

@@ -13,31 +13,36 @@
         <v-icon>arrow_drop_down</v-icon>
       </v-btn>
       <v-list>
-        <v-list-tile v-for="(subItem, j) in item.items"
-                     :i="j"
-                     :key="subItem.title + j"
-                     :to="getLink(subItem.to)"
-                     nuxt
-                     router
-                     :prepend-icon="subItem.action">
-          <v-list-tile-content>
-            <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+        <lc-toolbar-menu-item v-for="(subItem, j) in item.items"
+                              :item="subItem"
+                              :key="subItem.title + j"
+                              :level="level + 1"
+                              :i="j"
+                              :small="small"
+                              :sub-group="true"/>
       </v-list>
     </v-menu>
-    <v-spacer v-else-if="item.divider"
-              :key="'div' + i"/>
-    <v-btn v-else
-           flat
-           :small="small"
-           v-bind="attrs"
-           :key="'tile' + i"
-           :prepend-icon="item.action"
-           nuxt>
-      <v-icon v-if="item.action">{{item.action}}</v-icon>
-      {{ item.title || item.subheader }}
-    </v-btn>
+    <component :is="subGroup ? 'v-divider' : 'v-spacer'"
+               v-else-if="item.divider"
+               :key="'div' + i"/>
+    <v-list-tile v-else-if="level > 0"
+                 v-bind="attrs"
+                 :prepend-icon="item.action">
+      <v-list-tile-content>
+        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <template v-else>
+      <v-btn flat
+             :small="small"
+             v-bind="attrs"
+             :key="'tile' + i"
+             v-on="item.isVuexAction ? {click:onVuexAction} : {}"
+             :prepend-icon="item.action">
+        <v-icon v-if="item.action">{{ item.action }}</v-icon>
+        {{ item.title || item.subheader }}
+      </v-btn>
+    </template>
   </component>
 </template>
 <script>
@@ -52,25 +57,26 @@
     },
     computed: {
       attrs () {
-        console.log(this.item)
-        return {
-          [this.item.linkOpenExternal ? 'href' : 'to']: this.link
+        if (this.item.isVuexAction) {
+          return {}
         }
-      },
-      link () {
-        const link = this.item['subheader-link'] || this.item.to
-        if (link && !this.item.linkOpenExternal) {
-          return link.startsWith('/', link) ? link : '/' + link
+        let link = this.item['subheader-link'] || this.item.to
+        if (!this.item.linkOpenExternal) {
+          link = (link && link.startsWith('/', link)) ? link : '/' + link
         }
-        return link
+        const attrs = {
+          [this.item.linkOpenExternal ? 'href' : 'to']: link
+        }
+        if (this.item.linkOpenExternal) {
+          attrs.target = '_blank'
+        }
+        return attrs
       }
     },
     methods: {
-      getLink (link) {
-        if (link) {
-          return link.startsWith('/', link) ? link : '/' + link
-        }
-        return link
+      onVuexAction () {
+        const vuexAction = this.item.vuexAction
+        vuexAction && this.$store.dispatch(vuexAction)
       }
     }
   }
