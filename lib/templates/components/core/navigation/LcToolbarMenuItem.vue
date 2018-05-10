@@ -7,10 +7,10 @@
             :class="item.linkClass"
             left
             :key="item.title + i">
-      <v-icon v-if="item.action">{{ item.action }}</v-icon>
       <v-btn slot="activator"
              :small="small"
              flat>
+        <v-icon v-if="item.action">{{ item.action }}</v-icon>
         {{ item.title }}
         <v-icon>arrow_drop_down</v-icon>
       </v-btn>
