@@ -2,7 +2,7 @@
   <v-app :class="{'jumbo-first': $store.state.lc.hasJumbotron && !$store.state.lc.isContentEditMode}">
     <lc-sidebar-left/>
     <lc-sidebar-right/>
-    <lc-page-toolbar/>
+    <lc-page-toolbar show-search/>
     <lc-spinner/>
     <v-content class="page-view-layout"
                :class="{'is-loading':$store.state.lc.cmsLoading, 'content-edit-mode': $store.state.lc.isContentEditMode}">

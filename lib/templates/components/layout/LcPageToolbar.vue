@@ -10,7 +10,7 @@
                :clipped-right="clippedRight"
                v-scroll="onScroll"
                class="lc-page-toolbar"
-               :class="{'search-active': $store.state.lc.searchActive, 'has-jumbo': jumbo, 'transparent': transparentToolbar}"
+               :class="{'mobile-search-active': mobileSearchActive, 'has-jumbo': jumbo, 'transparent': transparentToolbar}"
                ref="toolbar"
                :flat="transparentToolbar"
                :dark="isDark"
