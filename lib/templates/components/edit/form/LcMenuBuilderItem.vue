@@ -1,32 +1,6 @@
 <template>
   <div>
-    <v-subheader v-if="item.subheader">
-      <a href="#" @click.stop="editItem(item,true)">[
-        <v-icon small>add</v-icon>
-        ]</a>
-      <v-icon v-if="item.action" small>{{item.action}}</v-icon>
-      <span>&nbsp;{{ item.subheader }}</span>
-      (
-      <router-link v-if="item.to || item['subheader-link']" :to="item.to || item['subheader-link']" router
-                   target="__blank">{{ item.to || item['subheader-link'] }}
-      </router-link>
-      )
-      <a href="#" @click.stop="editItem(item)">[
-        <v-icon small>edit</v-icon>
-        ]</a>
-      <a @click.stop="cutItem(item)" v-show="!cutIsActive">[
-        <v-icon small>content_cut</v-icon>
-        ]</a>
-      <template v-if="cutIsActive">
-        <a @click.stop="cutItem(item,true)">[
-          <v-icon small>content_copy</v-icon>
-          ]</a>
-        <a @click.stop="$store.dispatch('setMenuCutPaste', null)">[
-          <v-icon small>clear</v-icon>
-          ]</a>
-      </template>
-    </v-subheader>
-    <v-list-group v-else-if="item.items || item.type === 'directory'"
+    <v-list-group v-if="item.items || item.type === 'directory'"
                   :value="item.active"
                   :sub-group="subGroup"
                   :prepend-icon="subGroup ? 'arrow_drop_down' : item.action"
@@ -94,9 +68,10 @@
             <v-icon small>add</v-icon>
             ]</a>
           <v-icon v-if="item.action" small>{{ item.action }}</v-icon>
-          {{ item.title }}
+          <i v-show="item.subheader">SH</i>
+          {{ item.title || item.subheader }}
           (
-          <router-link v-if="item.to" :to="item.to" target="__blank">{{ item.to }}</router-link>
+          <router-link v-if="item.to" :to="item.to" target="__blank">{{ item.to || item.subheader }}</router-link>
           )
           <a @click.stop="editItem(item)">[
             <v-icon small>edit</v-icon>
