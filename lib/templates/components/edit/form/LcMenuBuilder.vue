@@ -98,12 +98,17 @@
               <v-text-field name="title"
                             required
                             v-model="editModel.title"
-                            label="Title"
+                            label="Text"
                             v-else/>
             </template>
             <lc-material-icon-picker v-if="editModel.type !== 'divider'"
                                      v-model="editModel.action"/>
+            <v-text-field label="Class name(s)"
+                          v-model="editModel.linkClass"/>
             <template v-if="editModel.type !== 'directory' && editModel.type !== 'divider'">
+
+              <v-text-field label="Icon class breakpoint"
+                            v-model="editModel.iconBreakpoint"/>
               <v-switch v-model="editModel.isVuexAction" label="Is vuex action"/>
               <v-text-field label="Vuex action name"
                             v-if="editModel.isVuexAction"
@@ -143,7 +148,9 @@
     linkOpenExternal: false,
     isVuexAction: false,
     vuexAction: null,
-    to: null
+    to: null,
+    linkClass: null,
+    iconBreakpoint: null
   }
   export default {
     name: 'LcMenuBuilder',

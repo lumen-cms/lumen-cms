@@ -4,8 +4,10 @@
             :value="item.active"
             bottom
             attach
+            :class="item.linkClass"
             left
             :key="item.title + i">
+      <v-icon v-if="item.action">{{ item.action }}</v-icon>
       <v-btn slot="activator"
              :small="small"
              flat>
@@ -34,13 +36,17 @@
     </v-list-tile>
     <template v-else>
       <v-btn flat
+             :class="item.linkClass"
              :small="small"
              v-bind="attrs"
              :key="'tile' + i"
+             :icon="$vuetify.breakpoint[item.iconBreakpoint]"
              v-on="item.isVuexAction ? {click:onVuexAction} : {}"
              :prepend-icon="item.action">
         <v-icon v-if="item.action">{{ item.action }}</v-icon>
-        {{ item.title || item.subheader }}
+        <span v-show="!$vuetify.breakpoint[item.iconBreakpoint]">
+         {{ item.title || item.subheader }}
+        </span>
       </v-btn>
     </template>
   </component>
