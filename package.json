@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@nuxtjs/apollo": "^3.0.6",
-    "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/sitemap": "0.1.1",
     "accept-language-parser": "^1.5.0",
     "apollo-link-error": "^1.0.9",
@@ -53,10 +52,11 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "subscriptions-transport-ws": "^0.9.7",
+    "vue-apollo": "3.0.0-beta.5",
+    "vue-gtagjs": "^1.0.7",
     "vue-i18n": "^7.6.0",
     "vue-ls": "^3.0.5",
-    "vuetify": "1.0.17",
-    "vue-apollo": "3.0.0-beta.5"
+    "vuetify": "1.0.17"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
