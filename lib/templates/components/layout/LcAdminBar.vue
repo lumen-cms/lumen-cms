@@ -57,8 +57,7 @@
           </v-btn>
           <span v-text="item.title"/>
         </v-tooltip>
-        <v-tooltip right
-                   v-if="$store.state.lc.isContentEditMode">
+        <v-tooltip right>
           <v-btn fab dark small
                  class="deep-purple darken-3"
                  slot="activator"
