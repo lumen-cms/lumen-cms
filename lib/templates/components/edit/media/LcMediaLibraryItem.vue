@@ -24,17 +24,22 @@
     </v-card-actions>
     <v-slide-y-transition>
       <v-card-text v-show="show">
-        <span>{{ item.name }}, used {{ used }} times</span>
-        <v-spacer/>
-        <lc-confirm-btn v-if="used === 0"
-                        label="delete"
-                        @onConfirm="$emit('remove',item)"/>
+        <div>
+          <i>{{ item.id }}</i><br>
+          <span>{{ item.name }}, used {{ used }} times</span>
+        </div>
+        <div>
+
+          <lc-confirm-btn v-if="used === 0"
+                          label="delete"
+                          @onConfirm="$emit('remove',item)"/>
+        </div>
       </v-card-text>
     </v-slide-y-transition>
   </v-card>
 </template>
 <script>
-  import { getFileAttrs } from '../../view/helpers/imageHelper'
+  import {getFileAttrs} from '../../view/helpers/imageHelper'
 
   export default {
     name: 'LcMediaLibraryItem',
