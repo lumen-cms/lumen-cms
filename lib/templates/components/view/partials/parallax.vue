@@ -81,6 +81,7 @@
         return Object.assign({}, refs.length && refs[0])
       },
       height () {
+        if (!this.fileReference) return 300
         const {vh} = getViewportDimensions()
         if (this.fileReference.resize) {
           return Math.min(vh, Number(this.fileReference.resize.replace(/\D/g, '')))
@@ -147,6 +148,7 @@
         const h = Math.max(Math.round(vh * 1.4), this.height)
         const ref = Object.assign({}, this.fileReference, {resize: false})
         const {file} = ref
+        if (!file) return ''
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
 
         return getImageSrc(ref.file,
