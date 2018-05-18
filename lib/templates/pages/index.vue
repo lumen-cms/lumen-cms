@@ -59,10 +59,8 @@
         let hash = this.$route.hash
         if (hash) {
           hash = hash.startsWith('#') ? hash.substr(1) : hash
-          setTimeout(() => {
-            const el = document.getElementsByClassName('data-id-' + hash)[0]
-            el && this.$vuetify.goTo(el) //el.scrollIntoView()
-          }, 250)
+          const el = document.getElementsByClassName('data-id-' + hash)[0]
+          el && this.$vuetify.goTo(el) //el.scrollIntoView()
         }
       },
       onRouteChange () {
