@@ -48,12 +48,23 @@
       }
     },
     mounted () {
+      this.scrollToAnchor()
       this.$on('routeChanged', this.onRouteChange)
     },
     beforeDestroy () {
       this.$off('routeChanged', this.onRouteChange)
     },
     methods: {
+      scrollToAnchor () {
+        let hash = this.$route.hash
+        if (hash) {
+          hash = hash.startsWith('#') ? hash.substr(1) : hash
+          setTimeout(() => {
+            const el = document.getElementsByClassName('data-id-' + hash)[0]
+            el && this.$vuetify.goTo(el) //el.scrollIntoView()
+          }, 250)
+        }
+      },
       onRouteChange () {
         this.$store.dispatch('setPageProps', {})
         this.$store.dispatch('setCurrentArticleCategories', [])
