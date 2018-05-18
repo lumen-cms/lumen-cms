@@ -138,7 +138,9 @@
       },
       openMenuBuilder (item) {
         this.selectedModel = item || {}
-        this.$refs.menuBuilder.toggleVisibility()
+        this.$nextTick(() => {
+          this.$refs.menuBuilder.toggleVisibility()
+        })
       },
       onEdit (item) {
         this.selectedModel = item || {}

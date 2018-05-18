@@ -41,9 +41,9 @@
       </div>
     </v-list-group>
     <template v-else-if="item.divider">
-      <div class="pl-3" style="margin-top:-11px">
+      <div class="pl-3 divider-wrap" style="margin-top:-11px">
+        <v-divider class="mt-3"/>
         <a href="#" @click.stop="editItem(item,true)">[ &#x2b; ]</a>
-        ---- DIVIDER|SPACER ----
         <a @click.stop="editItem(item)">[
           <v-icon small>edit</v-icon>
           ]</a>
@@ -153,5 +153,9 @@
 <style scoped>
   .list__tile__title a, .subheader a, .pl-3 a {
     text-decoration: none;
+  }
+
+  .list__group__items .divider-wrap {
+    margin-left: 60px
   }
 </style>
