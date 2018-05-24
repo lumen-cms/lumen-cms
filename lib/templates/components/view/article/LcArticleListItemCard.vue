@@ -2,7 +2,8 @@
   <v-card hover class="mb-3">
     <nuxt-link :to="'/' + item.slug">
       <v-card-media class="card-media lazyload"
-                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    ref="cardMedia"
+                    :src="mediaSrc"
                     :data-bg-card-media="previewImageCard"
                     height="200px"/>
     </nuxt-link>
@@ -41,12 +42,31 @@
   import articleListItemMixin from '../../../mixins/articleListItemMixin'
   import {getImageSrc} from '../../../util/imageSrcHelper'
 
+  const defaultImg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
   export default {
     name: 'LcArticleListItemCard',
     mixins: [articleListItemMixin],
-    computed: {
-      previewImageCard () {
-        return typeof this.previewImage === 'string' ? this.previewImage : getImageSrc(this.previewImage, null, 'x300').src
+    data () {
+      return {
+        mediaSrc: defaultImg,
+        previewImageCard: '',
+        isInit: true
+      }
+    },
+    watch: {
+      previewImage: {
+        handler (img) {
+          const previewImageCard = img === 'string' ? img : getImageSrc(img, null, 'x300').src
+          this.previewImageCard = previewImageCard
+          if (!this.isInit) {
+            // set mediaSrc if its not initial load for reactive search
+            this.mediaSrc = previewImageCard
+          }
+          if (this.isInit) {
+            this.isInit = false
+          }
+        },
+        immediate: true
       }
     }
   }
