@@ -29,7 +29,7 @@
     "collectCoverage": true
   },
   "dependencies": {
-    "@nuxtjs/apollo": "^4.0.0-beta.0",
+    "@nuxtjs/apollo": "^4.0.0-beta.1",
     "@nuxtjs/sitemap": "0.1.1",
     "accept-language-parser": "^1.5.0",
     "codemirror": "^5.38.0",
