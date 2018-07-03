@@ -129,7 +129,7 @@
         })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
 
         // Internet Explorer 6-11
-        const isIE = /*@cc_on!@*/false || !!document.documentMode
+        const isIE = /* @cc_on!@ */false || !!document.documentMode
 
         // Edge 20+
         const isEdge = !isIE && !!window.StyleMedia
@@ -152,12 +152,12 @@
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
 
         return getImageSrc(ref.file,
-          false,
-          isSmDown
-            // Jumbotron crop
-            ? `${xCropAmount}x${yCropAmount}centro`
-            // Parallax crop
-            : `${xCropAmount}x${Math.min(file.height, h)}centro`
+                           false,
+                           isSmDown
+                             // Jumbotron crop
+                             ? `${xCropAmount}x${yCropAmount}centro`
+                             // Parallax crop
+                             : `${xCropAmount}x${Math.min(file.height, h)}centro`
         ).src
       }
     }

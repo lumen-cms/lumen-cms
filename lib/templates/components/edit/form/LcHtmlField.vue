@@ -160,7 +160,6 @@
         <span>Align items</span>
       </v-tooltip>
 
-
       <v-tooltip top>
         <v-btn slot="activator"
                flat icon
@@ -257,17 +256,14 @@
         } else {
           value = args
         }
-        if (name !== this.statics.blotName || !value)
-          return super.format(name, value)
+        if (name !== this.statics.blotName || !value) { return super.format(name, value) }
         value = this.constructor.sanitize(value)
         if (!value.startsWith('http')) this.domNode.removeAttribute('target')
         this.domNode.setAttribute('href', value)
         if (linkid) this.domNode.setAttribute('data-link-id', linkid)
-        else if (this.domNode.getAttribute('data-link-id'))
-          this.domNode.removeAttribute('data-link-id')
+        else if (this.domNode.getAttribute('data-link-id')) { this.domNode.removeAttribute('data-link-id') }
         if (type) this.domNode.setAttribute('data-link-type', type)
-        else if (this.domNode.getAttribute('data-link-type'))
-          this.domNode.removeAttribute('data-link-type')
+        else if (this.domNode.getAttribute('data-link-type')) { this.domNode.removeAttribute('data-link-type') }
       }
     }
 

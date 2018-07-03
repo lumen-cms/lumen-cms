@@ -6,7 +6,7 @@
 <script>
   export default {
     name: 'LcSpinner',
-    mounted() {
+    mounted () {
       setTimeout(() => {
         // ensure that spinner is gone after 3 sec
         this.$refs.preloader.style.display = 'none'

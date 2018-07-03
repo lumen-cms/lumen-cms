@@ -31,68 +31,68 @@
   </v-dialog>
 </template>
 <script>
-import deleteGql from "../../gql/articleCategory/deleteArticleCategory.gql";
-import createGql from "../../gql/articleCategory/createArticleCategory.gql";
-import updateGql from "../../gql/articleCategory/updateArticleCategory.gql";
-import slugify from "slugify";
+  import deleteGql from '../../gql/articleCategory/deleteArticleCategory.gql';
+  import createGql from '../../gql/articleCategory/createArticleCategory.gql';
+  import updateGql from '../../gql/articleCategory/updateArticleCategory.gql';
+  import slugify from 'slugify';
 
-export default {
-  name: "LcArticleListDialog",
-  props: {
-    content: Array
-  },
-  data() {
-    return {
-      showDialog: false,
-      selected: null,
-      inputField: null
-    };
-  },
-  watch: {
-    selected(v) {
-      this.inputField = v ? this.content.find(e => e.id === v).title : null;
+  export default {
+    name: 'LcArticleListDialog',
+    props: {
+      content: Array
     },
-    showDialog(v) {
-      if (!v) {
-        this.selected = null;
-      }
-    }
-  },
-  methods: {
-    async onDelete() {
-      const selected = this.selected;
-      await this.mutateGql(
-        {
-          mutation: deleteGql,
-          variables: { id: selected },
-          refetchQueries: ["allArticleCategories"]
-        },
-        "deleteArticleCategory"
-      );
-    },
-    async onSave() {
-      let mutation = createGql;
-      const variables = {
-        title: this.inputField,
-        languageKey: this.$store.state.lc.locale.toUpperCase(),
-        slug: slugify(this.inputField, { lower: true })
+    data () {
+      return {
+        showDialog: false,
+        selected: null,
+        inputField: null
       };
-      if (this.selected) {
-        variables.id = this.selected;
-        mutation = updateGql;
-      }
-      await this.mutateGql(
-        {
-          mutation,
-          variables,
-          refetchQueries: ["allArticleCategories"]
-        },
-        this.selected ? "updateArticleCategory" : "createArticleCategory"
-      );
     },
-    toggleShow() {
-      this.showDialog = !this.showDialog;
+    watch: {
+      selected (v) {
+        this.inputField = v ? this.content.find(e => e.id === v).title : null;
+      },
+      showDialog (v) {
+        if (!v) {
+          this.selected = null;
+        }
+      }
+    },
+    methods: {
+      async onDelete () {
+        const selected = this.selected;
+        await this.mutateGql(
+          {
+            mutation: deleteGql,
+            variables: { id: selected },
+            refetchQueries: ['allArticleCategories']
+          },
+          'deleteArticleCategory'
+        );
+      },
+      async onSave () {
+        let mutation = createGql;
+        const variables = {
+          title: this.inputField,
+          languageKey: this.$store.state.lc.locale.toUpperCase(),
+          slug: slugify(this.inputField, { lower: true })
+        };
+        if (this.selected) {
+          variables.id = this.selected;
+          mutation = updateGql;
+        }
+        await this.mutateGql(
+          {
+            mutation,
+            variables,
+            refetchQueries: ['allArticleCategories']
+          },
+          this.selected ? 'updateArticleCategory' : 'createArticleCategory'
+        );
+      },
+      toggleShow () {
+        this.showDialog = !this.showDialog;
+      }
     }
-  }
-};
+  };
 </script>

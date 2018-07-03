@@ -45,7 +45,7 @@
              :prepend-icon="item.action">
         <v-icon v-if="item.action">{{ item.action }}</v-icon>
         <span v-show="!$vuetify.breakpoint[item.iconBreakpoint]">
-         {{ item.title || item.subheader }}
+          {{ item.title || item.subheader }}
         </span>
       </v-btn>
     </template>
