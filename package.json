@@ -29,7 +29,7 @@
     "collectCoverage": true
   },
   "dependencies": {
-    "@nuxtjs/apollo": "^4.0.0-beta.1",
+    "@nuxtjs/apollo": "^4.0.0-beta.5",
     "@nuxtjs/sitemap": "0.1.1",
     "accept-language-parser": "^1.5.0",
     "codemirror": "5.39.0",
@@ -47,14 +47,14 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-gtagjs": "^1.0.7",
-    "vue-i18n": "^7.8.0",
+    "vue-i18n": "7.8.1",
     "vue-ls": "3.1.0",
     "vuetify": "1.0.19"
   },
   "devDependencies": {
     "babel-eslint": "8.2.5",
     "codecov": "^3.0.2",
-    "eslint": "latest",
+    "eslint": "5.0.1",
     "eslint-config-standard": "latest",
     "eslint-plugin-import": "2.13.0",
     "eslint-plugin-jest": "^21.17.0",
@@ -62,7 +62,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-vue": "latest",
-    "jest": "^23.1.0",
+    "jest": "23.2.0",
     "jsdom": "^11.11.0",
     "nuxt": "^1.4.1",
     "standard-version": "^4.4.0"
