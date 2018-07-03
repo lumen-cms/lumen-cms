@@ -1,5 +1,5 @@
 <template>
-  <div class="preloader" ref="preloader">
+  <div class="preloader">
     <div class="spinner"/>
   </div>
 </template>
@@ -9,7 +9,9 @@
     mounted () {
       setTimeout(() => {
         // ensure that spinner is gone after 3 sec
-        this.$refs.preloader.style.display = 'none'
+        if(this.$el) {
+          this.$el.style.display = 'none'
+        }
       }, 3000)
     }
   }
