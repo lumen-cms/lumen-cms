@@ -118,6 +118,7 @@
       browserSniffer () {
         // https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
         // Opera 8.0+
+        // eslint-disable-next-line
         const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
 
         // Firefox 1.0+
@@ -126,7 +127,7 @@
         // Safari 3.0+ "[object HTMLElementConstructor]"
         const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
           return p.toString() === '[object SafariRemoteNotification]'
-        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
+        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification)) // eslint-disable-line
 
         // Internet Explorer 6-11
         const isIE = /* @cc_on!@ */false || !!document.documentMode
