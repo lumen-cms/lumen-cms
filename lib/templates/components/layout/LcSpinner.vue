@@ -5,18 +5,16 @@
 </template>
 <script>
   export default {
-    name: 'LcSpinner',
-    mounted() {
-      setTimeout(() => {
-        // ensure that spinner is gone after 3 sec
-        this.$refs.preloader.style.display = 'none'
-      }, 3000)
-    }
+    name: 'LcSpinner'
   }
 </script>
 <style lang="styl">
+  .wf-inactive .preloader {
+    display: none !important;
+  }
+
   .wf-active .preloader {
-    display: none
+    display: none !important;
   }
 
   .preloader {
