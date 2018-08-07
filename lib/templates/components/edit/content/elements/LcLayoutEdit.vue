@@ -64,7 +64,6 @@
                         type="number"/>
         </template>
 
-
         <v-select :items="['inset', 'popout', 'expand', 'focusable']"
                   v-if="model.properties.type === 'ExpansionPanel'"
                   v-model="model.properties.properties"

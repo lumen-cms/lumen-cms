@@ -1,5 +1,5 @@
 <template>
-  <div class="preloader" ref="preloader">
+  <div class="preloader">
     <div class="spinner"/>
   </div>
 </template>

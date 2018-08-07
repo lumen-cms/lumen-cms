@@ -60,7 +60,7 @@
         if (hash) {
           hash = hash.startsWith('#') ? hash.substr(1) : hash
           const el = document.getElementsByClassName('data-id-' + hash)[0]
-          el && this.$vuetify.goTo(el) //el.scrollIntoView()
+          el && this.$vuetify.goTo(el) // el.scrollIntoView()
         }
       },
       onRouteChange () {

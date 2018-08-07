@@ -49,7 +49,6 @@
     },
     computed: {
       attrs () {
-
         if (this.item.isVuexAction) {
           return {}
         }

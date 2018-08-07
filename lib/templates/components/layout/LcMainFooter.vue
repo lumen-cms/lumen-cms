@@ -21,7 +21,7 @@
   </v-footer>
 </template>
 <script>
-export default {
-  name: "LcMainFooter"
-};
+  export default {
+    name: 'LcMainFooter'
+  };
 </script>

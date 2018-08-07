@@ -3,7 +3,7 @@
        height="100%"
        width="auto"
        alt="logo"
-       @click="this.onLogoClick"
+       @click="onLogoClick"
        class="toolbar-logo">
 </template>
 
