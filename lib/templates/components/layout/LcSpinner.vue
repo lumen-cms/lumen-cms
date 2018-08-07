@@ -9,14 +9,6 @@
   }
 </script>
 <style lang="styl">
-  .wf-inactive .preloader {
-    display: none !important;
-  }
-
-  .wf-active .preloader {
-    display: none !important;
-  }
-
   .preloader {
     position: fixed;
     top: 0;
@@ -25,7 +17,7 @@
     bottom: 0;
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -41,6 +33,18 @@
     border-radius: 100%;
     -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
     animation: sk-scaleout 1.0s infinite ease-in-out;
+  }
+
+  .wf-loading .preloader {
+    display: flex
+  }
+
+  .wf-inactive .preloader {
+    display: none !important;
+  }
+
+  .wf-active .preloader {
+    display: none !important;
   }
 
   @-webkit-keyframes sk-scaleout {
