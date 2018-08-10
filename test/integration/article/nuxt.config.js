@@ -14,6 +14,14 @@ module.exports = {
   },
   plugins: ['~/plugins/additionalComponents.js'],
   modules: [['@@', {
+    apollo: {
+      clientConfigs: {
+        default: {
+          httpEndpoint: 'https://api.graph.cool/simple/v1/lumen-cms-demo',
+          wsEndpoint: 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo'
+        }
+      }
+    },
     cms: {
       pageToolbarExtension: false,
       componentMapping: {
