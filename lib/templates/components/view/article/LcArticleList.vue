@@ -19,17 +19,14 @@
       <v-flex xs12 sm6 md4
               v-for="(item, i) in list"
               :key="`cards${i}`">
-        <lc-article-list-item :item="item" style-type="Cards"/>
+        <lc-article-list-item-card :item="item"
+                                   :properties="properties"/>
       </v-flex>
     </template>
 
-    <template v-else-if="styleType === 'Slider'">
-      <lc-element-slider :hide-bottom-bar="content.properties.bottomBarHidden"
-                         :height="`${content.properties.sliderHeight}px`">
-        <lc-article-list-item v-for="(item, i) in list" :key="`slider${i}`"
-                              :height="content.properties.sliderHeight"
-                              :item="item" style-type="Slider"/>
-      </lc-element-slider>
+    <template v-else-if="styleType === 'Slider' && list.length">
+      <lc-article-list-slider :list="list"
+                              :properties="properties"/>
     </template>
 
     <v-flex xs12 v-else>
@@ -40,7 +37,7 @@
       </v-list>
     </v-flex>
 
-    <v-flex v-if="count > list.length && showPagination" xs12
+    <v-flex v-if="count > list.length && hasLoadMore" xs12
             class="text-xs-center">
       <v-btn color="primary" :block="$vuetify.breakpoint.smAndDown" outline
              :loading="!!loadingApollo"
@@ -112,6 +109,13 @@
     computed: {
       styleType () {
         return this.content.properties.styleType || 'Cards'
+      },
+      properties () {
+        return this.content.properties || {}
+      },
+      hasLoadMore () {
+        const hideShowMore = this.properties && this.properties.hideShowMore
+        return !hideShowMore && this.showPagination
       }
     },
     apollo: {
@@ -120,7 +124,6 @@
         prefetch ({store}) {
           const {skip, first} = getSkipFirst(pagination)
           const properties = this.content.properties || {}
-          console.log(store.state)
           const filter = {
             OR: [{deleted: null}, {deleted: false}],
             languageKey: store.state.lc.locale.toUpperCase(),
@@ -128,11 +131,11 @@
             published: true
           }
           this.onlyBlogPosts && (filter.isBlogEntry = true)
-
           return {
             first: properties.listItemsLimit || first,
             skip,
-            filter
+            filter,
+            orderBy: properties.orderBy || 'publishedDate_DESC'
           }
         },
         variables () {
@@ -141,6 +144,7 @@
           const variables = {
             first: properties.listItemsLimit || first,
             skip,
+            orderBy: properties.orderBy || 'publishedDate_DESC',
             filter: {
               languageKey: this.$store.state.lc.locale.toUpperCase(),
               // contents_some: {id_not: null}, // testing purpose
@@ -167,11 +171,17 @@
             if (!variables.filter.AND) variables.filter.AND = [{OR: variables.filter.OR}]
             delete variables.filter.OR
 
-            variables.filter.AND.push({
-              categories_some: {
-                id_in: this.content.properties.categoriesIds
-              }
-            })
+            if (properties.allCategoriesMustMatch) {
+              variables.filter.AND.push({
+                AND: this.content.properties.categoriesIds.map(id => ({categories_some: {id: id}}))
+              })
+            } else {
+              variables.filter.AND.push({
+                categories_some: {
+                  id_in: this.content.properties.categoriesIds
+                }
+              })
+            }
           }
           if (properties.listItemsType && properties.listItemsType !== 'All') {
             variables.filter.isBlogEntry = (properties.listItemsType === 'Articles')

@@ -35,6 +35,10 @@
           <v-textarea name="body"
                       v-model="model.description"
                       label="Code"/>
+
+          <v-switch v-model="model.properties.isVueRenderer"
+                    label="Is Vue Code"/>
+
           <v-switch v-model="iframeResponsiveValue"
                     label="Enable Youtube Iframe Responsive"/>
         </template>
@@ -48,7 +52,10 @@
       </div>
 
       <div id="tab-styles" v-if="active === 'tab-styles'">
-
+        <v-select v-model="model.properties.hideOnDivice"
+                  :items="[{value:'mobile',text:'Hide on mobile'},{value:'mobileTablet',text:'Hide on tablet/mobile'},{value:'tabletDesktop',text:'Hide on tablet/desktop'},{value:'desktop',text:'Hide on desktop'}]"
+                  label="Hide on device"
+                  clearable/>
         <v-select v-model="predefinedLayoutValue"
                   :items="$options.selectOptions.predifinedLayouts"
                   label="Component Pre-sets"
@@ -68,7 +75,6 @@
                            :key="style.modelName"
                            :label="style.label"
                            clearable
-                           :autocomplete="style.autocomplete"
                            @input="onSelectionsChange('header')"/>
               </v-card-text>
             </v-card>
@@ -85,7 +91,6 @@
                            :key="style.modelName"
                            :label="style.label"
                            clearable
-                           :autocomplete="style.autocomplete"
                            @input="onSelectionsChange('content')"/>
               </v-card-text>
             </v-card>
@@ -102,7 +107,6 @@
                            :key="style.modelName"
                            :label="style.label"
                            clearable
-                           :autocomplete="style.autocomplete"
                            @input="onSelectionsChange('root')"/>
               </v-card-text>
             </v-card>
@@ -118,7 +122,6 @@
                          :key="style.modelName"
                          :label="'General '+style.label"
                          clearable
-                         :autocomplete="style.autocomplete"
                          @input="onSelectionsChange('background')"/>
               <component v-for="style in $options.inputFields.backgroundHeaderStyles"
                          :is="style.tag"
@@ -128,7 +131,6 @@
                          :key="'header'+style.modelName"
                          :label="'Header '+style.label"
                          clearable
-                         :autocomplete="style.autocomplete"
                          @input="onSelectionsChange('backgroundHeader')"/>
             </v-card-text>
           </v-expansion-panel-content>
@@ -137,29 +139,26 @@
             <v-card-text class="grey lighten-4">
               <v-text-field v-model="model.properties.styleAttributes"
                             label="CSS Custom Styles"/>
-              <v-select :value="model.styles.headerClassNames"
+              <v-autocomplete :value="model.styles.headerClassNames"
                         @change="onClassNamesChange($event,'header')"
                         label="Header Class Names"
                         :items="$options.selectOptions.headerClassNames"
-                        autocomplete
                         chips
                         multiple
                         deletable-chips
                         clearable/>
-              <v-select :value="model.styles.contentClassNames"
+              <v-autocomplete :value="model.styles.contentClassNames"
                         @change="onClassNamesChange($event,'content')"
                         label="Content Class Names"
                         :items="$options.selectOptions.contentClassNames"
-                        autocomplete
                         chips
                         multiple
                         deletable-chips
                         clearable/>
-              <v-select :value="model.styles.rootClassNames"
+              <v-autocomplete :value="model.styles.rootClassNames"
                         @change="onClassNamesChange($event,'root')"
                         label="General Class Names"
                         :items="$options.selectOptions.rootClassNames"
-                        autocomplete
                         chips
                         multiple
                         deletable-chips
@@ -189,6 +188,9 @@
                   clearable
                   :items="['Parallax', 'Jumbotron', 'FixedBackground']"
                   @change="delete model.properties.imageOrient; delete model.properties.isLightbox; delete model.properties.imageColumnSize"/>
+        <v-switch label="Enable zoom effect"
+                  v-model="model.properties.enableBackgroundZoom"
+                  v-if="['FixedBackground'].includes(model.properties.layoutPanel)"/>
 
         <v-select name="imageOrient"
                   v-model="model.properties.imageOrient"
@@ -219,11 +221,20 @@
                            :key="style.modelName"
                            :label="style.label"
                            clearable
-                           :autocomplete="style.autocomplete"
                            @input="onSelectionsChange('root')"/>
                 <v-switch v-model="model.properties.isLightbox"
                           :disabled="!!model.properties.layoutPanel"
                           label="Enable Lightbox"/>
+                <template v-if="!model.properties.imageColumnSize">
+                  <v-text-field label="Slideshow height"
+                                v-model="model.properties.slideshowHeight"
+                                type="number"/>
+                  <v-switch label="Hide delimiters"
+                            v-model="model.properties.slideshowHideDelimiters"/>
+                  <v-text-field label="Auto rotation (ms)"
+                                v-model="model.properties.slideshowAutoRotation"
+                                type="number"/>
+                </template>
               </v-card-text>
             </v-card>
           </v-expansion-panel-content>

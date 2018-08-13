@@ -2,13 +2,12 @@
   <div>
     <v-subheader v-if="item.subheader"
                  :key="'subhead' + i">
-      <nuxt-link
-        v-if="item['subheader-link'] || item.to"
-        :to="item['subheader-link'] || item.to"
-        exact-active-class="primary--text"
-        style="text-decoration: none; color: inherit;"
-        nuxt>{{ item.subheader }}
-      </nuxt-link>
+      <router-link v-if="item['subheader-link'] || item.to"
+                   v-bind="attrs"
+                   exact-active-class="primary--text"
+                   style="text-decoration: none; color: inherit;">
+        {{ item.subheader }}
+      </router-link>
       <template v-else>{{ item.subheader }}</template>
     </v-subheader>
     <v-list-group v-else-if="item.items"
@@ -30,11 +29,11 @@
                                     :key="subItem.title + j"/>
     </v-list-group>
     <v-list-tile v-else-if="item.to"
-                 :to="item.to"
+                 v-bind="attrs"
                  :key="'tile' + i"
                  :prepend-icon="item.action"
-                 ripple
-                 nuxt>
+                 v-on="item.isVuexAction ? {click:onVuexAction} : {}"
+                 ripple>
       <v-list-tile-content>
         <v-list-tile-title>{{ item.title }}</v-list-tile-title>
       </v-list-tile-content>
@@ -51,6 +50,30 @@
       i: {type: Number, 'default': 0},
       level: {type: Number, 'default': 0},
       subGroup: {type: Boolean}
+    },
+    computed: {
+      attrs () {
+        if (this.item.isVuexAction) {
+          return {}
+        }
+        let link = this.item['subheader-link'] || this.item.to
+        if (!this.item.linkOpenExternal) {
+          link = (link && link.startsWith('/', link)) ? link : '/' + link
+        }
+        const attrs = {
+          [this.item.linkOpenExternal ? 'href' : 'to']: link
+        }
+        if (this.item.linkOpenExternal) {
+          attrs.target = '_blank'
+        }
+        return attrs
+      }
+    },
+    methods: {
+      onVuexAction () {
+        const vuexAction = this.item.vuexAction
+        vuexAction && this.$store.dispatch(vuexAction, true)
+      }
     }
   }
 </script>

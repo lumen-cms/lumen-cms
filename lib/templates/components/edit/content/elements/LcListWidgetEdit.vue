@@ -29,12 +29,22 @@
                   chips
                   item-value="id"
                   item-text="title"/>
+        <v-switch v-model="model.properties.allCategoriesMustMatch"
+                  color="info"
+                  :disabled="!(model.properties.categoriesIds && model.properties.categoriesIds.length)"
+                  label="All categories must match"/>
         <slot/>
         <v-select label="Limit list items"
                   v-model="model.properties.listItemsLimit"
                   name="listItemsLimit"
                   clearable
                   :items="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"/>
+        <v-select label="Sort items"
+                  v-model="model.properties.orderBy"
+                  :items="[{value:'createdAt_DESC',text:'Created'},{value:'updatedAt_DESC',text: 'Updated'},{value:'publishedDate_DESC',text:'Published'},{value:'title_ASC',text:'Title'}]"/>
+
+        <v-switch label="Hide show more"
+                  v-model="model.properties.hideShowMore"/>
 
         <v-select label="List item type"
                   v-model="model.properties.listItemsType"
@@ -46,21 +56,48 @@
                   clearable
                   :items="options.styleTypes"/>
 
+        <template v-if="model.properties.styleType === 'Cards'">
+          <v-switch v-model="model.properties.hideTagNames"
+                    label="Hide tag categories"/>
+        </template>
+
         <template v-if="(model.properties.styleType === 'Slider')">
+          <v-select label="Slider Style"
+                    :items="$options.inputFields.sliderStyles"
+                    v-model="model.properties.sliderStyle"/>
 
-          <v-select label="Slider height in px"
-                    v-model="model.properties.sliderHeight"
-                    name="sliderHeight"
-                    clearable
-                    :items="[300,400,500,600,700,800]"/>
+          <template v-if="model.properties.sliderStyle === 'slideshow'">
+            <v-select label="Items on each slide"
+                      v-model="model.properties.sliderItemsRow"
+                      :items="[1,2,3,4]"/>
 
-          <v-checkbox label="Hide bottom bar?"
-                      name="bottomBarHidden"
-                      v-model="model.properties.bottomBarHidden"/>
+            <v-switch v-model="model.properties.sliderImageCover"
+                      label="Image cover"/>
+            <v-select v-model="model.properties.sliderHeaderSize"
+                      label="Header Size"
+                      :items="['display-4','display-3','display-2','display-1','headline','title']"/>
+          </template>
+
+          <v-text-field label="Height"
+                        v-model="model.properties.height"
+                        type="number"/>
+
+          <v-switch label="Show delimiters"
+                    v-model="model.properties.sliderShowDelimiters"/>
+          <v-switch label="Light design"
+                    v-model="model.properties.sliderLightDesign"/>
+
+          <v-text-field label="Auto rotation (ms)"
+                        v-model="model.properties.sliderAutoRotation"
+                        type="number"/>
         </template>
 
       </div>
       <div id="tab-styles" v-if="active === 'tab-styles'">
+        <v-select v-model="model.properties.hideOnDivice"
+                  :items="[{value:'mobile',text:'Hide on mobile'},{value:'mobileTablet',text:'Hide on tablet/mobile'},{value:'tabletDesktop',text:'Hide on tablet/desktop'},{value:'desktop',text:'Hide on desktop'}]"
+                  label="Hide on device"
+                  clearable/>
         <v-expansion-panel focusable>
           <v-expansion-panel-content lazy v-if="false">
             <div slot="header">Content</div>
@@ -74,7 +111,6 @@
                            :key="style.modelName"
                            :label="style.label"
                            clearable
-                           :autocomplete="style.autocomplete"
                            @input="onSelectionsChange('content')"/>
               </v-card-text>
             </v-card>
@@ -91,7 +127,6 @@
                            :key="style.modelName"
                            :label="style.label"
                            clearable
-                           :autocomplete="style.autocomplete"
                            @input="onSelectionsChange(style.region)"/>
               </v-card-text>
             </v-card>
@@ -108,7 +143,6 @@
                            :key="style.modelName"
                            :label="style.label"
                            clearable
-                           :autocomplete="style.autocomplete"
                            @input="onSelectionsChange(style.region)"/>
               </v-card-text>
             </v-card>
@@ -135,7 +169,8 @@
     },
     inputFields: {
       backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
-      rootStyles: [styles.padding, styles.margin, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint]
+      rootStyles: [styles.padding, styles.margin, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
+      sliderStyles: [{value: 'round', text: 'Rounded image'}, {value: 'slideshow', text: 'Slideshow'}]
     },
     apollo: {
       allArticleCategories: {

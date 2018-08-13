@@ -1,8 +1,6 @@
 <template>
   <v-btn class="blue content-create-btn" :class="{'new-layout-col': isNewLayoutCol}" icon dark
-         @click.stop="$store.dispatch('setContentEditDialogData', {
-           dialogType: 'create',
-           isNewLayoutCol, previousElementSorting, layoutColumn, layoutIndex, contentLayoutElementId, pageContents, pageProps})">
+         @click.stop="onBtnClick">
     <v-icon v-text="isNewLayoutCol ? 'playlist_add' : 'add'"/>
   </v-btn>
 </template>
@@ -29,6 +27,16 @@
       isNewLayoutCol: {
         type: Boolean,
         'default': false
+      }
+    },
+    methods: {
+      onBtnClick () {
+        this.$store.dispatch(
+          'setContentEditDialogData',
+          Object.assign({}, this.$props, {
+            dialogType: 'create'
+          })
+        )
       }
     }
   }

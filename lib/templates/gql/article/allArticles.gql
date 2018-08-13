@@ -1,7 +1,7 @@
 #import '../file/fileFragment.gql'
 
-query allArticles ($filter: ArticleFilter, $first:Int, $skip:Int){
-  allArticles (filter: $filter,first:$first,skip:$skip, orderBy: publishedDate_DESC) {
+query allArticles ($filter: ArticleFilter, $first:Int, $skip:Int, $orderBy:ArticleOrderBy){
+  allArticles (filter: $filter,first:$first,skip:$skip, orderBy: $orderBy) {
     id
     description
     teaser
@@ -10,7 +10,7 @@ query allArticles ($filter: ArticleFilter, $first:Int, $skip:Int){
     published
     publishedDate
     isBlogEntry
-    categories {id title}
+    categories(orderBy:title_ASC) {id title}
     media {
       previewImage {
         ...file

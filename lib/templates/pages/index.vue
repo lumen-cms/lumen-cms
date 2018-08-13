@@ -4,6 +4,7 @@
                           :page-props="pageProps"
                           :content="pageContent"/>
     <lc-content-renderer v-else-if="pageContent.length"
+                         :device="$device"
                          :elements="pageContent"/>
     <div class="content-boxed white elevation-1 pa-3 max-width-700"
          v-if="!pageContent.length && Article && Article.description">
@@ -25,6 +26,7 @@
   export default {
     name: 'PageIndex',
     layout: 'pageView',
+    middleware: ['auth'],
     head () {
       if (this.Article && this.Article.id) {
         const lang = this.Article.languageKey.toLowerCase()
@@ -46,16 +48,23 @@
       }
     },
     mounted () {
+      this.scrollToAnchor()
       this.$on('routeChanged', this.onRouteChange)
     },
     beforeDestroy () {
       this.$off('routeChanged', this.onRouteChange)
     },
-    destroyed () {
-      this.$store.dispatch('setPageProps', {})
-    },
     methods: {
+      scrollToAnchor () {
+        let hash = this.$route.hash
+        if (hash) {
+          hash = hash.startsWith('#') ? hash.substr(1) : hash
+          const el = document.getElementsByClassName('data-id-' + hash)[0]
+          el && this.$vuetify.goTo(el) // el.scrollIntoView()
+        }
+      },
       onRouteChange () {
+        this.$store.dispatch('setPageProps', {})
         this.$store.dispatch('setCurrentArticleCategories', [])
       }
     },
@@ -89,7 +98,7 @@
             articleId: article.id,
             languageKey: article.languageKey
           })
-          await store.dispatch('setCurrentArticleCategories', article.categories.map(c => c.title).slice(0))
+          await store.dispatch('setCurrentArticleCategories', article.categories.slice(0))
           return {
             host,
             Article: article,

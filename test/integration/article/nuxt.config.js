@@ -33,6 +33,18 @@ module.exports = {
           text: 'Cms Test',
           view: 'lc-cms-test'
         }
+      },
+      systemBar: {
+        enable: true,
+        dark: false,
+        color: 'white'
+      },
+      templateVisibility: {
+        SIDEBAR_LEFT: 'test'
+        // HEAD_TOP (context) {
+        //   console.log(context)
+        //   return true
+        // }
       }
     }
   }]],

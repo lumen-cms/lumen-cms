@@ -28,7 +28,8 @@
           return
         }
         await this.$store.dispatch('setLanguageKey', lang)
-        this.$router.push(`/${lang}`)
+        const route = this.$cms.defaultLanguage === this.$store.state.lc.locale ? '/' : '/' + this.$store.state.lc.locale
+        this.$router.push(route)
         return Promise.resolve(true)
       }
     }

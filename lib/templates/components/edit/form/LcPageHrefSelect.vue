@@ -139,9 +139,3 @@
     }
   }
 </script>
-<style>
-  /* fixes problem with [Object Object] in the selection field */
-  .page-selection.input-group--select.input-group--focused .input-group--select__autocomplete {
-    /*opacity: 0;*/
-  }
-</style>

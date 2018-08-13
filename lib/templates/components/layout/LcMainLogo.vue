@@ -3,7 +3,7 @@
        height="100%"
        width="auto"
        alt="logo"
-       @click="$router.push('/')"
+       @click="onLogoClick"
        class="toolbar-logo">
 </template>
 
@@ -24,6 +24,12 @@
       logoMobilePath () {
         // fallback is logoPath
         return this.$cms.logoPathMobile || this.$cms.logoPath
+      }
+    },
+    methods: {
+      onLogoClick () {
+        const route = this.$cms.defaultLanguage === this.$store.state.lc.locale ? '/' : '/' + this.$store.state.lc.locale
+        this.$router.push(route)
       }
     }
   }

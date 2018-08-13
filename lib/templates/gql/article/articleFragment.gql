@@ -14,16 +14,20 @@ fragment article on Article{
   languageKey
   isBlogEntry
   authors {
-    name id
+    name
+    id
     file {
       ...file
     }
   }
   defaultLanguage{
+    id
     languageKey
   }
   categories{
-    id title
+    id
+    title
+    slug
   }
   ...extended
 }

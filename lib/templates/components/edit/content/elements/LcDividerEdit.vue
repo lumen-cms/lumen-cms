@@ -11,15 +11,17 @@
     </v-toolbar>
     <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent">
 
-      <v-text-field name="icon" v-model="model.properties.icon" label="Icon"
-                    hint="Leave empty if you only want to show a line-divider"/>
+      <lc-material-icon-picker v-model="model.properties.icon"/>
 
       <v-select name="iconSize"
                 v-model="model.properties.iconSize"
                 label="Icon Size"
                 :items="options.iconSizeOptions"
                 clearable/>
-
+      <v-select v-model="model.properties.hideOnDivice"
+                :items="[{value:'mobile',text:'Hide on mobile'},{value:'mobileTablet',text:'Hide on tablet/mobile'},{value:'tabletDesktop',text:'Hide on tablet/desktop'},{value:'desktop',text:'Hide on desktop'}]"
+                label="Hide on device"
+                clearable/>
       <component v-for="style in $options.inputFields.styles"
                  :is="style.tag"
                  :items="style.items"
@@ -28,7 +30,6 @@
                  :key="style.modelName"
                  :label="style.label"
                  clearable
-                 :autocomplete="style.autocomplete"
                  @input="onSelectionsChange(style.region)"/>
       <v-btn icon @click="classTooltip=!classTooltip">
         <v-icon>help</v-icon>
@@ -42,13 +43,20 @@
 <script>
   import contentEditMixin from '../../../../mixins/contentEditMixin'
   import styles from '../../../../util/contentEditStyleDefinitions'
+  import LcMaterialIconPicker from '../../LcMaterialIconPicker'
 
   export default {
     name: 'LcDividerEdit',
+    components: {LcMaterialIconPicker},
     mixins: [contentEditMixin],
     inputFields: {
       styles:
         [styles.dividerWidth, styles.textColor, styles.backgroundColor, styles.backgroundOpacity, styles.margin, styles.padding, styles.visibilityBreakpoint]
+    },
+    data () {
+      return {
+        materialIcons: []
+      }
     }
   }
 </script>

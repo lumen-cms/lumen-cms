@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-dialog v-model="show"
               persistent
               scrollable
@@ -106,15 +105,35 @@
                             required
                             :rules="[onRequiredRule]"
                             v-model="editModel.title"
-                            label="Title"
+                            label="Text"
                             v-else/>
             </template>
-            <v-text-field v-if="editModel.type === 'subheader'" name="action" v-model="editModel.action" label="Icon"/>
+            <lc-material-icon-picker v-if="editModel.type !== 'divider'"
+                                     v-model="editModel.action"/>
+            <v-select label="Item visibility"
+                      clearable
+                      :items="['hidden-xs-only', 'hidden-sm-and-down', 'hidden-sm-and-up', 'hidden-md-only', 'hidden-md-and-down', 'hidden-md-and-up', 'hidden-lg-only', 'hidden-lg-and-down', 'hidden-lg-and-up', 'hidden-xl-only']"
+                      v-model="editModel.linkClass"/>
             <template v-if="editModel.type !== 'directory' && editModel.type !== 'divider'">
+
+              <v-select label="Icon class breakpoint"
+                        clearable
+                        :items="['xsOnly','smAndDown','mdAndDown','lgAndDown','xlOnly','smAndUp','mdAndUp','lgAndUp']"
+                        v-model="editModel.iconBreakpoint"
+                        persistent-hint
+                        hint="On which breakpoint shall be icon only?"/>
+              <v-switch v-model="editModel.isVuexAction" label="Is vuex action"/>
+              <v-text-field label="Vuex action name"
+                            v-if="editModel.isVuexAction"
+                            required
+                            v-model="editModel.vuexAction"/>
               <lc-page-href-select required
+                                   v-if="!editModel.isVuexAction"
                                    @updated="onPageSelection"
                                    :value="editModel.link"/>
-              <v-switch v-model="editModel.linkOpenExternal" label="Open external"/>
+              <v-switch v-model="editModel.linkOpenExternal"
+                        label="Open external"
+                        v-if="!editModel.isVuexAction"/>
             </template>
           </lc-form-container>
         </v-card-text>
@@ -135,6 +154,18 @@
   import deleteTemplateGql from '../../../gql/pageTemplate/deletePageTemplate.gql'
   import validationRules from '../../../mixins/formValidation'
 
+  const editModel = {
+    type: null,
+    title: null,
+    subheader: null,
+    link: null,
+    linkOpenExternal: false,
+    isVuexAction: false,
+    vuexAction: null,
+    to: null,
+    linkClass: null,
+    iconBreakpoint: null
+  }
   export default {
     name: 'LcMenuBuilder',
     mixins: [validationRules],
@@ -152,7 +183,7 @@
           key: null
         },
         navigation: [],
-        editModel: null,
+        editModel: Object.assign({}, editModel),
         loading: false,
         deleting: false
       }
@@ -187,7 +218,7 @@
     },
     computed: {
       keyItems () {
-        return Object.keys(this.$cms.TEMPLATE).map(e => ({
+        return Object.keys(this.$cms.pageTemplate).map(e => ({
           value: slugifyTemplateKey(e, this.$store.state.lc.locale),
           text: e
         }))
@@ -259,15 +290,18 @@
         }
       },
       afterEditSave () {
-        this.$refs.editFormModel.resetForm()
         this.editShow = false
+        this.editModel = Object.assign({}, editModel)
+        this.$nextTick(() => {
+          this.$refs.editFormModel.resetForm()
+        })
       },
       /**
        * click on edit triggered
        */
       removeEditItem () {
         const currentNavigation = JSON.parse(JSON.stringify(this.navigation.slice(0)))
-        const form = this.editModel
+        const form = Object.assign({}, this.editModel)
 
         this.navigation = []
         this.navigation = removeItem(currentNavigation)
@@ -336,7 +370,7 @@
               return item
             }
             if (item.items) {
-              item.items = insertItem(item.items)
+              item.items = insertFirstChild(item.items)
             }
             return item
           })

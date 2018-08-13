@@ -13,7 +13,9 @@
                :class="{'info--text':active==='tab-content'}">
           Settings
         </v-btn>
-        <v-btn @click="active = 'tab-media'" flat
+        <v-btn @click="active = 'tab-media'"
+               v-if="model.properties.type !== 'Tabs'"
+               flat
                :class="{'info--text':active==='tab-media'}">
           Background
         </v-btn>
@@ -26,6 +28,41 @@
     <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent">
       <div id="tab-content" v-show="active === 'tab-content'">
         <v-select v-model="model.properties.type" :items="options.typeOptions" label="Layout Type"/>
+
+        <template v-if="model.properties.type === 'Tabs'">
+          <component v-for="style in $options.inputFields.bgColors"
+                     :is="style.tag"
+                     :items="style.items"
+                     v-model="selections[style.region][style.modelName]"
+                     :multiple="!!style.multiple"
+                     :key="style.modelName"
+                     :label="style.label"
+                     clearable
+                     @input="onSelectionsChange(style.region)"/>
+          <v-switch v-model="model.properties.dark"
+                    color="info"
+                    label="Dark design"/>
+          <v-switch v-model="model.properties.grow"
+                    color="info"
+                    label="Grow"/>
+        </template>
+
+        <template v-if="model.properties.type === 'Slider'">
+          <!-- this should match with properties of lc-list-widget -->
+          <v-text-field label="Height"
+                        v-model="model.properties.height"
+                        type="number"/>
+          <v-switch label="Enable transparent toolbar"
+                    v-model="model.properties.transparentToolbar"/>
+          <v-switch label="Show delimiters"
+                    v-model="model.properties.sliderShowDelimiters"/>
+          <v-switch label="Light design"
+                    v-model="model.properties.sliderLightDesign"/>
+          <v-text-field label="Auto rotation (ms)"
+                        v-model="model.properties.sliderAutoRotation"
+                        type="number"/>
+        </template>
+
         <v-select :items="['inset', 'popout', 'expand', 'focusable']"
                   v-if="model.properties.type === 'ExpansionPanel'"
                   v-model="model.properties.properties"
@@ -48,6 +85,10 @@
                       persistent-hint/>
       </div>
       <div id="tab-styles" v-if="active === 'tab-styles'">
+        <v-select v-model="model.properties.hideOnDivice"
+                  :items="[{value:'mobile',text:'Hide on mobile'},{value:'mobileTablet',text:'Hide on tablet/mobile'},{value:'tabletDesktop',text:'Hide on tablet/desktop'},{value:'desktop',text:'Hide on desktop'}]"
+                  label="Hide on device"
+                  clearable/>
         <component v-for="style in $options.inputFields.styles"
                    :is="style.tag"
                    :items="style.items"
@@ -56,7 +97,6 @@
                    :key="style.modelName"
                    :label="style.label"
                    clearable
-                   :autocomplete="style.autocomplete"
                    @input="onSelectionsChange(style.region)"/>
         <v-btn icon @click="classTooltip=!classTooltip">
           <v-icon>help</v-icon>
@@ -66,7 +106,7 @@
         </v-alert>
       </div>
 
-      <div id="tab-media" v-if="active === 'tab-media'">
+      <div id="tab-media" v-if="active === 'tab-media' && model.properties.type !== 'Tabs'">
         <component v-for="style in $options.inputFields.backgroundStyles"
                    :is="style.tag"
                    :items="style.items"
@@ -75,8 +115,8 @@
                    :key="style.modelName"
                    :label="style.label"
                    clearable
-                   :autocomplete="style.autocomplete"
                    @input="onSelectionsChange(style.region)"/>
+
         <lc-content-image-dialog v-if="model.id"
                                  :content="model"
                                  ref="contentImageDialog"/>
@@ -95,7 +135,8 @@
     mixins: [contentEditMixin, mediaFileMixin],
     inputFields: {
       styles: [styles.textColor, styles.margin, styles.padding, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
-      backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity]
+      backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
+      bgColors: [styles.backgroundColor]
     }
   }
 </script>

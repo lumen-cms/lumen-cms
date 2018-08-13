@@ -2,7 +2,7 @@
   cursor: pointer;
 }
 
-.lightbox-dialog {
+.dialog.lightbox-dialog {
   box-shadow: none;
   overflow: hidden;
   img {
@@ -21,6 +21,11 @@
     height: 80vh;
     .carousel__item {
       background-size: contain;
+    }
+  }
+  .carousel__left, .carousel__right {
+    .btn {
+      background: rgba(158, 158, 158, 0.5)
     }
   }
   .fade {

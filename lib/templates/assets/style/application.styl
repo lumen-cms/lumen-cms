@@ -3,6 +3,8 @@ $custom-theme_variables := {
   icon-size-medium: 2rem
   icon-size-large: 2.5rem
   icon-size-x_large: 3rem
+  icon-size-x_x_large: 6rem
+  icon-size-x_x_x_large: 9rem
 }
 $toolbar-extension-height := 64px
 
@@ -45,12 +47,36 @@ body {
   }
 }
 
-.speed-dial {
+.v-speed-dial {
   z-index: 2;
 }
 
-.avatar {
+.v-avatar {
   > img {
     object-fit: cover
   }
+}
+
+.v-icon.v-icon--x-x-large {
+  font-size: $custom-theme_variables.icon-size-x_x_large
+}
+
+.v-icon.v-icon--x-x-x-large {
+  font-size: $custom-theme_variables.icon-size-x_x_x_large
+}
+
+// fix menu case sensitive
+.v-system-bar, .v-toolbar {
+  .v-btn {
+    text-transform initial
+  }
+}
+
+// fix zIndex issues for layout
+.v-system-bar.v-system-bar--fixed {
+  z-index: 5
+}
+
+.lc-page-toolbar.v-toolbar {
+  z-index: 4
 }
