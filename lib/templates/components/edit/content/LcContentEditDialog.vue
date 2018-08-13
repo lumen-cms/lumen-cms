@@ -1,16 +1,19 @@
 <template>
-  <v-dialog :value="isShown"
+  <v-dialog v-model="isShown"
             :lazy="true"
             :persistent="true"
             :scrollable="true"
-            :hide-overlay="false"
+            no-click-animation
             content-class="minimized-dialog-element"
             max-width="700px"
             :fullscreen="$vuetify.breakpoint.xsOnly">
     <v-card>
+      <v-card-text>
+
       <component :is="componentName"
                  v-model="model"
                  @onMinimize="minimizeContent = $event"/>
+      </v-card-text>
       <v-progress-linear :indeterminate="true"
                          :active="$store.state.lc.updating"/>
       <v-card-actions v-show="!minimizeContent">
@@ -40,8 +43,17 @@
     // components: contentElements,
     data () {
       return {
+        isShown: false,
         minimizeContent: false,
         model: Object.assign({}, {classNames: []}, this.$store.state.lc.contentEditDialogData.content)
+      }
+    },
+    watch: {
+      '$store.state.lc.contentEditDialogData.dialogType': {
+        handler (v) {
+          this.isShown = v === 'edit'
+        },
+        immediate: true
       }
     },
     computed: {
@@ -60,9 +72,6 @@
           console.warn('Did you add the component into this.$cms.componentMapping?')
           return null
         }
-      },
-      isShown () {
-        return this.$store.getters.getDialogType === 'edit'
       }
     },
     methods: {

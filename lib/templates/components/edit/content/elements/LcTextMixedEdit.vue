@@ -32,7 +32,9 @@
                       label="Header Content"/>
 
         <template v-if="typename==='Html'">
-          <v-text-field name="body" v-model="model.description" label="Code" multi-line/>
+          <v-textarea name="body"
+                      v-model="model.description"
+                      label="Code"/>
           <v-switch v-model="iframeResponsiveValue"
                     label="Enable Youtube Iframe Responsive"/>
         </template>

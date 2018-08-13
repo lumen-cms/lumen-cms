@@ -31,11 +31,10 @@
               max-width="500">
       <v-card>
         <v-card-text>
-          <v-text-field name="inputTextArea"
-                        label="Please paste (CMD + V) your copied content here"
-                        multi-line
-                        ref="inputTextArea"
-                        style="width: 100%;height: 250px"/>
+          <v-textarea name="inputTextArea"
+                      label="Please paste (CMD + V) your copied content here"
+                      ref="inputTextArea"
+                      style="width: 100%;height: 250px"/>
         </v-card-text>
         <v-card-actions>
           <v-spacer/>

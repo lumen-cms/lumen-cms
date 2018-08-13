@@ -259,17 +259,17 @@
       z-index: 2;
     }
     &:not(.controls-visible) {
-      .toolbar__extension {
+      .v-toolbar__extension {
         display: none;
       }
       &:hover {
-        .toolbar__extension {
+        .v-toolbar__extension {
           display: flex;
           width: auto;
         }
       }
     }
-    &.toolbar--dense .toolbar__content {
+    &.v-toolbar--dense .v-toolbar__content {
       height: 35px;
     }
   }

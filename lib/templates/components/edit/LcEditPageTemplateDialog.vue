@@ -11,11 +11,13 @@
                     label="Title"
                     v-model="model.title"
                     validate-on-blur
+                    :rules="[onRequiredRule]"
                     :required="true"/>
       <v-select name="key"
                 :items="keyItems"
                 label="Key"
                 combobox
+                :rules="[onRequiredRule]"
                 v-model="model.key"
                 required/>
       <div style="max-height: 500px;" v-if="model.type==='CODE'">
@@ -42,6 +44,7 @@
   import updateTemplateGql from '../../gql/pageTemplate/updatePageTemplate.gql'
   import deleteTemplateGql from '../../gql/pageTemplate/deletePageTemplate.gql'
   import {slugifyTemplateKey} from '../../util/slugifyHelpers'
+  import validationRules from '../../mixins/formValidation'
 
   const model = {
     title: null,
@@ -52,6 +55,7 @@
   }
   export default {
     name: 'LcEditPageTemplateDialog',
+    mixins: [validationRules],
     props: {
       value: Object,
       default: model

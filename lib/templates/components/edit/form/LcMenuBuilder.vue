@@ -24,6 +24,7 @@
                                 label="Title"
                                 v-model="model.title"
                                 validate-on-blur
+                                :rules="[onRequiredRule]"
                                 required/>
                 </v-flex>
                 <v-flex>
@@ -32,6 +33,7 @@
                             label="Key"
                             combobox
                             required
+                            :rules="[onRequiredRule]"
                             v-model="model.key"/>
                 </v-flex>
               </v-layout>
@@ -90,13 +92,19 @@
                       v-model="editModel.type"
                       name="type"
                       required
+                      :rules="[onRequiredRule]"
                       label="Type"/>
             <template v-if="editModel.type !== 'divider'">
               <template v-if="editModel.type === 'subheader'">
-                <v-text-field name="subheader" required v-model="editModel.subheader" label="Title"/>
+                <v-text-field name="subheader"
+                              required
+                              v-model="editModel.subheader"
+                              :rules="[onRequiredRule]"
+                              label="Title"/>
               </template>
               <v-text-field name="title"
                             required
+                            :rules="[onRequiredRule]"
                             v-model="editModel.title"
                             label="Title"
                             v-else/>
@@ -125,9 +133,11 @@
   import createTemplateGql from '../../../gql/pageTemplate/createPageTemplate.gql'
   import updateTemplateGql from '../../../gql/pageTemplate/updatePageTemplate.gql'
   import deleteTemplateGql from '../../../gql/pageTemplate/deletePageTemplate.gql'
+  import validationRules from '../../../mixins/formValidation'
 
   export default {
     name: 'LcMenuBuilder',
+    mixins: [validationRules],
     props: {
       content: Array | Object
     },
@@ -155,9 +165,9 @@
           // update a menu entry
           const currentModel = model.item
           this.editModel = Object.assign({}, currentModel, {
-            link: currentModel.to ? this.getHrefValue(currentModel) : null,
-            type: currentModel.type || this.getItemType(currentModel)
-          }
+              link: currentModel.to ? this.getHrefValue(currentModel) : null,
+              type: currentModel.type || this.getItemType(currentModel)
+            }
           )
         } else {
           let originId = model.item && model.item.id

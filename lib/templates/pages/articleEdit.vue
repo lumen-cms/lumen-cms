@@ -110,7 +110,7 @@
                       clearable
                       deletable-chips
                       prepend-icon="list"
-                      :prepend-icon-cb="onArticleList"
+                      @click:prepend="onArticleList"
                       label="Categories"
                       v-model="model.categoriesIds"
                       name="categoriesIds"
@@ -123,7 +123,7 @@
                       clearable
                       multiple
                       :items="allAuthors || []"
-                      :prepend-icon-cb="onAddAuthor"
+                      @click:prepend="onAddAuthor"
                       prepend-icon="person_add"
                       item-text="name"
                       item-value="id"
@@ -145,16 +145,14 @@
         </v-layout>
         <v-layout row wrap>
           <v-flex md6 sm12 xs12>
-            <v-text-field name="teaser"
-                          v-model="model.teaser"
-                          label="Teaser"
-                          multi-line/>
+            <v-textarea name="teaser"
+                        v-model="model.teaser"
+                        label="Teaser"/>
           </v-flex>
           <v-flex md6 sm12 xs12>
-            <v-text-field name="description"
-                          v-model="model.description"
-                          label="Meta Description"
-                          multi-line/>
+            <v-textarea name="description"
+                        v-model="model.description"
+                        label="Meta Description"/>
           </v-flex>
         </v-layout>
       </v-container>

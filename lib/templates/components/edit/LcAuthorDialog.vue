@@ -14,6 +14,7 @@
                       type="text"
                       label="Name"
                       required
+                      :rules="[onRequiredRule]"
                       name="name"/>
       </v-card-text>
       <v-card-actions>
@@ -37,13 +38,16 @@
   import deleteGql from '../../gql/author/deleteAuthor.gql'
   import createGql from '../../gql/author/createAuthor.gql'
   import updateGql from '../../gql/author/updateAuthor.gql'
+  import validationMixin from '../../mixins/formValidation'
 
   export default {
     name: 'LcAuthorDialog',
+    mixins: [validationMixin],
     props: {
       author: {
         type: Object,
-        default: () => {}
+        default: () => {
+        }
       }
     },
     data () {

@@ -21,14 +21,19 @@
 
             <v-alert :value="err" v-text="err"/>
 
-            <lc-text-field type="email"
-                           required
-                           name="email"
+            <v-text-field type="email"
+                          required
+                          name="email"
+                          :rules="[onEmailRule,onRequiredRule]"
                           v-model="credentials.email"
                           label="Enter your email" @keyup.enter="onLogin"/>
-            <lc-text-field v-model="credentials.password" name="password"
-                          required type="password"
-                          label="Enter your password" @keyup.enter="onLogin"/>
+            <v-text-field v-model="credentials.password"
+                          name="password"
+                          required
+                          :rules="[onRequiredRule]"
+                          type="password"
+                          label="Enter your password"
+                          @keyup.enter="onLogin"/>
             <v-btn flat
                    outline
                    block
@@ -51,20 +56,24 @@
               <v-text-field type="text"
                             v-model="credentials.firstName"
                             name="firstName"
+                            :rules="[onRequiredRule]"
                             label="First Name"
                             required/>
               <v-text-field type="text" v-model="credentials.lastName"
                             name="lastName"
                             label="Last Name"
+                            :rules="[onRequiredRule]"
                             required/>
               <v-text-field type="email" required name="email"
                             v-model="credentials.email"
+                            :rules="[onRequiredRule,onEmailRule]"
                             label="Enter your email"
                             @keyup.enter="onRegister"/>
               <v-text-field v-model="credentials.password"
                             name="password"
                             required type="password"
                             label="Enter your password"
+                            :rules="[onRequiredRule]"
                             @keyup.enter="onRegister"/>
               <v-text-field v-model="passwordRepeat"
                             name="passwordRepeat"
@@ -90,12 +99,9 @@
         <v-form ref="passwordForget">
           <v-alert :value="err" v-text="err"/>
           <v-alert color="info" :value="true"> Currently not implemented !</v-alert>
-          <lc-text-field type="email"
-                         required
-                         name="email"
-                         v-model="credentials.email"
-                         label="Enter your email"
-                         @keyup.enter="onPasswordForget"/>
+          <v-text-field type="email" required name="email"
+                        v-model="credentials.email"
+                        label="Enter your email" @keyup.enter="onPasswordForget"/>
           <v-btn flat
                  @click="onPasswordForget"
                  block
@@ -121,11 +127,11 @@
   import userSignInMutationGql from '../gql/user/userSignInMutation.gql'
   import signupUserGql from '../gql/user/signupUser.gql'
   import hasArticlesGql from '../gql/article/hasArticles.gql'
-  import LcTextField from '../components/edit/form/LcTextField'
+  import validationMixin from '../mixins/formValidation'
 
   export default {
-    components: {LcTextField},
     layout: 'admin',
+    mixins: [validationMixin],
     data () {
       return {
         loading: false,

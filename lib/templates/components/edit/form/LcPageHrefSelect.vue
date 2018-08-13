@@ -8,6 +8,7 @@
             combobox
             :hint="(link && link.value) ? JSON.stringify(link) : null"
             persistent-hint
+            :rules="rules"
             :required="required"
             clearable
             class="page-selection"/>
@@ -16,10 +17,11 @@
   import allArticlesGql from '../../../gql/article/allArticlesSelect.gql'
   import {firstCharToUpper} from '../../../util/string'
   import debounce from 'lodash.debounce'
+  import formValidation from '../../../mixins/formValidation'
 
   export default {
     name: 'LcPageHrefSelect',
-    components: {},
+    mixins: [formValidation],
     props: {
       value: {
         type: Object,
@@ -54,6 +56,12 @@
       }
     },
     computed: {
+      rules () {
+        if (this.required) {
+          return [this.onRequiredRule]
+        }
+        return []
+      },
       options () {
         return this.items.map(e => e.value)
       },

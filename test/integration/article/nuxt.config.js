@@ -50,25 +50,25 @@ module.exports = {
     ]
   },
   build: {
-    babel: {
-      plugins: [
-        ['transform-imports', {
-          'vuetify': {
-            'transform': 'vuetify/es5/components/${member}',
-            'preventFullImport': true
-          }
-        }]
-      ]
-    },
+    // babel: {
+    //   plugins: [
+    //     ['transform-imports', {
+    //       'vuetify': {
+    //         'transform': 'vuetify/es5/components/${member}',
+    //         'preventFullImport': true
+    //       }
+    //     }]
+    //   ]
+    // },
     extend (config, ctx) {
       // config.resolve.alias['~articleUpdate'] = resolve(__dirname, './gql/UpdateArticle.gql')
-      if (ctx.isServer) {
-        config.externals = [
-          nodeExternals({
-            whitelist: [/^vuetify/]
-          })
-        ]
-      }
+      // if (ctx.isServer) {
+      //   config.externals = [
+      //     nodeExternals({
+      //       whitelist: [/^vuetify/]
+      //     })
+      //   ]
+      // }
     }
   }
 }

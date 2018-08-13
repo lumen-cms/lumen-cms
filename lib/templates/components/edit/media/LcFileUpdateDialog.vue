@@ -9,7 +9,7 @@
           <v-select
             label="Tags"
             prepend-icon="list"
-            :prepend-icon-cb="() => $refs.fileTagDialog.toggleShow()"
+            @click:prepend="() => $refs.fileTagDialog.toggleShow()"
             multiple chips
             :items="tagItems"
             v-model="tags"/>

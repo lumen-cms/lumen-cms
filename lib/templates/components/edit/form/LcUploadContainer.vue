@@ -29,6 +29,7 @@
                     :label="label"
                     :disabled="disabled"
                     :required="required"
+                    :rules="rules"
                     @click.native="onFocus"
                     ref="fileTextField"/>
       <input type="file"
@@ -50,9 +51,11 @@
 
 <script>
   import updateFileGql from '../../../gql/file/fileUpdate.gql'
+  import formValidation from '../../../mixins/formValidation'
 
   export default {
     name: 'LcUploadContainer',
+    mixins: [formValidation],
     props: {
       accept: {
         type: String,
@@ -77,6 +80,12 @@
       }
     },
     computed: {
+      rules () {
+        if (this.required) {
+          return [this.onRequiredRule]
+        }
+        return []
+      },
       isActive () {
         return this.$store.state.lc.mediaDeleting || this.uploading
       },
