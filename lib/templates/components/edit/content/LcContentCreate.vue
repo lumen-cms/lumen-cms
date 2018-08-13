@@ -3,6 +3,7 @@
 
     <v-bottom-sheet v-model="isShown"
                     :lazy="true"
+                    hide-overlay
                     :full-width="true">
       <v-card>
         <v-progress-linear :indeterminate="true" :active="$store.state.lc.updating"/>

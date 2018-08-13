@@ -3,17 +3,15 @@
             :lazy="true"
             :persistent="true"
             :scrollable="true"
+            hide-overlay
             no-click-animation
             content-class="minimized-dialog-element"
             max-width="700px"
             :fullscreen="$vuetify.breakpoint.xsOnly">
     <v-card>
-      <v-card-text>
-
       <component :is="componentName"
                  v-model="model"
                  @onMinimize="minimizeContent = $event"/>
-      </v-card-text>
       <v-progress-linear :indeterminate="true"
                          :active="$store.state.lc.updating"/>
       <v-card-actions v-show="!minimizeContent">
