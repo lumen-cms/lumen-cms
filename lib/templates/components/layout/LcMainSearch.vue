@@ -4,7 +4,7 @@
                 solo
                 :label="$t('search') + '...'"
                 append-icon="cancel"
-                :append-icon-cb="() => searchText=''"
+                @click:append="() => searchText=''"
                 hide-details single-line/>
 </template>
 <script>

@@ -17,14 +17,16 @@
           Register
         </v-tab>
         <v-tab-item class="white pt-4">
-          <lc-form-container ref="form">
+          <v-form ref="form">
 
             <v-alert :value="err" v-text="err"/>
 
-            <v-text-field type="email" required name="email"
+            <lc-text-field type="email"
+                           required
+                           name="email"
                           v-model="credentials.email"
                           label="Enter your email" @keyup.enter="onLogin"/>
-            <v-text-field v-model="credentials.password" name="password"
+            <lc-text-field v-model="credentials.password" name="password"
                           required type="password"
                           label="Enter your password" @keyup.enter="onLogin"/>
             <v-btn flat
@@ -35,7 +37,7 @@
                    :loading="loading">
               Login
             </v-btn>
-          </lc-form-container>
+          </v-form>
           <div class="text-xs-center mt-3">
             <v-btn flat
                    @click="passwordForget = !passwordForget">Forgot password?
@@ -44,7 +46,7 @@
         </v-tab-item>
         <v-tab-item class="white pt-4">
 
-          <lc-form-container ref="formRegister">
+          <v-form ref="formRegister">
             <template v-if="!showAfterRegister">
               <v-text-field type="text"
                             v-model="credentials.firstName"
@@ -81,16 +83,19 @@
             <v-alert color="success" v-model="showAfterRegister" icon="done">
               Your registration was successful. Please wait for the admin to confirm your registration.
             </v-alert>
-          </lc-form-container>
+          </v-form>
         </v-tab-item>
       </v-tabs>
       <div v-else>
-        <lc-form-container ref="passwordForget">
+        <v-form ref="passwordForget">
           <v-alert :value="err" v-text="err"/>
           <v-alert color="info" :value="true"> Currently not implemented !</v-alert>
-          <v-text-field type="email" required name="email"
-                        v-model="credentials.email"
-                        label="Enter your email" @keyup.enter="onPasswordForget"/>
+          <lc-text-field type="email"
+                         required
+                         name="email"
+                         v-model="credentials.email"
+                         label="Enter your email"
+                         @keyup.enter="onPasswordForget"/>
           <v-btn flat
                  @click="onPasswordForget"
                  block
@@ -101,7 +106,7 @@
           <v-alert color="success" v-model="requestPasswordProcessed" icon="done">
             We sent you an email with further instructions to request a new password.
           </v-alert>
-        </lc-form-container>
+        </v-form>
         <div class="text-xs-center mt-3">
           <v-btn flat
                  @click="passwordForget = !passwordForget">Back to login
@@ -116,8 +121,10 @@
   import userSignInMutationGql from '../gql/user/userSignInMutation.gql'
   import signupUserGql from '../gql/user/signupUser.gql'
   import hasArticlesGql from '../gql/article/hasArticles.gql'
+  import LcTextField from '../components/edit/form/LcTextField'
 
   export default {
+    components: {LcTextField},
     layout: 'admin',
     data () {
       return {

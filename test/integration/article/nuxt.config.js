@@ -1,4 +1,6 @@
 const {resolve} = require('path')
+const nodeExternals = require('webpack-node-externals')
+// const resolve = (dir) => require('path').join(__dirname, dir)
 
 module.exports = {
   rootDir: resolve(__dirname, '../../..'),
@@ -48,8 +50,25 @@ module.exports = {
     ]
   },
   build: {
-    extend (config) {
+    babel: {
+      plugins: [
+        ['transform-imports', {
+          'vuetify': {
+            'transform': 'vuetify/es5/components/${member}',
+            'preventFullImport': true
+          }
+        }]
+      ]
+    },
+    extend (config, ctx) {
       // config.resolve.alias['~articleUpdate'] = resolve(__dirname, './gql/UpdateArticle.gql')
+      if (ctx.isServer) {
+        config.externals = [
+          nodeExternals({
+            whitelist: [/^vuetify/]
+          })
+        ]
+      }
     }
   }
 }
