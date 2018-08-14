@@ -60,9 +60,9 @@
     "eslint-plugin-vue": "latest",
     "jest": "^23.5.0",
     "jsdom": "^11.10.0",
-    "css-loader": "^0.28.11",
     "nuxt": "latest",
     "standard-version": "latest",
+    "css-loader": "^0.28.11",
     "style-loader": "^0.22.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
