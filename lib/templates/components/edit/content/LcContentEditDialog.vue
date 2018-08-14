@@ -3,8 +3,6 @@
             :lazy="true"
             :persistent="true"
             :scrollable="true"
-            hide-overlay
-            no-click-animation
             content-class="minimized-dialog-element"
             max-width="700px"
             :fullscreen="$vuetify.breakpoint.xsOnly">
@@ -34,7 +32,6 @@
 </template>
 
 <script>
-  // import contentElements from '../../../../src/components/content/edit'
 
   export default {
     name: 'LcContentEditDialog',

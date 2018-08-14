@@ -15,7 +15,7 @@
     @extend .mb-0 // in fixed-background the last text does not have margin
   }
 
-  .fixed-background, .parallax__content {
+  .fixed-background, .v-parallax__content {
     .text-image {
       background-color: transparent // inside of parallax or fixed-background don't have background-color on default
     }
@@ -85,7 +85,7 @@
       background-color: white
     }
   }
-  .parallax, .jumbotron {
+  .v-parallax, .v-jumbotron {
     .content-header {
       h1, h2, h3, h4, h5, h6 {
         margin-bottom: 0
@@ -94,17 +94,17 @@
       padding: 24px
       margin: 0 auto
     }
-    .parallax__content, .jumbotron__content {
+    .v-parallax__content, .v-jumbotron__content {
       color: inherit;
       .content-element {
         @extend .mb-0
       }
     }
   }
-  .slider .jumbotron .jumbotron__content {
+  .v-slider .v-jumbotron .v-jumbotron__content {
     color: initial
   }
-  .jumbotron {
+  .v-jumbotron {
     color: white
     .content-header {
       display: inline-block

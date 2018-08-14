@@ -122,7 +122,7 @@
 
 <style lang="stylus">
   .lc-page-toolbar {
-    .toolbar__content {
+    .v-toolbar__content {
       > .layout {
         flex: inherit // need to align space correctly
       }
@@ -130,14 +130,14 @@
   }
 
   .lc-page-toolbar.mobile-search-active {
-    .toolbar__content {
+    .v-toolbar__content {
       > div:not(.lc-main-search), > button {
         display none
       }
     }
   }
 
-  .toolbar:not(.transparent) {
+  .v-toolbar:not(.transparent) {
     &:not(.theme--dark) {
       background-color: white !important;
     }
@@ -145,12 +145,12 @@
     transition: background-color 0.3s ease-in-out;
   }
 
-  .toolbar.transparent.has-jumbo .toolbar__extension {
+  .v-toolbar.transparent.has-jumbo .v-toolbar__extension {
     border-top-color: transparent !important;
   }
 
-  .toolbar.transparent.has-jumbo {
-    .btn.btn--flat, .toolbar__side-icon, .dialog__activator .btn--outline {
+  .v-toolbar.transparent.has-jumbo {
+    .v-btn.v-btn--flat, .v-toolbar__side-icon, .v-dialog__activator .v-btn--outline {
       background-color: rgba(0, 0, 0, 0.4) !important;
     }
   }

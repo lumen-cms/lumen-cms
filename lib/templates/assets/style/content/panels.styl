@@ -50,7 +50,7 @@
       @extend .mr-3
     }
   }
-  .fixed-background, .parallax__content, .jumbotron__content {
+  .fixed-background, .v-parallax__content, .v-jumbotron__content {
     .rte-content {
       @extend .pb-0
     }
@@ -63,16 +63,16 @@ max-width() {
 
 }
 
-.fixed-background, .jumbotron__content {
+.fixed-background, .v-jumbotron__content {
   > .container > .layout {
     max-width ()
   }
 }
-.parallax__content > div{
+.v-parallax__content > div{
   max-width ()
 }
 
-.fixed-background, .jumbotron__content {
+.fixed-background, .v-jumbotron__content {
   z-index 0
 }
 

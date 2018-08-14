@@ -1,16 +1,7 @@
 <template>
-  <div>
-    <lc-content-edit-renderer
-      :page-props="pageProps"
-      :elements="content || []"/>
-    <lc-media-library/>
-    <template v-if="!!$store.getters.getDialogType">
-      <lc-content-create ref="contentCreate"/>
-      <lc-content-delete-dialog :page-props="pageProps"
-                                v-if="$store.getters.getDialogType === 'delete'"/>
-      <lc-content-edit-dialog v-if="$store.getters.getDialogType === 'edit'"/>
-    </template>
-  </div>
+  <lc-content-edit-renderer
+    :page-props="pageProps"
+    :elements="content || []"/>
 </template>
 
 <script>
