@@ -13,13 +13,12 @@
                     validate-on-blur
                     :rules="[onRequiredRule]"
                     :required="true"/>
-      <v-select name="key"
-                :items="keyItems"
-                label="Key"
-                combobox
-                :rules="[onRequiredRule]"
-                v-model="model.key"
-                required/>
+      <v-combobox name="key"
+                  :items="keyItems"
+                  label="Key"
+                  :rules="[onRequiredRule]"
+                  v-model="model.key"
+                  required/>
       <div style="max-height: 500px;" v-if="model.type==='CODE'">
         <v-btn @click.stop="$refs.codeMirror.selectAll()" flat>Select All</v-btn>
         <v-btn @click.stop="$refs.codeMirror.autoFormatSelection()" flat>Format Selection</v-btn>

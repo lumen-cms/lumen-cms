@@ -1,17 +1,16 @@
 <template>
-  <v-select :loading="loading"
-            :items="options"
-            v-model="url"
-            :search-input.sync="searchInput"
-            label="Link"
-            name="page-selector"
-            combobox
-            :hint="(link && link.value) ? JSON.stringify(link) : null"
-            persistent-hint
-            :rules="rules"
-            :required="required"
-            clearable
-            class="page-selection"/>
+  <v-combobox :loading="loading"
+              :items="options"
+              v-model="url"
+              :search-input.sync="searchInput"
+              label="Link"
+              name="page-selector"
+              :hint="(link && link.value) ? JSON.stringify(link) : null"
+              persistent-hint
+              :rules="rules"
+              :required="required"
+              clearable
+              class="page-selection"/>
 </template>
 <script>
   import allArticlesGql from '../../../gql/article/allArticlesSelect.gql'

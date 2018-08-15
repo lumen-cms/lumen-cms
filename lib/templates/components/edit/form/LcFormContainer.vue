@@ -19,7 +19,7 @@
     },
     methods: {
       resetForm () {
-        this.$refs.form.resetValidation()
+        this.$refs.form.reset()
       },
       reset () {
         this.$refs.form.reset()

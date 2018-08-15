@@ -1,11 +1,9 @@
 <template>
-  <v-dialog
-    max-width="70%"
-    :value="value"
-    @input="onDialogChange"
-    lazy
-    :fullscreen="fullscreen"
-    persistent>
+  <v-dialog max-width="70%"
+            :value="value"
+            @input="onDialogChange"
+            :fullscreen="fullscreen"
+            persistent>
     <v-card>
       <v-card-title v-if="title" v-text="title"/>
       <v-card-text v-if="value">

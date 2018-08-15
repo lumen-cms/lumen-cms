@@ -27,10 +27,9 @@
                                 required/>
                 </v-flex>
                 <v-flex>
-                  <v-select name="key"
+                  <v-combobox name="key"
                             :items="keyItems"
                             label="Key"
-                            combobox
                             required
                             :rules="[onRequiredRule]"
                             v-model="model.key"/>
