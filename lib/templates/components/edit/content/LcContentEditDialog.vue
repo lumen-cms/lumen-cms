@@ -3,6 +3,7 @@
             :lazy="true"
             :persistent="true"
             :scrollable="true"
+            no-click-animation
             content-class="minimized-dialog-element"
             max-width="700px"
             :fullscreen="$vuetify.breakpoint.xsOnly">
@@ -32,6 +33,7 @@
 </template>
 
 <script>
+  import {GlobalEventBus} from '../../../util/globalEventBus'
 
   export default {
     name: 'LcContentEditDialog',
@@ -40,10 +42,17 @@
       return {
         isShown: false,
         minimizeContent: false,
-        model: Object.assign({}, {classNames: []}, this.$store.state.lc.contentEditDialogData.content)
+        model: {classNames: []}
       }
     },
     watch: {
+      '$store.state.lc.contentEditDialogData.content': {
+        handler (v) {
+          this.model = Object.assign({}, this.model, v)
+        },
+        deep: true,
+        immediate: true
+      },
       '$store.state.lc.contentEditDialogData.dialogType': {
         handler (v) {
           this.isShown = v === 'edit'
@@ -73,8 +82,8 @@
       async onSaveClose () {
         try {
           this.triggerSaveOnImages()
-          await this.onSubmit()
-          this.onHide()
+          await this.onSubmit(true)
+          // this.onHide()
         } catch (e) {
           console.log('onSaveClose', e)
         }
@@ -90,19 +99,21 @@
         this.triggerSaveOnImages()
         await this.onSubmit()
       },
-      async onSubmit () {
+      async onSubmit (unsetAfterSave) {
         const properties = this.model.properties || {}
         if (properties.imageColumnSize && properties.imageColumnSize === '') {
           properties.imageColumnSize = null
         }
         const variables = Object.assign({}, this.model, {properties})
         if (this.model.id) {
-          await this.$parent.onContentUpdate({variables})
+          GlobalEventBus.$emit('on-content-update', {variables, unsetAfterSave})
+          // await this.$parent.onContentUpdate({variables})
         } else {
           delete variables.id
           delete variables.__typename
-          const res = await this.$parent.onContentCreate({variables})
-          this.model.id = res.id
+          GlobalEventBus.$emit('on-content-create', {variables, unsetAfterSave})
+          // const res = await this.$parent.onContentCreate({variables})
+          // this.model.id = res.id
         }
       },
       onHide () {

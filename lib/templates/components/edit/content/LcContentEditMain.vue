@@ -13,6 +13,7 @@
   import {uploadFile} from '../../../util/fileUpload'
   import updateFileGql from '../../../gql/file/fileUpdate.gql'
   import allFilesOfOriginGql from '../../../gql/file/allFilesOfOrigin.gql'
+  import {GlobalEventBus} from '../../../util/globalEventBus'
 
   export default {
     name: 'LcContentEditMain',
@@ -38,6 +39,14 @@
       '$store.state.lc.crossDomainContent' (v) {
         v && this.onCrossDomainContentPaste(v)
       }
+    },
+    mounted () {
+      GlobalEventBus.$on('on-content-create', this.onContentCreate)
+      GlobalEventBus.$on('on-content-update', this.onContentUpdate)
+    },
+    destroyed () {
+      GlobalEventBus.$off('on-content-create', this.onContentCreate)
+      GlobalEventBus.$off('on-content-update', this.onContentUpdate)
     },
     methods: {
       async processSingleFileImport (file, projectIdOfCopy) {
@@ -85,24 +94,23 @@
         this.$refs.contentCreate.closeWindows()
         this.$store.dispatch('setCrossDomainContent', null)
       },
-      onContentUpdate ({variables}) {
+      async onContentUpdate ({variables, unsetAfterSave}) {
         // const dialogData = this.$store.getters.getDialogData
         variables = JSON.parse(JSON.stringify(variables))
         delete variables.__typename
-        return this.mutateGql({
+        const res = await this.mutateGql({
           mutation: updateContent,
           variables
         }, 'updateContent')
-          .catch(e => {
-            console.debug('failed variables:', variables)
-            console.error('update content fails', e)
-          })
+        if (unsetAfterSave) {
+          this.$store.dispatch('setContentEditDialogData', {})
+        }
+        return res
       },
-
       /**
        * @returns {Promise.<*[]>}
        */
-      async onContentCreate ({variables}) {
+      async onContentCreate ({variables, unsetAfterSave}) {
         const vars = Object.assign({}, variables)
         const dialogData = this.$store.getters.getDialogData
         vars.sorting = dialogData.previousElementSorting + 1
@@ -130,7 +138,7 @@
           // content: createdContent[firstCharToLower(typename)]
           content: createdContent
         })
-        this.$store.dispatch('setContentEditDialogData', state)
+        this.$store.dispatch('setContentEditDialogData', unsetAfterSave ? {} : state)
         return createdContent
       },
 
