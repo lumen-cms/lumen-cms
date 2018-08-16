@@ -24,13 +24,16 @@
       reset () {
         this.$refs.form.reset()
       },
+      validate () {
+        return this.$refs.form.validate()
+      },
       submitForm () {
         const customValid = this.$refs.form.validate()
         if (customValid) {
           // don't forget to call resetForm after mutation on component side like => this.$refs.form.resetForm()
           // const modified = Object.assign({}, this.modified)
           this.$emit('onSubmit', true)
-          this.$refs.form.resetForm()
+          this.$refs.form.reset()
         }
       }
     }

@@ -47,7 +47,6 @@
     </v-snackbar>
 
     <lc-form-container @onSubmit="onSubmit"
-                       @onFormDirty="$store.dispatch('setCanSave',$event)"
                        ref="form"
                        class="white elevation-1">
 

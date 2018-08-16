@@ -8,7 +8,6 @@
       <v-card-title v-if="title" v-text="title"/>
       <v-card-text v-if="value">
         <lc-form-container @onSubmit="onSubmit"
-                           @onFormDirty="$store.dispatch('setCanSave',$event)"
                            ref="form">
           <slot/>
         </lc-form-container>

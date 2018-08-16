@@ -1,34 +1,74 @@
 <template>
-  <lc-form-container @onFormDirty="$emit('onFormDirty',$event)" ref="form">
-    <v-text-field name="title" v-model="model.title" label="Title" v-if="!isBackground"/>
-    <v-text-field name="alternative" v-model="model.alternative" label="Alt" v-if="!isBackground"/>
-    <v-text-field name="caption" v-model="model.caption" label="Caption" v-if="!isBackground"/>
+  <lc-form-container @onFormDirty="$emit('onFormDirty',$event)"
+                     ref="form">
+    <v-text-field name="title"
+                  v-model="model.title"
+                  label="Title"
+                  v-if="!isBackground"/>
+    <v-text-field name="alternative"
+                  v-model="model.alternative"
+                  label="Alt"
+                  v-if="!isBackground"/>
+    <v-text-field name="caption"
+                  v-model="model.caption"
+                  label="Caption"
+                  v-if="!isBackground"/>
 
-    <v-select name="styles" :value="bgSize" :items="bgSizeOptions"
-              hint="[cover,contain,auto]" @change="onBackgroundChange($event,bgSizeOptions)"
+    <v-select name="styles"
+              :value="bgSize"
+              :items="bgSizeOptions"
+              hint="[cover,contain,auto]"
+              @change="onBackgroundChange($event,bgSizeOptions)"
               persistent-hint v-if="isBackground"/>
 
-    <v-select name="styles" :value="bgRepeat" :items="bgRepeatOptions"
-              hint="[no-repeat, repeat-x, repeat-y]" @change="onBackgroundChange($event,bgRepeatOptions)"
+    <v-select name="styles"
+              :value="bgRepeat"
+              :items="bgRepeatOptions"
+              hint="[no-repeat, repeat-x, repeat-y]"
+              @change="onBackgroundChange($event,bgRepeatOptions)"
               persistent-hint v-if="isBackground"/>
 
-    <v-select name="styles" :value="bgPosition" :items="bgPositionOptions"
-              hint="[center, left, right]" @change="onBackgroundChange($event,bgPositionOptions)"
+    <v-select name="styles"
+              :value="bgPosition"
+              :items="bgPositionOptions"
+              hint="[center, left, right]"
+              @change="onBackgroundChange($event,bgPositionOptions)"
               persistent-hint v-if="isBackground"/>
 
-    <v-text-field name="resize" v-model="model.resize" label="Resize"
-                  hint="[500x300] | [500x / x300] | [500x300!]" persistent-hint/>
-    <v-text-field name="crop" v-model="model.crop"
-                  label="Crop" hint="[:round] | [0x0:400x400] | [0x0:400x400:round] - round only single image"
+    <v-text-field name="resize"
+                  v-model="model.resize"
+                  label="Resize"
+                  hint="[500x300] | [500x / x300] | [500x300!]"
                   persistent-hint/>
-    <v-text-field name="linkSlug" v-model="model.linkSlug" v-show="false" v-if="!isBackground"
+    <v-text-field name="crop"
+                  v-model="model.crop"
+                  label="Crop"
+                  hint="[:round] | [0x0:400x400] | [0x0:400x400:round] - round only single image"
+                  persistent-hint/>
+    <v-text-field name="linkSlug"
+                  v-model="model.linkSlug"
+                  v-show="false"
+                  v-if="!isBackground"
                   label="this is just a recognize helper"/>
-    <lc-page-href-select :value="model" @updated="onHref" v-if="!isBackground"/>
+    <lc-page-href-select :value="model"
+                         @updated="onHref"
+                         v-if="!isBackground"/>
   </lc-form-container>
 </template>
 <script>
   import {firstCharToUpper} from '../../../util/string'
 
+  const model = {
+    title: null,
+    alternative: null,
+    caption: null,
+    file: {url: null},
+    linkSlug: null,
+    linkType: null,
+    linkOpenExternal: false,
+    linkId: null,
+    backgroundStyles: []
+  }
   export default {
     name: 'LcFileReferenceEdit',
     props: {
@@ -37,17 +77,7 @@
     },
     data () {
       return {
-        model: {
-          title: null,
-          alternative: null,
-          caption: null,
-          file: {url: null},
-          linkSlug: null,
-          linkType: null,
-          linkOpenExternal: false,
-          linkId: null,
-          backgroundStyles: []
-        },
+        model: Object.assign({}, model, this.content),
         disableLinkInput: false,
         showMenu: false
       }
@@ -73,12 +103,19 @@
       }
     },
     watch: {
-      content () {
-        this.setModel()
+      model: {
+        handler (v) {
+          console.log("watch model changed")
+          this.$emit('onFormDirty', v)
+        },
+        deep: true
       }
-    },
-    mounted () {
-      this.setModel()
+      // content: {
+      //   handler () {
+      //     this.setModel()
+      //   },
+      //   immediate: true
+      // }
     },
     methods: {
       findBgStyles (array) {
