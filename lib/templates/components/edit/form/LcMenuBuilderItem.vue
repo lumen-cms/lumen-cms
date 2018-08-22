@@ -103,11 +103,6 @@
       subGroup: {type: Boolean},
       parentIndex: {type: Number}
     },
-    watch: {
-      '$store.state.lc.menuCutPaste.isCut' (val) {
-        console.log(val)
-      }
-    },
     computed: {
       cutIsActive () {
         return this.$store.state.lc.menuCutPaste && this.$store.state.lc.menuCutPaste.isCut

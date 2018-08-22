@@ -44,6 +44,16 @@ module.exports = {
         //   console.log(context)
         //   return true
         // }
+      },
+      company: {
+        name: 'Lumen Media Ptd. Ltd.',
+        address: {
+          postalCode: '049908',
+          streetAddress: 'Bank of China Building 25',
+          addressLocality: 'Singapore'
+        },
+        email: 'some@info.com',
+        phoneNumbers: [{value: '+63123456', text: 'Singapore: +6263123456'}]
       }
     }
   }]],

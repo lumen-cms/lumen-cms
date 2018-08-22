@@ -76,9 +76,6 @@
       },
       value (value) {
         this.model = Object.assign({}, model, value)
-      },
-      'model.body' () {
-        this.$store.dispatch('setCanSave', true)
       }
     },
     computed: {
@@ -97,11 +94,9 @@
         try {
           this.model = Object.assign({}, this.model, {bodyJson: JSON.parse(v)})
           this.isValidJson = true
-          this.$store.dispatch('setCanSave', true)
         } catch (e) {
           // throw new Error(e)
           this.isValidJson = false
-          this.$store.dispatch('setCanSave', false)
         }
       },
       openDialog () {

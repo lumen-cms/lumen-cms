@@ -126,7 +126,7 @@
                             v-if="editModel.isVuexAction"
                             required
                             v-model="editModel.vuexAction"/>
-              <lc-page-href-select required
+              <lc-page-href-select :required="editModel.type === 'link'"
                                    v-if="!editModel.isVuexAction"
                                    @updated="onPageSelection"
                                    :value="editModel.link"/>
@@ -201,7 +201,7 @@
           )
         } else {
           let originId = model.item && model.item.id
-          if (!originId) {
+          if (originId === undefined || originId === null) {
             // click on create new button
             originId = this.navigation[this.navigation.length - 1] && this.navigation[this.navigation.length - 1].id
           }
