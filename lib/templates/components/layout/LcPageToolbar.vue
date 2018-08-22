@@ -51,6 +51,13 @@
       </template>
       <v-toolbar-side-icon :class="$cms.toolbarSidebarRightIconClass"
                            @click.native.stop="$store.dispatch('toggleSidebarRight')"/>
+      <lc-dialog icon="menu"
+                 class="lc-mega-menu"
+                 :show-class="$cms.megaMenuVisibility"
+                 v-if="$store.getters.getPageTemplate($cms.pageTemplate.MEGA_MENU)">
+        <lc-vue-renderer navigation="columns"
+                         :template-region="$cms.pageTemplate.MEGA_MENU"/>
+      </lc-dialog>
     </v-toolbar>
   </div>
 
