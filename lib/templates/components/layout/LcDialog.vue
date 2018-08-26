@@ -1,5 +1,5 @@
 <template>
-  <v-dialog>
+  <v-dialog v-model="showDialog">
     <v-btn slot="activator"
            :class="showClass"
            :icon="icon && !label">
@@ -20,6 +20,16 @@
       icon: String,
       label: String,
       showClass: String
+    },
+    data () {
+      return {
+        showDialog: false
+      }
+    },
+    watch: {
+      '$route.fullPath' () {
+        this.showDialog && (this.showDialog = false)
+      }
     }
   }
 </script>
