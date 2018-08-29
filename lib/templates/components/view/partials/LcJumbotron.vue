@@ -1,11 +1,14 @@
 <template>
-  <v-jumbotron v-if="src"
-               class="lazyload"
-               alt="jumbotron-image"
-               :height="height+'px'"
-               src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-               :data-prx="src"
-               dark>
+  <v-img :height="height"
+         :src="src"
+         dark>
+    <v-layout slot="placeholder"
+              fill-height
+              align-center
+              justify-center
+              ma-0>
+      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+    </v-layout>
     <v-container fill-height>
       <v-layout :align-center="!alignEnd" :align-end="alignEnd">
         <v-flex text-xs-center>
@@ -13,7 +16,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-jumbotron>
+  </v-img>
 </template>
 <script>
   import {getImageSrc} from '../../../util/imageSrcHelper'
