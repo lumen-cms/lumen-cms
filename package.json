@@ -49,6 +49,7 @@
     "stylus-loader": "^3.0.2",
     "vue-i18n": "^8.0.0",
     "vue-ls": "^3.0.5",
+    "vue-observe-visibility": "^0.4.1",
     "vuetify": "^1.2.1"
   },
   "devDependencies": {

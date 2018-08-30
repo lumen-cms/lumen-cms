@@ -1,11 +1,11 @@
 <template>
   <v-card hover class="mb-3">
     <nuxt-link :to="'/' + item.slug">
-      <v-card-media class="card-media lazyload"
-                    ref="cardMedia"
-                    :src="mediaSrc"
-                    :data-bg-card-media="previewImageCard"
-                    height="200px"/>
+      <lc-image class="card-media"
+                ref="cardMedia"
+                :src="previewImageCard"
+                :lazy-src="mediaSrc"
+                height="200px"/>
     </nuxt-link>
     <v-card-text style="cursor: default; min-height: 100px;">
       <div class="title pb-1" style="min-height: 44px">{{ item.title }}</div>

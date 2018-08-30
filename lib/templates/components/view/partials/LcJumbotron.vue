@@ -1,14 +1,6 @@
 <template>
-  <v-img :height="height"
-         :src="src"
-         dark>
-    <v-layout slot="placeholder"
-              fill-height
-              align-center
-              justify-center
-              ma-0>
-      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-    </v-layout>
+  <lc-image :height="height"
+            :src="src">
     <v-container fill-height>
       <v-layout :align-center="!alignEnd" :align-end="alignEnd">
         <v-flex text-xs-center>
@@ -16,7 +8,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-img>
+  </lc-image>
 </template>
 <script>
   import {getImageSrc} from '../../../util/imageSrcHelper'
