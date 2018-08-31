@@ -3,7 +3,7 @@
                        fixed
                        clipped
                        mobile-break-point="960"
-                       v-if="$store.getters.isPageTemplateVisible(this.$cms, 'SIDEBAR_LEFT')"
+                       v-if="$store.getters.isPageTemplateVisible($cms, 'SIDEBAR_LEFT')"
                        v-model="drawer">
     <v-divider/>
     <lc-vue-renderer :template-region="$cms.pageTemplate.SIDEBAR_LEFT"/>
