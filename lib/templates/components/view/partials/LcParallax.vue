@@ -17,18 +17,42 @@
 
 <script>
   import parallaxMixin from '../../../mixins/parallaxMixin'
-  import parallaxFixedBgMixin from '../../../mixins/parallaxFixedBgMixing'
+  import getViewportDimensions from '../../../util/getViewportDimensions'
+  import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
+  import {getImageSrc} from '../../../util/imageSrcHelper'
+
   /**
    * @description parallax of vuetify superset with static background
    * IMPORTANT :src must be set otherwise Firefox does not correctly apply transition
    */
   export default {
     name: 'LcParallax',
-    mixins: [parallaxMixin, parallaxFixedBgMixin],
+    mixins: [parallaxMixin],
     props: {
       defaultHeight: {
         type: Number,
         default: 300
+      }
+    },
+    computed: {
+      src () {
+        if (!this.fileReference) return ''
+        const isSmDown = this.$vuetify.breakpoint.smAndDown
+        const {vh} = getViewportDimensions()
+        const h = Math.max(Math.round(vh * 1.4), this.height)
+        const ref = Object.assign({}, this.fileReference, {resize: false})
+        const {file} = ref
+        if (!file) return ''
+        const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
+        return getImageSrc(
+          ref.file,
+          false,
+          isSmDown
+            // Jumbotron crop
+            ? `${xCropAmount}x${yCropAmount}centro`
+            // Parallax crop
+            : `${xCropAmount}x${Math.min(file.height, h)}centro`
+        ).src
       }
     },
     methods: {

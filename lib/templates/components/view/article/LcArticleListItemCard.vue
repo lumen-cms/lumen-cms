@@ -41,11 +41,13 @@
 <script>
   import articleListItemMixin from '../../../mixins/articleListItemMixin'
   import {getImageSrc} from '../../../util/imageSrcHelper'
+  import LcImage from '../partials/LcImage'
 
   const defaultImg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
   export default {
     name: 'LcArticleListItemCard',
     mixins: [articleListItemMixin],
+    components: {LcImage},
     data () {
       return {
         mediaSrc: defaultImg,

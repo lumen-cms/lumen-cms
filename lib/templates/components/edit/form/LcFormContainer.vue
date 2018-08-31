@@ -27,6 +27,9 @@
       validate () {
         return this.$refs.form.validate()
       },
+      resetValidation () {
+        this.$refs.form.resetValidation()
+      },
       submitForm () {
         const customValid = this.$refs.form.validate()
         if (customValid) {

@@ -141,7 +141,7 @@
         this.model.linkType = v.type || null
       },
       resetDetection () {
-        this.$refs.form.resetDetection()
+        this.$refs.form.resetValidation()
       },
       async validate () {
         const v = this.$refs.form.validate()

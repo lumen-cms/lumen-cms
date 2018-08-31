@@ -4,11 +4,12 @@
              :style="componentStyles"
              v-observe-visibility="{callback: visibilityChanged,throttle: 300}">
     <v-layout slot="placeholder"
+              v-if="src"
               fill-height
               align-center
               justify-center
               ma-0>
-      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+      <v-progress-circular indeterminate color="grey darken-1"></v-progress-circular>
     </v-layout>
     <slot/>
   </component>
@@ -26,7 +27,8 @@
       maxHeight: Number | String,
       sizes: String,
       srcset: String,
-      width: String | Number
+      width: String | Number,
+      isFigure: Boolean
     },
     data () {
       return {
