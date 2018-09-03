@@ -6,7 +6,9 @@
       <v-container fill-height>
         <v-layout :align-center="!alignEnd" :align-end="alignEnd">
           <v-flex text-xs-center>
-            <slot/>
+            <v-layout column style="position: relative">
+              <slot/>
+            </v-layout>
           </v-flex>
         </v-layout>
       </v-container>
@@ -21,6 +23,7 @@
 
   export default {
     name: 'LcFixedBackgroundImage',
+    mixins: [parallaxMixin],
     props: {
       zoomEnabled: {
         type: Boolean
@@ -30,7 +33,6 @@
         default: false
       }
     },
-    mixins: [parallaxMixin],
     components: {LcImage},
     computed: {
       isFixed () {
@@ -51,7 +53,6 @@
           return ''
         }
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
-
         const {src} = getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
         return src
       }
