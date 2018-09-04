@@ -105,7 +105,7 @@
     watch: {
       model: {
         handler (v) {
-          console.log("watch model changed")
+          console.log("watch model changed",v)
           this.$emit('onFormDirty', v)
         },
         deep: true

@@ -140,29 +140,29 @@
               <v-text-field v-model="model.properties.styleAttributes"
                             label="CSS Custom Styles"/>
               <v-autocomplete :value="model.styles.headerClassNames"
-                        @change="onClassNamesChange($event,'header')"
-                        label="Header Class Names"
-                        :items="$options.selectOptions.headerClassNames"
-                        chips
-                        multiple
-                        deletable-chips
-                        clearable/>
+                              @change="onClassNamesChange($event,'header')"
+                              label="Header Class Names"
+                              :items="$options.selectOptions.headerClassNames"
+                              chips
+                              multiple
+                              deletable-chips
+                              clearable/>
               <v-autocomplete :value="model.styles.contentClassNames"
-                        @change="onClassNamesChange($event,'content')"
-                        label="Content Class Names"
-                        :items="$options.selectOptions.contentClassNames"
-                        chips
-                        multiple
-                        deletable-chips
-                        clearable/>
+                              @change="onClassNamesChange($event,'content')"
+                              label="Content Class Names"
+                              :items="$options.selectOptions.contentClassNames"
+                              chips
+                              multiple
+                              deletable-chips
+                              clearable/>
               <v-autocomplete :value="model.styles.rootClassNames"
-                        @change="onClassNamesChange($event,'root')"
-                        label="General Class Names"
-                        :items="$options.selectOptions.rootClassNames"
-                        chips
-                        multiple
-                        deletable-chips
-                        clearable/>
+                              @change="onClassNamesChange($event,'root')"
+                              label="General Class Names"
+                              :items="$options.selectOptions.rootClassNames"
+                              chips
+                              multiple
+                              deletable-chips
+                              clearable/>
               <v-btn icon @click="classTooltip=!classTooltip">
                 <v-icon>help</v-icon>
               </v-btn>
@@ -187,7 +187,8 @@
                   label="Layout Panel"
                   clearable
                   :items="['Parallax', 'Jumbotron', 'FixedBackground']"
-                  @change="delete model.properties.imageOrient; delete model.properties.isLightbox; delete model.properties.imageColumnSize"/>
+                  @input="onLayoutPanelChange"/>
+
         <v-switch label="Enable zoom effect"
                   v-model="model.properties.enableBackgroundZoom"
                   v-if="['FixedBackground'].includes(model.properties.layoutPanel)"/>
@@ -197,7 +198,7 @@
                   label="Image Position"
                   :disabled="!!model.properties.layoutPanel"
                   :items="options.imageOrientOptions"
-                  @change="delete model.properties.layoutPanel"
+                  @input="onImageOrientChange"
                   clearable/>
 
         <v-expansion-panel focusable>
@@ -322,6 +323,20 @@
           }])
       },
       predifinedLayouts: contentElementStylePreSets
+    },
+    methods: {
+      onImageOrientChange (v) {
+        if (v) {
+          this.$set(this.model.properties, 'layoutPanel', null)
+        }
+      },
+      onLayoutPanelChange (v) {
+        if (v) {
+          this.$set(this.model.properties, 'imageOrient', null)
+          this.$set(this.model.properties, 'isLightbox', false)
+          this.$set(this.model.properties, 'imageColumnSize', null)
+        }
+      }
     },
     computed: {
       predefinedLayoutValue: {
