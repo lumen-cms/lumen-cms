@@ -2,6 +2,7 @@
   <no-ssr>
     <v-dialog content-class="lightbox-dialog"
               max-width="100vw"
+              lazy
               v-model="isActive"
               @keydown.esc="isActive = false"
               @keydown.right="carouselActiveItem++"
@@ -19,10 +20,20 @@
       <v-card>
         <v-card-text>
           <lc-image-lightbox-item v-if="fileReferences.length === 1"
-                                  :content="{fileRef:fileReferences[0],isLightbox:true}"/>
-          <lc-lightbox-carousel v-else
-                                :current-active="carouselActiveItem"
-                                :file-references="fileReferences"/>
+                                  :content="fileReferences[0]"/>
+          <!--<lc-image-lightbox-item v-if="fileReferences.length === 1"-->
+          <!--:content="{fileRef:fileReferences[0],isLightbox:true}"/>-->
+          <v-carousel hide-delimiters
+                      dark
+                      :value="carouselActiveItem"
+                      :cycle="false"
+                      v-else>
+            <v-carousel-item v-for="(item,i) in fileReferences"
+                             :key="i"
+                             contain>
+              <lc-image-lightbox-item :content="item"/>
+            </v-carousel-item>
+          </v-carousel>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -30,11 +41,13 @@
 </template>
 <script>
   import LcImageLightboxItem from './LcImageLightboxItem'
-  import LcLightboxCarousel from './LcLightboxCarousel'
+  import {getImageSrc} from '../../../../util/imageSrcHelper'
+  import imageSourceSetMixin from '../../../../mixins/getImageSourceSet'
 
   export default {
     name: 'LcLightboxDialog',
-    components: {LcLightboxCarousel, LcImageLightboxItem},
+    mixins: [imageSourceSetMixin],
+    components: {LcImageLightboxItem},
     props: {
       content: Object,
       fileReferences: Array
@@ -45,9 +58,21 @@
         carouselActiveItem: 0
       }
     },
+    computed: {
+      lightboxItems () {
+        return this.fileReferences.map(ref => {
+          const img = getImageSrc(ref.file)
+          const {srcset, sizes} = this.getImageSourceSet(ref)
+          return {
+            src: img.src,
+            srcset,
+            sizes
+          }
+        })
+      }
+    },
     methods: {
       setActiveItem (i) {
-        console.log(i)
         this.carouselActiveItem = i
       },
       toggleVisibility () {

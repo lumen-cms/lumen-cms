@@ -14,6 +14,7 @@
            :sizes="sizes"
            :class="{'img-cover':!contain, 'img-rounded':isRounded}">
     </figure>
+    <slot/>
   </div>
 </template>
 <script>

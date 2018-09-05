@@ -38,8 +38,7 @@
           </v-flex>
           <v-flex sm1 class="hidden-xs-only">
             <v-avatar slot="activator">
-              <img :data-src="getFileUrl(item)"
-                   class="lazyload"
+              <img :src="getFileUrl(item)"
                    alt="activator"
                    v-if="item.file">
               <v-icon v-else>photo</v-icon>

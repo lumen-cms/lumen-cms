@@ -38,12 +38,13 @@
   </v-card>
 </template>
 <script>
-  import {getFileAttrs} from '../../view/helpers/imageHelper'
+  import imageHelperMixin from '../../../mixins/imageHelperMixin'
   import LcImage from '../../view/partials/LcImage'
 
   export default {
     name: 'LcMediaLibraryItem',
     components: {LcImage},
+    mixins: [imageHelperMixin],
     props: {
       item: Object,
       size: Number,
@@ -78,7 +79,7 @@
         return heights[this.size]
       },
       src () {
-        const file = getFileAttrs({file: this.item}, 'x' + this.height)
+        const file = this.getFileAttrs({file: this.item}, 'x' + this.height)
         return file.src
       }
     },
