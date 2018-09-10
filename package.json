@@ -29,7 +29,7 @@
     "collectCoverage": true
   },
   "dependencies": {
-    "@nuxtjs/apollo": "4.0.0-rc1",
+    "@nuxtjs/apollo": "nuxt-community/apollo-module#vue-apollo-upgrade-beta-21",
     "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/sitemap": "0.1.1",
     "accept-language-parser": "^1.5.0",
@@ -47,7 +47,6 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "supports-webp": "^1.0.5",
-    "vue-apollo": "3.0.0-beta.19",
     "vue-i18n": "^8.1.0",
     "vue-ls": "^3.0.5",
     "vue-observe-visibility": "^0.4.1",
