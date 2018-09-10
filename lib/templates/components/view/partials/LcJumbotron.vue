@@ -13,14 +13,15 @@
   </div>
 </template>
 <script>
-  import {getImageSrc} from '../../../util/imageSrcHelper'
+  // import {getImageSrc} from '../../../util/imageSrcHelper'
   import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
   import parallaxMixin from '../../../mixins/parallaxMixin'
+  import imageSrcMixin from '../../../mixins/imageSrcHelperMixin'
   import LcImage from './LcImage'
 
   export default {
     name: 'LcJumbotron',
-    mixins: [parallaxMixin],
+    mixins: [parallaxMixin, imageSrcMixin],
     components: {LcImage},
     props: {
       alignEnd: {
@@ -42,7 +43,7 @@
         }
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
 
-        const {src} = getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
+        const {src} = this.getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
         return src
       }
     }

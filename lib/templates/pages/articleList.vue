@@ -5,18 +5,17 @@
   </v-container>
 </template>
 <script>
-  import getHeadMeta from '../util/getHeadMeta'
+  // import getHeadMeta from '../util/getHeadMeta'
   import initialAsyncData from '~initialAsyncData'
+  import headMetaMixin from '../mixins/headMetaMixin'
 
   export default {
     layout: 'list',
+    mixins: [headMetaMixin],
     head () {
-      return getHeadMeta({
+      return this.getHeadMeta({
         article: {},
         languagekey: this.locale,
-        path: this.$route.path,
-        host: this.host,
-        CONFIG: this.$cms,
         overwrites: {
           // overwrites
           description: this.$t('head.meta.articleListDescription'),

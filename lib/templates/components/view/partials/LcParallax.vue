@@ -19,7 +19,8 @@
   import parallaxMixin from '../../../mixins/parallaxMixin'
   import getViewportDimensions from '../../../util/getViewportDimensions'
   import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
-  import {getImageSrc} from '../../../util/imageSrcHelper'
+  // import {getImageSrc} from '../../../util/imageSrcHelper'
+  import imageSrcMixin from '../../../mixins/imageSrcHelperMixin'
 
   /**
    * @description parallax of vuetify superset with static background
@@ -27,7 +28,7 @@
    */
   export default {
     name: 'LcParallax',
-    mixins: [parallaxMixin],
+    mixins: [parallaxMixin, imageSrcMixin],
     props: {
       defaultHeight: {
         type: Number,
@@ -44,7 +45,7 @@
         const {file} = ref
         if (!file) return ''
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
-        return getImageSrc(
+        return this.getImageSrc(
           ref.file,
           false,
           isSmDown

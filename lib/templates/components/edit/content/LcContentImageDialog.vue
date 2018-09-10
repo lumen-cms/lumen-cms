@@ -91,11 +91,12 @@
 
 <script>
   import mediaFileMixin from '../../../mixins/mediaFileMixin'
-  import {getImageSrc} from '../../../util/imageSrcHelper'
+  import imageSrcHelperMixin from '../../../mixins/imageSrcHelperMixin'
+  // import {getImageSrc} from '../../../util/imageSrcHelper'
 
   export default {
     name: 'LcContentImageDialog',
-    mixins: [mediaFileMixin],
+    mixins: [mediaFileMixin, imageSrcHelperMixin],
     props: {
       canEdit: {
         type: Boolean,
@@ -155,7 +156,7 @@
         this.fileReferences = (fileReferences && fileReferences.slice(0).sort((a, b) => a.sorting - b.sorting)) || []
       },
       getFileUrl (item) {
-        return (item && item.file) ? getImageSrc(item.file, '64').src : ''
+        return (item && item.file) ? this.getImageSrc(item.file, '64').src : ''
       },
       onSelectNewImages () {
         this.$store.dispatch('setMediaExistingFiles', this.fileReferences

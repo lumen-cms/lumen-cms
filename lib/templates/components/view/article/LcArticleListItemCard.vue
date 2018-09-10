@@ -40,13 +40,14 @@
 </template>
 <script>
   import articleListItemMixin from '../../../mixins/articleListItemMixin'
-  import {getImageSrc} from '../../../util/imageSrcHelper'
+  import imageSrcHelperMixin from '../../../mixins/imageSrcHelperMixin'
+  // import {getImageSrc} from '../../../util/imageSrcHelper'
   import LcImage from '../partials/LcImage'
 
   const defaultImg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
   export default {
     name: 'LcArticleListItemCard',
-    mixins: [articleListItemMixin],
+    mixins: [articleListItemMixin, imageSrcHelperMixin],
     components: {LcImage},
     data () {
       return {
@@ -58,7 +59,7 @@
     watch: {
       previewImage: {
         handler (img) {
-          const previewImageCard = img === 'string' ? img : getImageSrc(img, null, 'x300').src
+          const previewImageCard = img === 'string' ? img : this.getImageSrc(img, null, 'x300').src
           this.previewImageCard = previewImageCard
           if (!this.isInit) {
             // set mediaSrc if its not initial load for reactive search

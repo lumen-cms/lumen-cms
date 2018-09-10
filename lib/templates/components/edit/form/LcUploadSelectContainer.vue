@@ -31,10 +31,12 @@
 </template>
 
 <script>
-  import {getImageSrc} from '../../../util/imageSrcHelper'
+  // import {getImageSrc} from '../../../util/imageSrcHelper'
+  import imageSrcHelperMixin from '../../../mixins/imageSrcHelperMixin'
 
   export default {
     name: 'LcUploadSelectContainer',
+    mixins: [imageSrcHelperMixin],
     props: {
       label: {
         type: String,
@@ -67,7 +69,7 @@
         if (!this.media) return null
         const getFileSrc = (media) => {
           return Object.assign({}, media, {
-            src: getImageSrc(media).src
+            src: this.getImageSrc(media).src
           })
         }
 

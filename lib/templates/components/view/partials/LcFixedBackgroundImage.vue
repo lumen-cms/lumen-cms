@@ -17,13 +17,14 @@
 </template>
 <script>
   import LcImage from './LcImage'
-  import {getImageSrc} from '../../../util/imageSrcHelper'
+  // import {getImageSrc} from '../../../util/imageSrcHelper'
   import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
   import parallaxMixin from '../../../mixins/parallaxMixin'
+  import imageSrcMixin from '../../../mixins/imageHelperMixin'
 
   export default {
     name: 'LcFixedBackgroundImage',
-    mixins: [parallaxMixin],
+    mixins: [parallaxMixin, imageSrcMixin],
     props: {
       zoomEnabled: {
         type: Boolean
@@ -53,7 +54,7 @@
           return ''
         }
         const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
-        const {src} = getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
+        const {src} = this.getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
         return src
       }
     }

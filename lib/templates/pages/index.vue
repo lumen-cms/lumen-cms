@@ -18,24 +18,23 @@
 </template>
 <script>
   import ArticleGql from '../gql/article/ArticleBySlug.gql'
-  import getHeadMeta from '../util/getHeadMeta'
+  // import getHeadMeta from '../util/getHeadMeta'
   import articleSubGql from '../gql/article/articleSubscription.gql'
   import setPageTemplates from '../util/setPageTemplates'
   import initialAsyncData from '~initialAsyncData'
+  import headMetaMixin from '../mixins/headMetaMixin'
 
   export default {
     name: 'PageIndex',
     layout: 'pageView',
+    mixins: [headMetaMixin],
     middleware: ['auth'],
     head () {
       if (this.Article && this.Article.id) {
         const lang = this.Article.languageKey.toLowerCase()
-        return getHeadMeta({
+        return this.getHeadMeta({
           article: this.Article,
-          languageKey: lang,
-          path: this.$route.path,
-          host: this.host,
-          CONFIG: this.$cms
+          languageKey: lang
         })
       }
       return {}

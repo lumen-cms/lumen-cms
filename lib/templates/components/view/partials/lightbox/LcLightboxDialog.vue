@@ -41,12 +41,13 @@
 </template>
 <script>
   import LcImageLightboxItem from './LcImageLightboxItem'
-  import {getImageSrc} from '../../../../util/imageSrcHelper'
+  // import {getImageSrc} from '../../../../util/imageSrcHelper'
   import imageSourceSetMixin from '../../../../mixins/getImageSourceSet'
+  import imageSrcHelperMixin from '../../../../mixins/imageSrcHelperMixin'
 
   export default {
     name: 'LcLightboxDialog',
-    mixins: [imageSourceSetMixin],
+    mixins: [imageSourceSetMixin, imageSrcHelperMixin],
     components: {LcImageLightboxItem},
     props: {
       content: Object,
@@ -61,7 +62,7 @@
     computed: {
       lightboxItems () {
         return this.fileReferences.map(ref => {
-          const img = getImageSrc(ref.file)
+          const img = this.getImageSrc(ref.file)
           const {srcset, sizes} = this.getImageSourceSet(ref)
           return {
             src: img.src,
