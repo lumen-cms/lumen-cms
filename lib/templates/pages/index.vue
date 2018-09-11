@@ -107,7 +107,7 @@
             },
             pageContent: article.contents
           }
-        } else if (urlAlias) {
+        } else if (urlAlias && urlAlias.article && urlAlias.article.slug) {
           redirect(301, '/' + urlAlias.article.slug)
         } else {
           error({
