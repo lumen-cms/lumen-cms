@@ -137,7 +137,7 @@
     }],
     computed: {
       canSubmit () {
-        return this.model.path && this.model.articleId
+        return this.model.path
       }
     },
     methods: {
