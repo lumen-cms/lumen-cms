@@ -35,15 +35,18 @@
 
   .content-expansion-panel {
     @extend .st-mb
-
-    .text-image, .content-element, .PageHeader, .read-more-panel {
-      margin-bottom: 0
-      padding: 0
+    .v-expansion-panel__body {
+      .content-header {
+        display: none
+      }
+      .text-image, .content-element, .PageHeader, .read-more-panel, .rte-content {
+        margin-bottom: 0
+        padding: 0
+        background-color transparent
+      }
+      .rte-content ul li {
+        //border-bottom-color white
+      }
     }
-
-    .rte-content ul li {
-    //border-bottom-color white
-    }
-
   }
 }
