@@ -1,9 +1,9 @@
 <template>
-  <v-footer absolute
+  <v-footer height="auto"
             clipped
+            absolute
             inset
-            app
-            class="d-inline-block">
+            app>
     <v-layout row wrap align-center class="grey darken-3 text-xs-center ma-0">
       <v-flex xs12>
         <v-spacer/>
