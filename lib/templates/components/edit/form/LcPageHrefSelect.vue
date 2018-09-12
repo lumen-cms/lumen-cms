@@ -69,6 +69,7 @@
           return (this.link && this.link.value) || this.link
         },
         set: debounce(function (v) {
+          console.log('set lc-page', v)
           if (v) {
             this.searchText = (v && v.value) || v
           } else {
@@ -82,6 +83,7 @@
         const v = this.value
         if (!v || !v.linkSlug) {
           this.url = null
+          this.link = {}
           return
         }
         const model = {
