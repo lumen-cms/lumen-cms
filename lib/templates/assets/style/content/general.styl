@@ -27,10 +27,10 @@
   &.max-width-auto, &.max-width-900, &.max-width-700 {
     @extend .content-boxed
     &.max-width-900 {
-      max-width: $max-width-900;
+      max-width: $max-width-lg;
     }
     &.max-width-700 {
-      max-width: $max-width-700
+      max-width: $max-width-md
     }
   }
 }
@@ -164,12 +164,12 @@
   }
   .max-width-900, .raw-html.responsive-frame.max-width-900 {
     > div:not(.content-bg), > figure, > p, > a {
-      max-width 900px
+      max-width $max-width-lg
     }
   }
   .max-width-700, .raw-html.responsive-frame.max-width-700 {
     > div:not(.content-bg), > figure, > p, > a {
-      max-width 700px
+      max-width $max-width-md
     }
   }
 }
