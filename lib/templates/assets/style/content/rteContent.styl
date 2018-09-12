@@ -69,44 +69,49 @@
     }
     &-normal_button_primary, &-normal_button, &-normal_button_secondary, &-normal_button_info, &-normal_button_error, &-normal_button_warning, &-normal_button_success {
       @extend .v-btn
-      padding: 8px 16px !important;
       height: auto;
     }
     &-large_button_primary, &-large_button, &-large_button_secondary, &-large_button_info, &-large_button_error, &-large_button_warning, &-large_button_success {
       @extend .v-btn
-      @extend .v-btn--large
-      padding: 8px 16px !important;
-      height: auto;
+      font-size: $button-large-font-size
+      height: $button-large-height
+      padding: $button-large-padding
     }
     &-large_button_primary, &-normal_button_primary {
       color: white !important
       text-decoration none
       background-color: $themeprimary !important
+      border-color: $themeprimary !important
     }
     &-large_button_secondary, &-normal_button_secondary {
       color: white !important
       text-decoration none
       background-color: $themesecondary !important
+      border-color: $themesecondary !important
     }
     &-large_button_info, &-normal_button_info {
       color: white !important
       text-decoration none
       background-color: $themeinfo !important
+      border-color: $themeinfo !important
     }
     &-large_button_warning, &-normal_button_warning {
       color: white !important
       text-decoration none
       background-color: $themewarning !important
+      border-color: $themewarning !important
     }
     &-large_button_success, &-normal_button_success {
       color: white !important
       text-decoration none
       background-color: $themesuccess !important
+      border-color: $themesuccess !important
     }
     &-large_button_error, &-normal_button_error {
       color: white !important
       text-decoration none
       background-color: $themeerror !important
+      border-color: $themeerror !important
     }
   }
 
