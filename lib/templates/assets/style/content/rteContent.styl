@@ -69,12 +69,13 @@
     }
     &-normal_button_primary, &-normal_button, &-normal_button_secondary, &-normal_button_info, &-normal_button_error, &-normal_button_warning, &-normal_button_success {
       @extend .v-btn
-      height: auto;
+      min-height: $button-height;
+      padding: $button-padding
     }
     &-large_button_primary, &-large_button, &-large_button_secondary, &-large_button_info, &-large_button_error, &-large_button_warning, &-large_button_success {
       @extend .v-btn
       font-size: $button-large-font-size
-      height: $button-large-height
+      min-height: $button-large-height
       padding: $button-large-padding
     }
     &-large_button_primary, &-normal_button_primary {
