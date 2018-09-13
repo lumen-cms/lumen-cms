@@ -25,7 +25,7 @@
       </v-flex>
     </template>
 
-    <template v-else-if="styleType === 'Slider' && list.length">
+    <template v-else-if="styleType === 'Slider' && list && list.length">
       <lc-article-list-slider :list="list"
                               :is-visible="isContentElementVisible"
                               :properties="properties"/>
@@ -40,7 +40,7 @@
       </v-list>
     </v-flex>
 
-    <v-flex v-if="count > list.length && hasLoadMore" xs12
+    <v-flex v-if="list && count > list.length && hasLoadMore" xs12
             class="text-xs-center">
       <v-btn color="primary" :block="$vuetify.breakpoint.smAndDown" outline
              :loading="!!loadingApollo"
@@ -111,6 +111,67 @@
         this.pagination.page += 1
         const {skip, first} = getSkipFirst(this.pagination)
         this.fetchMoreGql('articleQueries', {first, skip})
+      },
+      getTitleFilter (searchText) {
+        return [
+          {title_contains: searchText},
+          {slug_contains: searchText},
+          {keywords_contains: searchText}
+        ]
+      },
+      getVariablesFilter (languageKey, searchText) {
+        const {skip, first} = getSkipFirst(pagination)
+        const properties = this.content.properties || {}
+        const filter = {
+          OR: [{deleted: null}, {deleted: false}],
+          languageKey,
+          // contents_some: {id_not: null}, // testing
+          published: true
+        }
+        this.onlyBlogPosts && (filter.isBlogEntry = true)
+        // search text is present
+        if (searchText) {
+          const filterArray = this.getTitleFilter(searchText)
+          filter.AND = [
+            {OR: filter.OR},
+            {OR: filterArray}
+          ]
+          delete filter.OR
+        }
+        if (properties.categoriesIds && properties.categoriesIds.length) {
+          if (!filter.AND) filter.AND = [{OR: filter.OR}]
+          delete filter.OR
+
+          if (properties.allCategoriesMustMatch) {
+            filter.AND.push({
+              AND: properties.categoriesIds.map(id => ({categories_some: {id: id}}))
+            })
+          } else {
+            filter.AND.push({
+              categories_some: {
+                id_in: properties.categoriesIds
+              }
+            })
+          }
+        }
+        if (properties.listItemsType && properties.listItemsType !== 'All') {
+          filter.isBlogEntry = (properties.listItemsType === 'Articles')
+        }
+        const finalFilter = this.extendFilter(filter)
+        return {
+          first: properties.listItemsLimit || first,
+          skip,
+          filter: finalFilter,
+          orderBy: properties.orderBy || 'publishedDate_DESC'
+        }
+      },
+      /**
+       * mainly only provided to extend the current filter mechanism
+       * @param filter
+       * @return {*}
+       */
+      extendFilter (filter) {
+        return filter
       }
     },
     computed: {
@@ -129,71 +190,10 @@
       articleQueries: {
         query: allArticleGql,
         prefetch ({store}) {
-          const {skip, first} = getSkipFirst(pagination)
-          const properties = this.content.properties || {}
-          const filter = {
-            OR: [{deleted: null}, {deleted: false}],
-            languageKey: store.state.lc.locale.toUpperCase(),
-            contents_some: {id_not: null},
-            published: true
-          }
-          this.onlyBlogPosts && (filter.isBlogEntry = true)
-          return {
-            first: properties.listItemsLimit || first,
-            skip,
-            filter,
-            orderBy: properties.orderBy || 'publishedDate_DESC'
-          }
+          return this.getVariablesFilter(store.state.lc.locale.toUpperCase())
         },
         variables () {
-          const {skip, first} = getSkipFirst(pagination)
-          const properties = this.content.properties || {}
-          const variables = {
-            first: properties.listItemsLimit || first,
-            skip,
-            orderBy: properties.orderBy || 'publishedDate_DESC',
-            filter: {
-              languageKey: this.$store.state.lc.locale.toUpperCase(),
-              // contents_some: {id_not: null}, // testing purpose
-              OR: [{deleted: null}, {deleted: false}],
-              published: true
-            }
-          }
-          this.onlyBlogPosts && (variables.filter.isBlogEntry = true)
-          // search text is present
-          const searchText = this.$store.state.lc.mainSearch
-          if (searchText) {
-            const filterArray = [
-              {title_contains: searchText},
-              {slug_contains: searchText},
-              {keywords_contains: searchText}
-            ]
-            variables.filter.AND = [
-              {OR: variables.filter.OR},
-              {OR: filterArray}
-            ]
-            delete variables.filter.OR
-          }
-          if (properties.categoriesIds && properties.categoriesIds.length) {
-            if (!variables.filter.AND) variables.filter.AND = [{OR: variables.filter.OR}]
-            delete variables.filter.OR
-
-            if (properties.allCategoriesMustMatch) {
-              variables.filter.AND.push({
-                AND: this.content.properties.categoriesIds.map(id => ({categories_some: {id: id}}))
-              })
-            } else {
-              variables.filter.AND.push({
-                categories_some: {
-                  id_in: this.content.properties.categoriesIds
-                }
-              })
-            }
-          }
-          if (properties.listItemsType && properties.listItemsType !== 'All') {
-            variables.filter.isBlogEntry = (properties.listItemsType === 'Articles')
-          }
-          return variables
+          return this.getVariablesFilter(this.$store.state.lc.locale.toUpperCase(), this.$store.state.lc.mainSearch)
         },
         manual: true,
         update: data => data,
