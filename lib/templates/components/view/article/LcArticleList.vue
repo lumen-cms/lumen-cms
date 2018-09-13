@@ -20,12 +20,14 @@
               v-for="(item, i) in list"
               :key="`cards${i}`">
         <lc-article-list-item-card :item="item"
+                                   :is-content-element-visible="isContentElementVisible"
                                    :properties="properties"/>
       </v-flex>
     </template>
 
     <template v-else-if="styleType === 'Slider' && list.length">
       <lc-article-list-slider :list="list"
+                              :is-visible="isContentElementVisible"
                               :properties="properties"/>
     </template>
 
@@ -33,6 +35,7 @@
       <v-list subheader>
         <lc-article-list-item v-for="(item, i) in list" :key="`key${i}`"
                               :item="item"
+                              :is-content-element-visible="isContentElementVisible"
                               :style-type="styleType"/>
       </v-list>
     </v-flex>
@@ -87,6 +90,10 @@
         }
       },
       onlyBlogPosts: {
+        type: Boolean,
+        default: false
+      },
+      isContentElementVisible: {
         type: Boolean,
         default: false
       }

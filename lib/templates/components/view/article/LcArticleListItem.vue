@@ -2,7 +2,7 @@
   <v-list-tile :avatar="styleType === 'AvatarList'"
                :to="`/${item.slug}`">
     <v-list-tile-avatar v-if="styleType === 'AvatarList'">
-      <lc-figure :src="previewImageAvatar" alt="avatar"/>
+      <lc-figure :src="previewImageAvatar" alt="avatar" :is-visible="isContentElementVisible"/>
     </v-list-tile-avatar>
     <v-list-tile-content>
       <v-list-tile-title v-text="item.title"/>

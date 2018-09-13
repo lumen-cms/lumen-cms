@@ -2,7 +2,8 @@
   <div :class="currentClass">
     <lc-image :height="height"
               :class="{'lc-fixed-bg-img':isFixed,'lc-zoom-enabled':zoomEnabled}"
-              :src="src">
+              :src="src"
+              :is-visible="isContentElementVisible">
       <v-container fill-height>
         <v-layout :align-center="!alignEnd" :align-end="alignEnd">
           <v-flex text-xs-center>

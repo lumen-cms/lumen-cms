@@ -1,7 +1,8 @@
 <template>
   <div :class="currentClass">
     <lc-image :height="height"
-              :src="src">
+              :src="src"
+              :is-visible="isContentElementVisible">
       <v-container fill-height>
         <v-layout :align-center="!alignEnd" :align-end="alignEnd">
           <v-flex text-xs-center>
@@ -13,7 +14,6 @@
   </div>
 </template>
 <script>
-  // import {getImageSrc} from '../../../util/imageSrcHelper'
   import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
   import parallaxMixin from '../../../mixins/parallaxMixin'
   import imageSrcMixin from '../../../mixins/imageSrcHelperMixin'
@@ -35,6 +35,7 @@
     },
     computed: {
       src () {
+        if (!this.fileReference) return ''
         const ref = Object.assign({}, this.fileReference)
         ref.resize = ref.resize || 'x' + this.height // not sure if we should do any resizing actually
         const file = this.fileReference.file

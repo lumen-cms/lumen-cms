@@ -8,7 +8,7 @@
               ma-0>
       <v-progress-circular indeterminate color="grey darken-1"></v-progress-circular>
     </v-layout>
-    <figure v-observe-visibility="{callback: visibilityChanged,throttle: 300}">
+    <figure>
       <img :src="genSrc"
            :srcset="genSrcset"
            :sizes="sizes"
@@ -29,22 +29,15 @@
       sizes: String,
       srcset: String,
       width: String | Number,
-      isRounded: Boolean
+      isRounded: Boolean,
+      isVisible: Boolean
     },
-    data () {
-      return {
-        isVisible: false,
-        genSrc: null,
-        genSrcset: null
-      }
-    },
-
-    methods: {
-      visibilityChanged (isVisible) {
-        if (isVisible) {
-          this.genSrc = this.src
-          this.genSrcset = this.srcset
-        }
+    computed: {
+      genSrc () {
+        return this.isVisible ? this.src : null
+      },
+      genSrcset () {
+        return this.isVisible ? this.srcset : null
       }
     }
   }

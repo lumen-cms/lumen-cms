@@ -5,6 +5,7 @@
                 ref="cardMedia"
                 :src="previewImageCard"
                 :lazy-src="mediaSrc"
+                :is-visible="isContentElementVisible"
                 height="200px"/>
     </nuxt-link>
     <v-card-text style="cursor: default; min-height: 100px;">

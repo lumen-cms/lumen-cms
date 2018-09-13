@@ -1,8 +1,7 @@
 <template>
   <component :is="componentTag"
              v-bind="$props"
-             :style="componentStyles"
-             v-observe-visibility="{callback: visibilityChanged,throttle: 300}">
+             :style="componentStyles">
     <v-layout slot="placeholder"
               v-if="src"
               fill-height
@@ -28,12 +27,8 @@
       sizes: String,
       srcset: String,
       width: String | Number,
-      isFigure: Boolean
-    },
-    data () {
-      return {
-        isVisible: false
-      }
+      isFigure: Boolean,
+      isVisible: Boolean
     },
     computed: {
       componentTag () {
@@ -43,11 +38,6 @@
         if (!this.isVisible && this.height) {
           return `height: ${this.height}`
         }
-      }
-    },
-    methods: {
-      visibilityChanged (isVisible) {
-        isVisible && (this.isVisible = true)
       }
     }
   }
