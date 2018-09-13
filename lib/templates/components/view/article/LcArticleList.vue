@@ -112,6 +112,9 @@
         const {skip, first} = getSkipFirst(this.pagination)
         this.fetchMoreGql('articleQueries', {first, skip})
       },
+      /**
+       * overwrite if extend the component
+       */
       getTitleFilter (searchText) {
         return [
           {title_contains: searchText},
