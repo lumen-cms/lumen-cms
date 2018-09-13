@@ -65,6 +65,8 @@
         }
         if (this.item.linkOpenExternal) {
           attrs.target = '_blank'
+        } else {
+          attrs.exact = true
         }
         return attrs
       }
