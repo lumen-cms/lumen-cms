@@ -3,7 +3,7 @@
              v-bind="$props"
              :style="componentStyles">
     <v-layout slot="placeholder"
-              v-if="src"
+              v-if="isVisible"
               fill-height
               align-center
               justify-center

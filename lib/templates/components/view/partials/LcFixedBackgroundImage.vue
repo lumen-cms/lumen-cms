@@ -18,7 +18,6 @@
 </template>
 <script>
   import LcImage from './LcImage'
-  // import {getImageSrc} from '../../../util/imageSrcHelper'
   import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
   import parallaxMixin from '../../../mixins/parallaxMixin'
   import imageSrcMixin from '../../../mixins/imageHelperMixin'
@@ -48,6 +47,7 @@
         return true
       },
       src () {
+        if (!this.fileReference) return ''
         const ref = Object.assign({}, this.fileReference)
         ref.resize = ref.resize || 'x' + this.height // not sure if we should do any resizing actually
         const file = this.fileReference.file
