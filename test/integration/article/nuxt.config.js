@@ -11,7 +11,8 @@ module.exports = {
   env: {
     GRAPHQL_PROJECT_ID: 'cj8yj66xc01740164lh5bv4fz',
     GRAPHQL_SUBSCRIPTION: 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo',
-    COPYRIGHT: 'Lumen CMS'
+    COPYRIGHT: 'Lumen CMS',
+    IMAGE_PROXY: 'https://imgx.studentsgoabroad.com/v1/'
   },
   plugins: ['~/plugins/additionalComponents.js'],
   modules: [['@@', {

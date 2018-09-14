@@ -18,13 +18,13 @@
 </template>
 <script>
   import LcImage from './LcImage'
-  import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
   import parallaxMixin from '../../../mixins/parallaxMixin'
   import imageSrcMixin from '../../../mixins/imageHelperMixin'
+  import imgSrcsetMixin from '../../../mixins/getImageSourceSet'
 
   export default {
     name: 'LcFixedBackgroundImage',
-    mixins: [parallaxMixin, imageSrcMixin],
+    mixins: [parallaxMixin, imageSrcMixin, imgSrcsetMixin],
     props: {
       zoomEnabled: {
         type: Boolean
@@ -47,15 +47,14 @@
         return true
       },
       src () {
-        if (!this.fileReference) return ''
+        if (!this.fileReference || !this.fileReference.file) return ''
         const ref = Object.assign({}, this.fileReference)
         ref.resize = ref.resize || 'x' + this.height // not sure if we should do any resizing actually
         const file = this.fileReference.file
-        if (!file) {
-          return ''
-        }
-        const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
-        const {src} = this.getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
+        // const {xCropAmount, yCropAmount} = this.getJumbotronCropValue(this.height, file.height, file.width)
+        // const {src} = this.getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
+        // todo we should work out some srcset in the future
+        const {src} = this.getImageSrc(file, null)
         return src
       }
     }

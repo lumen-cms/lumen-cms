@@ -14,7 +14,6 @@
   </div>
 </template>
 <script>
-  import getJumbotronCropValue from '../../../util/getJumbotronCropValue'
   import parallaxMixin from '../../../mixins/parallaxMixin'
   import imageSrcMixin from '../../../mixins/imageSrcHelperMixin'
   import LcImage from './LcImage'
@@ -42,7 +41,7 @@
         if (!file) {
           return ''
         }
-        const {xCropAmount, yCropAmount} = getJumbotronCropValue(this.height, file.height, file.width)
+        const {xCropAmount, yCropAmount} = this.getJumbotronCropValue(this.height, file.height, file.width)
 
         const {src} = this.getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
         return src

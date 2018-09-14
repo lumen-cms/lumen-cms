@@ -87,7 +87,11 @@
         this.$store.dispatch('setContentEditDialogData', {})
       },
       onInsertPaste () {
-        this.$store.dispatch('setCrossDomainContent', this.$refs.inputTextArea.inputValue)
+        if (!this.$refs.inputTextArea.internalValue) {
+          console.error('Internal value of textarea not available')
+        } else {
+          this.$store.dispatch('setCrossDomainContent', this.$refs.inputTextArea.internalValue)
+        }
       },
       onPaste () {
         this.showPaste = true
