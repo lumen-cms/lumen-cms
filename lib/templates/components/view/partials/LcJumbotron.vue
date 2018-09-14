@@ -3,7 +3,7 @@
     <lc-image :height="height"
               :src="src"
               :is-visible="isContentElementVisible">
-      <v-container fill-height>
+      <v-container fill-height fluid>
         <v-layout :align-center="!alignEnd" :align-end="alignEnd">
           <v-flex text-xs-center>
             <slot/>

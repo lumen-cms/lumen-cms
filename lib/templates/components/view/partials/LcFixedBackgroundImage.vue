@@ -4,7 +4,7 @@
               :class="{'lc-fixed-bg-img':isFixed,'lc-zoom-enabled':zoomEnabled}"
               :src="src"
               :is-visible="isContentElementVisible">
-      <v-container fill-height>
+      <v-container fill-height fluid>
         <v-layout :align-center="!alignEnd" :align-end="alignEnd">
           <v-flex text-xs-center>
             <v-layout column style="position: relative">
