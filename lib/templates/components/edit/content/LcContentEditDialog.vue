@@ -10,6 +10,7 @@
     <v-card>
       <component :is="componentName"
                  v-model="model"
+                 ref="childComponent"
                  @onMinimize="minimizeContent = $event"/>
       <v-progress-linear :indeterminate="true"
                          :active="$store.state.lc.updating"/>
@@ -48,6 +49,9 @@
     watch: {
       '$store.state.lc.contentEditDialogData.content': {
         handler (v) {
+          if (v && v.id && this.$refs.childComponent) {
+            typeof this.$refs.childComponent.setComponentId === 'function' && this.$refs.childComponent.setComponentId(v.id)
+          }
           this.model = Object.assign({}, this.model, v)
         },
         deep: true,
@@ -105,13 +109,14 @@
           properties.imageColumnSize = null
         }
         const variables = Object.assign({}, this.model, {properties})
+
         if (this.model.id) {
-          GlobalEventBus.$emit('on-content-update', {variables, unsetAfterSave})
+          GlobalEventBus.$emit('lc-on-content-update', {variables, unsetAfterSave})
           // await this.$parent.onContentUpdate({variables})
         } else {
           delete variables.id
           delete variables.__typename
-          GlobalEventBus.$emit('on-content-create', {variables, unsetAfterSave})
+          GlobalEventBus.$emit('lc-on-content-create', {variables, unsetAfterSave})
           // const res = await this.$parent.onContentCreate({variables})
           // this.model.id = res.id
         }

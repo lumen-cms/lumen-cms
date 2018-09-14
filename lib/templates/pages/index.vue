@@ -18,11 +18,11 @@
 </template>
 <script>
   import ArticleGql from '../gql/article/ArticleBySlug.gql'
-  // import getHeadMeta from '../util/getHeadMeta'
-  import articleSubGql from '../gql/article/articleSubscription.gql'
+  // import articleSubGql from '../gql/article/articleSubscription.gql'
   import setPageTemplates from '../util/setPageTemplates'
   import initialAsyncData from '~initialAsyncData'
   import headMetaMixin from '../mixins/headMetaMixin'
+  import {GlobalEventBus} from '../util/globalEventBus'
 
   export default {
     name: 'PageIndex',
@@ -48,12 +48,38 @@
     },
     mounted () {
       this.scrollToAnchor()
-      this.$on('routeChanged', this.onRouteChange)
+      GlobalEventBus.$on('lc-on-article-content-change', this.onContentChange)
+      // this.$on('routeChanged', this.onRouteChange)
     },
     beforeDestroy () {
-      this.$off('routeChanged', this.onRouteChange)
+      GlobalEventBus.$off('lc-on-article-content-change', this.onContentChange)
+      //   this.$off('routeChanged', this.onRouteChange)
+    },
+    beforeRouteLeave () {
+      this.onRouteChange()
     },
     methods: {
+      onContentChange () {
+        if (this.$apollo.queries.lcArticle) {
+          console.log('smart query exists already')
+          this.$apollo.queries.lcArticle.refetch()
+        } else {
+          this.$apollo.addSmartQuery('lcArticle', {
+            query: ArticleGql,
+            variables () {
+              const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
+              return {slug}
+            },
+            manual: true,
+            result ({data}) {
+              console.log('inside smart query', data)
+              const article = data.Article
+              this.Article = article
+              this.pageContent = article.contents
+            }
+          })
+        }
+      },
       scrollToAnchor () {
         let hash = this.$route.hash
         if (hash) {
@@ -100,11 +126,11 @@
           await store.dispatch('setCurrentArticleCategories', article.categories.slice(0))
           return {
             host,
-            Article: article,
             pageProps: {
               articleId: article.id,
               languageKey: article.languageKey
             },
+            Article: article,
             pageContent: article.contents
           }
         } else if (urlAlias && urlAlias.article && urlAlias.article.slug) {
@@ -122,25 +148,25 @@
           message: 'An error occurred on query the content'
         })
       }
-    },
-    apollo: {
-      $subscribe: {
-        changedArticle: {
-          query: articleSubGql,
-          variables () {
-            const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
-            return {slug}
-          },
-          result ({data}) {
-            const article = JSON.parse(JSON.stringify(data.Article.node)) // important to clean due to reactivity
-            this.pageProps = {
-              articleId: article.id,
-              languageKey: article.languageKey
-            }
-            this.pageContent = article.contents.slice(0)
-          }
-        }
-      }
     }
+    // apollo: {
+    //   $subscribe: {
+    //     changedArticle: {
+    //       query: articleSubGql,
+    //       variables () {
+    //         const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
+    //         return {slug}
+    //       },
+    //       result ({data}) {
+    //         const article = JSON.parse(JSON.stringify(data.Article.node)) // important to clean due to reactivity
+    //         this.pageProps = {
+    //           articleId: article.id,
+    //           languageKey: article.languageKey
+    //         }
+    //         this.pageContent = article.contents.slice(0)
+    //       }
+    //     }
+    //   }
+    // }
   }
 </script>

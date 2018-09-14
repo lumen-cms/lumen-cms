@@ -41,12 +41,12 @@
       }
     },
     mounted () {
-      GlobalEventBus.$on('on-content-create', this.onContentCreate)
-      GlobalEventBus.$on('on-content-update', this.onContentUpdate)
+      GlobalEventBus.$on('lc-on-content-create', this.onContentCreate)
+      GlobalEventBus.$on('lc-on-content-update', this.onContentUpdate)
     },
     destroyed () {
-      GlobalEventBus.$off('on-content-create', this.onContentCreate)
-      GlobalEventBus.$off('on-content-update', this.onContentUpdate)
+      GlobalEventBus.$off('lc-on-content-create', this.onContentCreate)
+      GlobalEventBus.$off('lc-on-content-update', this.onContentUpdate)
     },
     methods: {
       async processSingleFileImport (file, projectIdOfCopy) {
@@ -93,6 +93,7 @@
         }
         this.$refs.contentCreate.closeWindows()
         this.$store.dispatch('setCrossDomainContent', null)
+        GlobalEventBus.$emit('lc-on-article-content-change')
       },
       async onContentUpdate ({variables, unsetAfterSave}) {
         // const dialogData = this.$store.getters.getDialogData
@@ -105,6 +106,7 @@
         if (unsetAfterSave) {
           this.$store.dispatch('setContentEditDialogData', {})
         }
+        GlobalEventBus.$emit('lc-on-article-content-change')
         return res
       },
       /**
@@ -139,6 +141,7 @@
           content: createdContent
         })
         this.$store.dispatch('setContentEditDialogData', unsetAfterSave ? {} : state)
+        GlobalEventBus.$emit('lc-on-article-content-change')
         return createdContent
       },
 
@@ -174,6 +177,7 @@
         }, 'createContent')
         this.$store.dispatch('toggleCmsLoading')
         this.$store.dispatch('setContentCopyData', {id: null})
+        GlobalEventBus.$emit('lc-on-article-content-change')
       },
 
       /**
@@ -215,6 +219,7 @@
         })
         this.$store.commit('SET_CMS_LOADING', false)
         this.$store.dispatch('setContentPublish', {})
+        GlobalEventBus.$emit('lc-on-article-content-change')
       },
 
       /**
@@ -260,6 +265,7 @@
         // unset all cut/paste vuex states
         this.$store.dispatch('setContentCutData', {})
         this.$store.dispatch('setContentPasteData', {})
+        GlobalEventBus.$emit('lc-on-article-content-change')
       },
       /**
        *
@@ -286,6 +292,7 @@
         await Promise.all(mutations)
         this.$store.dispatch('setContentMoveData', {})
         this.$store.commit('SET_CMS_LOADING', false)
+        GlobalEventBus.$emit('lc-on-article-content-change')
       }
     }
   }
