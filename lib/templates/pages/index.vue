@@ -49,15 +49,15 @@
     mounted () {
       this.scrollToAnchor()
       GlobalEventBus.$on('lc-on-article-content-change', this.onContentChange)
-      // this.$on('routeChanged', this.onRouteChange)
+      this.$on('routeChanged', this.onRouteChange)
     },
     beforeDestroy () {
       GlobalEventBus.$off('lc-on-article-content-change', this.onContentChange)
-      //   this.$off('routeChanged', this.onRouteChange)
+      this.$off('routeChanged', this.onRouteChange)
     },
-    beforeRouteLeave () {
-      this.onRouteChange()
-    },
+    // beforeRouteLeave () {
+    //   this.onRouteChange()
+    // },
     methods: {
       onContentChange () {
         if (this.$apollo.queries.lcArticle) {
