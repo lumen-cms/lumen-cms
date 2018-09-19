@@ -33,7 +33,7 @@
                   color="info"
                   :disabled="!(model.properties.categoriesIds && model.properties.categoriesIds.length)"
                   label="All categories must match"/>
-        <slot/>
+        <slot v-if="!$apollo.loading"/>
         <v-select label="Limit list items"
                   v-model="model.properties.listItemsLimit"
                   name="listItemsLimit"
