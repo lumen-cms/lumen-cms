@@ -33,7 +33,7 @@
                   color="info"
                   :disabled="!(model.properties.categoriesIds && model.properties.categoriesIds.length)"
                   label="All categories must match"/>
-        <slot/>
+        <slot></slot>
         <v-select label="Limit list items"
                   v-model="model.properties.listItemsLimit"
                   name="listItemsLimit"
@@ -167,10 +167,18 @@
         allArticleCategories: []
       }
     },
+    mounted () {
+      this.$slots.default = this.genNestedContent
+    },
     inputFields: {
       backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
       rootStyles: [styles.padding, styles.margin, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
       sliderStyles: [{value: 'round', text: 'Rounded image'}, {value: 'slideshow', text: 'Slideshow'}]
+    },
+    computed: {
+      genNestedContent () {
+        return this.$createElement('span')
+      }
     },
     apollo: {
       allArticleCategories: {
