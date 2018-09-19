@@ -8,6 +8,13 @@
       {{ label }}
     </v-btn>
     <v-card>
+      <v-card-title class="pa-0">
+        <v-spacer/>
+        <v-btn icon @click="showDialog=false">
+          <v-icon>clear</v-icon>
+        </v-btn>
+      </v-card-title>
+
       <v-card-text>
         <slot/>
       </v-card-text>
