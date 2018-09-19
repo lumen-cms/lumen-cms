@@ -28,11 +28,11 @@
                 </v-flex>
                 <v-flex>
                   <v-combobox name="key"
-                            :items="keyItems"
-                            label="Key"
-                            required
-                            :rules="[onRequiredRule]"
-                            v-model="model.key"/>
+                              :items="keyItems"
+                              label="Key"
+                              required
+                              :rules="[onRequiredRule]"
+                              v-model="model.key"/>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -195,9 +195,9 @@
           // update a menu entry
           const currentModel = model.item
           this.editModel = Object.assign({}, currentModel, {
-              link: currentModel.to ? this.getHrefValue(currentModel) : null,
-              type: currentModel.type || this.getItemType(currentModel)
-            }
+            link: currentModel.to ? this.getHrefValue(currentModel) : null,
+            type: currentModel.type || this.getItemType(currentModel)
+          }
           )
         } else {
           let originId = model.item && model.item.id

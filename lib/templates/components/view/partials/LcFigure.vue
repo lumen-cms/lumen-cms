@@ -6,7 +6,7 @@
               align-center
               justify-center
               ma-0>
-      <v-progress-circular indeterminate color="grey darken-1"></v-progress-circular>
+      <v-progress-circular indeterminate color="grey darken-1"/>
     </v-layout>
     <figure>
       <img :src="genSrc"
