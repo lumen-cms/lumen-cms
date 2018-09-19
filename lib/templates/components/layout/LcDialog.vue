@@ -1,5 +1,6 @@
 <template>
-  <v-dialog v-model="showDialog">
+  <v-dialog v-model="showDialog"
+            :content-class="dialogClass">
     <v-btn slot="activator"
            :class="showClass"
            :icon="icon && !label">
@@ -19,7 +20,8 @@
     props: {
       icon: String,
       label: String,
-      showClass: String
+      showClass: String,
+      dialogClass: String
     },
     data () {
       return {

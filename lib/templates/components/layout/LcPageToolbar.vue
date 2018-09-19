@@ -52,7 +52,7 @@
       <v-toolbar-side-icon :class="$cms.toolbarSidebarRightIconClass"
                            @click.native.stop="$store.dispatch('toggleSidebarRight')"/>
       <lc-dialog icon="menu"
-                 class="lc-mega-menu"
+                 dialog-class="lc-mega-menu"
                  :show-class="$cms.megaMenuVisibility"
                  v-if="$store.getters.getPageTemplate($cms.pageTemplate.MEGA_MENU)">
         <lc-vue-renderer navigation="columns"
@@ -159,6 +159,12 @@
   .v-toolbar.transparent.has-jumbo {
     .v-btn.v-btn--flat, .v-toolbar__side-icon, .v-dialog__activator .v-btn--outline, .v-dialog__activator .v-btn--icon {
       background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+  }
+
+  .v-dialog.lc-mega-menu {
+    .v-subheader {
+      font-size: 20px
     }
   }
 </style>
