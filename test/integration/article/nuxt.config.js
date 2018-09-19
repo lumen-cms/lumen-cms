@@ -10,7 +10,7 @@ module.exports = {
   },
   env: {
     GRAPHQL_PROJECT_ID: 'cj8yj66xc01740164lh5bv4fz',
-    GRAPHQL_SUBSCRIPTION: null,//'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo',
+    GRAPHQL_SUBSCRIPTION: null, // 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo',
     COPYRIGHT: 'Lumen CMS',
     IMAGE_PROXY: 'https://imgx.studentsgoabroad.com/v1/'
   },
@@ -20,7 +20,7 @@ module.exports = {
       clientConfigs: {
         default: {
           httpEndpoint: 'https://api.graph.cool/simple/v1/lumen-cms-demo',
-          wsEndpoint: null//'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo'
+          wsEndpoint: null// 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo'
         }
       }
     },

@@ -1,9 +1,9 @@
 <template>
   <v-autocomplete :items="$store.state.lc.materialIconNames"
-            name="icon"
-            v-model="model"
-            label="Icon"
-            cache-items>
+                  name="icon"
+                  v-model="model"
+                  label="Icon"
+                  cache-items>
     <template slot="item" slot-scope="data">
       <v-list-tile-avatar>
         <v-icon>{{ data.item }}</v-icon>
