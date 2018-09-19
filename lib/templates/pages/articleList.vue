@@ -1,7 +1,8 @@
 <template>
   <v-container fluid
                grid-list-md class="content-boxed blog-page">
-    <lc-article-list :only-blog-posts="true"/>
+    <lc-article-list :only-blog-posts="true"
+                     :is-content-element-visible="true"/>
   </v-container>
 </template>
 <script>
