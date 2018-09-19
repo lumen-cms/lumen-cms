@@ -51,7 +51,7 @@
       </template>
       <v-toolbar-side-icon :class="$cms.toolbarSidebarRightIconClass"
                            @click.native.stop="$store.dispatch('toggleSidebarRight')"/>
-      <lc-dialog icon="menu"
+      <lc-dialog :icon="$cms.megaMenuIcon || 'apps'"
                  dialog-class="lc-mega-menu"
                  :show-class="$cms.megaMenuVisibility"
                  v-if="$store.getters.getPageTemplate($cms.pageTemplate.MEGA_MENU)">
