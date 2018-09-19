@@ -168,7 +168,7 @@
       }
     },
     mounted () {
-      this.$slots.default = this.genNestedContent
+      this.$slots.default = this.genDefaultSlot
     },
     inputFields: {
       backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
@@ -176,7 +176,8 @@
       sliderStyles: [{value: 'round', text: 'Rounded image'}, {value: 'slideshow', text: 'Slideshow'}]
     },
     computed: {
-      genNestedContent () {
+      // adjust this in case you extend the functionality
+      genDefaultSlot () {
         return this.$createElement('span')
       }
     },
