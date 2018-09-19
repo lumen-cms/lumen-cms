@@ -15,7 +15,7 @@
         </v-btn>
       </v-card-title>
 
-      <v-card-text>
+      <v-card-text class="pt-0">
         <slot/>
       </v-card-text>
     </v-card>
