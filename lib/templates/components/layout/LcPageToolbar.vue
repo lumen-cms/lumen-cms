@@ -157,7 +157,7 @@
   }
 
   .v-toolbar.transparent.has-jumbo {
-    .v-btn.v-btn--flat, .v-toolbar__side-icon, .v-dialog__activator .v-btn--outline {
+    .v-btn.v-btn--flat, .v-toolbar__side-icon, .v-dialog__activator .v-btn--outline, .v-dialog__activator .v-btn--icon {
       background-color: rgba(0, 0, 0, 0.4) !important;
     }
   }
