@@ -23,7 +23,7 @@ This project aims to combine very popular open-source projects and a solid manag
 * SEO optimized 
 * SSR-rendered SPA feel of static website
 * Imageproxy (CDN + scale/crop)
-* Lazy-loading
+* Lazy-loading / Intersection Observer
 * Responsive images 
 * Fontloader
 * In-Page-Editing
@@ -40,6 +40,7 @@ This project aims to combine very popular open-source projects and a solid manag
 * GraphQL managed backend by graph.cool (https://graph.cool/)
 * Apollo (https://www.apollographql.com/client/, https://github.com/Akryum/vue-apollo)
 * Vue-i18n (https://kazupon.github.io/vue-i18n/en/)
+* Intersection-Observer (https://github.com/Akryum/vue-observe-visibility)
 * Fast deplyoment with zeit.co/now (https://zeit.co/now)
 
 ## Requirement
