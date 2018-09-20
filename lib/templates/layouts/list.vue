@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <lc-page-toolbar show-search/>
+    <lc-sidebar-left/>
     <lc-sidebar-right/>
     <v-content class="main page-view-layout"
                :class="{'is-loading':$store.state.lc.cmsLoading}">
