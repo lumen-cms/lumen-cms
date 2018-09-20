@@ -17,7 +17,7 @@
         </v-btn>
       </v-layout>
     </v-toolbar>
-    <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent">
+    <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent" v-if="!$apollo.loading">
       <div id="tab-content" v-if="active === 'tab-content'">
         <v-select multiple
                   clearable
@@ -33,7 +33,7 @@
                   color="info"
                   :disabled="!(model.properties.categoriesIds && model.properties.categoriesIds.length)"
                   label="All categories must match"/>
-        <slot v-if="!$apollo.loading"/>
+        <slot/>
         <v-select label="Limit list items"
                   v-model="model.properties.listItemsLimit"
                   name="listItemsLimit"
