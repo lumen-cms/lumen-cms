@@ -19,16 +19,8 @@
     </v-toolbar>
     <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent" v-if="!$apollo.loading">
       <div id="tab-content" v-if="active === 'tab-content'">
-        <v-select multiple
-                  clearable
-                  deletable-chips
-                  label="Categories"
-                  v-model="model.properties.categoriesIds"
-                  name="categoriesIds"
-                  :items="allArticleCategories || []"
-                  chips
-                  item-value="id"
-                  item-text="title"/>
+        <lc-category-select v-model="model.properties.categoriesIds"/>
+
         <v-switch v-model="model.properties.allCategoriesMustMatch"
                   color="info"
                   :disabled="!(model.properties.categoriesIds && model.properties.categoriesIds.length)"
@@ -154,32 +146,18 @@
 </template>
 
 <script>
-  import AllArticleCategoriesGql from '../../../../gql/articleCategory/allArticleCategories.gql'
   import styles from '../../../../util/contentEditStyleDefinitions'
   import contentEditMixin from '../../../../mixins/contentEditMixin'
+  import LcCategorySelect from '../../form/LcCategorySelect'
 
   export default {
     name: 'LcListWidgetEdit',
+    components: {LcCategorySelect},
     mixins: [contentEditMixin],
-    data () {
-      return {
-        // domains: this.$cms.DOMAINS, // todo seems unused?
-        allArticleCategories: []
-      }
-    },
     inputFields: {
       backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
       rootStyles: [styles.padding, styles.margin, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
       sliderStyles: [{value: 'round', text: 'Rounded image'}, {value: 'slideshow', text: 'Slideshow'}]
-    },
-    apollo: {
-      allArticleCategories: {
-        query: AllArticleCategoriesGql,
-        variables () {
-          const key = this.$store.state.lc.locale || 'en'
-          return {filter: {languageKey: key.toUpperCase()}}
-        }
-      }
     }
   }
 </script>
