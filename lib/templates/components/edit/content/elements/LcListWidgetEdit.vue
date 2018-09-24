@@ -17,7 +17,7 @@
         </v-btn>
       </v-layout>
     </v-toolbar>
-    <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent" v-if="!$apollo.loading">
+    <v-card-text style="height: 50vh; overflow: auto;" v-show="!hideContent">
       <div id="tab-content" v-if="active === 'tab-content'">
         <lc-category-select v-model="model.properties.categoriesIds"/>
 
