@@ -129,9 +129,11 @@
   import mediaFileMixin from '../../../../mixins/mediaFileMixin'
   import contentEditMixin from '../../../../mixins/contentEditMixin'
   import styles from '../../../../util/contentEditStyleDefinitions'
+  import VSwitch from 'vuetify/src/components/VSwitch/VSwitch'
 
   export default {
     name: 'LcLayoutEdit',
+    components: {VSwitch},
     mixins: [contentEditMixin, mediaFileMixin],
     inputFields: {
       styles: [styles.textColor, styles.margin, styles.padding, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
