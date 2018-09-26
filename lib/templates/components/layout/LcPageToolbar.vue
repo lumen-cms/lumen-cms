@@ -23,11 +23,7 @@
              @click.native.stop="$store.dispatch('toggleSidebarLeft')">
         <v-icon>apps</v-icon>
       </v-btn>
-
-      <v-toolbar-title>
-        <lc-main-logo/>
-      </v-toolbar-title>
-
+      <lc-main-logo/>
       <v-spacer/>
       <lc-main-search class="lc-main-search no-extension mx-3"
                       v-if="!!showSearch"

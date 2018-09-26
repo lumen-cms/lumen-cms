@@ -50,7 +50,7 @@
     "vue-i18n": "^8.1.0",
     "vue-ls": "^3.0.5",
     "vue-observe-visibility": "^0.4.1",
-    "vuetify": "^1.2.4"
+    "vuetify": "^1.2.5"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
