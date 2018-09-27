@@ -98,10 +98,14 @@
       try {
         const apollo = app.apolloProvider.defaultClient
         const res = await Promise.all([
-          apollo.query({query: ArticleGql, variables: {slug}}),
+          // apollo.query({query: ArticleGql, variables: {slug}}),
+          fetch('https://api.studentsgoabroad.com/article/' + process.env.GRAPHQL_PROJECT_ID, {slug}).then(r => r.json()),
           setPageTemplates(apollo, store)
         ])
-        const data = res[0].data
+
+        // await fetch('http://localhost:3000/lc-gql-api/' + slug)
+        const data = res[0]
+        // const data = res[0].data
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()
