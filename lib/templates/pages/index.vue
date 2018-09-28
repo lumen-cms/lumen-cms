@@ -97,9 +97,14 @@
       const {locale, host, slug} = initialAsyncData({req, store, params, $cms: app.$cms})
       try {
         const apollo = app.apolloProvider.defaultClient
+        console.log(slug)
+        // const server = 'https://api.studentsgoabroad.com/
+        const server = 'http://localhost:6969/'
+        const url = server + 'article/' + process.env.GRAPHQL_PROJECT_ID + '?slug=' + slug
+
         const res = await Promise.all([
           // apollo.query({query: ArticleGql, variables: {slug}}),
-          fetch('https://api.studentsgoabroad.com/article/' + process.env.GRAPHQL_PROJECT_ID, {slug}).then(r => r.json()),
+          fetch(url).then(r => r.json()),
           setPageTemplates(apollo, store)
         ])
 
