@@ -99,7 +99,7 @@
         const apollo = app.apolloProvider.defaultClient
         console.log(slug)
         // const server = 'https://api.studentsgoabroad.com/
-        const server = 'http://localhost:6969/'
+        const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
         const url = server + 'article/' + process.env.GRAPHQL_PROJECT_ID + '?slug=' + slug
 
         const res = await Promise.all([
