@@ -65,7 +65,11 @@
     "eslint-plugin-vue": "latest",
     "jest": "^23.5.0",
     "jsdom": "12.1.0",
-    "nuxt": "^1.4.2",
+    "nuxt": "^2.1.0",
     "standard-version": "latest"
+  },
+  "engines": {
+    "node": "10.x",
+    "npm": "5.x"
   }
 }
