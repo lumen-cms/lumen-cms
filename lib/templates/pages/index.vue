@@ -102,15 +102,10 @@
             .then(({data}) => data),
           setPageTemplates(apollo, store)
         ])
-        console.log(Object.getOwnPropertySymbols(res[0]), Object.getOwnPropertySymbols(store), Object.getOwnPropertySymbols(redirect), Object.getOwnPropertySymbols(slug), Object.getOwnPropertySymbols(host), Object.getOwnPropertySymbols(locale))
         const data = _clonedeep(res[0])
         const article = data.Article
         const urlAlias = data.UrlAlias
-        console.log('article:', Object.getOwnPropertySymbols(article))
-        urlAlias && console.log('urlAlias:', Object.getOwnPropertySymbols(urlAlias))
         const articleLang = article && article.languageKey.toLowerCase()
-
-        console.log('articlelang:', Object.getOwnPropertySymbols(articleLang))
         await store.dispatch('setLanguageKey', articleLang || locale)
         if (article) {
           if (!store.getters.canEdit && (article.deleted || !article.published)) {
@@ -130,7 +125,6 @@
             languageKey: article.languageKey
           })
           await store.dispatch('setCurrentArticleCategories', article.categories.slice(0))
-          console.log('articleCat:', Object.getOwnPropertySymbols(article.categories))
           return {
             host,
             pageProps: {
