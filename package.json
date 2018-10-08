@@ -49,9 +49,10 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "supports-webp": "^1.0.5",
+    "vue-cli-plugin-apollo": "^0.17.0",
     "vue-i18n": "^8.1.0",
     "vue-ls": "^3.0.5",
-    "vue-observe-visibility": "^0.4.1",
+    "vue-observe-visibility": "^0.4.3",
     "vuetify": "1.2.6"
   },
   "devDependencies": {
@@ -66,7 +67,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "latest",
     "jest": "^23.5.0",
-    "jsdom": "12.1.0",
+    "jsdom": "^12.2.0",
     "nuxt": "^2.1.0",
     "standard-version": "latest"
   },
