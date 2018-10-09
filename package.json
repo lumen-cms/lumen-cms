@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@nuxtjs/apollo": "4.0.0-rc2.2",
-    "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/sitemap": "0.1.1",
     "accept-language-parser": "^1.5.0",
     "clone-deep": "^4.0.0",
