@@ -51,7 +51,8 @@
     "vue-i18n": "^8.1.0",
     "vue-ls": "^3.0.5",
     "vue-observe-visibility": "^0.4.3",
-    "vuetify": "1.2.6"
+    "vuetify": "1.2.6",
+    "nuxt": "^2.1.0"
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
@@ -66,7 +67,6 @@
     "eslint-plugin-vue": "latest",
     "jest": "^23.5.0",
     "jsdom": "^12.2.0",
-    "nuxt": "^2.1.0",
     "standard-version": "latest"
   },
   "engines": {
