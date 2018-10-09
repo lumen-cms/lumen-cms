@@ -17,8 +17,8 @@
   </div>
 </template>
 <script>
+  import _clonedeep from 'clone-deep'
   import ArticleGql from '../gql/article/ArticleBySlug.gql'
-  // import articleSubGql from '../gql/article/articleSubscription.gql'
   import setPageTemplates from '../util/setPageTemplates'
   import initialAsyncData from '~initialAsyncData'
   import headMetaMixin from '../mixins/headMetaMixin'
@@ -98,10 +98,11 @@
       try {
         const apollo = app.apolloProvider.defaultClient
         const res = await Promise.all([
-          apollo.query({query: ArticleGql, variables: {slug}}),
+          apollo.query({query: ArticleGql, variables: {slug}})
+            .then(({data}) => data),
           setPageTemplates(apollo, store)
         ])
-        const data = res[0].data
+        const data = _clonedeep(res[0])
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()
@@ -149,24 +150,5 @@
         })
       }
     }
-    // apollo: {
-    //   $subscribe: {
-    //     changedArticle: {
-    //       query: articleSubGql,
-    //       variables () {
-    //         const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
-    //         return {slug}
-    //       },
-    //       result ({data}) {
-    //         const article = JSON.parse(JSON.stringify(data.Article.node)) // important to clean due to reactivity
-    //         this.pageProps = {
-    //           articleId: article.id,
-    //           languageKey: article.languageKey
-    //         }
-    //         this.pageContent = article.contents.slice(0)
-    //       }
-    //     }
-    //   }
-    // }
   }
 </script>
