@@ -1,27 +1,29 @@
 <template>
-  <no-ssr>
-    <v-app :class="{'extended-toolbar': hasExtension}">
-      <lc-page-toolbar :has-extension="hasExtension"/>
-      <lc-sidebar-right/>
-      <v-content :class="{'is-loading':$store.state.lc.cmsLoading, 'content-edit-mode': false}">
-        <v-container fluid
-                     class="pa-0">
-          <v-card class="ma-5 pa-5">
-            <v-card-text>
-              <div v-html="message"/>
-              <v-btn @click="reload"
-                     color="primary"
-                     flat>
-                <v-icon>home</v-icon>&nbsp;&nbsp;Home
-              </v-btn>
-            </v-card-text>
-          </v-card>
-        </v-container>
-      </v-content>
-      <lc-main-footer/>
-      <lc-admin-bar v-if="$store.getters.canEdit"/>
-    </v-app>
-  </no-ssr>
+  <div>
+    <no-ssr>
+      <v-app :class="{'extended-toolbar': hasExtension}">
+        <lc-page-toolbar :has-extension="hasExtension" />
+        <lc-sidebar-right />
+        <v-content :class="{'is-loading':$store.state.lc.cmsLoading, 'content-edit-mode': false}">
+          <v-container fluid
+                       class="pa-0">
+            <v-card class="ma-5 pa-5">
+              <v-card-text>
+                <div v-html="message" />
+                <v-btn @click="reload"
+                       color="primary"
+                       flat>
+                  <v-icon>home</v-icon>&nbsp;&nbsp;Home
+                </v-btn>
+              </v-card-text>
+            </v-card>
+          </v-container>
+        </v-content>
+        <lc-main-footer />
+        <lc-admin-bar v-if="$store.getters.canEdit" />
+      </v-app>
+    </no-ssr>
+  </div>
 </template>
 
 <script>
@@ -41,7 +43,7 @@
       return {
         title: this.title || '',
         meta: [
-          {name: 'robots', content: 'noindex,nofollow'}
+          { name: 'robots', content: 'noindex,nofollow' }
         ]
       }
     },

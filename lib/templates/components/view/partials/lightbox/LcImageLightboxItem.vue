@@ -33,7 +33,7 @@
       genImgAttrs () {
         return {
           ...this.getImageSourceSet(this.content),
-          ...this.getFileAttrs(this.content)
+          ...this.getFileAttrs(this.content, null, null, true)
         }
       }
     }

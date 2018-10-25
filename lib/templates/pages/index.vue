@@ -2,27 +2,26 @@
   <div class="article-detail-page">
     <lc-content-edit-main v-if="$store.state.lc.isContentEditMode"
                           :page-props="pageProps"
-                          :content="pageContent"/>
+                          :content="pageContent" />
     <lc-content-renderer v-else-if="pageContent.length"
                          :device="$device"
-                         :elements="pageContent"/>
+                         :elements="pageContent" />
     <div class="content-boxed white elevation-1 pa-3 max-width-700"
          v-if="!pageContent.length && Article && Article.description">
-      <h1 v-text="Article.title" class="display-1"/>
+      <h1 v-text="Article.title" class="display-1" />
       <blockquote v-text="Article.teaser"
                   v-if="Article.teaser"
-                  class="my-5"/>
-      <div v-html="Article.description"/>
+                  class="my-5" />
+      <div v-html="Article.description" />
     </div>
   </div>
 </template>
 <script>
   import ArticleGql from '../gql/article/ArticleBySlug.gql'
-  // import articleSubGql from '../gql/article/articleSubscription.gql'
   import setPageTemplates from '../util/setPageTemplates'
   import initialAsyncData from '~initialAsyncData'
   import headMetaMixin from '../mixins/headMetaMixin'
-  import {GlobalEventBus} from '../util/globalEventBus'
+  import { GlobalEventBus } from '../util/globalEventBus'
 
   export default {
     name: 'PageIndex',
@@ -55,9 +54,6 @@
       GlobalEventBus.$off('lc-on-article-content-change', this.onContentChange)
       this.$off('routeChanged', this.onRouteChange)
     },
-    // beforeRouteLeave () {
-    //   this.onRouteChange()
-    // },
     methods: {
       onContentChange () {
         if (this.$apollo.queries.lcArticle) {
@@ -67,12 +63,11 @@
           this.$apollo.addSmartQuery('lcArticle', {
             query: ArticleGql,
             variables () {
-              const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
-              return {slug}
+              const { slug } = initialAsyncData({ store: this.$store, params: this.$route.params, $cms: this.$cms })
+              return { slug }
             },
             manual: true,
-            result ({data}) {
-              console.log('inside smart query', data)
+            result ({ data }) {
               const article = data.Article
               this.Article = article
               this.pageContent = article.contents
@@ -93,26 +88,22 @@
         this.$store.dispatch('setCurrentArticleCategories', [])
       }
     },
-    async asyncData ({req, app, store, params, error, redirect}) {
-      const {locale, host, slug} = initialAsyncData({req, store, params, $cms: app.$cms})
+    async asyncData ({ req, app, store, params, error, redirect }) {
+      const { locale, host, slug } = initialAsyncData({ req, store, params, $cms: app.$cms })
       try {
         const apollo = app.apolloProvider.defaultClient
-        console.log(slug)
         // const server = 'https://api.studentsgoabroad.com/
         const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
         const url = server + 'article/' + process.env.GRAPHQL_PROJECT_ID + '?slug=' + slug
 
         const res = await Promise.all([
-          // apollo.query({query: ArticleGql, variables: {slug}}),
           fetch(url).then(r => r.json()),
           setPageTemplates(apollo, store)
         ])
 
         // await fetch('http://localhost:3000/lc-gql-api/' + slug)
         const data = res[0]
-        // const data = res[0].data
-        const article = data.Article
-        const urlAlias = data.UrlAlias
+        const {article, urlAlias} = data
         const articleLang = article && article.languageKey.toLowerCase()
         await store.dispatch('setLanguageKey', articleLang || locale)
         if (article) {
@@ -158,24 +149,5 @@
         })
       }
     }
-    // apollo: {
-    //   $subscribe: {
-    //     changedArticle: {
-    //       query: articleSubGql,
-    //       variables () {
-    //         const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
-    //         return {slug}
-    //       },
-    //       result ({data}) {
-    //         const article = JSON.parse(JSON.stringify(data.Article.node)) // important to clean due to reactivity
-    //         this.pageProps = {
-    //           articleId: article.id,
-    //           languageKey: article.languageKey
-    //         }
-    //         this.pageContent = article.contents.slice(0)
-    //       }
-    //     }
-    //   }
-    // }
   }
 </script>

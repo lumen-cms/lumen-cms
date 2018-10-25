@@ -1,16 +1,11 @@
 <template>
   <div :class="currentClass"
        v-bind="currentAttrs">
-    <component v-if="currentAttrs && height"
-               :is="isContentElementVisible ? 'v-parallax' : 'div'"
-               class="lazyload"
-               ref="parallaxElement"
-               alt="parallax-image"
-               :height="height"
-               :jumbotron="$vuetify.breakpoint.smAndDown"
-               :src="src">
+    <v-parallax alt="parallax-image"
+                :height="height"
+                :src="src">
       <slot/>
-    </component>
+    </v-parallax>
   </div>
 </template>
 

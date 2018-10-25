@@ -16,7 +16,7 @@
     head () {
       return this.getHeadMeta({
         article: {},
-        languagekey: this.locale,
+        languageKey: this.locale,
         overwrites: {
           // overwrites
           description: this.$t('head.meta.articleListDescription'),
