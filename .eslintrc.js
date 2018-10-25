@@ -1,30 +1,16 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module',
-    ecmaVersion: 8
+    parser: 'babel-eslint'
   },
   env: {
     browser: true,
     node: true,
     jest: true
   },
-  extends: ['plugin:vue/recommended', 'plugin:jest/recommended', 'standard'],
-  plugins: [
-    'jest',
-    'vue'
-  ],
+  extends: ['plugin:vue/essential', 'plugin:jest/recommended', '@vue/standard'],
   rules: {
-    'semi': 0,
-    // Allow paren-less arrow functions
-    'arrow-parens': 0,
-    // Allow async-await
-    'generator-star-spacing': 0,
-    'object-curly-spacing': 0,
-    // Allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    // Do not allow console.logs etc...
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'rules': {
       'indent': ['error', 2]
