@@ -43,7 +43,7 @@
 
   export default {
     name: 'LcMediaLibraryItem',
-    components: {LcImage},
+    components: { LcImage },
     mixins: [imageHelperMixin],
     props: {
       item: Object,
@@ -79,7 +79,7 @@
         return heights[this.size]
       },
       src () {
-        const file = this.getFileAttrs({file: this.item}, 'x' + this.height)
+        const file = this.getFileAttrs({ file: this.item }, 'x' + this.height)
         return file.src
       }
     },

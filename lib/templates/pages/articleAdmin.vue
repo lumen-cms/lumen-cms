@@ -82,7 +82,7 @@
 </template>
 <script>
   import allArticlesGql from '../gql/article/allArticlesAdmin.gql'
-  import {pagination, getSkipFirst} from '../util/pagination'
+  import { pagination, getSkipFirst } from '../util/pagination'
 
   export default {
     middleware: ['isAuth'],
@@ -102,7 +102,7 @@
     },
     computed: {
       tableHeaders () {
-        return [{value: 'id', sortable: false}, {
+        return [{ value: 'id', sortable: false }, {
           value: 'title',
           text: 'Title',
           sortable: true,
@@ -130,14 +130,14 @@
       articleQueries: {
         query: allArticlesGql,
         variables () {
-          const {skip, first} = getSkipFirst(this.pagination)
+          const { skip, first } = getSkipFirst(this.pagination)
           const variables = {
             first,
             skip,
             filter: {
               languageKey: this.$store.state.lc.locale.toUpperCase(),
               // contents_some: {id_not: null}, // testing purpose
-              OR: [{deleted: null}, {deleted: false}]
+              OR: [{ deleted: null }, { deleted: false }]
             }
           }
           if (this.showDeleted) {
@@ -151,16 +151,16 @@
           const searchText = this.$store.state.lc.mainSearch
           if (searchText) {
             const filterArray = [
-              {title_contains: searchText},
-              {slug_contains: searchText},
-              {keywords_contains: searchText},
-              {categories_some: {title_contains: searchText}}
+              { title_contains: searchText },
+              { slug_contains: searchText },
+              { keywords_contains: searchText },
+              { categories_some: { title_contains: searchText } }
             ]
             variables.filter.AND = [
-              {OR: filterArray}
+              { OR: filterArray }
             ]
             if (!this.showDelete) {
-              variables.filter.AND.push({OR: variables.filter.OR})
+              variables.filter.AND.push({ OR: variables.filter.OR })
             }
           }
           if (this.filter.onlyBlog) {
@@ -174,8 +174,8 @@
         },
         manual: true,
         update: data => data,
-        result ({data}) {
-          const {allArticles, _allArticlesMeta} = data // eslint-disable-line camelcase
+        result ({ data }) {
+          const { allArticles, _allArticlesMeta } = data // eslint-disable-line camelcase
           this.list = allArticles
           this.count = _allArticlesMeta && _allArticlesMeta.count
         },

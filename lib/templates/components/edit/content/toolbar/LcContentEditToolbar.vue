@@ -172,7 +172,7 @@
       },
       onContentCopy () {
         const copyData = this.$store.state.lc.contentCopyData
-        const data = Object.assign({}, {contentElement: copyData}, {
+        const data = Object.assign({}, { contentElement: copyData }, {
           id: this.id,
           sorting: this.sorting,
           articleId: this.pageProps.articleId,
@@ -201,7 +201,7 @@
         this.$store.dispatch('setContentPasteData', pasteObj)
       },
       toggleContentCut () {
-        const contentCutData = this.$store.state.lc.contentCutData.id ? {id: null} : {
+        const contentCutData = this.$store.state.lc.contentCutData.id ? { id: null } : {
           id: this.id,
           articleIdOrigin: this.pageProps.articleId,
           type: this.content && this.content.type
@@ -211,7 +211,7 @@
       toggleContentCopy () {
         const currentCopyId = this.$store.state.lc.contentCopyData.id
         const data = this.content
-        const state = currentCopyId ? {id: null} : data
+        const state = currentCopyId ? { id: null } : data
         this.$store.dispatch('setContentCopyData', state)
       },
       onCrossCopy () {
@@ -239,7 +239,7 @@
        * setting the contentPublish state
        */
       togglePageContentElementVisibility () {
-        this.$store.dispatch('setContentPublish', {id: this.id, published: !this.published})
+        this.$store.dispatch('setContentPublish', { id: this.id, published: !this.published })
       }
     }
   }

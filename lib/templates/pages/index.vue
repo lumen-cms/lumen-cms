@@ -103,7 +103,7 @@
 
         // await fetch('http://localhost:3000/lc-gql-api/' + slug)
         const data = res[0]
-        const {article, urlAlias} = data
+        const { article, urlAlias } = data
         const articleLang = article && article.languageKey.toLowerCase()
         await store.dispatch('setLanguageKey', articleLang || locale)
         if (article) {

@@ -92,7 +92,7 @@
   import updateUrlAliasGql from '../gql/urlAlias/updateUrlAlias.gql'
   import createUrlAliasGql from '../gql/urlAlias/createUrlAlias.gql'
   import deleteUrlAlias from '../gql/urlAlias/deleteUrlAlias.gql'
-  import {pagination, getSkipFirst} from '../util/pagination'
+  import { pagination, getSkipFirst } from '../util/pagination'
 
   const model = {
     id: null,
@@ -210,7 +210,7 @@
         manual: true,
         loadingKey: 'loadingApollo',
         variables () {
-          const {skip, first} = getSkipFirst(this.pagination)
+          const { skip, first } = getSkipFirst(this.pagination)
           const variables = {
             first,
             skip,
@@ -223,7 +223,7 @@
           const searchText = this.$store.state.lc.mainSearch
           if (searchText) {
             variables.filter.OR = [
-              {path_contains: searchText},
+              { path_contains: searchText },
               {
                 article: {
                   slug_contains: searchText
@@ -233,7 +233,7 @@
           }
           return variables
         },
-        result ({data}) {
+        result ({ data }) {
           this.list = data.allUrlAliases
           this.count = data._allUrlAliasesMeta.count
         }

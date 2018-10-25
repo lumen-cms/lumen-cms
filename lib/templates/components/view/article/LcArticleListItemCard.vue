@@ -49,7 +49,7 @@
   export default {
     name: 'LcArticleListItemCard',
     mixins: [articleListItemMixin, imageSrcHelperMixin],
-    components: {LcImage},
+    components: { LcImage },
     data () {
       return {
         mediaSrc: defaultImg,

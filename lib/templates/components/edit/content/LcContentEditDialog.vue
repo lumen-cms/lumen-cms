@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import {GlobalEventBus} from '../../../util/globalEventBus'
+  import { GlobalEventBus } from '../../../util/globalEventBus'
 
   export default {
     name: 'LcContentEditDialog',
@@ -43,7 +43,7 @@
       return {
         isShown: false,
         minimizeContent: false,
-        model: {classNames: []}
+        model: { classNames: [] }
       }
     },
     watch: {
@@ -108,15 +108,15 @@
         if (properties.imageColumnSize && properties.imageColumnSize === '') {
           properties.imageColumnSize = null
         }
-        const variables = Object.assign({}, this.model, {properties})
+        const variables = Object.assign({}, this.model, { properties })
 
         if (this.model.id) {
-          GlobalEventBus.$emit('lc-on-content-update', {variables, unsetAfterSave})
+          GlobalEventBus.$emit('lc-on-content-update', { variables, unsetAfterSave })
           // await this.$parent.onContentUpdate({variables})
         } else {
           delete variables.id
           delete variables.__typename
-          GlobalEventBus.$emit('lc-on-content-create', {variables, unsetAfterSave})
+          GlobalEventBus.$emit('lc-on-content-create', { variables, unsetAfterSave })
           // const res = await this.$parent.onContentCreate({variables})
           // this.model.id = res.id
         }

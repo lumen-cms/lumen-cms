@@ -333,51 +333,51 @@
     computed: {
       alignItems () {
         return [
-          {value: 'left', text: 'format_align_left'},
-          {value: 'center', text: 'format_align_center'},
-          {value: 'right', text: 'format_align_right'},
-          {value: 'justify', text: 'format_align_justify'}
+          { value: 'left', text: 'format_align_left' },
+          { value: 'center', text: 'format_align_center' },
+          { value: 'right', text: 'format_align_right' },
+          { value: 'justify', text: 'format_align_justify' }
         ]
       },
       iconItems () {
         return [
-          {value: 'standard', text: 'Standard'},
-          {value: 'medium', text: 'Medium'},
-          {value: 'large', text: 'Large'},
-          {value: 'x_large', text: 'X-Large'},
-          {value: 'x_x_large', text: 'X-X-Large'},
-          {value: 'x_x_x_large', text: 'X-X-X-Large'},
-          {value: false, text: 'None'}
+          { value: 'standard', text: 'Standard' },
+          { value: 'medium', text: 'Medium' },
+          { value: 'large', text: 'Large' },
+          { value: 'x_large', text: 'X-Large' },
+          { value: 'x_x_large', text: 'X-X-Large' },
+          { value: 'x_x_x_large', text: 'X-X-X-Large' },
+          { value: false, text: 'None' }
         ]
       },
       headerItems () {
         return [
-          {value: 1, text: 'Header 1'},
-          {value: 2, text: 'Header 2'},
-          {value: 3, text: 'Header 3'},
-          {value: 4, text: 'Header 4'},
-          {value: 5, text: 'Header 5'},
-          {value: 6, text: 'Header 6'},
-          {value: false, text: 'Paragraph'}
+          { value: 1, text: 'Header 1' },
+          { value: 2, text: 'Header 2' },
+          { value: 3, text: 'Header 3' },
+          { value: 4, text: 'Header 4' },
+          { value: 5, text: 'Header 5' },
+          { value: 6, text: 'Header 6' },
+          { value: false, text: 'Paragraph' }
         ]
       },
       buttonItems () {
         return [
-          {value: 'normal_button', text: 'Normal Button'},
-          {value: 'large_button', text: 'Large Button'},
-          {value: 'normal_button_primary', text: 'Primary Button'},
-          {value: 'large_button_primary', text: 'Large Primary'},
-          {value: 'normal_button_success', text: 'Button Success'},
-          {value: 'large_button_success', text: 'Large Success'},
-          {value: 'normal_button_info', text: 'Button Info'},
-          {value: 'large_button_info', text: 'Large Info'},
-          {value: 'normal_button_warning', text: 'Button Warning'},
-          {value: 'large_button_warning', text: 'Large Warning'},
-          {value: 'normal_button_error', text: 'Button Error'},
-          {value: 'large_button_error', text: 'Large Error'},
-          {value: 'normal_button_secondary', text: 'Button Secondary'},
-          {value: 'large_button_secondary', text: 'Large Secondary'},
-          {value: false, text: 'None'}
+          { value: 'normal_button', text: 'Normal Button' },
+          { value: 'large_button', text: 'Large Button' },
+          { value: 'normal_button_primary', text: 'Primary Button' },
+          { value: 'large_button_primary', text: 'Large Primary' },
+          { value: 'normal_button_success', text: 'Button Success' },
+          { value: 'large_button_success', text: 'Large Success' },
+          { value: 'normal_button_info', text: 'Button Info' },
+          { value: 'large_button_info', text: 'Large Info' },
+          { value: 'normal_button_warning', text: 'Button Warning' },
+          { value: 'large_button_warning', text: 'Large Warning' },
+          { value: 'normal_button_error', text: 'Button Error' },
+          { value: 'large_button_error', text: 'Large Error' },
+          { value: 'normal_button_secondary', text: 'Button Secondary' },
+          { value: 'large_button_secondary', text: 'Large Secondary' },
+          { value: false, text: 'None' }
         ]
       }
     },
@@ -457,10 +457,10 @@
         const quill = this.quill
         if (this.format[format] && this.format[format] === value) {
           quill.format(format, false, Quill.sources.USER)
-          this.format = Object.assign({}, this.format, {[format]: false})
+          this.format = Object.assign({}, this.format, { [format]: false })
         } else {
           quill.format(format, value, Quill.sources.USER)
-          this.format = Object.assign({}, this.format, {[format]: value})
+          this.format = Object.assign({}, this.format, { [format]: value })
         }
       },
       onInsertMaterialIcon () {

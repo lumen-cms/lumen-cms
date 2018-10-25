@@ -94,7 +94,7 @@
 
 <script>
   import allPageTemplatesGql from '../gql/pageTemplate/allPageTemplates.gql'
-  import {slugifyTemplateKey} from '../util/slugifyHelpers'
+  import { slugifyTemplateKey } from '../util/slugifyHelpers'
   import slugify from 'slugify'
   import LcMenuBuilder from '../components/edit/form/LcMenuBuilder'
 
@@ -106,7 +106,7 @@
   export default {
     layout: 'admin',
     middleware: 'isAuth',
-    components: {LcMenuBuilder},
+    components: { LcMenuBuilder },
     data () {
       return {
         selectedModel: {},

@@ -53,7 +53,7 @@
     },
     methods: {
       getSelectedRange () {
-        return {from: this.cm.getCursor(true), to: this.cm.getCursor(false)}
+        return { from: this.cm.getCursor(true), to: this.cm.getCursor(false) }
       },
       autoFormatSelection () {
         const range = this.getSelectedRange()

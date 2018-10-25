@@ -56,13 +56,13 @@
   </lc-form-container>
 </template>
 <script>
-  import {firstCharToUpper} from '../../../util/string'
+  import { firstCharToUpper } from '../../../util/string'
 
   const model = {
     title: null,
     alternative: null,
     caption: null,
-    file: {url: null},
+    file: { url: null },
     linkSlug: null,
     linkType: null,
     linkOpenExternal: false,

@@ -52,13 +52,13 @@
         data.append('data', this.file)
 
         this.uploading = true
-        const response = await fetch(endpoint, {method: 'POST', body: data})
+        const response = await fetch(endpoint, { method: 'POST', body: data })
         const responseData = await response.json()
         this.uploading = false
         this.file = null
         this.model = responseData.id
 
-        this.$emit('file-uploaded', {responseData})
+        this.$emit('file-uploaded', { responseData })
       }
     }
   }

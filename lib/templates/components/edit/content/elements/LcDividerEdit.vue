@@ -47,7 +47,7 @@
 
   export default {
     name: 'LcDividerEdit',
-    components: {LcMaterialIconPicker},
+    components: { LcMaterialIconPicker },
     mixins: [contentEditMixin],
     inputFields: {
       styles:

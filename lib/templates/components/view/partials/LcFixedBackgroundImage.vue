@@ -34,7 +34,7 @@
         default: false
       }
     },
-    components: {LcImage},
+    components: { LcImage },
     computed: {
       isFixed () {
         if (process.browser) {
@@ -54,7 +54,7 @@
         // const {xCropAmount, yCropAmount} = this.getJumbotronCropValue(this.height, file.height, file.width)
         // const {src} = this.getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
         // todo we should work out some srcset in the future
-        const {src} = this.getImageSrc(file, null)
+        const { src } = this.getImageSrc(file, null)
         return src
       }
     }

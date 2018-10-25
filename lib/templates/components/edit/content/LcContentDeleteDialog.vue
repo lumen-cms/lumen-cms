@@ -49,11 +49,11 @@
         const mutationPromises = [
           this.mutateGql({
             mutation: deleteContentGql,
-            variables: {id: id}
+            variables: { id: id }
           }),
           this.mutateGql({
             mutation: updateArticleGql,
-            variables: {id: this.pageProps.articleId, modified: new Date()}
+            variables: { id: this.pageProps.articleId, modified: new Date() }
           })
         ]
         await Promise.all(mutationPromises)

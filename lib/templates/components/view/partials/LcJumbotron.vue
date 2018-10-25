@@ -21,7 +21,7 @@
   export default {
     name: 'LcJumbotron',
     mixins: [parallaxMixin, imageSrcMixin],
-    components: {LcImage},
+    components: { LcImage },
     props: {
       alignEnd: {
         type: Boolean,
@@ -41,9 +41,9 @@
         if (!file) {
           return ''
         }
-        const {xCropAmount, yCropAmount} = this.getJumbotronCropValue(this.height, file.height, file.width)
+        const { xCropAmount, yCropAmount } = this.getJumbotronCropValue(this.height, file.height, file.width)
 
-        const {src} = this.getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
+        const { src } = this.getImageSrc(file, null, `${xCropAmount}x${yCropAmount}centro`)
         return src
       }
     }

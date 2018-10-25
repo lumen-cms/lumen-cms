@@ -14,7 +14,7 @@
 </template>
 <script>
   import allArticlesGql from '../../../gql/article/allArticlesSelect.gql'
-  import {firstCharToUpper} from '../../../util/string'
+  import { firstCharToUpper } from '../../../util/string'
   import debounce from 'lodash.debounce'
   import formValidation from '../../../mixins/formValidation'
 
@@ -45,7 +45,7 @@
         let found
         if (value) {
           found = this.items.find(e => e.value === value)
-          found && found.id ? this.emitValue(found) : this.emitValue({value})
+          found && found.id ? this.emitValue(found) : this.emitValue({ value })
         } else {
           this.emitValue({})
         }
@@ -106,18 +106,18 @@
           const variables = {
             filter: {
               languageKey: this.$store.state.lc.locale.toUpperCase(),
-              OR: [{deleted: null}, {deleted: false}]
+              OR: [{ deleted: null }, { deleted: false }]
             }
           }
           const searchText = (typeof this.searchText === 'object') ? this.searchText.value : this.searchText
           if (searchText) {
             const filterArray = [
-              {title_contains: searchText},
-              {slug_contains: searchText}
+              { title_contains: searchText },
+              { slug_contains: searchText }
             ]
             variables.filter.AND = [
-              {OR: variables.filter.OR},
-              {OR: filterArray}
+              { OR: variables.filter.OR },
+              { OR: filterArray }
             ]
             delete variables.filter.OR
           }
@@ -126,7 +126,7 @@
         watchLoading (isLoading) {
           this.loading = isLoading
         },
-        result ({data}) {
+        result ({ data }) {
           const allItems = data.allArticles
           // todo here we can extend
           this.items = allItems.map(e => ({

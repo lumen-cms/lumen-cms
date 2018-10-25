@@ -189,7 +189,7 @@
       onImageItemDeleted () {
         const item = this.currentRefToDelete
         this.fileReferences = this.fileReferences
-          .map(e => e.id === item.id ? Object.assign({}, e, {file: null}) : e)
+          .map(e => e.id === item.id ? Object.assign({}, e, { file: null }) : e)
       },
       onDirty (item, value) {
         this.$set(this.can_update, item.id, value)

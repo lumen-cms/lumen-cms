@@ -96,7 +96,7 @@
     },
     computed: {
       tagItems () {
-        return (this.allFileTags && this.allFileTags.map(e => ({value: e.id, text: e.title}))) || []
+        return (this.allFileTags && this.allFileTags.map(e => ({ value: e.id, text: e.title }))) || []
       },
       isEditorImage () {
         if (!this.value) return

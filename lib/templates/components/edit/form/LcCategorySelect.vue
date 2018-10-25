@@ -38,7 +38,7 @@
         query: AllArticleCategoriesGql,
         variables () {
           const key = this.$store.state.lc.locale || 'en'
-          return {filter: {languageKey: key.toUpperCase()}}
+          return { filter: { languageKey: key.toUpperCase() } }
         }
       }
     }

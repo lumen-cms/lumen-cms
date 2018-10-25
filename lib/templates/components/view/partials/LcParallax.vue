@@ -30,12 +30,12 @@
       src () {
         if (!this.fileReference) return ''
         const isSmDown = this.$vuetify.breakpoint.smAndDown
-        const {vh} = this.getViewportDimensions()
+        const { vh } = this.getViewportDimensions()
         const h = Math.max(Math.round(vh * 1.4), this.height)
-        const ref = Object.assign({}, this.fileReference, {resize: false})
-        const {file} = ref
+        const ref = Object.assign({}, this.fileReference, { resize: false })
+        const { file } = ref
         if (!file) return ''
-        const {xCropAmount, yCropAmount} = this.getJumbotronCropValue(this.height, file.height, file.width)
+        const { xCropAmount, yCropAmount } = this.getJumbotronCropValue(this.height, file.height, file.width)
         return this.getImageSrc(
           ref.file,
           false,
@@ -74,7 +74,7 @@
 
         // Blink engine detection
         const isBlink = (isChrome || isOpera) && !!window.CSS
-        return {isOpera, isFirefox, isSafari, isIE, isEdge, isChrome, isBlink}
+        return { isOpera, isFirefox, isSafari, isIE, isEdge, isChrome, isBlink }
       }
     }
   }

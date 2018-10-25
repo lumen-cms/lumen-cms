@@ -313,7 +313,7 @@
       },
       get imageColumnSizeOptions () {
         return ENUMS.IMAGE_COLUMNS
-          .map(e => ({text: imageSizeOptions[e], value: e}))
+          .map(e => ({ text: imageSizeOptions[e], value: e }))
           .concat([{
             value: 'variable',
             text: 'Image columns without breakpoint'

@@ -152,12 +152,12 @@
 
   export default {
     name: 'LcListWidgetEdit',
-    components: {LcCategorySelect},
+    components: { LcCategorySelect },
     mixins: [contentEditMixin],
     inputFields: {
       backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
       rootStyles: [styles.padding, styles.margin, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
-      sliderStyles: [{value: 'round', text: 'Rounded image'}, {value: 'slideshow', text: 'Slideshow'}]
+      sliderStyles: [{ value: 'round', text: 'Rounded image' }, { value: 'slideshow', text: 'Slideshow' }]
     }
   }
 </script>

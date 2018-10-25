@@ -61,7 +61,7 @@
           'description': '<p class="ql-align-center">Now you can start building up your new website. Enable content editing to start modify the content.</p>',
           'teaser': null,
           'type': 'TextImage',
-          'properties': {'headerLayout': 'H1', 'header': `Welcome to ${lang} page`},
+          'properties': { 'headerLayout': 'H1', 'header': `Welcome to ${lang} page` },
           'styles': {
             'rootClassNames': [],
             'headerClassNames': [],

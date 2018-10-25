@@ -24,11 +24,11 @@
         }
       })
     },
-    async asyncData ({route, store, req, params, app}) {
-      let {host, locale} = initialAsyncData({req, store, params, $cms: app.$cms})
+    async asyncData ({ route, store, req, params, app }) {
+      let { host, locale } = initialAsyncData({ req, store, params, $cms: app.$cms })
       locale = (app.$cms.routes.listMapLocale && app.$cms.routes.listMapLocale[route.name]) || locale
       await store.dispatch('setLanguageKey', locale)
-      return {host, locale}
+      return { host, locale }
     }
   }
 </script>

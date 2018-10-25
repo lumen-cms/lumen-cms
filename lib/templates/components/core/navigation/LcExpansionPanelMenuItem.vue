@@ -47,9 +47,9 @@
     name: 'LcExpansionPanelMenuItem',
     props: {
       item: Object,
-      i: {type: Number, 'default': 0},
-      level: {type: Number, 'default': 0},
-      subGroup: {type: Boolean}
+      i: { type: Number, 'default': 0 },
+      level: { type: Number, 'default': 0 },
+      subGroup: { type: Boolean }
     },
     computed: {
       attrs () {

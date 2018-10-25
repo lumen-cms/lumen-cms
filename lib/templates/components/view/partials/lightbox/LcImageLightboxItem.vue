@@ -24,8 +24,8 @@
         if (this.content.linkSlug) {
           const isLinkExternal = this.content.linkSlug && this.isExternalUrl(this.content.linkSlug)
           const linkAttrs = isLinkExternal
-            ? {href: this.content.linkSlug}
-            : {to: `/${this.content.linkSlug}`}
+            ? { href: this.content.linkSlug }
+            : { to: `/${this.content.linkSlug}` }
           return linkAttrs
         }
         return {}

@@ -67,7 +67,7 @@
         const selected = this.selected
         await this.mutateGql({
           mutation: deleteGql,
-          variables: {id: selected},
+          variables: { id: selected },
           refetchQueries: ['allFileTags']
         }, 'deleteFileTag')
         this.selected = null

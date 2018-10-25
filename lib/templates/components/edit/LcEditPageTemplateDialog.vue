@@ -42,7 +42,7 @@
   import createTemplateGql from '../../gql/pageTemplate/createPageTemplate.gql'
   import updateTemplateGql from '../../gql/pageTemplate/updatePageTemplate.gql'
   import deleteTemplateGql from '../../gql/pageTemplate/deletePageTemplate.gql'
-  import {slugifyTemplateKey} from '../../util/slugifyHelpers'
+  import { slugifyTemplateKey } from '../../util/slugifyHelpers'
   import validationRules from '../../mixins/formValidation'
 
   const model = {
@@ -80,7 +80,7 @@
     },
     computed: {
       mode () {
-        return this.model.type === 'JSON' ? {name: 'javascript', json: true} : 'vue'
+        return this.model.type === 'JSON' ? { name: 'javascript', json: true } : 'vue'
       },
       keyItems () {
         return Object.keys(this.$cms.pageTemplate).map(e => ({
@@ -92,7 +92,7 @@
     methods: {
       onJsonChanged (v) {
         try {
-          this.model = Object.assign({}, this.model, {bodyJson: JSON.parse(v)})
+          this.model = Object.assign({}, this.model, { bodyJson: JSON.parse(v) })
           this.isValidJson = true
         } catch (e) {
           // throw new Error(e)
@@ -128,7 +128,7 @@
       async onDelete () {
         await this.mutateGql({
           mutation: deleteTemplateGql,
-          variables: {id: this.model.id},
+          variables: { id: this.model.id },
           refetchQueries: ['allPageTemplates']
         }, 'deletePagetemplate')
         this.$emit('refetchTemplates', true)

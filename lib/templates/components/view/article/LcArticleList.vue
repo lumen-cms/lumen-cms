@@ -58,7 +58,7 @@
     page: 1
   }
   const getSkipFirst = function (pagination) {
-    const {page, rowsPerPage} = pagination
+    const { page, rowsPerPage } = pagination
     const first = rowsPerPage
     const skip = (page - 1) * first
     return {
@@ -109,24 +109,24 @@
     methods: {
       loadMore () {
         this.pagination.page += 1
-        const {skip, first} = getSkipFirst(this.pagination)
-        this.fetchMoreGql('articleQueries', {first, skip})
+        const { skip, first } = getSkipFirst(this.pagination)
+        this.fetchMoreGql('articleQueries', { first, skip })
       },
       /**
        * overwrite if extend the component
        */
       getTitleFilter (searchText) {
         return [
-          {title_contains: searchText},
-          {slug_contains: searchText},
-          {keywords_contains: searchText}
+          { title_contains: searchText },
+          { slug_contains: searchText },
+          { keywords_contains: searchText }
         ]
       },
       getVariablesFilter (languageKey, searchText) {
-        const {skip, first} = getSkipFirst(pagination)
+        const { skip, first } = getSkipFirst(pagination)
         const properties = this.content.properties || {}
         const filter = {
-          OR: [{deleted: null}, {deleted: false}],
+          OR: [{ deleted: null }, { deleted: false }],
           languageKey,
           // contents_some: {id_not: null}, // testing
           published: true
@@ -136,18 +136,18 @@
         if (searchText) {
           const filterArray = this.getTitleFilter(searchText)
           filter.AND = [
-            {OR: filter.OR},
-            {OR: filterArray}
+            { OR: filter.OR },
+            { OR: filterArray }
           ]
           delete filter.OR
         }
         if (properties.categoriesIds && properties.categoriesIds.length) {
-          if (!filter.AND) filter.AND = [{OR: filter.OR}]
+          if (!filter.AND) filter.AND = [{ OR: filter.OR }]
           delete filter.OR
 
           if (properties.allCategoriesMustMatch) {
             filter.AND.push({
-              AND: properties.categoriesIds.map(id => ({categories_some: {id: id}}))
+              AND: properties.categoriesIds.map(id => ({ categories_some: { id: id } }))
             })
           } else {
             filter.AND.push({
@@ -192,7 +192,7 @@
     apollo: {
       articleQueries: {
         query: allArticleGql,
-        prefetch ({store}) {
+        prefetch ({ store }) {
           return this.getVariablesFilter(store.state.lc.locale.toUpperCase())
         },
         variables () {
@@ -200,8 +200,8 @@
         },
         manual: true,
         update: data => data,
-        result ({data}) {
-          const {allArticles, _allArticlesMeta} = data // eslint-disable-line camelcase
+        result ({ data }) {
+          const { allArticles, _allArticlesMeta } = data // eslint-disable-line camelcase
           this.list = allArticles
           this.count = _allArticlesMeta && _allArticlesMeta.count
         },

@@ -198,7 +198,7 @@
   import mutationUpdateDeleteArticle from '../gql/article/updateDeleteArticle.gql'
   import AllArticleCategoriesGql from '../gql/articleCategory/allArticleCategories.gql'
   import allAuthors from '../gql/author/allAuthors.gql'
-  import {cleanSchemaForClone} from '../util/contentClone'
+  import { cleanSchemaForClone } from '../util/contentClone'
 
   import mediaFileMixin from '../mixins/mediaFileMixin'
 
@@ -259,24 +259,24 @@
       },
       allArticleCategories: {
         query: AllArticleCategoriesGql,
-        prefetch ({store}) {
+        prefetch ({ store }) {
           const key = store.state.lc.locale || 'en'
-          return {filter: {languageKey: key.toUpperCase()}}
+          return { filter: { languageKey: key.toUpperCase() } }
         },
         variables () {
           const key = this.$store.state.lc.locale || 'en'
-          return {filter: {languageKey: key.toUpperCase()}}
+          return { filter: { languageKey: key.toUpperCase() } }
         }
       },
       Article: {
         query: ArticleGql,
-        prefetch ({route}) {
+        prefetch ({ route }) {
           const id = route.params.id || ''
-          return {id}
+          return { id }
         },
         variables () {
           const id = this.$route.params.id || ''
-          return {id}
+          return { id }
         },
         skip () {
           const hasId = !!this.$route.params.id
@@ -285,7 +285,7 @@
         watchLoading (isLoading) {
           this.$store.commit('SET_CMS_LOADING', isLoading)
         },
-        result ({data}) {
+        result ({ data }) {
           const article = data.Article
           if (article) {
             this.model = Object.assign({}, this.model, article, {
@@ -301,7 +301,7 @@
     },
     computed: {
       languageItems () {
-        return this.$cms.languages.map(e => ({value: e.toUpperCase(), text: this.$t(e)}))
+        return this.$cms.languages.map(e => ({ value: e.toUpperCase(), text: this.$t(e) }))
       },
       previewImage () {
         return this.model && this.model.media && this.model.media.map(e => e.previewImage)
@@ -321,7 +321,7 @@
         this.loadingSlugUpdate = true
         const updatedSlugs = await this.mutateGql({
           mutation: updateSlugsGql,
-          variables: {id: this.model.id, slug: this.model.slug}
+          variables: { id: this.model.id, slug: this.model.slug }
         }).then(r => r.updateSlugs)
         this.loadingSlugUpdate = false
         this.showUpdatedSlugs = true
@@ -356,7 +356,7 @@
       },
       async cloneWithContent () {
         this.clonePageProcess = true
-        const page = await this.queryGql({query: ArticleWithContent, variables: {id: this.model.id}})
+        const page = await this.queryGql({ query: ArticleWithContent, variables: { id: this.model.id } })
         const cloned = cleanSchemaForClone(page.Article, this.$cms)
         cloned.slug += slugify('-' + this.model.id + '-' + new Date().toISOString())
         cloned.title += ' -  copy'
@@ -381,17 +381,17 @@
       async onDelete () {
         const id = this.model.id
         const slug = this.model.slug + '_' + id
-        await this.mutateGql({mutation: mutationUpdateDeleteArticle, variables: {id, slug}}, 'updateArticle')
-        this.$router.push({name: 'articleAdmin'})
+        await this.mutateGql({ mutation: mutationUpdateDeleteArticle, variables: { id, slug } }, 'updateArticle')
+        this.$router.push({ name: 'articleAdmin' })
       },
       async createNewArticle (variables) {
-        const article = await this.mutateGql({mutation: mutationCreateArticle, variables}, 'createArticle')
-        this.$router.push({name: 'articleEdit', params: {id: article.id}})
+        const article = await this.mutateGql({ mutation: mutationCreateArticle, variables }, 'createArticle')
+        this.$router.push({ name: 'articleEdit', params: { id: article.id } })
       },
       slugifySlug (string) {
         return string.indexOf('/') !== -1
-          ? string.split('/').map(e => slugify(e, {lower: true})).filter(e => e).join('/')
-          : slugify(string, {lower: true})
+          ? string.split('/').map(e => slugify(e, { lower: true })).filter(e => e).join('/')
+          : slugify(string, { lower: true })
       },
       async onSubmit () {
         const variables = this.model
@@ -399,7 +399,7 @@
         if (variables.id) {
           // update current article
           const needSlugUpdate = this.slugOnInit !== this.model.slug
-          await this.mutateGql({mutation: mutationUpdateArticle, variables}, 'updateArticle')
+          await this.mutateGql({ mutation: mutationUpdateArticle, variables }, 'updateArticle')
           // check if slug changed and update slugs of all content elements
           if (needSlugUpdate) {
             await this.updateSlugs()

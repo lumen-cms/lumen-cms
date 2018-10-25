@@ -101,7 +101,7 @@
         let configAdminBarLinks = (CONFIG.adminBarLinks && Array.isArray(CONFIG.adminBarLinks) && CONFIG.adminBarLinks.slice(0)) || []
         return configAdminBarLinks.concat([{
           title: 'Page templates',
-          to: {name: 'pageTemplates'},
+          to: { name: 'pageTemplates' },
           color: 'yellow darken-2',
           icon: 'code'
         }, {
@@ -111,7 +111,7 @@
           icon: 'list'
         }, {
           title: 'URL 301 redirects',
-          to: {name: 'redirects'},
+          to: { name: 'redirects' },
           color: 'yellow darken-4',
           icon: 'forward'
         }])

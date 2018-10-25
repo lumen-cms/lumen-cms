@@ -152,15 +152,15 @@
     },
     mounted () {
       if (this.$store.getters.canEdit) {
-        const redirectUrl = this.hasArticles ? '/' : {name: 'install'}
+        const redirectUrl = this.hasArticles ? '/' : { name: 'install' }
         this.$router.push(redirectUrl)
       }
     },
-    async asyncData ({app}) {
+    async asyncData ({ app }) {
       const apollo = app.apolloProvider.defaultClient
       const res = await apollo.query({
         query: hasArticlesGql
-      }).then(({data}) => data.allArticles)
+      }).then(({ data }) => data.allArticles)
       if (res.length) {
         return {
           hasArticles: true
@@ -177,7 +177,7 @@
           password: this.credentials.password
         }
         try {
-          const result = await this.mutateGql({mutation: userSignInMutationGql, variables}, 'authenticateUser')
+          const result = await this.mutateGql({ mutation: userSignInMutationGql, variables }, 'authenticateUser')
           await this.$store.dispatch('LOGIN', result)
         } catch (e) {
           this.loading = false
@@ -188,7 +188,7 @@
         this.loading = false
 
         if (this.$store.getters.canEdit) {
-          const redirectUrl = this.hasArticles ? '/' : {name: 'install'}
+          const redirectUrl = this.hasArticles ? '/' : { name: 'install' }
           this.$router.push(redirectUrl)
           return Promise.resolve(true)
         } else {
@@ -204,7 +204,7 @@
         const v = this.$refs.formRegister.validate()
         if (!v) return
         this.loading = true
-        const d = await this.mutateGql({mutation: signupUserGql, variables: this.credentials}, 'signupUser')
+        const d = await this.mutateGql({ mutation: signupUserGql, variables: this.credentials }, 'signupUser')
         if (!d) {
           return
         }

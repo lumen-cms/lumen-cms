@@ -18,7 +18,7 @@
 
   export default {
     name: 'LcArticleListItem',
-    components: {LcFigure},
+    components: { LcFigure },
     mixins: [articleListItemMixin, imageSrcHelperMixin],
     computed: {
       previewImageAvatar () {

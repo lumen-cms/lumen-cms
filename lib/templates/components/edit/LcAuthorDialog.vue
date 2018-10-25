@@ -76,7 +76,7 @@
         }
         await this.mutateGql({
           mutation: deleteGql,
-          variables: {id: this.model.id},
+          variables: { id: this.model.id },
           refetchQueries: ['allAuthors']
         })
         this.showDialog = false

@@ -109,7 +109,7 @@
   import allFilesGql from '../../gql/file/allFiles.gql'
   import fileGql from '../../gql/file/File.gql'
   // import CONFIG from '../../../src/config'
-  import {pagination, getSkipFirst} from '../../util/pagination'
+  import { pagination, getSkipFirst } from '../../util/pagination'
 
   export default {
     name: 'LcMediaLibray',
@@ -144,18 +144,18 @@
       },
       sortOptions () {
         return [
-          {title: 'Created ASC', value: 'createdAt_ASC'},
-          {title: 'Created DESC', value: 'createdAt_DESC'},
-          {title: 'Name ASC', value: 'name_ASC'},
-          {title: 'Name DESC', value: 'name_DESC'}
+          { title: 'Created ASC', value: 'createdAt_ASC' },
+          { title: 'Created DESC', value: 'createdAt_DESC' },
+          { title: 'Name ASC', value: 'name_ASC' },
+          { title: 'Name DESC', value: 'name_DESC' }
         ]
       },
       sizeOptions () {
         return [
-          {title: 'X-Small', value: 2},
-          {title: 'Small', value: 3},
-          {title: 'Medium', value: 4},
-          {title: 'Large', value: 6}
+          { title: 'X-Small', value: 2 },
+          { title: 'Small', value: 3 },
+          { title: 'Medium', value: 4 },
+          { title: 'Large', value: 6 }
         ]
       }
     },
@@ -190,7 +190,7 @@
        * @returns {*|Promise.<*>}
        */
       async deleteFileOnId (fileId) {
-        const mutationOptions = {mutation: deleteFileGql, variables: {id: fileId}}
+        const mutationOptions = { mutation: deleteFileGql, variables: { id: fileId } }
         await this.mutateGql(mutationOptions, 'deleteFile')
       },
       async onRemove (item) {
@@ -201,7 +201,7 @@
        *
        */
       async onLoadEditorImage (item) {
-        const {File} = await this.queryGql({
+        const { File } = await this.queryGql({
           query: fileGql,
           variables: {
             id: item.name.split('.')[1]
@@ -219,8 +219,8 @@
       },
       loadMore () {
         this.pagination.page += 1
-        const {skip, first} = getSkipFirst(this.pagination)
-        this.fetchMoreGql('allFiles', {first, skip})
+        const { skip, first } = getSkipFirst(this.pagination)
+        this.fetchMoreGql('allFiles', { first, skip })
       },
       onUploaded () {
         this.refetchGql('allFiles')
@@ -260,7 +260,7 @@
       allFiles: {
         query: allFilesGql,
         variables () {
-          const {skip, first} = getSkipFirst(pagination)
+          const { skip, first } = getSkipFirst(pagination)
           const variables = {
             skip,
             first,
@@ -273,7 +273,7 @@
           if (mainSearch) {
             variables.filter = Object.assign({}, variables.filter, {
               OR: [
-                {name_contains: mainSearch},
+                { name_contains: mainSearch },
                 {
                   fileTags_some: {
                     title_contains: mainSearch
@@ -284,7 +284,7 @@
           }
           return variables
         },
-        result ({data}) {
+        result ({ data }) {
           this.totalCount = data._allFilesMeta && data._allFilesMeta.count
         },
         skip () {

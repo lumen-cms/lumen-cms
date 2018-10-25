@@ -23,5 +23,5 @@
 <script>
   export default {
     name: 'LcMainFooter'
-  };
+  }
 </script>

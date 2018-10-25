@@ -98,10 +98,10 @@
     name: 'LcMenuBuilderItem',
     props: {
       item: Object,
-      i: {type: Number, 'default': 0},
-      level: {type: Number, 'default': 0},
-      subGroup: {type: Boolean},
-      parentIndex: {type: Number}
+      i: { type: Number, 'default': 0 },
+      level: { type: Number, 'default': 0 },
+      subGroup: { type: Boolean },
+      parentIndex: { type: Number }
     },
     computed: {
       cutIsActive () {
@@ -116,7 +116,7 @@
        * @param firstChild
        */
       editItem (item, isNew, firstChild) {
-        let editObject = Object.assign({}, {item, isNew, firstChild})
+        let editObject = Object.assign({}, { item, isNew, firstChild })
         this.$store.dispatch('setMenuEdit', editObject)
       },
       /**
@@ -126,7 +126,7 @@
        */
       cutItem (item, isPaste) {
         if (!isPaste) {
-          this.$store.dispatch('setMenuCutPaste', {item, isCut: true})
+          this.$store.dispatch('setMenuCutPaste', { item, isCut: true })
         } else {
           const currentState = Object.assign({}, this.$store.state.lc.menuCutPaste, {
             toItem: item,

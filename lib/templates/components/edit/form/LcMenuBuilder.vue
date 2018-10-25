@@ -146,7 +146,7 @@
   </div>
 </template>
 <script>
-  import {slugifyTemplateKey} from '../../../util/slugifyHelpers'
+  import { slugifyTemplateKey } from '../../../util/slugifyHelpers'
   import LcMenuBuilderItem from './LcMenuBuilderItem'
   import createTemplateGql from '../../../gql/pageTemplate/createPageTemplate.gql'
   import updateTemplateGql from '../../../gql/pageTemplate/updatePageTemplate.gql'
@@ -171,7 +171,7 @@
     props: {
       content: Array | Object
     },
-    components: {LcMenuBuilderItem},
+    components: { LcMenuBuilderItem },
     data () {
       return {
         show: false,
@@ -205,7 +205,7 @@
             // click on create new button
             originId = this.navigation[this.navigation.length - 1] && this.navigation[this.navigation.length - 1].id
           }
-          this.editModel = Object.assign({}, {originId: originId, firstChild: model.firstChild})
+          this.editModel = Object.assign({}, { originId: originId, firstChild: model.firstChild })
         }
       },
       content (value) {
@@ -279,7 +279,7 @@
 
         function mapItems (array) {
           return array.map(item => {
-            item = Object.assign({}, item, {id})
+            item = Object.assign({}, item, { id })
             id++
             if (item.items) {
               item.items = mapItems(item.items)
@@ -476,7 +476,7 @@
         this.deleting = true
         await this.mutateGql({
           mutation: deleteTemplateGql,
-          variables: {id: this.model.id}
+          variables: { id: this.model.id }
         })
         this.$emit('refetchTemplates', true)
         this.onClose()
