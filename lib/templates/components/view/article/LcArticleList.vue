@@ -2,7 +2,7 @@
   <v-layout row wrap class="justify-center">
     <v-flex xs12 v-show="!!loadingApollo">
       <div style="text-align: center; padding: 20px;">
-        <v-progress-circular indeterminate class="primary--text"/>
+        <v-progress-circular indeterminate class="primary--text" />
       </div>
     </v-flex>
 
@@ -21,14 +21,14 @@
               :key="`cards${i}`">
         <lc-article-list-item-card :item="item"
                                    :is-content-element-visible="isContentElementVisible"
-                                   :properties="properties"/>
+                                   :properties="properties" />
       </v-flex>
     </template>
 
     <template v-else-if="styleType === 'Slider' && list && list.length">
       <lc-article-list-slider :list="list"
                               :is-visible="isContentElementVisible"
-                              :properties="properties"/>
+                              :properties="properties" />
     </template>
 
     <v-flex xs12 v-else>
@@ -36,7 +36,7 @@
         <lc-article-list-item v-for="(item, i) in list" :key="`key${i}`"
                               :item="item"
                               :is-content-element-visible="isContentElementVisible"
-                              :style-type="styleType"/>
+                              :style-type="styleType" />
       </v-list>
     </v-flex>
 
@@ -51,10 +51,10 @@
 </template>
 
 <script>
-  import allArticleGql from '../../../gql/article/allArticles.gql'
+  import * as qs from 'qs'
 
   const pagination = {
-    rowsPerPage: 20,
+    rowsPerPage: 2,
     page: 1
   }
   const getSkipFirst = function (pagination) {
@@ -106,11 +106,33 @@
         pagination: Object.assign({}, pagination)
       }
     },
+    async created () {
+      const langKey = this.$store.state.lc.locale.toUpperCase()
+      const searchVal = this.$store.state.lc.mainSearch
+      const queryObject = this.getVariablesFilter(langKey, searchVal)
+      const queryParams = `${qs.stringify(queryObject)}`
+      const articleQueryData = await this.getArticles(queryParams)
+
+      this.list = articleQueryData.allArticles
+      this.count = articleQueryData._allArticlesMeta && articleQueryData._allArticlesMeta.count
+    },
     methods: {
-      loadMore () {
+      async getArticles (queryParams) {
+        const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
+        const url = server + 'allArticles/' + process.env.GRAPHQL_PROJECT_ID + '?' + queryParams
+        const data = await fetch(url).then(r => r.json())
+        return data
+      },
+      async loadMore () {
         this.pagination.page += 1
+
+        const langKey = this.$store.state.lc.locale.toUpperCase()
+        const searchVal = this.$store.state.lc.mainSearch
         const { skip, first } = getSkipFirst(this.pagination)
-        this.fetchMoreGql('articleQueries', { first, skip })
+        const queryObject = Object.assign({}, this.getVariablesFilter(langKey, searchVal), { skip, first })
+        const queryParams = `${qs.stringify(queryObject)}`
+        const articleQueryData = await this.getArticles(queryParams)
+        this.list.push(...articleQueryData.allArticles)
       },
       /**
        * overwrite if extend the component
@@ -126,10 +148,11 @@
         const { skip, first } = getSkipFirst(pagination)
         const properties = this.content.properties || {}
         const filter = {
-          OR: [{ deleted: null }, { deleted: false }],
+          OR: [],
           languageKey,
           // contents_some: {id_not: null}, // testing
-          published: true
+          published: true,
+          deleted_not: true
         }
         this.onlyBlogPosts && (filter.isBlogEntry = true)
         // search text is present
@@ -188,25 +211,26 @@
         const hideShowMore = this.properties && this.properties.hideShowMore
         return !hideShowMore && this.showPagination
       }
-    },
-    apollo: {
-      articleQueries: {
-        query: allArticleGql,
-        prefetch ({ store }) {
-          return this.getVariablesFilter(store.state.lc.locale.toUpperCase())
-        },
-        variables () {
-          return this.getVariablesFilter(this.$store.state.lc.locale.toUpperCase(), this.$store.state.lc.mainSearch)
-        },
-        manual: true,
-        update: data => data,
-        result ({ data }) {
-          const { allArticles, _allArticlesMeta } = data // eslint-disable-line camelcase
-          this.list = allArticles
-          this.count = _allArticlesMeta && _allArticlesMeta.count
-        },
-        loadingKey: 'loadingApollo'
-      }
     }
+    // ,
+    // apollo: {
+    //   articleQueries: {
+    //     query: allArticleGql,
+    //     prefetch ({ store }) {
+    //       return this.getVariablesFilter(store.state.lc.locale.toUpperCase())
+    //     },
+    //     variables () {
+    //       return this.getVariablesFilter(this.$store.state.lc.locale.toUpperCase(), this.$store.state.lc.mainSearch)
+    //     },
+    //     manual: true,
+    //     update: data => data,
+    //     result ({ data }) {
+    //       const { allArticles, _allArticlesMeta } = data // eslint-disable-line camelcase
+    //       this.list = allArticles
+    //       this.count = _allArticlesMeta && _allArticlesMeta.count
+    //     },
+    //     loadingKey: 'loadingApollo'
+    //   }
+    // }
   }
 </script>
