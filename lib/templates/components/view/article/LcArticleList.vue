@@ -125,7 +125,7 @@
         if (this.content.type === 'ListWidget') {
           this.fetchArticles()
         } else {
-          this.$router.push(`${this.$route.path}?page=${pagination.page + 1}`)
+          this.$router.push(`${this.$route.path}?page=${this.pagination.page + 1}`)
         }
       },
       async getArticles (queryParams) {
