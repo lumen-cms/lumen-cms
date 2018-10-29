@@ -42,9 +42,11 @@
 
     <v-flex v-if="list && count > list.length && hasLoadMore" xs12
             class="text-xs-center">
-      <v-btn color="primary" :block="$vuetify.breakpoint.smAndDown" outline
-             :loading="!!loadingApollo"
-             @click.native="loadMore">{{ $t('show_more') }}
+      <v-btn color="primary" :block="$vuetify.breakpoint.smAndDown"
+             outline
+             :to="content.type === 'ListWidget' ? null : `${$route.path}?page=${pagination.page + 1}`"
+             @click.native="content.type === 'ListWidget' ? loadMore() : null"
+             :loading="!!loadingApollo">{{ $t('show_more') }}
       </v-btn>
     </v-flex>
   </v-layout>
@@ -54,24 +56,25 @@
   import * as qs from 'qs'
 
   const pagination = {
-    rowsPerPage: 2,
+    rowsPerPage: 20,
     page: 1
   }
+
   const getSkipFirst = function (pagination) {
     const { page, rowsPerPage } = pagination
-    const first = rowsPerPage
-    const skip = (page - 1) * first
+    const first = rowsPerPage * page
+    const skip = 0
     return {
       first, skip
     }
   }
-
   /**
    * Wrap this in a v-container, e.g.:
    *   <v-container fluid grid-list-md class="content-boxed"> </v-container>
    */
   export default {
     name: 'LcArticleList',
+    scrollToTop: false,
     props: {
       showCount: {
         type: Boolean,
@@ -103,7 +106,7 @@
         list: [],
         count: 0,
         loadingApollo: 0,
-        pagination: Object.assign({}, pagination)
+        pagination: Object.assign({}, pagination, { page: Number(this.$route.query.page || pagination.page) })
       }
     },
     async created () {
@@ -124,15 +127,14 @@
         return data
       },
       async loadMore () {
-        this.pagination.page += 1
-
+        this.content.type === 'ListWidget' && (this.pagination.page += 1)
         const langKey = this.$store.state.lc.locale.toUpperCase()
         const searchVal = this.$store.state.lc.mainSearch
         const { skip, first } = getSkipFirst(this.pagination)
         const queryObject = Object.assign({}, this.getVariablesFilter(langKey, searchVal), { skip, first })
         const queryParams = `${qs.stringify(queryObject)}`
         const articleQueryData = await this.getArticles(queryParams)
-        this.list.push(...articleQueryData.allArticles)
+        this.list = articleQueryData.allArticles
       },
       /**
        * overwrite if extend the component
@@ -145,7 +147,7 @@
         ]
       },
       getVariablesFilter (languageKey, searchText) {
-        const { skip, first } = getSkipFirst(pagination)
+        const { skip, first } = getSkipFirst(this.pagination)
         const properties = this.content.properties || {}
         const filter = {
           OR: [],
@@ -211,26 +213,15 @@
         const hideShowMore = this.properties && this.properties.hideShowMore
         return !hideShowMore && this.showPagination
       }
+    },
+    watch: {
+      '$route' (to, from) {
+        this.pagination.page = Number(this.$route.query.page) || 1
+        this.loadMore()
+      },
+      '$store.state.lc.mainSearch' () {
+        this.loadMore()
+      }
     }
-    // ,
-    // apollo: {
-    //   articleQueries: {
-    //     query: allArticleGql,
-    //     prefetch ({ store }) {
-    //       return this.getVariablesFilter(store.state.lc.locale.toUpperCase())
-    //     },
-    //     variables () {
-    //       return this.getVariablesFilter(this.$store.state.lc.locale.toUpperCase(), this.$store.state.lc.mainSearch)
-    //     },
-    //     manual: true,
-    //     update: data => data,
-    //     result ({ data }) {
-    //       const { allArticles, _allArticlesMeta } = data // eslint-disable-line camelcase
-    //       this.list = allArticles
-    //       this.count = _allArticlesMeta && _allArticlesMeta.count
-    //     },
-    //     loadingKey: 'loadingApollo'
-    //   }
-    // }
   }
 </script>
