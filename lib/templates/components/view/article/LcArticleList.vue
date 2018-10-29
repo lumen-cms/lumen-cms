@@ -1,12 +1,12 @@
 <template>
   <v-layout row wrap class="justify-center">
-    <v-flex xs12 v-show="!!loadingApollo">
+    <v-flex xs12 v-show="!articlesLoaded">
       <div style="text-align: center; padding: 20px;">
         <v-progress-circular indeterminate class="primary--text" />
       </div>
     </v-flex>
 
-    <template v-if="showCount">
+    <template v-if="articlesLoaded && showCount">
       <v-flex xs12 v-if="count">
         {{ count }} {{ $t('results') }}
       </v-flex>
@@ -44,8 +44,7 @@
             class="text-xs-center">
       <v-btn color="primary" :block="$vuetify.breakpoint.smAndDown"
              outline
-             :to="content.type === 'ListWidget' ? null : `${$route.path}?page=${pagination.page + 1}`"
-             @click.native="content.type === 'ListWidget' ? loadMore() : null"
+             @click.native="onShowMoreClicked"
              :loading="!!loadingApollo">{{ $t('show_more') }}
       </v-btn>
     </v-flex>
@@ -56,7 +55,7 @@
   import * as qs from 'qs'
 
   const pagination = {
-    rowsPerPage: 20,
+    rowsPerPage: 2,
     page: 1
   }
 
@@ -103,6 +102,7 @@
     },
     data () {
       return {
+        articlesLoaded: false,
         list: [],
         count: 0,
         loadingApollo: 0,
@@ -118,15 +118,23 @@
 
       this.list = articleQueryData.allArticles
       this.count = articleQueryData._allArticlesMeta && articleQueryData._allArticlesMeta.count
+      this.articlesLoaded = true
     },
     methods: {
+      async onShowMoreClicked () {
+        if (this.content.type === 'ListWidget') {
+          this.fetchArticles()
+        } else {
+          this.$router.push(`${this.$route.path}?page=${pagination.page + 1}`)
+        }
+      },
       async getArticles (queryParams) {
         const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
         const url = server + 'allArticles/' + process.env.GRAPHQL_PROJECT_ID + '?' + queryParams
         const data = await fetch(url).then(r => r.json())
         return data
       },
-      async loadMore () {
+      async fetchArticles (scrollY = 0) {
         this.content.type === 'ListWidget' && (this.pagination.page += 1)
         const langKey = this.$store.state.lc.locale.toUpperCase()
         const searchVal = this.$store.state.lc.mainSearch
@@ -135,6 +143,7 @@
         const queryParams = `${qs.stringify(queryObject)}`
         const articleQueryData = await this.getArticles(queryParams)
         this.list = articleQueryData.allArticles
+        scrollY && window && window.scrollTo(0, scrollY)
       },
       /**
        * overwrite if extend the component
@@ -216,11 +225,13 @@
     },
     watch: {
       '$route' (to, from) {
-        this.pagination.page = Number(this.$route.query.page) || 1
-        this.loadMore()
+        const queryParamPage = Number(this.$route.query.page)
+        const scrollPos = queryParamPage ? window && window.scrollY : null
+        this.pagination.page = queryParamPage || 1
+        this.fetchArticles(scrollPos)
       },
       '$store.state.lc.mainSearch' () {
-        this.loadMore()
+        this.fetchArticles()
       }
     }
   }

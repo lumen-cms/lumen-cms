@@ -217,7 +217,7 @@
       onRefetch () {
         this.refetchGql('allFiles')
       },
-      loadMore () {
+      fetchArticles () {
         this.pagination.page += 1
         const { skip, first } = getSkipFirst(this.pagination)
         this.fetchMoreGql('allFiles', { first, skip })

@@ -18,7 +18,6 @@
 </template>
 <script>
   import ArticleGql from '../gql/article/ArticleBySlug.gql'
-  import setPageTemplates from '../util/setPageTemplates'
   import initialAsyncData from '~initialAsyncData'
   import headMetaMixin from '../mixins/headMetaMixin'
   import { GlobalEventBus } from '../util/globalEventBus'
@@ -91,15 +90,11 @@
     async asyncData ({ req, app, store, params, error, redirect }) {
       const { locale, host, slug } = initialAsyncData({ req, store, params, $cms: app.$cms })
       try {
-        const apollo = app.apolloProvider.defaultClient
         // const server = 'https://api.studentsgoabroad.com/
         const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
-        const url = server + 'article/' + process.env.GRAPHQL_PROJECT_ID + '?slug=' + slug
+        const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}?slug=${slug}`
 
-        const res = await Promise.all([
-          fetch(url).then(r => r.json()),
-          setPageTemplates(apollo, store)
-        ])
+        const res = await Promise.all([fetch(url).then(r => r.json())])
 
         // await fetch('http://localhost:3000/lc-gql-api/' + slug)
         const data = res[0]
