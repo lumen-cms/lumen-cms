@@ -55,7 +55,7 @@
   import * as qs from 'qs'
 
   const pagination = {
-    rowsPerPage: 2,
+    rowsPerPage: 20,
     page: 1
   }
 
