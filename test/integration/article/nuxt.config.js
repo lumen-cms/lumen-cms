@@ -1,4 +1,6 @@
 const { resolve } = require('path')
+const nodeExternals = require('webpack-node-externals')
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 // const resolve = (dir) => require('path').join(__dirname, dir)
 
 module.exports = {
@@ -82,15 +84,17 @@ module.exports = {
     //     }]
     //   ]
     // },
-    extend (config, ctx) {
-      // config.resolve.alias['~articleUpdate'] = resolve(__dirname, './gql/UpdateArticle.gql')
-      // if (ctx.isServer) {
-      //   config.externals = [
-      //     nodeExternals({
-      //       whitelist: [/^vuetify/]
-      //     })
-      //   ]
-      // }
-    }
+    // transpile: [/^vuetify/],
+    // plugins: [new VuetifyLoaderPlugin()],
+    // extend (config, ctx) {
+    //   // config.resolve.alias['~articleUpdate'] = resolve(__dirname, './gql/UpdateArticle.gql')
+    //   if (ctx.isServer) {
+    //     config.externals = [
+    //       nodeExternals({
+    //         whitelist: [/^vuetify/]
+    //       })
+    //     ]
+    //   }
+    // }
   }
 }
