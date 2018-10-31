@@ -84,3 +84,44 @@
     }
   }
 </script>
+
+<style lang="stylus" scoped>
+  .lightbox-dialog {
+    box-shadow: none;
+    overflow: hidden;
+    img {
+      object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
+      height: 100%
+      vertical-align: middle
+    }
+    .v-card, .v-card-text {
+      background-color: transparent;
+    }
+    .v-carousel {
+      box-shadow: none;
+      background-color: transparent;
+      height: 80vh;
+      .v-carousel__item {
+        background-size: contain;
+      }
+    }
+    .v-carousel__left, .v-carousel__right {
+      .v-btn {
+        background: rgba(158, 158, 158, 0.5)
+      }
+    }
+    .fade {
+      &-enter-active, &-leave-active, &-leave-to {
+        transition: .3s ease-out
+        position: absolute
+        top: 0
+        left: 0
+      }
+      &-enter, &-leave, &-leave-to {
+        opacity: 0
+      }
+    }
+  }
+</style>

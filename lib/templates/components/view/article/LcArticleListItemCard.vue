@@ -6,14 +6,14 @@
                 :src="previewImageCard"
                 :lazy-src="mediaSrc"
                 :is-visible="isContentElementVisible"
-                height="200px"/>
+                height="200px" />
     </nuxt-link>
     <v-card-text style="cursor: default; min-height: 100px;">
       <div class="title pb-1" style="min-height: 44px">{{ item.title }}</div>
       <div class="grey--text darken-2 subheading py-2">
         <template v-if="localPublishedDate">
           <v-icon class="grey--text darken-2 body-2 pr-1">access_time</v-icon>
-          <span v-text="localPublishedDate" class="pr-3 body-1"/>
+          <span v-text="localPublishedDate" class="pr-3 body-1" />
         </template>
 
         <template v-if="item.authors && item.authors.length">
@@ -21,7 +21,7 @@
           <span class="body-1"
                 v-for="(author, i) in item.authors"
                 :key="'author-' + (author.name || '') + i"
-                v-text="author.name + (i < item.authors.length - 1 ? ', ' : '')"/>
+                v-text="author.name + (i < item.authors.length - 1 ? ', ' : '')" />
           <br>
         </template>
 
@@ -30,11 +30,11 @@
           <span class="body-1"
                 v-for="(cat, i) in item.categories"
                 :key="'cat-' + (cat.title || '') + i"
-                v-text="cat.title + (i < item.categories.length - 1 ? ', ' : '')"/>
+                v-text="cat.title + (i < item.categories.length - 1 ? ', ' : '')" />
         </template>
       </div>
       <div class="description-wrap" v-if="item.teaser">
-        <lc-html-renderer :content="item.teaser"/>
+        <lc-html-renderer :content="item.teaser" />
       </div>
     </v-card-text>
   </v-card>
@@ -77,25 +77,25 @@
 </script>
 
 <style lang="stylus">
-  .description-wrap .rte-content {
-    position: relative;
-    height: 4.7em;
-    overflow: hidden;
-  }
-
-  .description-wrap .rte-content:after {
-    content: "";
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 70%;
-    height: 1.2em;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
-  }
-
-  .description-wrap .rte-content p {
-    line-height: 1.2em;
+  .description-wrap {
+    .rte-content {
+      position: relative;
+      height: 4.7em;
+      overflow: hidden;
+      p {
+        line-height: 1.2em;
+      }
+    }
+    .rte-content:after {
+      content: "";
+      text-align: right;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 70%;
+      height: 1.2em;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
+    }
   }
 
   .truncate {
