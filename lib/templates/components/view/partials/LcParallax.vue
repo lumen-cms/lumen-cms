@@ -26,6 +26,9 @@
         default: 300
       }
     },
+    components: {
+      VParallax: () => import('vuetify/lib/components/VParallax')
+    },
     computed: {
       src () {
         if (!this.fileReference) return ''

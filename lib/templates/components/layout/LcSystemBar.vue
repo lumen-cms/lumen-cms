@@ -14,6 +14,9 @@
     name: 'LcSystemBar',
     props: {
       lightsOut: Boolean
+    },
+    components: {
+      VSystemBar: () => import('vuetify/lib/components/VSystemBar')
     }
   }
 </script>

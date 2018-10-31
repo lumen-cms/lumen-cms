@@ -50,7 +50,9 @@
   export default {
     name: 'LcLightboxDialog',
     mixins: [imageSourceSetMixin, imageSrcHelperMixin],
-    components: { LcImageLightboxItem },
+    components: {
+      LcImageLightboxItem
+    },
     props: {
       content: Object,
       fileReferences: Array

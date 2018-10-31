@@ -113,9 +113,9 @@
 
   export default {
     name: 'LcMediaLibray',
-    // components: {
-    //   'Addon0': CONFIG.MEDIA_LIBRARY.ADDONS[0]
-    // },
+    components: {
+      VSystemBar: () => import('vuetify/lib/components/VSystemBar')
+    },
     props: {
       value: Boolean,
       onlyOne: Boolean

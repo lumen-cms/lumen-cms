@@ -17,6 +17,9 @@
 <script>
   export default {
     name: 'LcEditFooter',
+    components: {
+      VFooter: () => import('vuetify/lib/components/VFooter')
+    },
     computed: {
       copyright () {
         return `${new Date().getFullYear()} ${process.env.COPYRIGHT}`
