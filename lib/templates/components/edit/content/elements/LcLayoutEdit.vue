@@ -137,6 +137,9 @@
       styles: [styles.textColor, styles.margin, styles.padding, styles.elevations, styles.contentWidth, styles.visibilityBreakpoint],
       backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],
       bgColors: [styles.backgroundColor]
+    },
+    components: {
+      VAutocomplete: () => import('vuetify/lib/components/VAutocomplete')
     }
   }
 </script>

@@ -16,6 +16,9 @@
 </template>
 <script>
   export default {
+    components: {
+      VAutocomplete: () => import('vuetify/lib/components/VAutocomplete')
+    },
     name: 'LcMaterialIconPicker',
     props: {
       value: String

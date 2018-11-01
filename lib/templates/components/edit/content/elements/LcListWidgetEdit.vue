@@ -152,7 +152,10 @@
 
   export default {
     name: 'LcListWidgetEdit',
-    components: { LcCategorySelect },
+    components: {
+      LcCategorySelect,
+      VAutocomplete: () => import('vuetify/lib/components/VAutocomplete')
+    },
     mixins: [contentEditMixin],
     inputFields: {
       backgroundStyles: [styles.backgroundColor, styles.backgroundOpacity],

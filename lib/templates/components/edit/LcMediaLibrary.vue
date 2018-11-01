@@ -91,7 +91,8 @@
             </v-layout>
           </v-container>
           <v-btn block outline color="primary"
-                 @click="loadMore()" :loading="!!loadingApollo"
+                 @click="loadMore"
+                 :loading="!!loadingApollo"
                  v-show="totalCount > pagination.rowsPerPage">
             Load more...
           </v-btn>
@@ -217,7 +218,7 @@
       onRefetch () {
         this.refetchGql('allFiles')
       },
-      fetchArticles () {
+      loadMore () {
         this.pagination.page += 1
         const { skip, first } = getSkipFirst(this.pagination)
         this.fetchMoreGql('allFiles', { first, skip })

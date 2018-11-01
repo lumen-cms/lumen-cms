@@ -47,7 +47,10 @@
 
   export default {
     name: 'LcDividerEdit',
-    components: { LcMaterialIconPicker },
+    components: {
+      LcMaterialIconPicker,
+      VAutocomplete: () => import('vuetify/lib/components/VAutocomplete')
+    },
     mixins: [contentEditMixin],
     inputFields: {
       styles:

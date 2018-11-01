@@ -289,6 +289,9 @@
     name: 'LcTextMixtedEdit',
     mixins: [contentEditMixin],
     inputFields: inputFields,
+    components: {
+      VAutocomplete: () => import('vuetify/lib/components/VAutocomplete')
+    },
     selectOptions: {
       get contentClassNames () {
         let array = []
