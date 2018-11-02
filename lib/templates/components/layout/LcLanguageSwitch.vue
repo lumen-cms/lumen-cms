@@ -23,14 +23,17 @@
       }
     },
     methods: {
-      async changeLanguage (lang) {
-        if (this.$store.state.lc.locale === lang) {
-          return
-        }
-        await this.$store.dispatch('setLanguageKey', lang)
-        const route = this.$cms.defaultLanguage === this.$store.state.lc.locale ? '/' : '/' + this.$store.state.lc.locale
-        this.$router.push(route)
-        return Promise.resolve(true)
+      changeLanguage (lang) {
+        return new Promise(resolve => {
+          if (this.$store.state.lc.locale !== lang) {
+            this.$store.dispatch('setLanguageKey', lang)
+              .then(() => {
+                const newLangIsDefault = this.$cms.defaultLanguage === lang
+                const route = newLangIsDefault ? '/' : '/' + this.$store.state.lc.locale
+                this.$router.push(route)
+              })
+          }
+        })
       }
     }
   }

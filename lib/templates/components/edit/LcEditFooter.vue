@@ -40,7 +40,6 @@
           return
         }
         await this.$store.dispatch('setLanguageKey', lang)
-        return Promise.resolve(true)
       },
       /**
        * on mounted check if the current language is correctly set

@@ -72,8 +72,12 @@ module.exports = {
     ]
   },
   build: {
-    splitChunks: {
-      maxSize: 250000
-    }
+    extractCSS: true
+    // optimization: {
+    //   splitChunks: {
+    //     name: true,
+    //     maxSize: 350000
+    //   }
+    // }
   }
 }

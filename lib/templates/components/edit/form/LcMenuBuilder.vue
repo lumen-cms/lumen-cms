@@ -147,7 +147,6 @@
 </template>
 <script>
   import { slugifyTemplateKey } from '../../../util/slugifyHelpers'
-  import LcMenuBuilderItem from './LcMenuBuilderItem'
   import createTemplateGql from '../../../gql/pageTemplate/createPageTemplate.gql'
   import updateTemplateGql from '../../../gql/pageTemplate/updatePageTemplate.gql'
   import deleteTemplateGql from '../../../gql/pageTemplate/deletePageTemplate.gql'
@@ -171,7 +170,6 @@
     props: {
       content: Array | Object
     },
-    components: { LcMenuBuilderItem },
     data () {
       return {
         show: false,

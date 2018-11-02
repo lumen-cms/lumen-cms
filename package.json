@@ -19,7 +19,8 @@
     "lint": "eslint --ignore-pattern '/lib/templates/plugins' --ext .js,.vue lib test",
     "test": "npm run lint && jest",
     "release": "standard-version && git push --follow-tags && npm publish",
-    "analyze": "nuxt build test/integration/article -- --a"
+    "build": "nuxt build test/integration/article",
+    "analyze": "npm run build -- --a"
   },
   "files": [
     "lib"

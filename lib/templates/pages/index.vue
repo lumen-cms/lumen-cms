@@ -1,7 +1,7 @@
 <template>
   <div class="article-detail-page">
     <lc-content-edit-main v-if="$store.state.lc.isContentEditMode"
-                          :page-props="pageProps"
+                          :page-props="$store.state.pageProps"
                           :content="pageContent" />
     <lc-content-renderer v-else-if="pageContent.length"
                          :device="$device"
@@ -17,7 +17,6 @@
   </div>
 </template>
 <script>
-  import ArticleGql from '../gql/article/ArticleBySlug.gql'
   import initialAsyncData from '~initialAsyncData'
   import headMetaMixin from '../mixins/headMetaMixin'
   import { GlobalEventBus } from '../util/globalEventBus'
@@ -40,7 +39,7 @@
     data () {
       return {
         Article: null,
-        pageProps: null,
+        pageProps: this.$store.state.lc.pageProps,
         pageContent: []
       }
     },
@@ -54,25 +53,17 @@
       this.$off('routeChanged', this.onRouteChange)
     },
     methods: {
-      onContentChange () {
-        if (this.$apollo.queries.lcArticle) {
-          console.log('smart query exists already')
-          this.$apollo.queries.lcArticle.refetch()
-        } else {
-          this.$apollo.addSmartQuery('lcArticle', {
-            query: ArticleGql,
-            variables () {
-              const { slug } = initialAsyncData({ store: this.$store, params: this.$route.params, $cms: this.$cms })
-              return { slug }
-            },
-            manual: true,
-            result ({ data }) {
-              const article = data.Article
-              this.Article = article
-              this.pageContent = article.contents
-            }
-          })
-        }
+      async onContentChange () {
+        if (!this.$store.getters.canEdit) return
+        const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
+        const { slug } = initialAsyncData({ store: this.$store, params: this.$route.params, $cms: this.$cms })
+        const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}?slug=${slug}&nocache=true`
+        const res = await Promise.all([fetch(url).then(r => r.json())])
+        const data = res[0]
+        const article = data && data.Article
+
+        this.Article = article
+        this.pageContent = article.contents
       },
       scrollToAnchor () {
         let hash = this.$route.hash
@@ -87,21 +78,19 @@
         this.$store.dispatch('setCurrentArticleCategories', [])
       }
     },
-    async asyncData ({ req, app, store, params, error, redirect }) {
+    async asyncData ({ req, app, store, params, error, redirect, isHMR }) {
       const { locale, host, slug } = initialAsyncData({ req, store, params, $cms: app.$cms })
+      console.log('async data')
       try {
-        // const server = 'https://api.studentsgoabroad.com/
         const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
         const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}?slug=${slug}`
-
         const res = await Promise.all([fetch(url).then(r => r.json())])
 
-        // await fetch('http://localhost:3000/lc-gql-api/' + slug)
         const data = res[0]
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()
-        await store.dispatch('setLanguageKey', articleLang || locale)
+        console.log(articleLang, 'async article lang', slug, isHMR)
         if (article) {
           if (!store.getters.canEdit && (article.deleted || !article.published)) {
             error({
@@ -122,10 +111,6 @@
           await store.dispatch('setCurrentArticleCategories', article.categories.slice(0))
           return {
             host,
-            pageProps: {
-              articleId: article.id,
-              languageKey: article.languageKey
-            },
             Article: article,
             pageContent: article.contents
           }
