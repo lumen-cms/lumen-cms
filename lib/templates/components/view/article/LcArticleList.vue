@@ -45,7 +45,7 @@
       <v-btn color="primary" :block="$vuetify.breakpoint.smAndDown"
              outline
              @click.native="onShowMoreClicked"
-             :loading="!!loadingApollo">{{ $t('show_more') }}
+             :loading="!!loadingMore">{{ $t('show_more') }}
       </v-btn>
     </v-flex>
   </v-layout>
@@ -105,7 +105,7 @@
         articlesLoaded: false,
         list: [],
         count: 0,
-        loadingApollo: 0,
+        loadingMore: false,
         pagination: Object.assign({}, pagination, { page: Number(this.$route.query.page || pagination.page) })
       }
     },
@@ -122,11 +122,13 @@
     },
     methods: {
       async onShowMoreClicked () {
+        this.loadingMore = true
         if (this.content.type === 'ListWidget') {
-          this.fetchArticles()
+          await this.fetchArticles()
         } else {
           this.$router.push({ query: { page: this.pagination.page + 1 } })
         }
+        this.loadingMore = false
       },
       async getArticles (queryParams) {
         const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
