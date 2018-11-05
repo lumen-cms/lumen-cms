@@ -55,7 +55,7 @@
   import * as qs from 'qs'
 
   const pagination = {
-    rowsPerPage: 20,
+    rowsPerPage: 5,
     page: 1
   }
 
@@ -125,7 +125,7 @@
         if (this.content.type === 'ListWidget') {
           this.fetchArticles()
         } else {
-          this.$router.push(`${this.$route.path}?page=${this.pagination.page + 1}`)
+          this.$router.push({ query: { page: this.pagination.page + 1 } })
         }
       },
       async getArticles (queryParams) {
@@ -134,7 +134,7 @@
         const data = await fetch(url).then(r => r.json())
         return data
       },
-      async fetchArticles (scrollY = 0) {
+      async fetchArticles () {
         this.content.type === 'ListWidget' && (this.pagination.page += 1)
         const langKey = this.$store.state.lc.locale.toUpperCase()
         const searchVal = this.$store.state.lc.mainSearch
@@ -143,7 +143,6 @@
         const queryParams = `${qs.stringify(queryObject)}`
         const articleQueryData = await this.getArticles(queryParams)
         this.list = articleQueryData.allArticles
-        scrollY && window && window.scrollTo(0, scrollY)
       },
       /**
        * overwrite if extend the component
@@ -226,9 +225,8 @@
     watch: {
       '$route' (to, from) {
         const queryParamPage = Number(this.$route.query.page)
-        const scrollPos = queryParamPage ? window && window.scrollY : null
         this.pagination.page = queryParamPage || 1
-        this.fetchArticles(scrollPos)
+        this.fetchArticles()
       },
       '$store.state.lc.mainSearch' () {
         this.fetchArticles()
