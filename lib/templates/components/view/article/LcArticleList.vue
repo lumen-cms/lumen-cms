@@ -125,10 +125,10 @@
         this.loadingMore = true
         if (this.content.type === 'ListWidget') {
           await this.fetchArticles()
+          this.loadingMore = false
         } else {
-          this.$router.push({ query: { page: this.pagination.page + 1 } })
+          this.$router.push({ query: { page: this.pagination.page + 1 } }, () => (this.loadingMore = false))
         }
-        this.loadingMore = false
       },
       async getArticles (queryParams) {
         const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
