@@ -87,7 +87,7 @@
   }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   .lightbox-dialog {
     box-shadow: none;
     overflow: hidden;
