@@ -9,7 +9,7 @@
                 @keydown.right="carouselActiveItem++"
                 @keydown.left="carouselActiveItem--">
         <div class="text-xs-right">
-          <v-spacer />
+          <v-spacer/>
           <v-btn icon
                  flat
                  round
@@ -21,18 +21,19 @@
         <v-card>
           <v-card-text>
             <lc-image-lightbox-item v-if="fileReferences.length === 1"
-                                    :content="fileReferences[0]" />
+                                    :content="fileReferences[0]"/>
             <!--<lc-image-lightbox-item v-if="fileReferences.length === 1"-->
             <!--:content="{fileRef:fileReferences[0],isLightbox:true}"/>-->
             <v-carousel hide-delimiters
                         dark
                         :value="carouselActiveItem"
                         :cycle="false"
+                        height="80vh"
                         v-else>
               <v-carousel-item v-for="(item,i) in fileReferences"
                                :key="i"
                                contain>
-                <lc-image-lightbox-item :content="item" />
+                <lc-image-lightbox-item :content="item"/>
               </v-carousel-item>
             </v-carousel>
           </v-card-text>
@@ -67,7 +68,7 @@
       lightboxItems () {
         return this.fileReferences.map(ref => {
           const img = this.getImageSrc(ref.file)
-          const { srcset, sizes } = this.getImageSourceSet(ref)
+          const {srcset, sizes} = this.getImageSourceSet(ref)
           return {
             src: img.src,
             srcset,
@@ -104,7 +105,6 @@
     .v-carousel {
       box-shadow: none;
       background-color: transparent;
-      height: 80vh;
       .v-carousel__item {
         background-size: contain;
       }
