@@ -1,7 +1,7 @@
 <template>
   <div class="article-detail-page">
     <lc-content-edit-main v-if="$store.state.lc.isContentEditMode"
-                          :page-props="$store.state.pageProps"
+                          :page-props="$store.state.lc.pageProps"
                           :content="pageContent" />
     <lc-content-renderer v-else-if="pageContent.length"
                          :device="$device"

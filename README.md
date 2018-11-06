@@ -206,7 +206,6 @@ Disable the CSS import and manualy add it with stylus
  ]
 ```
 ```stylus
-@import '~lumen-cms/lib/templates/assets/style/vuetify-imports.styl'
 $themeprimary = #ff6f00
 $themeaccent = #ffc400
 $themesecondary = $grey.darken-3
@@ -329,7 +328,7 @@ customizable through stylesheets and properties. The most common element is `LcT
 
 ### Text with image (`LcTextImage`)
 * Header (h1 - h6)
-* Text (enabled richt text editor from QuillJs)
+* Text (enabled rich text editor from QuillJs)
 * Image(s) as gallery or single
 * Parallax/Jumbotron/Fixed-Background effect
 * Flexible arrangement
@@ -348,7 +347,7 @@ customizable through stylesheets and properties. The most common element is `LcT
   - Parralax/Jumbotron/Fixed-Background images
 * Slider
 * Expansion-panel
- => holds as many content elmements inside each row/column
+ => holds as many content elements inside each row/column
 
 ### List Widget (`LcListWidget`)
 * List of articles
@@ -356,7 +355,7 @@ customizable through stylesheets and properties. The most common element is `LcT
 * Filter based on taxonomy
 
 ### Read more accordion (`LcReadMore`)
-* Teaser text (richt text)
+* Teaser text (rich text)
 * Body text (rich text)
 
 ### Customize content elements and layout
@@ -440,7 +439,7 @@ $ cd pathOfProject
 $ now
 ```
 To connect the now deployment with your custom domain head over to the [documentation](https://zeit.co/docs/features/aliases) 
-Sidenote: you need at least a premium account due to the size of the website bundle.
+Note: you need at least a premium account due to the size of the website bundle.
 ## Websites built with Lumen CMS
 * https://planet.training
 * https://www.studentsgoabroad.com | https://www.studentsgoabroad.org

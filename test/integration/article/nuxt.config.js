@@ -8,6 +8,18 @@ module.exports = {
   render: {
     resourceHints: false
   },
+  disableCSS: true,
+  vuetify: {
+    theme: {
+      primary: '#ff5555',
+      secondary: '#424242',
+      accent: '#82B1FF',
+      error: '#FF5252',
+      info: '#2196F3',
+      success: '#4CAF50',
+      warning: '#FFC107'
+    }
+  },
   env: {
     GRAPHQL_PROJECT_ID: 'cj8yj66xc01740164lh5bv4fz',
     GRAPHQL_SUBSCRIPTION: null, // 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo',
@@ -71,8 +83,9 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Studentsgoabroad project' }
     ]
   },
+  css: [{ src: '~/assets/style/app.styl', lang: 'styl' }],
   build: {
-    extractCSS: true
+    // extractCSS: true
     // optimization: {
     //   splitChunks: {
     //     name: true,
