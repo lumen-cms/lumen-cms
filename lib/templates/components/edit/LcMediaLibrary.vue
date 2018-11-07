@@ -208,10 +208,7 @@
             id: item.name.split('.')[1]
           }
         })
-        const data = await fetch(File.url)
-          .then(res => res.json())
-          .catch(e => console.log(e))
-
+        const data = await this.$axios.$get(File.url)
         this.editorLoadData = data
         return data
       },

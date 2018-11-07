@@ -2,24 +2,24 @@
   <div class="article-detail-page">
     <lc-content-edit-main v-if="$store.state.lc.isContentEditMode"
                           :page-props="$store.state.lc.pageProps"
-                          :content="pageContent" />
+                          :content="pageContent"/>
     <lc-content-renderer v-else-if="pageContent.length"
                          :device="$device"
-                         :elements="pageContent" />
+                         :elements="pageContent"/>
     <div class="content-boxed white elevation-1 pa-3 max-width-700"
          v-if="!pageContent.length && Article && Article.description">
-      <h1 v-text="Article.title" class="display-1" />
+      <h1 v-text="Article.title" class="display-1"/>
       <blockquote v-text="Article.teaser"
                   v-if="Article.teaser"
-                  class="my-5" />
-      <div v-html="Article.description" />
+                  class="my-5"/>
+      <div v-html="Article.description"/>
     </div>
   </div>
 </template>
 <script>
   import initialAsyncData from '~initialAsyncData'
   import headMetaMixin from '../mixins/headMetaMixin'
-  import { GlobalEventBus } from '../util/globalEventBus'
+  import {GlobalEventBus} from '../util/globalEventBus'
 
   export default {
     name: 'PageIndex',
@@ -55,11 +55,16 @@
     methods: {
       async onContentChange () {
         if (!this.$store.getters.canEdit) return
-        const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
-        const { slug } = initialAsyncData({ store: this.$store, params: this.$route.params, $cms: this.$cms })
-        const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}?slug=${slug}&nocache=true`
-        const res = await Promise.all([fetch(url).then(r => r.json())])
-        const data = res[0]
+        const server = (['production', 'staging'].includes(process.env.NODE_ENV) || process.env.ENFORCE_GQL_PROXY_PROD === '1')
+          ? process.env.GQL_PROXY_PROD : process.env.GQL_PROXY_DEV
+        const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
+        const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}`
+        const data = await this.$axios.$get(url, {
+          params: {slug, nocache: true},
+          headers: {
+            'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
+          }
+        })
         const article = data && data.Article
 
         this.Article = article
@@ -78,15 +83,18 @@
         this.$store.dispatch('setCurrentArticleCategories', [])
       }
     },
-    async asyncData ({ req, app, store, params, error, redirect, isHMR }) {
-      const { locale, host, slug } = initialAsyncData({ req, store, params, $cms: app.$cms })
-      console.log('async data')
+    async asyncData ({req, app, store, params, error, redirect, isHMR}) {
+      const {locale, host, slug} = initialAsyncData({req, store, params, $cms: app.$cms})
       try {
-        const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
-        const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}?slug=${slug}`
-        const res = await Promise.all([fetch(url).then(r => r.json())])
-
-        const data = res[0]
+        const server = (['production', 'staging'].includes(process.env.NODE_ENV) || process.env.ENFORCE_GQL_PROXY_PROD === '1')
+          ? process.env.GQL_PROXY_PROD : process.env.GQL_PROXY_DEV
+        const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}`
+        const data = await app.$axios.$get(url, {
+          params: {slug},
+          headers: {
+            'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
+          }
+        })
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()

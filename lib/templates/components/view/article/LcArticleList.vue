@@ -52,9 +52,6 @@
 </template>
 
 <script>
-  import * as qs from 'qs'
-  import axios from 'axios'
-
   const pagination = {
     rowsPerPage: 5,
     page: 1
@@ -130,19 +127,15 @@
         }
       },
       async getArticles (queryObject) {
-        const queryParams = `${qs.stringify(queryObject)}`
-        // console.log(queryParams)
-        const qp = qrs.stringify(queryObject)
-        console.log('queryParams::::', queryParams)
-        console.log('queryParams::::', qs.parse(JSON.stringify(queryParams)))
-        console.log('QP::::', qp)
-        const server = process.env.NODE_ENV !== 'development' ? 'https://api.studentsgoabroad.com/' : 'http://localhost:6969/'
-        const url = server + 'allArticles/' + process.env.GRAPHQL_PROJECT_ID //+ '?' + queryParams
-        // const data = await fetch(url).then(r => r.json())
-        const {data} = await axios.get(url, {
-          params: queryObject
+        const server = (['production', 'staging'].includes(process.env.NODE_ENV) || process.env.ENFORCE_GQL_PROXY_PROD === '1')
+          ? process.env.GQL_PROXY_PROD : process.env.GQL_PROXY_DEV
+        const url = server + 'allArticles/' + process.env.GRAPHQL_PROJECT_ID
+        return this.$axios.$get(url, {
+          params: queryObject,
+          headers: {
+            'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
+          }
         })
-        return data
       },
       async fetchArticles () {
         this.content.type === 'ListWidget' && (this.pagination.page += 1)

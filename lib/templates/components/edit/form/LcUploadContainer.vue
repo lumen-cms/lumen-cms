@@ -111,11 +111,8 @@
           this.uploading = true
           const results = []
           for (const form of this.forms) {
-            const response = await fetch(endpoint, { method: 'POST', body: form })
-            const responseData = await response.json()
-
+            const responseData = await this.$axios.$post(endpoint, form)
             results.push(responseData)
-
             const width = form.get('width')
             const height = form.get('height')
             if (width || height) {
@@ -147,21 +144,21 @@
             const width = img.naturalWidth || img.width
             const height = img.naturalHeight || img.height
             window.URL.revokeObjectURL(img.src)
-            return resolve({ width, height })
+            return resolve({width, height})
           }
           img.onerror = reject
           img.src = src
         })
       },
       async getImageDimensionsFromFile (file) {
-        const { width, height } = await this.addImageProcess(window.URL.createObjectURL(file))
-        return { width, height }
+        const {width, height} = await this.addImageProcess(window.URL.createObjectURL(file))
+        return {width, height}
       },
       async getFormData (files) {
         const forms = []
         for (const file of files) {
           const form = new FormData()
-          const { width, height } = await this.getImageDimensionsFromFile(file)
+          const {width, height} = await this.getImageDimensionsFromFile(file)
 
           form.append('data', file, file.name)
           form.append('width', width)

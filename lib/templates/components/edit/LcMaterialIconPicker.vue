@@ -40,10 +40,13 @@
     },
     methods: {
       async getMaterialNames () {
-        const fetched = await fetch('https://raw.githubusercontent.com/google/material-design-icons/224895a8/iconfont/codepoints')
-          .then(res => res.text())
-        const array = fetched.split('\n').map(item => item.split(' ')[0])
-        this.$store.dispatch('setMaterialIconNames', array)
+        try {
+          const fetched = await this.$axios.$get('https://raw.githubusercontent.com/google/material-design-icons/224895a8/iconfont/codepoints')
+          const array = fetched.split('\n').map(item => item.split(' ')[0])
+          this.$store.dispatch('setMaterialIconNames', array)
+        } catch (e) {
+          console.error(e)
+        }
       }
     }
   }
