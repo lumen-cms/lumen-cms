@@ -62,6 +62,7 @@
         const data = await this.$axios.$get(url, {
           params: {slug, nocache: true},
           headers: {
+            'Access-Control-Allow-Origin': '*',
             'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
           }
         })
@@ -92,6 +93,7 @@
         const data = await app.$axios.$get(url, {
           params: {slug},
           headers: {
+            'Access-Control-Allow-Origin': '*',
             'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
           }
         })

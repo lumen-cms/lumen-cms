@@ -133,6 +133,7 @@
         return this.$axios.$get(url, {
           params: queryObject,
           headers: {
+            'Access-Control-Allow-Origin': '*',
             'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
           }
         })
