@@ -59,13 +59,15 @@
           ? process.env.GQL_PROXY_PROD : process.env.GQL_PROXY_DEV
         const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
         const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}`
-        const data = await this.$axios.$get(url, {
-          params: {slug, nocache: true},
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
+        const config = {
+          params: {slug, nocache: true}
+        }
+        if (process.server) {
+          config.headers = {
+            'Accept-Encoding': 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
           }
-        })
+        }
+        const data = await this.$axios.$get(url, config)
         const article = data && data.Article
 
         this.Article = article
@@ -90,13 +92,15 @@
         const server = (['production', 'staging'].includes(process.env.NODE_ENV) || process.env.ENFORCE_GQL_PROXY_PROD === '1')
           ? process.env.GQL_PROXY_PROD : process.env.GQL_PROXY_DEV
         const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}`
-        const data = await app.$axios.$get(url, {
-          params: {slug},
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
+        const config = {
+          params: {slug}
+        }
+        if (process.server) {
+          config.headers = {
+            'Accept-Encoding': 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
           }
-        })
+        }
+        const data = await app.$axios.$get(url, config)
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()

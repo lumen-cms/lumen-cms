@@ -130,13 +130,15 @@
         const server = (['production', 'staging'].includes(process.env.NODE_ENV) || process.env.ENFORCE_GQL_PROXY_PROD === '1')
           ? process.env.GQL_PROXY_PROD : process.env.GQL_PROXY_DEV
         const url = server + 'allArticles/' + process.env.GRAPHQL_PROJECT_ID
-        return this.$axios.$get(url, {
-          params: queryObject,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Accept-Encoding': process.browser ? 'gzip, deflate, br' : 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
+        const config = {
+          params: queryObject
+        }
+        if (process.server) {
+          config.headers = {
+            'Accept-Encoding': 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
           }
-        })
+        }
+        return this.$axios.$get(url, config)
       },
       async fetchArticles () {
         this.content.type === 'ListWidget' && (this.pagination.page += 1)
