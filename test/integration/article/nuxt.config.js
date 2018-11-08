@@ -1,4 +1,4 @@
-const {resolve} = require('path')
+const { resolve } = require('path')
 // const resolve = (dir) => require('path').join(__dirname, dir)
 
 module.exports = {
@@ -69,24 +69,24 @@ module.exports = {
           addressLocality: 'Singapore'
         },
         email: 'some@info.com',
-        phoneNumbers: [{value: '+63123456', text: 'Singapore: +6263123456'}]
+        phoneNumbers: [{ value: '+63123456', text: 'Singapore: +6263123456' }]
       }
     }
   }]],
   head: {
     title: 'Studentsgoabroad',
     meta: [
-      {charset: 'utf-8'},
-      {hid: 'robots', name: 'robots', content: 'noindex, nofollow'},
+      { charset: 'utf-8' },
+      { hid: 'robots', name: 'robots', content: 'noindex, nofollow' },
       {
         hid: 'viewport',
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui'
       },
-      {hid: 'description', name: 'description', content: 'Studentsgoabroad project'}
+      { hid: 'description', name: 'description', content: 'Studentsgoabroad project' }
     ]
   },
-  css: [{src: '~/assets/style/app.styl', lang: 'styl'}],
+  css: [{ src: '~/assets/style/app.styl', lang: 'styl' }],
   build: {
     // extractCSS: true
     // optimization: {

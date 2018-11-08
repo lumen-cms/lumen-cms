@@ -19,7 +19,7 @@
 <script>
   import initialAsyncData from '~initialAsyncData'
   import headMetaMixin from '../mixins/headMetaMixin'
-  import {GlobalEventBus} from '../util/globalEventBus'
+  import { GlobalEventBus } from '../util/globalEventBus'
 
   export default {
     name: 'PageIndex',
@@ -57,10 +57,10 @@
         if (!this.$store.getters.canEdit) return
         const server = (['production', 'staging'].includes(process.env.NODE_ENV) || process.env.ENFORCE_GQL_PROXY_PROD === '1')
           ? process.env.GQL_PROXY_PROD : process.env.GQL_PROXY_DEV
-        const {slug} = initialAsyncData({store: this.$store, params: this.$route.params, $cms: this.$cms})
+        const { slug } = initialAsyncData({ store: this.$store, params: this.$route.params, $cms: this.$cms })
         const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}`
         const config = {
-          params: {slug, nocache: true}
+          params: { slug, nocache: true }
         }
         if (process.server) {
           config.headers = {
@@ -86,14 +86,14 @@
         this.$store.dispatch('setCurrentArticleCategories', [])
       }
     },
-    async asyncData ({req, app, store, params, error, redirect, isHMR}) {
-      const {locale, host, slug} = initialAsyncData({req, store, params, $cms: app.$cms})
+    async asyncData ({ req, app, store, params, error, redirect, isHMR }) {
+      const { locale, host, slug } = initialAsyncData({ req, store, params, $cms: app.$cms })
       try {
         const server = (['production', 'staging'].includes(process.env.NODE_ENV) || process.env.ENFORCE_GQL_PROXY_PROD === '1')
           ? process.env.GQL_PROXY_PROD : process.env.GQL_PROXY_DEV
         const url = `${server}article/${process.env.GRAPHQL_PROJECT_ID}`
         const config = {
-          params: {slug}
+          params: { slug }
         }
         if (process.server) {
           config.headers = {

@@ -58,7 +58,7 @@
   }
 
   const getSkipFirst = function (pagination) {
-    const {page, rowsPerPage} = pagination
+    const { page, rowsPerPage } = pagination
     const first = rowsPerPage * page
     const skip = 0
     return {
@@ -104,7 +104,7 @@
         list: [],
         count: 0,
         loadingMore: false,
-        pagination: Object.assign({}, pagination, {page: Number(this.$route.query.page || pagination.page)})
+        pagination: Object.assign({}, pagination, { page: Number(this.$route.query.page || pagination.page) })
       }
     },
     async created () {
@@ -123,7 +123,7 @@
           await this.fetchArticles()
           this.loadingMore = false
         } else {
-          this.$router.push({query: {page: this.pagination.page + 1}}, () => (this.loadingMore = false))
+          this.$router.push({ query: { page: this.pagination.page + 1 } }, () => (this.loadingMore = false))
         }
       },
       async getArticles (queryObject) {
@@ -144,8 +144,8 @@
         this.content.type === 'ListWidget' && (this.pagination.page += 1)
         const langKey = this.$store.state.lc.locale.toUpperCase()
         const searchVal = this.$store.state.lc.mainSearch
-        const {skip, first} = getSkipFirst(this.pagination)
-        const queryObject = Object.assign({}, this.getVariablesFilter(langKey, searchVal), {skip, first})
+        const { skip, first } = getSkipFirst(this.pagination)
+        const queryObject = Object.assign({}, this.getVariablesFilter(langKey, searchVal), { skip, first })
         const articleQueryData = await this.getArticles(queryObject)
         this.list = articleQueryData.allArticles
       },
@@ -154,13 +154,13 @@
        */
       getTitleFilter (searchText) {
         return [
-          {title_contains: searchText},
-          {slug_contains: searchText},
-          {keywords_contains: searchText}
+          { title_contains: searchText },
+          { slug_contains: searchText },
+          { keywords_contains: searchText }
         ]
       },
       getVariablesFilter (languageKey, searchText) {
-        const {skip, first} = getSkipFirst(this.pagination)
+        const { skip, first } = getSkipFirst(this.pagination)
         const properties = this.content.properties || {}
         const filter = {
           OR: [],
@@ -174,20 +174,20 @@
         if (searchText) {
           const filterArray = this.getTitleFilter(searchText)
           filter.AND = [
-            {OR: filterArray}
+            { OR: filterArray }
           ]
           if (filter.OR.length) {
-            filter.AND.push({OR: filter.OR})
+            filter.AND.push({ OR: filter.OR })
           }
           delete filter.OR
         }
         if (properties.categoriesIds && properties.categoriesIds.length) {
-          if (!filter.AND) filter.AND = [{OR: filter.OR}]
+          if (!filter.AND) filter.AND = [{ OR: filter.OR }]
           delete filter.OR
 
           if (properties.allCategoriesMustMatch) {
             filter.AND.push({
-              AND: properties.categoriesIds.map(id => ({'categories_some': {'id': id}}))
+              AND: properties.categoriesIds.map(id => ({ 'categories_some': { 'id': id } }))
             })
           } else {
             filter.AND.push({
