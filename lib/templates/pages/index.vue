@@ -91,14 +91,14 @@
           params: { slug }
         }
         if (store.getters.canEdit) {
-          config.params.nocache = true
+          config.params.nocache = 1
         }
 
         const data = await app.$axios.$get(url, config)
         const article = data.Article
         const urlAlias = data.UrlAlias
         const articleLang = article && article.languageKey.toLowerCase()
-        console.log(articleLang, 'async article lang', slug, isHMR)
+        console.log(articleLang, 'async article lang', slug, config.params, 'canEdit: ', store.getters.canEdit)
         if (article) {
           if (!store.getters.canEdit && (article.deleted || !article.published)) {
             error({
