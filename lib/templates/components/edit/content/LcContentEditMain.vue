@@ -9,11 +9,11 @@
   import updateContent from '../../../gql/content/updateContent.gql'
   import updateArticleGql from '../../../gql/article/updateArticleModif.gql'
   import storageWatcher from '../../../mixins/storageWatcher'
-  import {cleanSchemaForClone, getFilesOfSchema, replaceFileIds} from '../../../util/contentClone'
+  import { cleanSchemaForClone, getFilesOfSchema, replaceFileIds } from '../../../util/contentClone'
   import uploadFileMixin from '../../../mixins/fileUpload'
   import updateFileGql from '../../../gql/file/fileUpdate.gql'
   import allFilesOfOriginGql from '../../../gql/file/allFilesOfOrigin.gql'
-  import {GlobalEventBus} from '../../../util/globalEventBus'
+  import { GlobalEventBus } from '../../../util/globalEventBus'
 
   export default {
     name: 'LcContentEditMain',
@@ -53,7 +53,7 @@
         let origin = `https://files.graph.cool/${projectIdOfCopy}/${file.secret}`
         const fileExist = await this.queryGql({
           query: allFilesOfOriginGql,
-          variables: {origin}
+          variables: { origin }
         }, 'allFiles')
         if (fileExist && fileExist.length) {
           return fileExist[0]
@@ -89,13 +89,13 @@
             }
             cleaned = replaceFileIds(cleaned, mapped)
           }
-          await this.onContentCreate({variables: cleaned})
+          await this.onContentCreate({ variables: cleaned })
         }
         this.$refs.contentCreate.closeWindows()
         this.$store.dispatch('setCrossDomainContent', null)
         GlobalEventBus.$emit('lc-on-article-content-change')
       },
-      async onContentUpdate ({variables, unsetAfterSave}) {
+      async onContentUpdate ({ variables, unsetAfterSave }) {
         // const dialogData = this.$store.getters.getDialogData
         variables = JSON.parse(JSON.stringify(variables))
         delete variables.__typename
@@ -112,7 +112,7 @@
       /**
        * @returns {Promise.<*[]>}
        */
-      async onContentCreate ({variables, unsetAfterSave}) {
+      async onContentCreate ({ variables, unsetAfterSave }) {
         const vars = Object.assign({}, variables)
         const dialogData = this.$store.getters.getDialogData
         vars.sorting = dialogData.previousElementSorting + 1
@@ -176,7 +176,7 @@
           variables
         }, 'createContent')
         this.$store.dispatch('toggleCmsLoading')
-        this.$store.dispatch('setContentCopyData', {id: null})
+        this.$store.dispatch('setContentCopyData', { id: null })
         GlobalEventBus.$emit('lc-on-article-content-change')
       },
 
@@ -211,11 +211,11 @@
        * @returns {Promise.<void>}
        */
       async togglePageContentElementVisibility () {
-        const {id, published} = this.$store.state.lc.contentPublishData
+        const { id, published } = this.$store.state.lc.contentPublishData
         this.$store.commit('SET_CMS_LOADING', true)
         await this.mutateGql({
           mutation: updateContent,
-          variables: {id, published}
+          variables: { id, published }
         })
         this.$store.commit('SET_CMS_LOADING', false)
         this.$store.dispatch('setContentPublish', {})
@@ -227,7 +227,7 @@
        * @returns {Promise.<void>}
        */
       async onContentPaste () {
-        const {id, layoutIndex, sorting, articleId, contentLayoutElementId, pageContents, articleIdOrigin} = this.$store.state.lc.contentPasteData
+        const { id, layoutIndex, sorting, articleId, contentLayoutElementId, pageContents, articleIdOrigin } = this.$store.state.lc.contentPasteData
 
         const contentVariables = {
           id,
@@ -272,7 +272,7 @@
        * @returns {Promise.<void>}
        */
       async onContentMove () {
-        const {id, currentIndex, swopIndex, pageContents} = this.$store.state.lc.contentMoveData
+        const { id, currentIndex, swopIndex, pageContents } = this.$store.state.lc.contentMoveData
         const currentElement = pageContents.find((e, i) => i === currentIndex)
         const swopElement = pageContents.find((e, i) => i === swopIndex)
         if (!(currentElement && swopElement)) {
@@ -284,10 +284,10 @@
         this.$store.commit('SET_CMS_LOADING', true)
         const mutations = [this.mutateGql({
           mutation: updateContent,
-          variables: {id, sorting: swopElement.sorting}
+          variables: { id, sorting: swopElement.sorting }
         }), this.mutateGql({
           mutation: updateContent,
-          variables: {id: swopElement.id, sorting: currentElement.sorting}
+          variables: { id: swopElement.id, sorting: currentElement.sorting }
         })]
         await Promise.all(mutations)
         this.$store.dispatch('setContentMoveData', {})

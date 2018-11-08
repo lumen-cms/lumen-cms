@@ -56,7 +56,7 @@
         this.uploading = false
         this.file = null
         this.model = responseData.id
-        this.$emit('file-uploaded', {responseData})
+        this.$emit('file-uploaded', { responseData })
       }
     }
   }

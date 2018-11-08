@@ -68,7 +68,7 @@
       lightboxItems () {
         return this.fileReferences.map(ref => {
           const img = this.getImageSrc(ref.file)
-          const {srcset, sizes} = this.getImageSourceSet(ref)
+          const { srcset, sizes } = this.getImageSourceSet(ref)
           return {
             src: img.src,
             srcset,
