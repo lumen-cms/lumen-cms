@@ -2,17 +2,17 @@
   <div class="article-detail-page">
     <lc-content-edit-main v-if="$store.state.lc.isContentEditMode"
                           :page-props="$store.state.lc.pageProps"
-                          :content="pageContent"/>
+                          :content="pageContent" />
     <lc-content-renderer v-else-if="pageContent.length"
                          :device="$device"
-                         :elements="pageContent"/>
+                         :elements="pageContent" />
     <div class="content-boxed white elevation-1 pa-3 max-width-700"
          v-if="!pageContent.length && Article && Article.description">
-      <h1 v-text="Article.title" class="display-1"/>
+      <h1 v-text="Article.title" class="display-1" />
       <blockquote v-text="Article.teaser"
                   v-if="Article.teaser"
-                  class="my-5"/>
-      <div v-html="Article.description"/>
+                  class="my-5" />
+      <div v-html="Article.description" />
     </div>
   </div>
 </template>
@@ -62,11 +62,6 @@
         const config = {
           params: { slug, nocache: true }
         }
-        if (process.server) {
-          config.headers = {
-            'Accept-Encoding': 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
-          }
-        }
         const data = await this.$axios.$get(url, config)
         const article = data && data.Article
 
@@ -95,11 +90,10 @@
         const config = {
           params: { slug }
         }
-        if (process.server) {
-          config.headers = {
-            'Accept-Encoding': 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
-          }
+        if (store.getters.canEdit) {
+          config.params.nocache = true
         }
+
         const data = await app.$axios.$get(url, config)
         const article = data.Article
         const urlAlias = data.UrlAlias

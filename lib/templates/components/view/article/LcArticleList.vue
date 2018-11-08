@@ -133,11 +133,6 @@
         const config = {
           params: queryObject
         }
-        if (process.server) {
-          config.headers = {
-            'Accept-Encoding': 'gzip, deflate' // https://github.com/nuxt-community/axios-module/pull/176
-          }
-        }
         return this.$axios.$get(url, config)
       },
       async fetchArticles () {
