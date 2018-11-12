@@ -109,14 +109,10 @@
   import deleteFileGql from '../../gql/fileReference/deleteFile.gql'
   import allFilesGql from '../../gql/file/allFiles.gql'
   import fileGql from '../../gql/file/File.gql'
-  // import CONFIG from '../../../src/config'
   import { pagination, getSkipFirst } from '../../util/pagination'
 
   export default {
     name: 'LcMediaLibray',
-    components: {
-      VSystemBar: () => import('vuetify/lib/components/VSystemBar')
-    },
     props: {
       value: Boolean,
       onlyOne: Boolean

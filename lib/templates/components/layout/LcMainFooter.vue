@@ -22,9 +22,6 @@
 </template>
 <script>
   export default {
-    name: 'LcMainFooter',
-    components: {
-      VFooter: () => import('vuetify/lib/components/VFooter')
-    }
+    name: 'LcMainFooter'
   }
 </script>
