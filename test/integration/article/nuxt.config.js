@@ -86,14 +86,5 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Studentsgoabroad project' }
     ]
   },
-  css: [{ src: '~/assets/style/app.styl', lang: 'styl' }],
-  build: {
-    // extractCSS: true
-    // optimization: {
-    //   splitChunks: {
-    //     name: true,
-    //     maxSize: 350000
-    //   }
-    // }
-  }
+  css: [{ src: '~/assets/style/app.styl', lang: 'styl' }]
 }
