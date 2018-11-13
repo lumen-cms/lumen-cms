@@ -38,7 +38,6 @@
 
   export default {
     name: 'LcContentEditDialog',
-    // components: contentElements,
     data () {
       return {
         isShown: false,
