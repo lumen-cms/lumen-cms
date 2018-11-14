@@ -2,7 +2,7 @@
   <img :src="path || ($vuetify.breakpoint.lgAndUp ? logoPath : logoMobilePath)"
        height="100%"
        width="auto"
-       :alt="$cms.Head && $cms.Head.site_name + 'Logo'"
+       :alt="`${$cms.Head && $cms.Head.site_name} Logo`"
        :title="$cms.Head && $cms.Head.site_name"
        @click="onLogoClick"
        class="toolbar-logo">
