@@ -1,6 +1,6 @@
 <template>
   <div :class="{'lc-toolbar-boxed':$cms.toolbarBoxed,'lc-system-bar-boxed':$cms.systemBar.boxed}">
-    <lc-system-bar v-if="$cms.systemBar.enable && !$device.isMobile"
+    <lc-system-bar v-if="$cms.systemBar.enable && $vuetify.breakpoint.mdAndUp"
                    :lights-out="transparentToolbar"/>
     <v-toolbar app
                fixed
