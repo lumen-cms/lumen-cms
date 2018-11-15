@@ -53,7 +53,7 @@
 
 <script>
   const pagination = {
-    rowsPerPage: 5,
+    rowsPerPage: 20,
     page: 1
   }
 
