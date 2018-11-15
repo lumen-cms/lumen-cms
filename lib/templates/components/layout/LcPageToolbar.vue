@@ -1,7 +1,9 @@
 <template>
   <div :class="{'lc-toolbar-boxed':$cms.toolbarBoxed,'lc-system-bar-boxed':$cms.systemBar.boxed}">
-    <lc-system-bar v-if="$cms.systemBar.enable && !$device.isMobile"
-                   :lights-out="transparentToolbar"/>
+    <no-ssr>
+      <lc-system-bar v-if="$cms.systemBar.enable && $vuetify.breakpoint.mdAndUp"
+                     :lights-out="transparentToolbar"/>
+    </no-ssr>
     <v-toolbar app
                fixed
                :extended="hasExtension"
@@ -24,19 +26,19 @@
         <v-icon>apps</v-icon>
       </v-btn>
       <v-toolbar-title>
-        <lc-main-logo/>
+        <lc-main-logo />
       </v-toolbar-title>
-      <v-spacer/>
+      <v-spacer />
       <lc-main-search class="lc-main-search no-extension mx-3"
                       v-if="!!showSearch"
-                      @mobileSearchActive="mobileSearchActive = $event"/>
+                      @mobileSearchActive="mobileSearchActive = $event" />
 
       <template v-show="!mobileSearchActive">
-        <slot/>
+        <slot />
         <lc-vue-renderer :template-region="$cms.pageTemplate.HEAD_TOP"
                          navigation="menu"
                          v-if="!hideToolbarRenderer"
-                         :class="$cms.toolbarTopVisibility"/>
+                         :class="$cms.toolbarTopVisibility" />
         <v-layout v-if="hasExtension"
                   row
                   slot="extension"
@@ -44,17 +46,17 @@
                   pa-3>
           <lc-vue-renderer v-if="!hideExtensionTemplate"
                            navigation="menu"
-                           :template-region="$cms.pageTemplate.HEAD_EXTENSION"/>
+                           :template-region="$cms.pageTemplate.HEAD_EXTENSION" />
         </v-layout>
       </template>
       <v-toolbar-side-icon :class="$cms.toolbarSidebarRightIconClass"
-                           @click.native.stop="$store.dispatch('toggleSidebarRight')"/>
+                           @click.native.stop="$store.dispatch('toggleSidebarRight')" />
       <lc-dialog :icon="$cms.megaMenuIcon || 'apps'"
                  dialog-class="lc-mega-menu"
                  :show-class="$cms.megaMenuVisibility"
                  v-if="$store.getters.getPageTemplate($cms.pageTemplate.MEGA_MENU)">
         <lc-vue-renderer navigation="columns"
-                         :template-region="$cms.pageTemplate.MEGA_MENU"/>
+                         :template-region="$cms.pageTemplate.MEGA_MENU" />
       </lc-dialog>
     </v-toolbar>
   </div>
