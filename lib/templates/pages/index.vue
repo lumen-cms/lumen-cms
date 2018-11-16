@@ -91,7 +91,7 @@
           params: { slug }
         }
         if (store.getters.canEdit) {
-          config.params.nocache = 1
+          config.params.nocache = true
         }
 
         const data = await app.$axios.$get(url, config)
