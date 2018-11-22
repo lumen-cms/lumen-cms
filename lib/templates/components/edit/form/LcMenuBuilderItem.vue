@@ -71,7 +71,7 @@
           <i v-show="item.subheader">SH</i>
           {{ item.title || item.subheader }}
           (
-          <router-link v-if="item.to" :to="item.to" target="_blank" rel="noopener">
+          <router-link v-if="item.to" :to="item.to" target="_blank" rel="noreferrer">
             {{ item.to || item.subheader }}
           </router-link>
           )
