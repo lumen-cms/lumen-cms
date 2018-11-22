@@ -31,6 +31,7 @@
                           name="password"
                           required
                           :rules="[onRequiredRule]"
+                          autocomplete="current-password"
                           type="password"
                           label="Enter your password"
                           @keyup.enter="onLogin"/>
@@ -73,6 +74,7 @@
                             name="password"
                             required type="password"
                             label="Enter your password"
+                            autocomplete="new-password"
                             :rules="[onRequiredRule]"
                             @keyup.enter="onRegister"/>
               <v-text-field v-model="passwordRepeat"
@@ -80,6 +82,7 @@
                             required type="password"
                             :rules="[samePasswordRule]"
                             label="Repeat your password"
+                            autocomplete="new-password"
                             @keyup.enter="onRegister"/>
               <v-btn flat
                      @click="onRegister"

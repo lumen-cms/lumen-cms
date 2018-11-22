@@ -1,7 +1,7 @@
 <template>
   <div v-once>
     <div>
-      <strong>Colors (<a href="https://www.vuetifyjs.com/style/colors" target="_blank">colors</a>)</strong>
+      <strong>Colors (<a href="https://www.vuetifyjs.com/style/colors" target="_blank" rel="noopener">colors</a>)</strong>
       <p>
         'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green',
         'lime',
@@ -13,7 +13,7 @@
     </div>
     <div>
       <strong>Margins / Paddings (<a href="https://www.vuetifyjs.com/layout/spacing"
-                                     target="_blank">spacing</a>)</strong>
+                                     target="_blank" rel="noopener">spacing</a>)</strong>
       <p>
         m => Margin, m[t,r,b,l,x,y][0,1,2,3,4,5]<br>
         p => Padding p[t,r,b,l,x,y][0,1,2,3,4,5]<br>
@@ -22,7 +22,7 @@
     </div>
     <div>
       <strong>Font sizes (<a href="https://www.vuetifyjs.com/style/typography"
-                             target="_blank">font sizes</a>)</strong>
+                             target="_blank" rel="noopener">font sizes</a>)</strong>
       <p>
         'display-4', 'display-3', 'display-2', 'display-1', 'headline', 'title', 'subheading', 'body-2', 'body-1',
         'caption'
@@ -30,14 +30,14 @@
     </div>
     <div>
       <strong>Hide elements (<a href="https://www.vuetifyjs.com/layout/display"
-                                target="_blank">hide classes</a>)</strong>
+                                target="_blank" rel="noopener">hide classes</a>)</strong>
       <p>
         'hidden-xs-only', 'hidden-sm-and-down', 'hidden-sm-and-up', 'hidden-md-only', 'hidden-md-and-down',
         'hidden-md-and-up', 'hidden-lg-only', 'hidden-lg-and-down', 'hidden-lg-and-up', 'hidden-xl-only'</p>
     </div>
     <div>
       <strong>Cards (<a href="https://www.vuetifyjs.com/layout/elevation"
-                        target="_blank">Card elevations</a>)</strong>
+                        target="_blank" rel="noopener">Card elevations</a>)</strong>
       <p>
         'elevation-0', 'elevation-3', 'elevation-6', 'elevation-9', 'elevation-12', 'elevation-15', 'elevation-18',
         'elevation-21', 'elevation-24'

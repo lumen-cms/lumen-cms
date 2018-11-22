@@ -71,7 +71,9 @@
           <i v-show="item.subheader">SH</i>
           {{ item.title || item.subheader }}
           (
-          <router-link v-if="item.to" :to="item.to" target="__blank">{{ item.to || item.subheader }}</router-link>
+          <router-link v-if="item.to" :to="item.to" target="_blank" rel="noopener">
+            {{ item.to || item.subheader }}
+          </router-link>
           )
           <a @click.stop="editItem(item)">[
             <v-icon small>edit</v-icon>
@@ -87,7 +89,6 @@
               <v-icon small>clear</v-icon>
               ]</a>
           </template>
-
         </v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
