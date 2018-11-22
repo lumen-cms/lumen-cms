@@ -65,6 +65,7 @@
         }
         if (this.item.linkOpenExternal) {
           attrs.target = '_blank'
+          attrs.rel = 'noopener'
         } else {
           attrs.exact = true
         }
