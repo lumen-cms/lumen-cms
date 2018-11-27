@@ -44,7 +44,7 @@
     "js-cookie": "^2.2.0",
     "lodash.debounce": "^4.0.8",
     "lodash.mergewith": "^4.6.1",
-    "nuxt": "2.3.2",
+    "nuxt": "2.3.4",
     "nuxt-device-detect": "1.1.2",
     "quill": "^1.3.6",
     "slugify": "1.3.3",
