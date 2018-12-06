@@ -8,8 +8,8 @@
         </router-link>
       </v-toolbar-title>
       <v-toolbar-title class="hidden-xl-only" v-else>Create Blog Article</v-toolbar-title>
-      <v-spacer/>
-      <lc-trigger-save-btn text="SAVE"/>
+      <v-spacer />
+      <lc-trigger-save-btn text="SAVE" />
       <v-menu bottom left v-if="model && model.id">
         <v-btn icon slot="activator">
           <v-icon>more_vert</v-icon>
@@ -57,10 +57,10 @@
             <v-text-field name="title"
                           v-model="model.title"
                           required
-                          label="Title"/>
+                          label="Title" />
             <v-text-field name="metaTitle"
                           v-model="model.metaTitle"
-                          label="Meta Title"/>
+                          label="Meta Title" />
             <v-layout align-center>
               <v-tooltip bottom>
                 <v-btn icon slot="activator" :loading="loadingSlugUpdate" @click="updateSlugs">
@@ -71,7 +71,7 @@
               <v-text-field name="slug"
                             v-model="model.slug"
                             required
-                            label="Slug"/>
+                            label="Slug" />
             </v-layout>
             <v-menu lazy
                     :close-on-content-click="false"
@@ -86,10 +86,10 @@
                             label="Published date"
                             :value="publishedDateString"
                             prepend-icon="event"
-                            readonly/>
+                            readonly />
 
               <v-date-picker :value="datePickerInputParsed"
-                             @input="setDate" no-title scrollable actions/>
+                             @input="setDate" no-title scrollable actions />
             </v-menu>
 
           </v-flex>
@@ -97,14 +97,14 @@
 
             <v-switch name="published"
                       v-model="model.published"
-                      label="Published"/>
+                      label="Published" />
             <v-switch name="isBlogEntry"
                       v-model="model.isBlogEntry"
-                      label="Is Blog Entry"/>
+                      label="Is Blog Entry" />
             <v-select name="languageKey"
                       v-model="model.languageKey"
                       label="Language" :items="languageItems"
-                      required/>
+                      required />
             <v-select multiple
                       clearable
                       deletable-chips
@@ -116,7 +116,7 @@
                       :items="allArticleCategories || []"
                       chips
                       item-value="id"
-                      item-text="title"/>
+                      item-text="title" />
 
             <v-select label="Authors"
                       clearable
@@ -146,16 +146,16 @@
           <v-flex md6 sm12 xs12>
             <v-textarea name="teaser"
                         v-model="model.teaser"
-                        label="Teaser"/>
+                        label="Teaser" />
           </v-flex>
           <v-flex md6 sm12 xs12>
             <v-textarea name="description"
                         v-model="model.description"
-                        label="Meta Description"/>
+                        label="Meta Description" />
           </v-flex>
         </v-layout>
       </v-container>
-      <slot/>
+      <slot />
       <lc-upload-select-container class="mt-4"
                                   v-if="model.id"
                                   label="Preview Image"
@@ -163,12 +163,12 @@
                                   @deleted="onPreviewImageDeleted"
                                   :only-one="true"
                                   :processing="processingMedia"
-                                  :media="previewImage"/>
+                                  :media="previewImage" />
 
       <i>ID: {{ model.id }}</i>
       <v-alert :value="model.deleted" icon="delete">Page is Deleted</v-alert>
     </lc-form-container>
-    <lc-edit-footer/>
+    <lc-edit-footer />
     <v-snackbar v-model="showClone" dark top>
       Create a clone inclusive content elements?
       <v-btn @click="cloneWithContent"
@@ -177,9 +177,9 @@
       </v-btn>
     </v-snackbar>
     <lc-article-list-dialog ref="articleListDialog"
-                            :content="allArticleCategories"/>
+                            :content="allArticleCategories" />
     <lc-author-dialog ref="authorDialog"
-                      :author="selectedAuthor"/>
+                      :author="selectedAuthor" />
     <v-snackbar v-model="showUpdatedSlugs"
                 bottom>
       <div>Updated&nbsp;<strong>[ {{ updatedSlugs }} ]</strong>&nbsp;slugs in all content elements</div>
@@ -199,6 +199,7 @@
   import AllArticleCategoriesGql from '../gql/articleCategory/allArticleCategories.gql'
   import allAuthors from '../gql/author/allAuthors.gql'
   import { cleanSchemaForClone } from '../util/contentClone'
+  import { graphqlRequest, staticToken } from '../util/graphqlRequest'
 
   import mediaFileMixin from '../mixins/mediaFileMixin'
 
@@ -385,8 +386,10 @@
         this.$router.push({ name: 'articleAdmin' })
       },
       async createNewArticle (variables) {
-        const article = await this.mutateGql({ mutation: mutationCreateArticle, variables }, 'createArticle')
-        this.$router.push({ name: 'articleEdit', params: { id: article.id } })
+        const { articlesCreateOne } = await graphqlRequest(mutationCreateArticle, { data: variables }, staticToken.moderator)
+        console.log(articlesCreateOne)
+        // const article = await this.mutateGql({ mutation: mutationCreateArticle, variables }, 'createArticle')
+        // this.$router.push({ name: 'articleEdit', params: { id: article.id } })
       },
       slugifySlug (string) {
         return string.indexOf('/') !== -1

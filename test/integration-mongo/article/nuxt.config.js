@@ -21,6 +21,7 @@ module.exports = {
     }
   },
   env: {
+    ENDPOINT: 'http://localhost:4000',
     GRAPHQL_PROJECT_ID: 'cj8yj66xc01740164lh5bv4fz',
     GRAPHQL_SUBSCRIPTION: null, // 'wss://subscriptions.us-west-2.graph.cool/v1/lumen-cms-demo',
     COPYRIGHT: 'Lumen CMS',

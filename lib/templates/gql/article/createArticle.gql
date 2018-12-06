@@ -1,35 +1,8 @@
 #import './articleFragment.gql'
 
-mutation createArticle(
-$languageKey:LANGUAGE_KEY!,
-$metaTitle:String,
-$teaser:String,
-$description:String,
-$title:String!,
-$keywords:String,
-$slug:String!
-$categoriesIds:[ID!]
-$contents:[ArticlecontentsContent!]
-$isBlogEntry:Boolean
-$published:Boolean
-$publishedDate:DateTime
-$authorsIds: [ID!]
-){
-  createArticle(
-    languageKey:$languageKey
-    metaTitle:$metaTitle
-    teaser:$teaser
-    description:$description
-    title:$title
-    keywords:$keywords
-    slug:$slug
-    categoriesIds:$categoriesIds
-    contents:$contents
-    isBlogEntry:$isBlogEntry
-    published:$published
-    publishedDate:$publishedDate
-    authorsIds:$authorsIds
-  ){
-    ...article
+mutation ($data: ArticleInput) {
+  articlesCreateOne(data: $data) {
+    insertedId
+    acknowledged
   }
 }

@@ -16,6 +16,7 @@
   "scripts": {
     "dev-fix": "nuxt test/fixture",
     "dev": "nuxt test/integration/article",
+    "dev-mongo": "nuxt test/integration-mongo/article",
     "lint": "eslint --ignore-pattern '/lib/templates/plugins' --ext .js,.vue lib test",
     "test": "npm run lint && jest",
     "release": "standard-version && git push --follow-tags && npm publish",
@@ -40,6 +41,7 @@
     "codemirror": "5.42.0",
     "cookie": "^0.3.1",
     "css-loader": "1.0.1",
+    "graphql-request": "1.8.2",
     "graphql-tag": "2.10.0",
     "js-cookie": "^2.2.0",
     "lodash.debounce": "^4.0.8",
