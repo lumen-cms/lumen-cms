@@ -39,6 +39,7 @@
     "clone-deep": "4.0.1",
     "codemirror": "5.42.0",
     "cookie": "^0.3.1",
+    "core-js": "2.6.0",
     "css-loader": "2.0.0",
     "graphql-tag": "2.10.0",
     "js-cookie": "^2.2.0",
