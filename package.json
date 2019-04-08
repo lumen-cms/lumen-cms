@@ -52,7 +52,7 @@
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "supports-webp": "1.0.7",
+    "supports-webp": "2.0.1",
     "vue": "2.6.2",
     "vue-i18n": "8.8.0",
     "vue-ls": "^3.2.0",
