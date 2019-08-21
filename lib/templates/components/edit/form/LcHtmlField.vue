@@ -15,7 +15,7 @@
           <v-btn flat="flat" @click.native="onRemoveLink">Remove</v-btn>
           <v-btn flat="flat" @click.native="showPageUrlSelect = false">Cancel</v-btn>
           <v-btn class="green--text darken-1" flat="flat"
-                 @click.native="onSetSelection">OK
+                 @click.native.prevent.stop="onSetSelection">OK
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -301,7 +301,7 @@
     data () {
       return {
         quill: null,
-        selectedLinkText: {},
+        // selectedLinkText: {},
         format: {
           bold: false,
           italic: false,
@@ -406,21 +406,25 @@
         }
       },
       onSetSelection () {
-        this.quill.focus()
-        const hrefSelection = this.href
-        const slug = hrefSelection.linkSlug && hrefSelection.linkSlug.trim()
-        this.quill.setSelection(this.selectedLinkText.index, this.selectedLinkText.length, 'user')
-        this.quill.format(
-          'link',
-          slug
-            ? {
-              value: slug,
-              linkid: hrefSelection.linkId,
-              type: hrefSelection.linkType
-            }
-            : false
-        )
         this.showPageUrlSelect = false
+        setTimeout(() => {
+          if (!this.quill.hasFocus()) {
+            this.quill.focus()
+          }
+          const hrefSelection = this.href
+          const slug = hrefSelection.linkSlug && hrefSelection.linkSlug.trim()
+          // this.quill.setSelection(this.selectedLinkText.index, this.selectedLinkText.length)
+          this.quill.format(
+            'link',
+            slug
+              ? {
+                value: slug,
+                linkid: hrefSelection.linkId,
+                type: hrefSelection.linkType
+              }
+              : false
+          )
+        }, 500)
       },
       onRemoveLink () {
         this.href = {}
@@ -449,7 +453,7 @@
        */
       onSetLink () {
         const format = this.quill.getFormat()
-        this.selectedLinkText = this.quill.getSelection()
+        // this.selectedLinkText = this.quill.getSelection()
         const link = (format && format.link) || {}
         this.href = {
           linkSlug: link.value,
