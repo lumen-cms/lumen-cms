@@ -12,7 +12,7 @@
 # Lumen CMS 
 #### NodeJS | Vue 2.x | NuxtJs | Vuetify | GraphQl - graph.cool
 
-## Attention
+## Attention!
 Due to the shutdown of Graphcool BaaS service this project sadly is coming to an end. I started with a different approach - feel free to contact me if you are interested in checking it out.
 
 ## Motivation
